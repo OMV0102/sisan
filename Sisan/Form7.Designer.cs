@@ -79,7 +79,9 @@
             this.dataGridView1.RowHeadersWidth = 40;
             this.dataGridView1.Size = new System.Drawing.Size(700, 250);
             this.dataGridView1.TabIndex = 53;
+            this.dataGridView1.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_CellMouseDown);
             this.dataGridView1.CellToolTipTextNeeded += new System.Windows.Forms.DataGridViewCellToolTipTextNeededEventHandler(this.dataGridView1_CellToolTipTextNeeded);
+            this.dataGridView1.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellValueChanged);
             // 
             // label2
             // 

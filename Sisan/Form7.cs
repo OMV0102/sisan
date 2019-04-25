@@ -34,7 +34,8 @@ namespace system_analysis
         public int exp_count = 0; // количество экспертов
         public int E = -1; //порядковый номер нашего эксперта в exp_res
         public int sol_count; // количество альтернатив про выбранной проблеме
-
+        public int row = -1;
+        public int col = -1;
 
         public struct result
         {
@@ -338,6 +339,23 @@ namespace system_analysis
             {
                 text = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
                 e.ToolTipText = text;
+            }
+        }
+
+        // когда НАЖИМАЕМ НА ЯЧЕЙКУ
+        private void dataGridView1_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
+        {
+
+        }
+
+        // когда РЕДАКТИРУЕМ ЯЧЕЙКУ
+        private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if(e.ColumnIndex == 1 && e.RowIndex >= 0 && e.RowIndex < sol_count) // если ячейки с оценками
+            {
+                int chislo = -1;
+                string text = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+
             }
         }
     }
