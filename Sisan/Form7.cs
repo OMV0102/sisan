@@ -45,6 +45,9 @@ namespace system_analysis
 
         List<string> list_sol;  // список для просто альтернатив
 
+        //строчка добавлена
+        //и ещещ строчка
+
 
         // при ЗАГРУЗКЕ ФОРМЫ 
         private void Form7_Load(object sender, EventArgs e)
