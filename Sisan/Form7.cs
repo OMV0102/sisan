@@ -339,7 +339,6 @@ namespace system_analysis
                 text = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
                 e.ToolTipText = text;
             }
-            
         }
     }
 }
