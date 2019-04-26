@@ -37,6 +37,8 @@
             this.button_cross = new System.Windows.Forms.Button();
             this.button_minimize = new System.Windows.Forms.Button();
             this.button_back = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -88,12 +90,11 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label2.ForeColor = System.Drawing.Color.Black;
-            this.label2.Location = new System.Drawing.Point(195, 122);
+            this.label2.Location = new System.Drawing.Point(255, 152);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(391, 57);
+            this.label2.Size = new System.Drawing.Size(219, 19);
             this.label2.TabIndex = 54;
-            this.label2.Text = "Для прохождения опроса\r\nщелкните по ячейке с оценкой и введите значение.\r\nСумма о" +
-    "ценок не должна превышать 100!\r\n";
+            this.label2.Text = "Сумма оценок должна быть ";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label_problem
@@ -115,7 +116,7 @@
             this.btn_save.FlatAppearance.MouseOverBackColor = System.Drawing.Color.SandyBrown;
             this.btn_save.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_save.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btn_save.Location = new System.Drawing.Point(272, 543);
+            this.btn_save.Location = new System.Drawing.Point(268, 532);
             this.btn_save.Name = "btn_save";
             this.btn_save.Size = new System.Drawing.Size(244, 52);
             this.btn_save.TabIndex = 57;
@@ -185,11 +186,37 @@
             this.button_back.UseVisualStyleBackColor = false;
             this.button_back.Click += new System.EventHandler(this.button_back_Click);
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label3.ForeColor = System.Drawing.Color.Black;
+            this.label3.Location = new System.Drawing.Point(93, 183);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(634, 19);
+            this.label3.TabIndex = 69;
+            this.label3.Text = "Если по вашему мнению для алтернативы оценка не требуется, впишите в ячейку 0.";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label4.ForeColor = System.Drawing.Color.Black;
+            this.label4.Location = new System.Drawing.Point(114, 120);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(584, 19);
+            this.label4.TabIndex = 70;
+            this.label4.Text = "Для прохождения опроса щелкните по ячейке с оценкой и введите значение.";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // Form7
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 607);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.button_back);
             this.Controls.Add(this.button_cross);
             this.Controls.Add(this.button_minimize);
@@ -221,5 +248,7 @@
         private System.Windows.Forms.Button button_cross;
         private System.Windows.Forms.Button button_minimize;
         private System.Windows.Forms.Button button_back;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
     }
 }
