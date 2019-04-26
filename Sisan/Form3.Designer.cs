@@ -49,6 +49,8 @@
             this.btn_problem_delete = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.label_save_status = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.list_menu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -57,7 +59,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label1.ForeColor = System.Drawing.Color.Black;
-            this.label1.Location = new System.Drawing.Point(359, 28);
+            this.label1.Location = new System.Drawing.Point(359, 50);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(109, 23);
             this.label1.TabIndex = 13;
@@ -238,7 +240,7 @@
             this.comboBox_problems.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_problems.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.comboBox_problems.FormattingEnabled = true;
-            this.comboBox_problems.Location = new System.Drawing.Point(101, 66);
+            this.comboBox_problems.Location = new System.Drawing.Point(101, 88);
             this.comboBox_problems.MaxDropDownItems = 10;
             this.comboBox_problems.Name = "comboBox_problems";
             this.comboBox_problems.Size = new System.Drawing.Size(604, 27);
@@ -247,7 +249,7 @@
             // 
             // btn_add_problem
             // 
-            this.btn_add_problem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(238)))), ((int)(((byte)(240)))));
+            this.btn_add_problem.BackColor = System.Drawing.SystemColors.Control;
             this.btn_add_problem.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_add_problem.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(238)))), ((int)(((byte)(240)))));
             this.btn_add_problem.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(238)))), ((int)(((byte)(240)))));
@@ -255,7 +257,7 @@
             this.btn_add_problem.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_add_problem.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btn_add_problem.ForeColor = System.Drawing.Color.Green;
-            this.btn_add_problem.Location = new System.Drawing.Point(21, 51);
+            this.btn_add_problem.Location = new System.Drawing.Point(21, 73);
             this.btn_add_problem.Name = "btn_add_problem";
             this.btn_add_problem.Size = new System.Drawing.Size(30, 42);
             this.btn_add_problem.TabIndex = 33;
@@ -266,14 +268,14 @@
             // 
             // btn_problem_edit
             // 
-            this.btn_problem_edit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(238)))), ((int)(((byte)(240)))));
+            this.btn_problem_edit.BackColor = System.Drawing.SystemColors.Control;
             this.btn_problem_edit.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_problem_edit.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(238)))), ((int)(((byte)(240)))));
             this.btn_problem_edit.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(238)))), ((int)(((byte)(240)))));
             this.btn_problem_edit.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(238)))), ((int)(((byte)(240)))));
             this.btn_problem_edit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_problem_edit.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btn_problem_edit.Location = new System.Drawing.Point(54, 54);
+            this.btn_problem_edit.Location = new System.Drawing.Point(54, 76);
             this.btn_problem_edit.Name = "btn_problem_edit";
             this.btn_problem_edit.Size = new System.Drawing.Size(39, 42);
             this.btn_problem_edit.TabIndex = 34;
@@ -284,7 +286,7 @@
             // 
             // btn_problem_delete
             // 
-            this.btn_problem_delete.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(238)))), ((int)(((byte)(240)))));
+            this.btn_problem_delete.BackColor = System.Drawing.SystemColors.Control;
             this.btn_problem_delete.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_problem_delete.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(238)))), ((int)(((byte)(240)))));
             this.btn_problem_delete.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(238)))), ((int)(((byte)(240)))));
@@ -292,7 +294,7 @@
             this.btn_problem_delete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_problem_delete.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btn_problem_delete.ForeColor = System.Drawing.Color.Red;
-            this.btn_problem_delete.Location = new System.Drawing.Point(711, 56);
+            this.btn_problem_delete.Location = new System.Drawing.Point(711, 78);
             this.btn_problem_delete.Name = "btn_problem_delete";
             this.btn_problem_delete.Size = new System.Drawing.Size(30, 42);
             this.btn_problem_delete.TabIndex = 35;
@@ -324,6 +326,29 @@
             this.label_save_status.Text = "Внесены изменения, необходимо сохранение!  ---->";
             this.label_save_status.Visible = false;
             // 
+            // label5
+            // 
+            this.label5.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.label5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label5.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label5.ForeColor = System.Drawing.Color.Black;
+            this.label5.Location = new System.Drawing.Point(0, 40);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(795, 5);
+            this.label5.TabIndex = 59;
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label6.ForeColor = System.Drawing.Color.Black;
+            this.label6.Location = new System.Drawing.Point(265, 5);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(252, 29);
+            this.label6.TabIndex = 60;
+            this.label6.Text = "Работа с проблемами";
+            // 
             // form3_analyst_add
             // 
             this.AcceptButton = this.btn_save;
@@ -332,6 +357,8 @@
             this.BackColor = System.Drawing.SystemColors.Control;
             this.CancelButton = this.button_back;
             this.ClientSize = new System.Drawing.Size(795, 744);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.label_save_status);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.btn_problem_delete);
@@ -382,5 +409,7 @@
         private System.Windows.Forms.Button btn_problem_delete;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label_save_status;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
     }
 }

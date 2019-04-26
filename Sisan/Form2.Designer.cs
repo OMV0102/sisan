@@ -50,6 +50,8 @@
             this.label_problems = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.Label();
             this.textBox3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // button_back
@@ -121,7 +123,7 @@
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label7.ForeColor = System.Drawing.Color.Black;
-            this.label7.Location = new System.Drawing.Point(307, 39);
+            this.label7.Location = new System.Drawing.Point(307, 57);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(109, 23);
             this.label7.TabIndex = 21;
@@ -341,7 +343,7 @@
             this.label_problems.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.label_problems.Font = new System.Drawing.Font("Tahoma", 14F);
             this.label_problems.ForeColor = System.Drawing.Color.Black;
-            this.label_problems.Location = new System.Drawing.Point(31, 71);
+            this.label_problems.Location = new System.Drawing.Point(31, 89);
             this.label_problems.Name = "label_problems";
             this.label_problems.Size = new System.Drawing.Size(668, 27);
             this.label_problems.TabIndex = 55;
@@ -370,6 +372,30 @@
             this.textBox3.Size = new System.Drawing.Size(611, 26);
             this.textBox3.TabIndex = 57;
             // 
+            // label4
+            // 
+            this.label4.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.label4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label4.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label4.ForeColor = System.Drawing.Color.Black;
+            this.label4.Location = new System.Drawing.Point(0, 40);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(738, 5);
+            this.label4.TabIndex = 58;
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label5
+            // 
+            this.label5.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label5.ForeColor = System.Drawing.Color.Black;
+            this.label5.Location = new System.Drawing.Point(226, 4);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(300, 29);
+            this.label5.TabIndex = 59;
+            this.label5.Text = "Метод парных сравнений";
+            // 
             // form2_opros0
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -377,6 +403,8 @@
             this.BackColor = System.Drawing.SystemColors.Control;
             this.CancelButton = this.button_back;
             this.ClientSize = new System.Drawing.Size(738, 801);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.label_problems);
@@ -434,5 +462,7 @@
         private System.Windows.Forms.Label label_problems;
         private System.Windows.Forms.Label textBox2;
         private System.Windows.Forms.Label textBox3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
     }
 }

@@ -57,6 +57,8 @@
             this.label12 = new System.Windows.Forms.Label();
             this.label_close = new System.Windows.Forms.Label();
             this.label_no = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label_header = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // button_cross
@@ -70,7 +72,7 @@
             this.button_cross.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button_cross.Font = new System.Drawing.Font("Times New Roman", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button_cross.ForeColor = System.Drawing.Color.Black;
-            this.button_cross.Location = new System.Drawing.Point(801, -3);
+            this.button_cross.Location = new System.Drawing.Point(800, -1);
             this.button_cross.Name = "button_cross";
             this.button_cross.Size = new System.Drawing.Size(40, 40);
             this.button_cross.TabIndex = 25;
@@ -90,7 +92,7 @@
             this.button_minimize.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button_minimize.Font = new System.Drawing.Font("Tahoma", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button_minimize.ForeColor = System.Drawing.Color.Black;
-            this.button_minimize.Location = new System.Drawing.Point(755, -16);
+            this.button_minimize.Location = new System.Drawing.Point(754, -16);
             this.button_minimize.Name = "button_minimize";
             this.button_minimize.Size = new System.Drawing.Size(40, 40);
             this.button_minimize.TabIndex = 24;
@@ -130,7 +132,7 @@
             this.btn_change_pass.FlatAppearance.MouseOverBackColor = System.Drawing.Color.SandyBrown;
             this.btn_change_pass.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_change_pass.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btn_change_pass.Location = new System.Drawing.Point(433, 541);
+            this.btn_change_pass.Location = new System.Drawing.Point(437, 532);
             this.btn_change_pass.Name = "btn_change_pass";
             this.btn_change_pass.Size = new System.Drawing.Size(171, 34);
             this.btn_change_pass.TabIndex = 27;
@@ -144,7 +146,7 @@
             this.comboBox_problems.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_problems.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.comboBox_problems.FormattingEnabled = true;
-            this.comboBox_problems.Location = new System.Drawing.Point(42, 101);
+            this.comboBox_problems.Location = new System.Drawing.Point(42, 91);
             this.comboBox_problems.MaxDropDownItems = 10;
             this.comboBox_problems.Name = "comboBox_problems";
             this.comboBox_problems.Size = new System.Drawing.Size(759, 27);
@@ -157,7 +159,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label1.ForeColor = System.Drawing.Color.Black;
-            this.label1.Location = new System.Drawing.Point(346, 62);
+            this.label1.Location = new System.Drawing.Point(346, 52);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(122, 25);
             this.label1.TabIndex = 34;
@@ -433,7 +435,7 @@
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Tahoma", 15F);
             this.label11.ForeColor = System.Drawing.Color.Black;
-            this.label11.Location = new System.Drawing.Point(118, 546);
+            this.label11.Location = new System.Drawing.Point(122, 537);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(289, 24);
             this.label11.TabIndex = 54;
@@ -472,10 +474,33 @@
             this.label_no.ForeColor = System.Drawing.Color.Red;
             this.label_no.Location = new System.Drawing.Point(66, 132);
             this.label_no.Name = "label_no";
-            this.label_no.Size = new System.Drawing.Size(713, 27);
+            this.label_no.Size = new System.Drawing.Size(709, 27);
             this.label_no.TabIndex = 57;
-            this.label_no.Text = "У вас нет проблем, альтернативы которых нужно оценивать!";
+            this.label_no.Text = "У вас нет проблем, альтернативы которой нужно оценивать!";
             this.label_no.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label13
+            // 
+            this.label13.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.label13.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label13.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label13.ForeColor = System.Drawing.Color.Black;
+            this.label13.Location = new System.Drawing.Point(0, 40);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(840, 5);
+            this.label13.TabIndex = 61;
+            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label_header
+            // 
+            this.label_header.AutoSize = true;
+            this.label_header.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label_header.ForeColor = System.Drawing.Color.Black;
+            this.label_header.Location = new System.Drawing.Point(287, 4);
+            this.label_header.Name = "label_header";
+            this.label_header.Size = new System.Drawing.Size(109, 29);
+            this.label_header.TabIndex = 62;
+            this.label_header.Text = "Эксперт ";
             // 
             // Form9_expert
             // 
@@ -483,7 +508,9 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.button_back;
-            this.ClientSize = new System.Drawing.Size(841, 598);
+            this.ClientSize = new System.Drawing.Size(840, 581);
+            this.Controls.Add(this.label_header);
+            this.Controls.Add(this.label13);
             this.Controls.Add(this.label_no);
             this.Controls.Add(this.label_close);
             this.Controls.Add(this.label12);
@@ -556,5 +583,7 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label_close;
         private System.Windows.Forms.Label label_no;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label_header;
     }
 }

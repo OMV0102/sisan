@@ -37,16 +37,18 @@
             this.button1 = new System.Windows.Forms.Button();
             this.btn_change_pass = new System.Windows.Forms.Button();
             this.btn_expert_edit = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label1.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label1.ForeColor = System.Drawing.Color.Black;
-            this.label1.Location = new System.Drawing.Point(116, 63);
+            this.label1.Location = new System.Drawing.Point(143, 63);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(425, 33);
+            this.label1.Size = new System.Drawing.Size(384, 29);
             this.label1.TabIndex = 0;
             this.label1.Text = "Выберите дальнейшее действие:";
             // 
@@ -162,7 +164,7 @@
             this.button1.Size = new System.Drawing.Size(268, 65);
             this.button1.TabIndex = 19;
             this.button1.TabStop = false;
-            this.button1.Text = "Добавление экспертов к проблемам";
+            this.button1.Text = "Изменение списков экспертов к проблемам";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -202,6 +204,29 @@
             this.btn_expert_edit.UseVisualStyleBackColor = false;
             this.btn_expert_edit.Click += new System.EventHandler(this.btn_expert_edit_Click);
             // 
+            // label5
+            // 
+            this.label5.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.label5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label5.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label5.ForeColor = System.Drawing.Color.Black;
+            this.label5.Location = new System.Drawing.Point(0, 40);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(677, 5);
+            this.label5.TabIndex = 60;
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label2.ForeColor = System.Drawing.Color.Black;
+            this.label2.Location = new System.Drawing.Point(259, 5);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(118, 29);
+            this.label2.TabIndex = 61;
+            this.label2.Text = "Аналитик";
+            // 
             // form4_analyst_choice
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -209,6 +234,8 @@
             this.BackColor = System.Drawing.SystemColors.Control;
             this.CancelButton = this.button_back;
             this.ClientSize = new System.Drawing.Size(677, 351);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.btn_expert_edit);
             this.Controls.Add(this.btn_change_pass);
             this.Controls.Add(this.button1);
@@ -241,5 +268,7 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button btn_change_pass;
         private System.Windows.Forms.Button btn_expert_edit;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label2;
     }
 }

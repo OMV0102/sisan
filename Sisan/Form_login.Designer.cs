@@ -40,6 +40,7 @@
             this.label_analyst = new System.Windows.Forms.Label();
             this.label_error = new System.Windows.Forms.Label();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // button_back
@@ -107,11 +108,11 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label1.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label1.ForeColor = System.Drawing.Color.Black;
-            this.label1.Location = new System.Drawing.Point(249, 50);
+            this.label1.Location = new System.Drawing.Point(253, 4);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(84, 33);
+            this.label1.Size = new System.Drawing.Size(65, 29);
             this.label1.TabIndex = 22;
             this.label1.Text = "Вход";
             // 
@@ -217,6 +218,18 @@
             this.checkBox1.UseVisualStyleBackColor = true;
             this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
+            // label9
+            // 
+            this.label9.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.label9.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label9.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label9.ForeColor = System.Drawing.Color.Black;
+            this.label9.Location = new System.Drawing.Point(0, 40);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(586, 5);
+            this.label9.TabIndex = 49;
+            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // Form_login
             // 
             this.AcceptButton = this.btn_entry;
@@ -225,6 +238,7 @@
             this.BackColor = System.Drawing.SystemColors.Control;
             this.CancelButton = this.button_back;
             this.ClientSize = new System.Drawing.Size(586, 328);
+            this.Controls.Add(this.label9);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.label_error);
             this.Controls.Add(this.label_analyst);
@@ -263,5 +277,6 @@
         public System.Windows.Forms.Label label_analyst;
         private System.Windows.Forms.Label label_error;
         private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.Label label9;
     }
 }

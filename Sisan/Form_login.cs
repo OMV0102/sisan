@@ -97,9 +97,11 @@ namespace system_analysis
                         form1_main.num_expert = exp_list[comboBox_user.SelectedIndex].n_id;
 
                         // если пользователь угадал свой пароль, он переходит на следующий квест
+                        
+                        Form9_expert form = new Form9_expert();
+                        form.fio = comboBox_user.SelectedItem.ToString();
                         exp_list.Clear();  // очищаем на всякий случай список с экспертами 
                         comboBox_user.Items.Clear(); // и комбобокс тоже чистим
-                        Form9_expert form = new Form9_expert();
                         form.Show();
                         this.Close();
                     }
@@ -132,7 +134,7 @@ namespace system_analysis
             this.Close();
         }
 
-        // при загрузке формы
+        // при ЗАГРУЗКЕ ФОРМЫ
         private void Form_login_Load(object sender, EventArgs e)
         {
             
@@ -161,7 +163,7 @@ namespace system_analysis
                 comboBox_user.Visible = true;
 
                 string text = "";
-                FileInfo fileInf = new FileInfo(directory + "analyst_password.txt");
+                FileInfo fileInf = new FileInfo(directory + "experts.txt");
                 if (fileInf.Exists) // если фпйл существует вообще
                 {
                     using (StreamReader sr = new StreamReader(directory + "experts.txt", System.Text.Encoding.UTF8))
@@ -189,9 +191,9 @@ namespace system_analysis
                             // если в отчестве стоит "-"
                             // то не пишем его
                             if(words[3] == "-")
-                                a.fio = words[1] + " " + words[2];
+                                a.fio = words[1] + " " + words[2].First() + ".";
                             else
-                                a.fio = words[1] + " " + words[2] + " " + words[3];
+                                a.fio = words[1] + " " + words[2].First() + "." + " " + words[3].First() + ".";
                             // запомнили пароль
                             a.password_exp = words[4];
                             // запомнили должность

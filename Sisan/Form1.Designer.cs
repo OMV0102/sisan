@@ -94,7 +94,7 @@
             this.button_cross.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button_cross.Font = new System.Drawing.Font("Times New Roman", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button_cross.ForeColor = System.Drawing.Color.Black;
-            this.button_cross.Location = new System.Drawing.Point(633, 1);
+            this.button_cross.Location = new System.Drawing.Point(633, 0);
             this.button_cross.Name = "button_cross";
             this.button_cross.Size = new System.Drawing.Size(40, 40);
             this.button_cross.TabIndex = 3;
@@ -126,7 +126,7 @@
             this.button_minimize.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button_minimize.Font = new System.Drawing.Font("Tahoma", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button_minimize.ForeColor = System.Drawing.Color.Black;
-            this.button_minimize.Location = new System.Drawing.Point(575, -12);
+            this.button_minimize.Location = new System.Drawing.Point(582, -10);
             this.button_minimize.Name = "button_minimize";
             this.button_minimize.Size = new System.Drawing.Size(40, 40);
             this.button_minimize.TabIndex = 5;

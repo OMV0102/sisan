@@ -39,6 +39,8 @@
             this.button_back = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -58,7 +60,7 @@
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label7.ForeColor = System.Drawing.Color.Black;
-            this.label7.Location = new System.Drawing.Point(342, 29);
+            this.label7.Location = new System.Drawing.Point(342, 59);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(109, 23);
             this.label7.TabIndex = 48;
@@ -90,7 +92,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label2.ForeColor = System.Drawing.Color.Black;
-            this.label2.Location = new System.Drawing.Point(255, 152);
+            this.label2.Location = new System.Drawing.Point(232, 164);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(219, 19);
             this.label2.TabIndex = 54;
@@ -103,7 +105,7 @@
             this.label_problem.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label_problem.Font = new System.Drawing.Font("Tahoma", 12.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label_problem.ForeColor = System.Drawing.Color.Black;
-            this.label_problem.Location = new System.Drawing.Point(50, 67);
+            this.label_problem.Location = new System.Drawing.Point(50, 94);
             this.label_problem.Name = "label_problem";
             this.label_problem.Size = new System.Drawing.Size(700, 27);
             this.label_problem.TabIndex = 56;
@@ -116,7 +118,7 @@
             this.btn_save.FlatAppearance.MouseOverBackColor = System.Drawing.Color.SandyBrown;
             this.btn_save.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_save.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btn_save.Location = new System.Drawing.Point(268, 532);
+            this.btn_save.Location = new System.Drawing.Point(268, 530);
             this.btn_save.Name = "btn_save";
             this.btn_save.Size = new System.Drawing.Size(244, 52);
             this.btn_save.TabIndex = 57;
@@ -203,18 +205,43 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label4.ForeColor = System.Drawing.Color.Black;
-            this.label4.Location = new System.Drawing.Point(114, 120);
+            this.label4.Location = new System.Drawing.Point(111, 136);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(584, 19);
             this.label4.TabIndex = 70;
             this.label4.Text = "Для прохождения опроса щелкните по ячейке с оценкой и введите значение.";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // label5
+            // 
+            this.label5.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.label5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label5.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label5.ForeColor = System.Drawing.Color.Black;
+            this.label5.Location = new System.Drawing.Point(0, 40);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(800, 5);
+            this.label5.TabIndex = 71;
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label6.ForeColor = System.Drawing.Color.Black;
+            this.label6.Location = new System.Drawing.Point(189, 4);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(441, 29);
+            this.label6.TabIndex = 72;
+            this.label6.Text = "Метод взвешенных экпертных оценок";
+            // 
             // Form7
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 607);
+            this.ClientSize = new System.Drawing.Size(800, 600);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.button_back);
@@ -250,5 +277,7 @@
         private System.Windows.Forms.Button button_back;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
     }
 }

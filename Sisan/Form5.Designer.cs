@@ -42,6 +42,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // button_back
@@ -76,7 +78,7 @@
             this.button_minimize.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button_minimize.Font = new System.Drawing.Font("Tahoma", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button_minimize.ForeColor = System.Drawing.Color.Black;
-            this.button_minimize.Location = new System.Drawing.Point(1225, -13);
+            this.button_minimize.Location = new System.Drawing.Point(1216, -13);
             this.button_minimize.Name = "button_minimize";
             this.button_minimize.Size = new System.Drawing.Size(40, 40);
             this.button_minimize.TabIndex = 19;
@@ -97,7 +99,7 @@
             this.button_cross.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button_cross.Font = new System.Drawing.Font("Times New Roman", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button_cross.ForeColor = System.Drawing.Color.Black;
-            this.button_cross.Location = new System.Drawing.Point(1271, 0);
+            this.button_cross.Location = new System.Drawing.Point(1262, 0);
             this.button_cross.Name = "button_cross";
             this.button_cross.Size = new System.Drawing.Size(40, 40);
             this.button_cross.TabIndex = 20;
@@ -129,7 +131,7 @@
             this.comboBox1_problems.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1_problems.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.comboBox1_problems.FormattingEnabled = true;
-            this.comboBox1_problems.Location = new System.Drawing.Point(276, 82);
+            this.comboBox1_problems.Location = new System.Drawing.Point(297, 84);
             this.comboBox1_problems.Name = "comboBox1_problems";
             this.comboBox1_problems.Size = new System.Drawing.Size(742, 27);
             this.comboBox1_problems.TabIndex = 45;
@@ -140,7 +142,7 @@
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label7.ForeColor = System.Drawing.Color.Black;
-            this.label7.Location = new System.Drawing.Point(574, 45);
+            this.label7.Location = new System.Drawing.Point(595, 47);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(109, 23);
             this.label7.TabIndex = 44;
@@ -234,13 +236,38 @@
             this.comboBox1.TabIndex = 53;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
+            // label5
+            // 
+            this.label5.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.label5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label5.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label5.ForeColor = System.Drawing.Color.Black;
+            this.label5.Location = new System.Drawing.Point(0, 40);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(1300, 5);
+            this.label5.TabIndex = 61;
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label6.ForeColor = System.Drawing.Color.Black;
+            this.label6.Location = new System.Drawing.Point(516, 5);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(283, 29);
+            this.label6.TabIndex = 62;
+            this.label6.Text = "Результаты оцениваний";
+            // 
             // form5_analyst_report
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.CancelButton = this.button_back;
-            this.ClientSize = new System.Drawing.Size(1309, 524);
+            this.ClientSize = new System.Drawing.Size(1300, 524);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label2);
@@ -282,5 +309,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
     }
 }

@@ -49,6 +49,7 @@ namespace system_analysis
         public int num_problem; // уникальный номер проблемы (ID)
         public int N = -1; //порядковый номер проблемы в list_prob
         public int E = -1; //порядковый номер эксперта в list_prob
+        public string fio; // ФИО эксперта для отображения вверху формы
 
         // кнопка СВЕРНУТЬ ОКНО
         private void button_minimize_Click(object sender, EventArgs e)
@@ -90,7 +91,7 @@ namespace system_analysis
             this.Close();
         }
 
-        //  при загрузке формы
+        //  при ЗАГРУЗКЕ ФОРМЫ
         private void Form9_expert_Load(object sender, EventArgs e)
         {
             
@@ -109,6 +110,7 @@ namespace system_analysis
             }
             //============================================
 
+            label_header.Text += fio; // добавили к заголовку вверху формы ФИО эксперта
             list_prob = new List<st_problem>();
             string text = "";
             string[] words;
