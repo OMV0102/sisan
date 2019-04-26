@@ -40,13 +40,11 @@ namespace system_analysis
         List<result> exp_res; // список с оценками экспертов
 
         List<string> list_sol;  // список для просто альтернатив
-
-
+        
         // при ЗАГРУЗКЕ ФОРМЫ 
-        private void Form7_Load(object sender, EventArgs e)
+        private void Form12_prefer_Load(object sender, EventArgs e)
         {
             Form9_expert form = this.Owner as Form9_expert;
-            label2.Text += max + "!";
             string[] words;
             label_problem.Text = form.problem; // проблему вывели в форму
             exp_count = form.list_prob[form.N].exp.Count();  // узнали сколько всего экспертов
@@ -63,7 +61,7 @@ namespace system_analysis
             sol_count = 0;
             if (text.Length != 0)
             {
-               
+
                 using (StreamReader sr = new StreamReader(directory + "solutions" + form.num_problem + ".txt", System.Text.Encoding.UTF8))
                 {
                     string line;
@@ -73,6 +71,9 @@ namespace system_analysis
                         sol_count++;
                     }
                 }
+
+                label2.Text = "Распределите оценки от 1 до " + sol_count + " между альтернативами,\n";
+                label2.Text += "(1 - альтернатива наиболее предпочительна, " + sol_count + " - наименее).";
                 alter = true;
 
                 if (alter)
@@ -80,12 +81,12 @@ namespace system_analysis
                     a.marks = new int[sol_count]; // выделили память для результата экспертов для нулевой альтернативы
                     // проверяем, есть ли у нас уже какие-то результаты опроса, если да, то читаем их
                     // иначе заполняем список -1 (типа не оценено)
-                    FileInfo fileInf = new FileInfo(directory + "matrix" + form.num_problem + "m3.txt");
+                    FileInfo fileInf = new FileInfo(directory + "matrix" + form.num_problem + "m2.txt");
                     if (fileInf.Exists)
                     {
                         exists = true;  // уже есть какие то результаты
                         int m = 0;
-                        using (StreamReader sr = new StreamReader(directory + "matrix" + form.num_problem + "m3.txt", System.Text.Encoding.UTF8))
+                        using (StreamReader sr = new StreamReader(directory + "matrix" + form.num_problem + "m2.txt", System.Text.Encoding.UTF8))
                         {
                             string line;
                             while ((line = sr.ReadLine()) != null)
@@ -94,7 +95,7 @@ namespace system_analysis
                                 a.id_exp = Convert.ToInt32(words[0]);
                                 if (a.id_exp == form1_main.num_expert)
                                     E = m;
-                                if(m > 0)
+                                if (m > 0)
                                     a.marks = new int[sol_count]; // выделили память для результата экспертов для sol_count-1 альтернатив
                                 for (int j = 0; j < a.marks.Count(); j++)
                                 {
@@ -153,14 +154,14 @@ namespace system_analysis
                     {
                         DataRow dr = table.NewRow();
                         dr[0] = list_sol[j];
-                        dr[1] = tmp[j] ;
+                        dr[1] = tmp[j];
                         table.Rows.Add(dr);
                     }
 
                     dataGridView1.DataSource = table;
                     dataGridView1.Columns[0].Width = 600; // ширина столбца альтерантив
                     dataGridView1.Columns[1].Width = 97; // ширина столбца оценок
-                    // шобы столбцы нельзя было сортировать
+                    // шобы по альтернативам нельзя было сортировать
                     dataGridView1.Columns[0].SortMode = DataGridViewColumnSortMode.NotSortable;
                     dataGridView1.Columns[1].SortMode = DataGridViewColumnSortMode.NotSortable;
                 }
@@ -172,7 +173,7 @@ namespace system_analysis
         {
             Form9_expert form = this.Owner as Form9_expert; // 9 форма - хозяин этой формы
 
-            using (StreamWriter sw = new StreamWriter(directory + "matrix" + form.num_problem + "m3.txt", false, System.Text.Encoding.UTF8))
+            using (StreamWriter sw = new StreamWriter(directory + "matrix" + form.num_problem + "m2.txt", false, System.Text.Encoding.UTF8))
             {
                 string line = "";
                 for(int i = 0; i < exp_res.Count; i++)
@@ -197,8 +198,8 @@ namespace system_analysis
             Message m = Message.Create(base.Handle, 0xa1, new IntPtr(2), IntPtr.Zero);
             this.WndProc(ref m);
         }
-        
-        // кнопка СОХРАНИТЬ
+
+        // кнопка СОХРАНИТЬ // цвет label = цвет формы нейтральный
         private void btn_save_Click(object sender, EventArgs e)
         {
             Form9_expert form = this.Owner as Form9_expert;
@@ -218,8 +219,6 @@ namespace system_analysis
 
                 if (count_right == sol_count)
                 {
-                    label3.BackColor = this.BackColor; // цвет label = цвет формы нейтральный
-                    label2.BackColor = this.BackColor; // цвет label = цвет формы нейтральный
 
                     // СОХРАНЯЕМ
                     save();
@@ -250,8 +249,6 @@ namespace system_analysis
                     MessageBoxIcon.Error,
                     MessageBoxDefaultButton.Button1,
                     MessageBoxOptions.DefaultDesktopOnly);
-                    label2.BackColor = Color.FromArgb(254, 254, 34); // желтый фон
-                    label3.BackColor = Color.FromArgb(254, 254, 34); // желтый фон
                     this.TopMost = true; this.TopMost = false;
                     this.TopMost = true; this.TopMost = false;
                 }

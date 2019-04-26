@@ -468,7 +468,10 @@ namespace system_analysis
         // кнопка МЕТОД 2 (МЕТОД ПРЕДПОЧТЕНИЯ)
         private void btn_m2_Click(object sender, EventArgs e)
         {
-
+            Form12_prefer form = new Form12_prefer();
+            form.Owner = this;
+            form.Show();
+            this.Hide();
         }
 
         // кнопка МЕТОД 3 (МЕТОД РАНГА)

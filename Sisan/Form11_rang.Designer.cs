@@ -257,7 +257,7 @@
             this.Name = "Form11_rang";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Метод ранга";
-            this.Load += new System.EventHandler(this.Form7_Load);
+            this.Load += new System.EventHandler(this.Form11_rang_Load);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form7_MouseDown);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);

@@ -18,14 +18,5 @@ namespace system_analysis
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new form1_main());
         }
-        //=========================================================
-
-
-
-
-
-
-
-        //=========================================================
     }
 }

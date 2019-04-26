@@ -40,10 +40,9 @@ namespace system_analysis
         List<result> exp_res; // список с оценками экспертов
 
         List<string> list_sol;  // список для просто альтернатив
-
-
+        
         // при ЗАГРУЗКЕ ФОРМЫ 
-        private void Form7_Load(object sender, EventArgs e)
+        private void Form11_rang_Load(object sender, EventArgs e)
         {
             Form9_expert form = this.Owner as Form9_expert;
             label2.Text += max + "!";
@@ -63,7 +62,7 @@ namespace system_analysis
             sol_count = 0;
             if (text.Length != 0)
             {
-               
+
                 using (StreamReader sr = new StreamReader(directory + "solutions" + form.num_problem + ".txt", System.Text.Encoding.UTF8))
                 {
                     string line;
@@ -94,7 +93,7 @@ namespace system_analysis
                                 a.id_exp = Convert.ToInt32(words[0]);
                                 if (a.id_exp == form1_main.num_expert)
                                     E = m;
-                                if(m > 0)
+                                if (m > 0)
                                     a.marks = new int[sol_count]; // выделили память для результата экспертов для sol_count-1 альтернатив
                                 for (int j = 0; j < a.marks.Count(); j++)
                                 {
@@ -153,7 +152,7 @@ namespace system_analysis
                     {
                         DataRow dr = table.NewRow();
                         dr[0] = list_sol[j];
-                        dr[1] = tmp[j] ;
+                        dr[1] = tmp[j];
                         table.Rows.Add(dr);
                     }
 
