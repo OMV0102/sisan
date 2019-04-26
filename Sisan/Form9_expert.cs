@@ -456,16 +456,16 @@ namespace system_analysis
             this.Hide();
         }
 
-        // кнопка МЕТОД 1 (ВЗВЕШЕННЫХ ЭКСПЕРТНЫХ ОЦЕНОК)
+        // кнопка МЕТОД 1 (МЕТОД ВЗВЕШЕННЫХ ЭКСПЕРТНЫХ ОЦЕНОК)
         private void btn_start_m1_Click(object sender, EventArgs e)
         {            
-            Form7 form = new Form7(problem, num_problem);
+            Form7 form = new Form7();
             form.Owner = this;
             form.Show();
             this.Hide();
         }
 
-        // кнопка МЕТОД 2 (МЕТОД ВЗВЕШЕННЫХ ЭКСПЕРТНЫХ ОЦЕНОК)
+        // кнопка МЕТОД 2 (МЕТОД ПРЕДПОЧТЕНИЯ)
         private void btn_m2_Click(object sender, EventArgs e)
         {
 
@@ -474,7 +474,10 @@ namespace system_analysis
         // кнопка МЕТОД 3 (МЕТОД РАНГА)
         private void btn_m3_Click(object sender, EventArgs e)
         {
-
+            Form11_rang form = new Form11_rang();
+            form.Owner = this;
+            form.Show();
+            this.Hide();
         }
 
         // кнопка МЕТОД 4 (МЕТОД ПОЛНОГО ПОПАРНОГО СОСПОСТАВЛЕНИЯ)

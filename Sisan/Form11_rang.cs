@@ -11,10 +11,10 @@ using System.IO;
 
 namespace system_analysis
 {
-    public partial class Form7 : Form
+    public partial class Form11_rang : Form
     {
 
-        public Form7()
+        public Form11_rang()
         {
             InitializeComponent();
         }
@@ -26,13 +26,11 @@ namespace system_analysis
         //======================================================
 
         private bool alter = false;
-        public int max = 100; // максимальная СУММА ВСЕХ оценок (если одна оценка max, то остальные 0)
         public bool correct = false; // флаг корректного изменния
         public int exp_count = 0; // количество экспертов
         public int E = -1; //порядковый номер нашего эксперта в exp_res
         public int sol_count; // количество альтернатив про выбранной проблеме
-        public int row = -1;
-        public int col = -1;
+        public int max = 100; // максимальная оценка для ОДНОЙ алтернативы
 
         public struct result
         {
@@ -82,12 +80,12 @@ namespace system_analysis
                     a.marks = new int[sol_count]; // выделили память для результата экспертов для нулевой альтернативы
                     // проверяем, есть ли у нас уже какие-то результаты опроса, если да, то читаем их
                     // иначе заполняем список -1 (типа не оценено)
-                    FileInfo fileInf = new FileInfo(directory + "matrix" + form.num_problem + "m1.txt");
+                    FileInfo fileInf = new FileInfo(directory + "matrix" + form.num_problem + "m3.txt");
                     if (fileInf.Exists)
                     {
                         exists = true;  // уже есть какие то результаты
                         int m = 0;
-                        using (StreamReader sr = new StreamReader(directory + "matrix" + form.num_problem + "m1.txt", System.Text.Encoding.UTF8))
+                        using (StreamReader sr = new StreamReader(directory + "matrix" + form.num_problem + "m3.txt", System.Text.Encoding.UTF8))
                         {
                             string line;
                             while ((line = sr.ReadLine()) != null)
@@ -113,6 +111,8 @@ namespace system_analysis
                         for (int i = 0; i < exp_count; i++)
                         {
                             a.id_exp = form.list_prob[form.N].exp[i].id_exp;
+                            if (a.id_exp == form1_main.num_expert)
+                                E = i;
                             for (int j = 0; j < a.marks.Count(); j++)
                             {
                                 a.marks[j] = -1;
@@ -172,7 +172,7 @@ namespace system_analysis
         {
             Form9_expert form = this.Owner as Form9_expert; // 9 форма - хозяин этой формы
 
-            using (StreamWriter sw = new StreamWriter(directory + "matrix" + form.num_problem + "m1.txt", false, System.Text.Encoding.UTF8))
+            using (StreamWriter sw = new StreamWriter(directory + "matrix" + form.num_problem + "m3.txt", false, System.Text.Encoding.UTF8))
             {
                 string line = "";
                 for(int i = 0; i < exp_res.Count; i++)
@@ -219,64 +219,24 @@ namespace system_analysis
                 if (count_right == sol_count)
                 {
                     label3.BackColor = this.BackColor; // цвет label = цвет формы нейтральный
+                    label2.BackColor = this.BackColor; // цвет label = цвет формы нейтральный
 
-                    int sum = 0; // сумма оценок
-                    // складываем
-                    for (int i = 0; i < sol_count; i++)
-                    {
-                        sum += Convert.ToInt32(dataGridView1[1, i].Value);
-                    }
+                    // СОХРАНЯЕМ
+                    save();
+                    form.list_prob[form.N].exp[form.E].m1 = 1; //внесли изменения в 9 форму (group)
+                    form.save_group(); // сохраняем измененное в файл group...
+                    form.update(form.N, form.E); // обновляем в 9 форме
+                    MessageBox.Show(
+                    "Изменения сохранены!",
+                    "Сохранение",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information,
+                    MessageBoxDefaultButton.Button1,
+                    MessageBoxOptions.DefaultDesktopOnly);
 
-                    if (sum == max)
-                    {
-                        label2.BackColor = this.BackColor; // цвет label = цвет формы нейтральный
-
-                        // СОХРАНЯЕМ
-                        save();
-                        form.list_prob[form.N].exp[form.E].m1 = 1; //внесли изменения в 9 форму (group)
-                        form.save_group(); // сохраняем измененное в файл group...
-                        form.update(form.N, form.E); // обновляем в 9 форме
-                        MessageBox.Show(
-                        "Изменения сохранены!",
-                        "Сохранение",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Information,
-                        MessageBoxDefaultButton.Button1,
-                        MessageBoxOptions.DefaultDesktopOnly);
-
-                        form.Show();
-                        form.TopMost = true; form.TopMost = false;
-                        this.Close();
-                    }
-                    else
-                    {
-                        if (sum < max)
-                        {
-                            dataGridView1.Rows[0].Cells[0].Selected = true;
-                            correct = false;
-                            DialogResult result = MessageBox.Show(
-                            "Сумма оценок не должна быть меньше " + max + "!",
-                            "Ошибка",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Error,
-                            MessageBoxDefaultButton.Button1,
-                            MessageBoxOptions.DefaultDesktopOnly);
-                        }
-                        if (sum > max)
-                        {
-                            dataGridView1.Rows[0].Cells[0].Selected = true;
-                            correct = false;
-                            MessageBox.Show(
-                            "Сумма оценок не должна превышать " + max + "!\n",
-                            "Ошибка",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Error,
-                            MessageBoxDefaultButton.Button1,
-                            MessageBoxOptions.DefaultDesktopOnly);
-                        }
-                        this.TopMost = true; this.TopMost = false;
-                        label2.BackColor = Color.FromArgb(254, 254, 34); // желтый фон
-                    }
+                    form.Show();
+                    form.TopMost = true; form.TopMost = false;
+                    this.Close();
                 }
                 else
                 {
@@ -290,6 +250,7 @@ namespace system_analysis
                     MessageBoxIcon.Error,
                     MessageBoxDefaultButton.Button1,
                     MessageBoxOptions.DefaultDesktopOnly);
+                    label2.BackColor = Color.FromArgb(254, 254, 34); // желтый фон
                     label3.BackColor = Color.FromArgb(254, 254, 34); // желтый фон
                     this.TopMost = true; this.TopMost = false;
                     this.TopMost = true; this.TopMost = false;
@@ -392,6 +353,8 @@ namespace system_analysis
             }
         }
 
+        public int row = -1;
+        public int col = -1;
         // когда НАЖИМАЕМ НА ЯЧЕЙКУ
         private void dataGridView1_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
         {
