@@ -286,7 +286,7 @@
             this.KeyPreview = true;
             this.Name = "form5_analyst_report";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Аналитик";
+            this.Text = "Результаты оцениваний";
             this.Load += new System.EventHandler(this.form5_analyst_report_Load);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.form5_analyst_report_MouseDown);
             this.ResumeLayout(false);

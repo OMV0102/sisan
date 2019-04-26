@@ -152,7 +152,7 @@
             this.KeyPreview = true;
             this.Name = "form1_main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Оценка решений проблемы";
+            this.Text = "Экспертные оценки";
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.form1_main_MouseDown);
             this.ResumeLayout(false);
             this.PerformLayout();

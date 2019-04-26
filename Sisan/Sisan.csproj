@@ -65,6 +65,12 @@
     <Compile Include="Form11_rang.designer.cs">
       <DependentUpon>Form11_rang.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form12_prefer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form12_prefer.designer.cs">
+      <DependentUpon>Form12_prefer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form2.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -147,6 +153,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form11_rang.resx">
       <DependentUpon>Form11_rang.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form12_prefer.resx">
+      <DependentUpon>Form12_prefer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form2.resx">
       <DependentUpon>Form2.cs</DependentUpon>

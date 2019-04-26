@@ -431,7 +431,7 @@
             this.KeyPreview = true;
             this.Name = "form2_opros0";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Эксперт";
+            this.Text = "Метод парных сравнений";
             this.Load += new System.EventHandler(this.form2_opros0_Load);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.form2_opros0_MouseDown);
             this.ResumeLayout(false);

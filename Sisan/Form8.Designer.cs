@@ -242,7 +242,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Form8";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Form8";
+            this.Text = "Изменение списков экспертов у проблем";
             this.Load += new System.EventHandler(this.Form8_Load);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form8_MouseDown);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();

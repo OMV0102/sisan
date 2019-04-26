@@ -1,6 +1,6 @@
 ﻿namespace system_analysis
 {
-    partial class Form7
+    partial class Form12_prefer
     {
         /// <summary>
         /// Required designer variable.
@@ -31,7 +31,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.label2 = new System.Windows.Forms.Label();
             this.label_problem = new System.Windows.Forms.Label();
             this.btn_save = new System.Windows.Forms.Button();
             this.button_cross = new System.Windows.Forms.Button();
@@ -41,6 +40,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -86,18 +86,6 @@
             this.dataGridView1.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_CellMouseDown);
             this.dataGridView1.CellToolTipTextNeeded += new System.Windows.Forms.DataGridViewCellToolTipTextNeededEventHandler(this.dataGridView1_CellToolTipTextNeeded);
             this.dataGridView1.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellValueChanged);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label2.ForeColor = System.Drawing.Color.Black;
-            this.label2.Location = new System.Drawing.Point(232, 164);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(219, 19);
-            this.label2.TabIndex = 54;
-            this.label2.Text = "Сумма оценок должна быть ";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label_problem
             // 
@@ -193,11 +181,11 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label3.ForeColor = System.Drawing.Color.Black;
-            this.label3.Location = new System.Drawing.Point(93, 183);
+            this.label3.Location = new System.Drawing.Point(80, 190);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(634, 19);
+            this.label3.Size = new System.Drawing.Size(642, 19);
             this.label3.TabIndex = 69;
-            this.label3.Text = "Если по вашему мнению для алтернативы оценка не требуется, впишите в ячейку 0.";
+            this.label3.Text = "Если по вашему мнению для альтернативы оценка не требуется, впишите в ячейку 0.";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label4
@@ -205,11 +193,11 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label4.ForeColor = System.Drawing.Color.Black;
-            this.label4.Location = new System.Drawing.Point(111, 136);
+            this.label4.Location = new System.Drawing.Point(144, 134);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(584, 19);
+            this.label4.Size = new System.Drawing.Size(515, 19);
             this.label4.TabIndex = 70;
-            this.label4.Text = "Для прохождения опроса щелкните по ячейке с оценкой и введите значение.";
+            this.label4.Text = "Для оценивания щелкните по ячейке с оценкой и введите значение.";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label5
@@ -229,17 +217,30 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label6.ForeColor = System.Drawing.Color.Black;
-            this.label6.Location = new System.Drawing.Point(205, 4);
+            this.label6.Location = new System.Drawing.Point(264, 4);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(441, 29);
+            this.label6.Size = new System.Drawing.Size(248, 29);
             this.label6.TabIndex = 72;
-            this.label6.Text = "Метод взвешенных экпертных оценок";
+            this.label6.Text = "Метод предпочтения";
             // 
-            // Form7
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label2.ForeColor = System.Drawing.Color.Black;
+            this.label2.Location = new System.Drawing.Point(80, 161);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(593, 19);
+            this.label2.TabIndex = 73;
+            this.label2.Text = "Каждую альтернативу независимо от других нужно оценить по шкале от 0 до ";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // Form12_prefer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 600);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
@@ -249,14 +250,13 @@
             this.Controls.Add(this.button_minimize);
             this.Controls.Add(this.btn_save);
             this.Controls.Add(this.label_problem);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label7);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "Form7";
+            this.Name = "Form12_prefer";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Метод взвешенных экпертных оценок";
+            this.Text = "Метод предпочтения";
             this.Load += new System.EventHandler(this.Form7_Load);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form7_MouseDown);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
@@ -269,7 +269,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label_problem;
         private System.Windows.Forms.Button btn_save;
         private System.Windows.Forms.Button button_cross;
@@ -279,5 +278,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label2;
     }
 }

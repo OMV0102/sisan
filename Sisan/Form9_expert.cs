@@ -109,7 +109,7 @@ namespace system_analysis
                 
             }
             //============================================
-
+            this.Text = "Эксперт " + fio; // добавили к имени формы в пуске ФИО эксперта
             label_header.Text += fio; // добавили к заголовку вверху формы ФИО эксперта
             list_prob = new List<st_problem>();
             string text = "";

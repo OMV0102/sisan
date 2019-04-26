@@ -544,7 +544,6 @@
             this.KeyPreview = true;
             this.Name = "Form9_expert";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Form9_expert";
             this.Load += new System.EventHandler(this.Form9_expert_Load);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form9_expert_MouseDown);
             this.ResumeLayout(false);

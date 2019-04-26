@@ -379,7 +379,7 @@
             this.KeyPreview = true;
             this.Name = "form3_analyst_add";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Аналитик";
+            this.Text = "Редактирование проблем";
             this.Load += new System.EventHandler(this.form3_analyst_add_Load);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.form3_analyst_add_MouseDown);
             this.list_menu.ResumeLayout(false);
