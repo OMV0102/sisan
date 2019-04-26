@@ -331,7 +331,36 @@ namespace system_analysis
         // кнопка НАЗАД
         private void button_back_Click(object sender, EventArgs e)
         {
+            Form9_expert form = this.Owner as Form9_expert;
+            if (change == true)
+            {
+                DialogResult otvet = MessageBox.Show(
+                "Все несохраненные изменения будут потеряны.\n" +
+                "Закрыть оценивание?",
+                "Внимание",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning,
+                MessageBoxDefaultButton.Button2,
+                MessageBoxOptions.DefaultDesktopOnly);
 
+                if (otvet == DialogResult.Yes)
+                {
+                    form.Show();  // Показываем форму эксперта
+                    form.TopMost = true; form.TopMost = false;
+                    this.Close();
+                }
+
+                if (otvet == DialogResult.No)
+                {
+                    this.TopMost = true; this.TopMost = false;
+                }
+            }
+            else
+            {
+                form.Show();  // Показываем форму эксперта
+                form.TopMost = true; form.TopMost = false;
+                this.Close();
+            }
         }
 
         // НАВОДИМ НА АЛЬТЕРНАТИВУ КУРСОР отображается полностью весь текст в сноске
@@ -345,10 +374,64 @@ namespace system_analysis
             }
         }
 
+        // функция ПРОВЕРКА ЗНАЧЕНИЙ У ячейки
+        // для dataGridView1_CellMouseDown И dataGridView1_CellValueChanged
+        private void check_cell_value(int r, int c)
+        {
+            string text = dataGridView1.Rows[r].Cells[c].Value.ToString();
+            if (text != "")// если введено что-то
+            {
+                int chislo = -1;
+                bool is_int = int.TryParse(text, out chislo);
+                if (is_int == true) // если введено целое число
+                {
+                    if (chislo >= 0 && chislo <= 100)// если введено целое число в правильном интервале
+                    {
+                        change = true;
+                        exp_res[E].marks[r] = chislo;
+                        dataGridView1.Rows[r].Cells[c].Style.BackColor = Color.FromName("ButtonHighlight"); // белый фон
+                        dataGridView1.Rows[r].Cells[c].Style.ForeColor = Color.FromName("Black"); // черный текст
+                    }
+                    else// если введено целое число НЕ в интервале
+                    {
+                        dataGridView1.Rows[r].Cells[c].Style.ForeColor = Color.FromName("Red"); // красный текст
+                        dataGridView1.Rows[r].Cells[c].Style.BackColor = Color.FromArgb(254, 254, 34); // желтый фон
+                    }
+                }
+                else // если введено НЕ целое число
+                {
+                    dataGridView1.Rows[r].Cells[c].Style.ForeColor = Color.FromName("Red");// красный текст
+                    dataGridView1.Rows[r].Cells[c].Style.BackColor = Color.FromArgb(254, 254, 34); // желтый фон
+                }
+            }
+            else // если НЕ введено
+            {
+                dataGridView1.Rows[r].Cells[c].Style.BackColor = Color.FromArgb(255, 64, 64); // красный фон
+            }
+        }
+
         // когда НАЖИМАЕМ НА ЯЧЕЙКУ
         private void dataGridView1_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
         {
+            if (e.ColumnIndex == 1 && e.RowIndex >= 0 && e.RowIndex < sol_count) // если ячейки с оценками
+            {
+                // делаем нормальной, если тыкаем
+                dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.BackColor = Color.FromName("ButtonHighlight"); // белый фон
+                dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.ForeColor = Color.FromName("Black"); // черный текст
+            }
 
+            // проверяем ячейку, с котрой ушли
+            if(col == 1 && row >= 0 && row < sol_count)
+            {
+                check_cell_value(row, col);
+            }
+
+            if (e.ColumnIndex == 1 && e.RowIndex >= 0 && e.RowIndex < sol_count) // если ячейки с оценками
+            {
+                // запоминаем ячейку для проверки, когда уйдем с нее
+                row = e.RowIndex;
+                col = e.ColumnIndex;
+            }
         }
 
         // когда РЕДАКТИРУЕМ ЯЧЕЙКУ
@@ -356,9 +439,7 @@ namespace system_analysis
         {
             if(e.ColumnIndex == 1 && e.RowIndex >= 0 && e.RowIndex < sol_count) // если ячейки с оценками
             {
-                int chislo = -1;
-                string text = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
-
+                check_cell_value(e.RowIndex, e.ColumnIndex);
             }
         }
     }
