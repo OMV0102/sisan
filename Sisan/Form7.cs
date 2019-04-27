@@ -25,14 +25,13 @@ namespace system_analysis
         private string directory = global_class.main_directory;
         //======================================================
 
-        private bool alter = false;
         public int max = 100; // максимальная СУММА ВСЕХ оценок (если одна оценка max, то остальные 0)
-        public bool correct = false; // флаг корректного изменния
+        public bool correct = false; // флаг правильных значений ячеек
+        public bool change = false; // флаг внесенных изменений
+        public bool is_edit; // флаг, что после редактирования не проверяем повторно ячейку
         public int exp_count = 0; // количество экспертов
         public int E = -1; //порядковый номер нашего эксперта в exp_res
         public int sol_count; // количество альтернатив про выбранной проблеме
-        public int row = -1;
-        public int col = -1;
 
         public struct result
         {
@@ -75,95 +74,92 @@ namespace system_analysis
                         sol_count++;
                     }
                 }
-                alter = true;
 
-                if (alter)
+                a.marks = new int[sol_count]; // выделили память для результата экспертов для нулевой альтернативы
+                // проверяем, есть ли у нас уже какие-то результаты опроса, если да, то читаем их
+                // иначе заполняем список -1 (типа не оценено)
+                FileInfo fileInf = new FileInfo(directory + "matrix" + form.num_problem + "m1.txt");
+                if (fileInf.Exists)
                 {
-                    a.marks = new int[sol_count]; // выделили память для результата экспертов для нулевой альтернативы
-                    // проверяем, есть ли у нас уже какие-то результаты опроса, если да, то читаем их
-                    // иначе заполняем список -1 (типа не оценено)
-                    FileInfo fileInf = new FileInfo(directory + "matrix" + form.num_problem + "m1.txt");
-                    if (fileInf.Exists)
+                    exists = true;  // уже есть какие то результаты
+                    int m = 0;
+                    using (StreamReader sr = new StreamReader(directory + "matrix" + form.num_problem + "m1.txt", System.Text.Encoding.UTF8))
                     {
-                        exists = true;  // уже есть какие то результаты
-                        int m = 0;
-                        using (StreamReader sr = new StreamReader(directory + "matrix" + form.num_problem + "m1.txt", System.Text.Encoding.UTF8))
+                        string line;
+                        while ((line = sr.ReadLine()) != null)
                         {
-                            string line;
-                            while ((line = sr.ReadLine()) != null)
-                            {
-                                words = line.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                                a.id_exp = Convert.ToInt32(words[0]);
-                                if (a.id_exp == form1_main.num_expert)
-                                    E = m;
-                                if(m > 0)
-                                    a.marks = new int[sol_count]; // выделили память для результата экспертов для sol_count-1 альтернатив
-                                for (int j = 0; j < a.marks.Count(); j++)
-                                {
-                                    a.marks[j] = Convert.ToInt32(words[j + 1]);
-                                }
-                                m++;
-                                exp_res.Add(a);
-                            }
-                        }
-                    }
-                    else
-                    {
-                        exists = false; // нет никаких результатов
-                        for (int i = 0; i < exp_count; i++)
-                        {
-                            a.id_exp = form.list_prob[form.N].exp[i].id_exp;
+                            words = line.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                            a.id_exp = Convert.ToInt32(words[0]);
+                            if (a.id_exp == form1_main.num_expert)
+                                E = m;
+                            if(m > 0)
+                                a.marks = new int[sol_count]; // выделили память для результата экспертов для sol_count-1 альтернатив
                             for (int j = 0; j < a.marks.Count(); j++)
                             {
-                                a.marks[j] = -1;
+                                a.marks[j] = Convert.ToInt32(words[j + 1]);
                             }
+                            m++;
                             exp_res.Add(a);
                         }
                     }
-
-
-                    DataTable table = new DataTable("Альтернативы и оценки");
-                    table.Clear();
-                    table.Columns.Clear();
-                    table.Rows.Clear();
-
-                    table.Columns.Add(new DataColumn("Альтернатива"));
-                    table.Columns[0].ReadOnly = true; // альтернативы можно только смотреть
-                    table.Columns.Add(new DataColumn("Оценка"));
-
-                    int n = exp_res[E].marks.Count();
-                    string[] tmp = new string[n];
-                    // заполнение датагрида
-                    for (int j = 0; j < n; j++)
-                    {
-                        if (exists == false) // никаких результатов нет ни у одного эксперта
-                        {
-                            tmp[j] = "";
-                        }
-                        else // есь уже какие-то результаты
-                        {
-                            if (exp_res[E].marks[0] == -1) // если у нашего эксперта нет результатов
-                                tmp[j] = "";
-                            else // если у нашего эксперт есть результаты
-                                tmp[j] = exp_res[E].marks[j].ToString();
-                        }
-                    }
-
-                    for (int j = 0; j < list_sol.Count; j++)
-                    {
-                        DataRow dr = table.NewRow();
-                        dr[0] = list_sol[j];
-                        dr[1] = tmp[j] ;
-                        table.Rows.Add(dr);
-                    }
-
-                    dataGridView1.DataSource = table;
-                    dataGridView1.Columns[0].Width = 600; // ширина столбца альтерантив
-                    dataGridView1.Columns[1].Width = 97; // ширина столбца оценок
-                    // шобы столбцы нельзя было сортировать
-                    dataGridView1.Columns[0].SortMode = DataGridViewColumnSortMode.NotSortable;
-                    dataGridView1.Columns[1].SortMode = DataGridViewColumnSortMode.NotSortable;
                 }
+                else
+                {
+                    exists = false; // нет никаких результатов
+                    for (int i = 0; i < exp_count; i++)
+                    {
+                        a.id_exp = form.list_prob[form.N].exp[i].id_exp;
+                        for (int j = 0; j < a.marks.Count(); j++)
+                        {
+                            a.marks[j] = -1;
+                        }
+                        exp_res.Add(a);
+                    }
+                }
+
+
+                DataTable table = new DataTable("Альтернативы и оценки");
+                table.Clear();
+                table.Columns.Clear();
+                table.Rows.Clear();
+
+                table.Columns.Add(new DataColumn("Альтернатива"));
+                table.Columns[0].ReadOnly = true; // альтернативы можно только смотреть
+                table.Columns.Add(new DataColumn("Оценка"));
+
+                int n = exp_res[E].marks.Count();
+                string[] tmp = new string[n];
+                // заполнение датагрида
+                for (int j = 0; j < n; j++)
+                {
+                    if (exists == false) // никаких результатов нет ни у одного эксперта
+                    {
+                        tmp[j] = "";
+                    }
+                    else // есь уже какие-то результаты
+                    {
+                        if (exp_res[E].marks[0] == -1) // если у нашего эксперта нет результатов
+                            tmp[j] = "";
+                        else // если у нашего эксперт есть результаты
+                            tmp[j] = exp_res[E].marks[j].ToString();
+                    }
+                }
+
+                for (int j = 0; j < list_sol.Count; j++)
+                {
+                    DataRow dr = table.NewRow();
+                    dr[0] = list_sol[j];
+                    dr[1] = tmp[j] ;
+                    table.Rows.Add(dr);
+                }
+
+                dataGridView1.DataSource = table;
+                dataGridView1.Columns[0].Width = 600; // ширина столбца альтерантив
+                dataGridView1.Columns[1].Width = 97; // ширина столбца оценок
+                // шобы столбцы нельзя было сортировать
+                dataGridView1.Columns[0].SortMode = DataGridViewColumnSortMode.NotSortable;
+                dataGridView1.Columns[1].SortMode = DataGridViewColumnSortMode.NotSortable;
+                
             }
         }
 
@@ -202,21 +198,18 @@ namespace system_analysis
         private void btn_save_Click(object sender, EventArgs e)
         {
             Form9_expert form = this.Owner as Form9_expert;
-            if(correct == true)
+            if(change == true)
             {
-                
-                int count_right = 0;
+                correct = true;
                 for (int i = 0; i < sol_count; i++) // ищем НЕправильные ячейки
                 {
-                    correct = false;
-                    check_cell_value(i, 1);
-                    if (correct == true)
+                    if (check_cell_value(i, 1) == false)
                     {
-                        count_right++;                              
+                        correct = false;
                     }
                 }
 
-                if (count_right == sol_count)
+                if (correct == true)
                 {
                     label3.BackColor = this.BackColor; // цвет label = цвет формы нейтральный
 
@@ -236,6 +229,7 @@ namespace system_analysis
                         form.list_prob[form.N].exp[form.E].m1 = 1; //внесли изменения в 9 форму (group)
                         form.save_group(); // сохраняем измененное в файл group...
                         form.update(form.N, form.E); // обновляем в 9 форме
+                        this.Hide(); // СКРЫВАЕМ ФОРМУ пока MessageBox показывается 
                         MessageBox.Show(
                         "Изменения сохранены!",
                         "Сохранение",
@@ -252,8 +246,8 @@ namespace system_analysis
                     {
                         if (sum < max)
                         {
+                            this.Hide(); // СКРЫВАЕМ ФОРМУ пока MessageBox показывается 
                             dataGridView1.Rows[0].Cells[0].Selected = true;
-                            correct = false;
                             DialogResult result = MessageBox.Show(
                             "Сумма оценок не должна быть меньше " + max + "!",
                             "Ошибка",
@@ -261,11 +255,12 @@ namespace system_analysis
                             MessageBoxIcon.Error,
                             MessageBoxDefaultButton.Button1,
                             MessageBoxOptions.DefaultDesktopOnly);
+                            this.Show();
                         }
                         if (sum > max)
                         {
+                            this.Hide(); // СКРЫВАЕМ ФОРМУ пока MessageBox показывается 
                             dataGridView1.Rows[0].Cells[0].Selected = true;
-                            correct = false;
                             MessageBox.Show(
                             "Сумма оценок не должна превышать " + max + "!\n",
                             "Ошибка",
@@ -273,6 +268,7 @@ namespace system_analysis
                             MessageBoxIcon.Error,
                             MessageBoxDefaultButton.Button1,
                             MessageBoxOptions.DefaultDesktopOnly);
+                            this.Show();
                         }
                         this.TopMost = true; this.TopMost = false;
                         label2.BackColor = Color.FromArgb(254, 254, 34); // желтый фон
@@ -281,7 +277,7 @@ namespace system_analysis
                 else
                 {
                     dataGridView1.Rows[0].Cells[0].Selected = true;
-                    correct = false;
+                    this.Hide(); // СКРЫВАЕМ ФОРМУ пока MessageBox показывается
                     MessageBox.Show(
                     "Все ячейки оценок должны быть заполнены \nчислами от 0 до "+max+"!\n" +
                     "Если для альтернативы по вашему мнению оценка не нужна, впишите в ячейку ноль!\n",
@@ -290,6 +286,7 @@ namespace system_analysis
                     MessageBoxIcon.Error,
                     MessageBoxDefaultButton.Button1,
                     MessageBoxOptions.DefaultDesktopOnly);
+                    this.Show();
                     label3.BackColor = Color.FromArgb(254, 254, 34); // желтый фон
                     this.TopMost = true; this.TopMost = false;
                     this.TopMost = true; this.TopMost = false;
@@ -314,35 +311,50 @@ namespace system_analysis
         private void button_back_Click(object sender, EventArgs e)
         {
             Form9_expert form = this.Owner as Form9_expert;
-            if (correct == true)
+            if (change == true)
             {
-                DialogResult otvet = MessageBox.Show(
-                "Все несохраненные изменения будут потеряны.\n" +
-                "Закрыть оценивание?",
-                "Внимание",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Warning,
-                MessageBoxDefaultButton.Button2,
-                MessageBoxOptions.DefaultDesktopOnly);
+                correct = true;
+                for (int i = 0; i < sol_count; i++) // ищем НЕправильные ячейки
+                {
+                    if (check_cell_value(i, 1) == false)
+                    {
+                        correct = false;
+                    }
+                }
 
-                if (otvet == DialogResult.Yes)
+                if (correct == true)
+                {
+                    this.Hide(); // СКРЫВАЕМ ФОРМУ пока MessageBox показывается 
+                    DialogResult otvet = MessageBox.Show(
+                    "Все несохраненные изменения будут потеряны.\n" +
+                    "Закрыть оценивание?",
+                    "Внимание",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning,
+                    MessageBoxDefaultButton.Button2,
+                    MessageBoxOptions.DefaultDesktopOnly);
+
+                    if (otvet == DialogResult.Yes)
+                    {
+                        form.Show();  // Показываем форму эксперта
+                        form.TopMost = true; form.TopMost = false;
+                        this.Close();
+                    }
+
+                    if (otvet == DialogResult.No)
+                    {
+                        this.Show();
+                        this.TopMost = true; this.TopMost = false;
+                    }
+                }
+                else
                 {
                     form.Show();  // Показываем форму эксперта
                     form.TopMost = true; form.TopMost = false;
                     this.Close();
                 }
-
-                if (otvet == DialogResult.No)
-                {
-                    this.TopMost = true; this.TopMost = false;
-                }
             }
-            else
-            {
-                form.Show();  // Показываем форму эксперта
-                form.TopMost = true; form.TopMost = false;
-                this.Close();
-            }
+            
         }
 
         // НАВОДИМ НА АЛЬТЕРНАТИВУ КУРСОР отображается полностью весь текст в сноске
@@ -358,7 +370,7 @@ namespace system_analysis
 
         // функция ПРОВЕРКА ЗНАЧЕНИЙ У ячейки
         // для dataGridView1_CellMouseDown И dataGridView1_CellValueChanged
-        private void check_cell_value(int r, int c)
+        private bool check_cell_value(int r, int c)
         {
             string text = dataGridView1.Rows[r].Cells[c].Value.ToString();
             if (text != "")// если введено что-то
@@ -369,30 +381,34 @@ namespace system_analysis
                 {
                     if (chislo >= 0 && chislo <= max)// если введено целое число в правильном интервале
                     {
-                        correct = true;
+                        change = true;
                         exp_res[E].marks[r] = chislo;
                         dataGridView1.Rows[r].Cells[c].Style.BackColor = Color.FromName("ButtonHighlight"); // белый фон
                         dataGridView1.Rows[r].Cells[c].Style.ForeColor = Color.FromName("Black"); // черный текст
+                        return true;
                     }
                     else// если введено целое число НЕ в интервале
                     {
                         dataGridView1.Rows[r].Cells[c].Style.ForeColor = Color.FromName("Red"); // красный текст
                         dataGridView1.Rows[r].Cells[c].Style.BackColor = Color.FromArgb(254, 254, 34); // желтый фон
+                        return false;
                     }
                 }
                 else // если введено НЕ целое число
                 {
                     dataGridView1.Rows[r].Cells[c].Style.ForeColor = Color.FromName("Red");// красный текст
                     dataGridView1.Rows[r].Cells[c].Style.BackColor = Color.FromArgb(254, 254, 34); // желтый фон
+                    return false;
                 }
             }
             else // если НЕ введено
             {
                 dataGridView1.Rows[r].Cells[c].Style.BackColor = Color.FromArgb(254, 254, 34); // желтый фон
+                return false;
             }
         }
 
-        // когда НАЖИМАЕМ НА ЯЧЕЙКУ
+        // когда НАЖИМАЕМ НА ЯЧЕЙКУ (приоритет_0)
         private void dataGridView1_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
         {
             if (e.ColumnIndex == 1 && e.RowIndex >= 0 && e.RowIndex < sol_count) // если ячейки с оценками
@@ -401,28 +417,29 @@ namespace system_analysis
                 dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.BackColor = Color.FromName("ButtonHighlight"); // белый фон
                 dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.ForeColor = Color.FromName("Black"); // черный текст
             }
+        }
 
-            // проверяем ячейку, с котрой ушли
-            if(col == 1 && row >= 0 && row < sol_count)
-            {
-                check_cell_value(row, col);
-            }
-
+        // когда РЕДАКТИРУЕМ ЯЧЕЙКУ (значение ячейки НОВОЕ) (приоритет_1)
+        private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
             if (e.ColumnIndex == 1 && e.RowIndex >= 0 && e.RowIndex < sol_count) // если ячейки с оценками
             {
-                // запоминаем ячейку для проверки, когда уйдем с нее
-                row = e.RowIndex;
-                col = e.ColumnIndex;
+                check_cell_value(e.RowIndex, e.ColumnIndex);
+                is_edit = true;
             }
         }
 
-        // когда РЕДАКТИРУЕМ ЯЧЕЙКУ
-        private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        // когда УШЛИ С ЯЧЕЙКИ (значение ячейки НОВОЕ) (приоритет_2)
+        private void dataGridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            if(e.ColumnIndex == 1 && e.RowIndex >= 0 && e.RowIndex < sol_count) // если ячейки с оценками
+            if (is_edit == false)
             {
-                check_cell_value(e.RowIndex, e.ColumnIndex);
+                if (e.ColumnIndex == 1 && e.RowIndex >= 0 && e.RowIndex < sol_count)  // если ячейки с оценками
+                {
+                    check_cell_value(e.RowIndex, e.ColumnIndex);
+                }
             }
+            is_edit = false;
         }
     }
 }
