@@ -40,6 +40,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.btn_sort = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -106,7 +107,7 @@
             this.btn_save.FlatAppearance.MouseOverBackColor = System.Drawing.Color.SandyBrown;
             this.btn_save.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_save.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btn_save.Location = new System.Drawing.Point(268, 530);
+            this.btn_save.Location = new System.Drawing.Point(230, 531);
             this.btn_save.Name = "btn_save";
             this.btn_save.Size = new System.Drawing.Size(244, 52);
             this.btn_save.TabIndex = 57;
@@ -223,11 +224,28 @@
             this.label2.Text = "Этот label заполняется в коде при загрузке формы.";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // btn_sort
+            // 
+            this.btn_sort.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(118)))), ((int)(((byte)(168)))));
+            this.btn_sort.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btn_sort.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkOrange;
+            this.btn_sort.FlatAppearance.MouseOverBackColor = System.Drawing.Color.SandyBrown;
+            this.btn_sort.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_sort.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btn_sort.Location = new System.Drawing.Point(584, 521);
+            this.btn_sort.Name = "btn_sort";
+            this.btn_sort.Size = new System.Drawing.Size(157, 62);
+            this.btn_sort.TabIndex = 74;
+            this.btn_sort.Text = "Сортировать по оценкам";
+            this.btn_sort.UseVisualStyleBackColor = false;
+            this.btn_sort.Click += new System.EventHandler(this.btn_sort_Click);
+            // 
             // Form12_prefer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 600);
+            this.Controls.Add(this.btn_sort);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
@@ -265,5 +283,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button btn_sort;
     }
 }

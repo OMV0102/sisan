@@ -230,7 +230,7 @@ namespace system_analysis
                     save();
                     //============================================
                     // в форме эксперта обновляем данные на ней
-                    form.list_prob[form.N].exp[form.E].m2 = 1; // не закончил проходить
+                    form.list_prob[form.N].exp[form.E].m2 = 1;  // опрос пройден
                     form.save_group(); // сохраняем измененное в файл group...
                     form.update(form.N, form.E);  // обновляем на 9 форме 
                     //============================================
@@ -343,7 +343,7 @@ namespace system_analysis
         }
 
         // функция ПРОВЕРКА ЗНАЧЕНИЙ У ячейки
-        // для dataGridView1_CellMouseDown И dataGridView1_CellValueChanged
+        // для dataGridView1_CellMouseDown И dataGridView1_CellValueChanged // КОГДА ПЕРЕЩЕЛКИВАЮ , ТО СРАВНИВАЮ НОВОЕ ЗНАЧЕНИЕ В ПРЕДЫДУЩЕЙ ЯЧЕЙКИ С СТАРАЫМ ЗНАЧЕНИЕМ В НОВОЙ ЯЧЕЙКИ
         private bool check_cell_value(int r, int c)
         {
             string text = dataGridView1.Rows[r].Cells[c].Value.ToString();
@@ -377,6 +377,8 @@ namespace system_analysis
                         }
                         else// Если число НЕ меняли  // QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ 
                         {
+                            dataGridView1.Rows[r].Cells[c].Style.ForeColor = Color.FromName("Red"); // черный текст
+                            dataGridView1.Rows[r].Cells[c].Style.BackColor = Color.FromName("ButtonHighlight"); // нейтральный фон
                             return true;
                         }
                     }
@@ -401,7 +403,7 @@ namespace system_analysis
             }
         }
 
-        // когда НАЖИМАЕМ НА ЯЧЕЙКУ (приоритет_0)
+        // когда НАЖИМАЕМ НА ЯЧЕЙКУ (приоритет_0) 
         private void dataGridView1_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
         {
             if (e.ColumnIndex == 1 && e.RowIndex >= 0 && e.RowIndex < sol_count) // если ячейки с оценками
@@ -435,6 +437,12 @@ namespace system_analysis
                 }
             }
             is_edit = false;
+        }
+
+        // кнопка СОРТИРОВАТЬ
+        private void btn_sort_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
