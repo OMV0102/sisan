@@ -36,7 +36,6 @@
             this.button_cross = new System.Windows.Forms.Button();
             this.button_minimize = new System.Windows.Forms.Button();
             this.button_back = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -177,29 +176,17 @@
             this.button_back.UseVisualStyleBackColor = false;
             this.button_back.Click += new System.EventHandler(this.button_back_Click);
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label3.ForeColor = System.Drawing.Color.Black;
-            this.label3.Location = new System.Drawing.Point(80, 190);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(642, 19);
-            this.label3.TabIndex = 69;
-            this.label3.Text = "Если по вашему мнению для альтернативы оценка не требуется, впишите в ячейку 0.";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label4.ForeColor = System.Drawing.Color.Black;
-            this.label4.Location = new System.Drawing.Point(144, 134);
+            this.label4.Location = new System.Drawing.Point(46, 177);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(515, 19);
             this.label4.TabIndex = 70;
             this.label4.Text = "Для оценивания щелкните по ячейке с оценкой и введите значение.";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label5
             // 
@@ -229,12 +216,12 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label2.ForeColor = System.Drawing.Color.Black;
-            this.label2.Location = new System.Drawing.Point(80, 161);
+            this.label2.Location = new System.Drawing.Point(46, 139);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(593, 19);
+            this.label2.Size = new System.Drawing.Size(389, 19);
             this.label2.TabIndex = 73;
-            this.label2.Text = "Каждую альтернативу независимо от других нужно оценить по шкале от 0 до ";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label2.Text = "Этот label заполняется в коде при загрузке формы.";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // Form12_prefer
             // 
@@ -245,7 +232,6 @@
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
             this.Controls.Add(this.button_back);
             this.Controls.Add(this.button_cross);
             this.Controls.Add(this.button_minimize);
@@ -275,7 +261,6 @@
         private System.Windows.Forms.Button button_cross;
         private System.Windows.Forms.Button button_minimize;
         private System.Windows.Forms.Button button_back;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;

@@ -25,6 +25,8 @@ namespace system_analysis
         private string directory = global_class.main_directory;
         //======================================================
 
+        //МЕТОД 1 (МЕТОД ВЗВЕШЕННЫХ ЭКСПЕРТНЫХ ОЦЕНОК)
+
         public int max = 100; // максимальная СУММА ВСЕХ оценок (если одна оценка max, то остальные 0)
         public bool correct = false; // флаг правильных значений ячеек
         public bool change = false; // флаг внесенных изменений
@@ -225,10 +227,14 @@ namespace system_analysis
                         label2.BackColor = this.BackColor; // цвет label = цвет формы нейтральный
 
                         // СОХРАНЯЕМ
+                        // сохраняем в файл matrix...
                         save();
-                        form.list_prob[form.N].exp[form.E].m1 = 1; //внесли изменения в 9 форму (group)
+                        //============================================
+                        // в форме эксперта обновляем данные на ней
+                        form.list_prob[form.N].exp[form.E].m1 = 1; // не закончил проходить
                         form.save_group(); // сохраняем измененное в файл group...
-                        form.update(form.N, form.E); // обновляем в 9 форме
+                        form.update(form.N, form.E);  // обновляем на 9 форме 
+                        //============================================
                         this.Hide(); // СКРЫВАЕМ ФОРМУ пока MessageBox показывается 
                         MessageBox.Show(
                         "Изменения сохранены!",
@@ -381,10 +387,8 @@ namespace system_analysis
                 {
                     if (chislo >= 0 && chislo <= max)// если введено целое число в правильном интервале
                     {
-                        change = true;
-                        exp_res[E].marks[r] = chislo;
-                        dataGridView1.Rows[r].Cells[c].Style.BackColor = Color.FromName("ButtonHighlight"); // белый фон
-                        dataGridView1.Rows[r].Cells[c].Style.ForeColor = Color.FromName("Black"); // черный текст
+                        change = true; // изменение засчитано
+                        exp_res[E].marks[r] = chislo; // запомнили введеную оценку
                         return true;
                     }
                     else// если введено целое число НЕ в интервале

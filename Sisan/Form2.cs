@@ -20,6 +20,8 @@ namespace system_analysis
         private string directory = global_class.main_directory;
         //======================================================
 
+        // МЕТОД 0 (МЕТОД ПАРНЫХ СРАВНЕНИЙ)
+
         private int N = 0; // количество вопросов
         private bool start = false;
         private int current = 1;
@@ -465,6 +467,7 @@ namespace system_analysis
             if (start)
             {
                 Form9_expert form = this.Owner as Form9_expert;
+
                 bool end = true;
                 for (int i = 0; i < q.Count; i++)
                     if (q[i].result == -1)
@@ -472,6 +475,7 @@ namespace system_analysis
 
                 if (!end)
                 {
+                    this.Hide();
                     DialogResult result = MessageBox.Show(
                     "Вы не прошли опрос до конца.\n" +
                     "Можете вернуться и продолжить в любое время.\n" +
@@ -507,7 +511,11 @@ namespace system_analysis
                         //===================================
                     }
                     if (result == DialogResult.No)
+                    {
+                        this.Show();
                         this.TopMost = true; this.TopMost = false;
+                    }
+                        
                 }
                 else
                 {

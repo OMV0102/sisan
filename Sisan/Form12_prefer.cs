@@ -25,6 +25,8 @@ namespace system_analysis
         private string directory = global_class.main_directory;
         //======================================================
 
+        // МЕТОД 2 (МЕТОД ПРЕДПОЧТЕНИЯ)
+
         public bool correct = false; // флаг правильных значений ячеек
         public bool change = false; // флаг внесенных изменений
         public bool is_edit; // флаг, что после редактирования не проверяем повторно ячейку
@@ -32,6 +34,7 @@ namespace system_analysis
         public int E = -1; //порядковый номер нашего эксперта в exp_res
         public int sol_count; // количество альтернатив про выбранной проблеме
         public int max = 100; // максимальная оценка для ОДНОЙ альтернативы
+        public int old_value = -1;  // Старое значение, котрое харнится в ячейке
 
         public struct result
         {
@@ -41,12 +44,14 @@ namespace system_analysis
         List<result> exp_res; // список с оценками экспертов
 
         List<string> list_sol;  // список для просто альтернатив
+
+        public bool[] numbers; // массив порядковых
         
         // при ЗАГРУЗКЕ ФОРМЫ 
         private void Form11_rang_Load(object sender, EventArgs e)
         {
             Form9_expert form = this.Owner as Form9_expert;
-            label2.Text += max + "!";
+
             string[] words;
             label_problem.Text = form.problem; // проблему вывели в форму
             exp_count = form.list_prob[form.N].exp.Count();  // узнали сколько всего экспертов
@@ -74,15 +79,21 @@ namespace system_analysis
                     }
                 }
 
+                label2.Text = "Сопоставьте оценки от 1 до " + sol_count + " для альтернатив, (1 - самая предпочтительная, " + sol_count + " - не предпочтительная)";
+
+                // выделяем память для массива порядковых чисел
+                numbers = new bool[sol_count + 1]; // индексы используем с 1 по sol_count, по умолчанию false
+                numbers[0] = true; // 0 индекс не используем, т.к. оценки с 1 по sol_count
+
                 a.marks = new int[sol_count]; // выделили память для результата экспертов для нулевой альтернативы
                 // проверяем, есть ли у нас уже какие-то результаты опроса, если да, то читаем их
                 // иначе заполняем список -1 (типа не оценено)
-                FileInfo fileInf = new FileInfo(directory + "matrix" + form.num_problem + "m3.txt");
+                FileInfo fileInf = new FileInfo(directory + "matrix" + form.num_problem + "m2.txt");
                 if (fileInf.Exists)
                 {
                     exists = true;  // уже есть какие то результаты
                     int m = 0;
-                    using (StreamReader sr = new StreamReader(directory + "matrix" + form.num_problem + "m3.txt", System.Text.Encoding.UTF8))
+                    using (StreamReader sr = new StreamReader(directory + "matrix" + form.num_problem + "m2.txt", System.Text.Encoding.UTF8))
                     {
                         string line;
                         while ((line = sr.ReadLine()) != null)
@@ -160,7 +171,6 @@ namespace system_analysis
                 // шобы столбцы нельзя было сортировать
                 dataGridView1.Columns[0].SortMode = DataGridViewColumnSortMode.NotSortable;
                 dataGridView1.Columns[1].SortMode = DataGridViewColumnSortMode.NotSortable;
-                
             }
         }
 
@@ -169,7 +179,7 @@ namespace system_analysis
         {
             Form9_expert form = this.Owner as Form9_expert; // 9 форма - хозяин этой формы
 
-            using (StreamWriter sw = new StreamWriter(directory + "matrix" + form.num_problem + "m3.txt", false, System.Text.Encoding.UTF8))
+            using (StreamWriter sw = new StreamWriter(directory + "matrix" + form.num_problem + "m2.txt", false, System.Text.Encoding.UTF8))
             {
                 string line = "";
                 for(int i = 0; i < exp_res.Count; i++)
@@ -212,14 +222,18 @@ namespace system_analysis
 
                 if (correct == true)
                 {
-                    label3.BackColor = this.BackColor; // цвет label = цвет формы нейтральный
-                    label2.BackColor = this.BackColor; // цвет label = цвет формы нейтральный
+                    //label3.BackColor = this.BackColor; // цвет label = цвет формы нейтральный
+                    //label2.BackColor = this.BackColor; // цвет label = цвет формы нейтральный
 
                     // СОХРАНЯЕМ
+                    // сохраняем в файл matrix...
                     save();
-                    form.list_prob[form.N].exp[form.E].m1 = 1; //внесли изменения в 9 форму (group)
+                    //============================================
+                    // в форме эксперта обновляем данные на ней
+                    form.list_prob[form.N].exp[form.E].m2 = 1; // не закончил проходить
                     form.save_group(); // сохраняем измененное в файл group...
-                    form.update(form.N, form.E); // обновляем в 9 форме
+                    form.update(form.N, form.E);  // обновляем на 9 форме 
+                    //============================================
                     this.Hide();  // СКРЫВАЕМ ФОРМУ пока MessageBox показывается 
                     MessageBox.Show(
                     "Изменения сохранены!",
@@ -238,7 +252,7 @@ namespace system_analysis
                     dataGridView1.Rows[0].Cells[0].Selected = true;
                     this.Hide(); // СКРЫВАЕМ ФОРМУ пока MessageBox показывается 
                     DialogResult otvet = MessageBox.Show(
-                    "Все ячейки оценок должны быть заполнены \nчислами от 0 до "+max+"!\n" +
+                    "Все ячейки оценок должны быть заполнены \nчислами от 0 до " + "???" +"!\n" +
                     "Если для альтернативы по вашему мнению оценка не нужна, впишите в ячейку ноль!\n",
                     "Ошибка",
                     MessageBoxButtons.OK,
@@ -246,8 +260,8 @@ namespace system_analysis
                     MessageBoxDefaultButton.Button1,
                     MessageBoxOptions.DefaultDesktopOnly);
                     this.Show();
-                    label2.BackColor = Color.FromArgb(254, 254, 34); // желтый фон
-                    label3.BackColor = Color.FromArgb(254, 254, 34); // желтый фон
+                    //label2.BackColor = Color.FromArgb(254, 254, 34); // желтый фон
+                    //label3.BackColor = Color.FromArgb(254, 254, 34); // желтый фон
                     this.TopMost = true; this.TopMost = false;
                     this.TopMost = true; this.TopMost = false;
                 }
@@ -339,15 +353,34 @@ namespace system_analysis
                 bool is_int = int.TryParse(text, out chislo);
                 if (is_int == true) // если введено целое число
                 {
-                    if (chislo >= 0 && chislo <= max)// если введено целое число в правильном интервале
+                    if(chislo > 0 && chislo <= sol_count)// если введено целое число в правильном интервале
                     {
-                        change = true;
-                        exp_res[E].marks[r] = chislo;
-                        dataGridView1.Rows[r].Cells[c].Style.BackColor = Color.FromName("ButtonHighlight"); // белый фон
-                        dataGridView1.Rows[r].Cells[c].Style.ForeColor = Color.FromName("Black"); // черный текст
-                        return true;
+                        if (chislo != old_value)  // если новое число отлично от старого // QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ 
+                        {
+                            if (numbers[chislo] == false) //Если введеное число свободно
+                            {
+                                if (old_value > 0 && old_value <= sol_count)
+                                {
+                                    numbers[old_value] = false;
+                                }
+                                change = true; // изменение засчитано
+                                numbers[chislo] = true; // оценка занята
+                                exp_res[E].marks[r] = chislo; // запомнили введеную оценку
+                                return true;
+                            }
+                            else // если введеное число НЕ свободно
+                            {
+                                dataGridView1.Rows[r].Cells[c].Style.ForeColor = Color.FromName("Red"); // красный текст
+                                dataGridView1.Rows[r].Cells[c].Style.BackColor = Color.FromArgb(254, 254, 34); // желтый фон
+                                return false;
+                            }
+                        }
+                        else// Если число НЕ меняли  // QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ 
+                        {
+                            return true;
+                        }
                     }
-                    else// если введено целое число НЕ в интервале
+                    else // если введено целое число НЕ в интервале
                     {
                         dataGridView1.Rows[r].Cells[c].Style.ForeColor = Color.FromName("Red"); // красный текст
                         dataGridView1.Rows[r].Cells[c].Style.BackColor = Color.FromArgb(254, 254, 34); // желтый фон
@@ -376,6 +409,8 @@ namespace system_analysis
                 // делаем нормальной, если тыкаем
                 dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.BackColor = Color.FromName("ButtonHighlight"); // белый фон
                 dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.ForeColor = Color.FromName("Black"); // черный текст
+                // запоминаем старое значение, чтоб его освободить потом
+                int.TryParse(dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString(), out old_value);
             }
         }
 
