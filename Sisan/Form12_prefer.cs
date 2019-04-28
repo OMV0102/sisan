@@ -561,19 +561,6 @@ namespace system_analysis
             }
         }
 
-        // когда НАЖИМАЕМ НА ЯЧЕЙКУ (приоритет_0) 
-        private void dataGridView1_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            /*if (e.ColumnIndex == 1 && e.RowIndex >= 0 && e.RowIndex < sol_count) // если ячейки с оценками
-            {
-                // делаем нормальной, если тыкаем
-                dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.BackColor = Color.FromName("ButtonHighlight"); // белый фон
-                dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.ForeColor = Color.FromName("Black"); // черный текст
-                // запоминаем старое значение, чтоб его освободить потом
-                int.TryParse(dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString(), out old_value);
-            }*/
-        }
-
         // когда РЕДАКТИРУЕМ ЯЧЕЙКУ (именно меняется значение) (приоритет_1)
         private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
