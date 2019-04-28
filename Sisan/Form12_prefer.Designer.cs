@@ -246,12 +246,13 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label3.ForeColor = System.Drawing.Color.Black;
-            this.label3.Location = new System.Drawing.Point(46, 172);
+            this.label3.Location = new System.Drawing.Point(46, 173);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(447, 38);
+            this.label3.Size = new System.Drawing.Size(691, 38);
             this.label3.TabIndex = 75;
-            this.label3.Text = "После проставления оценок, нажмите \"Сортировать\",\r\nчтобы расположить альтернативы" +
-    " по порядку по оценкам.";
+            this.label3.Text = "После проставления оценок для наглядности можно расположить альтернативы в порядк" +
+    "е\r\nубывания их значимости по введенным оценкам. Для этого нажмите кнопку \"Сортир" +
+    "овать\".";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // Form12_prefer

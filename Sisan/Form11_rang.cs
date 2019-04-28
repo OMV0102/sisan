@@ -76,7 +76,6 @@ namespace system_analysis
                     }
                 }
 
-                a.marks = new int[sol_count]; // выделили память для результата экспертов для нулевой альтернативы
                 // проверяем, есть ли у нас уже какие-то результаты опроса, если да, то читаем их
                 // иначе заполняем список -1 (типа не оценено)
                 FileInfo fileInf = new FileInfo(directory + "matrix" + form.num_problem + "m3.txt");
@@ -93,8 +92,7 @@ namespace system_analysis
                             a.id_exp = Convert.ToInt32(words[0]);
                             if (a.id_exp == form1_main.num_expert)
                                 E = m;
-                            if (m > 0)
-                                a.marks = new int[sol_count]; // выделили память для результата экспертов для sol_count-1 альтернатив
+                            a.marks = new int[sol_count]; // выделили память для результата экспертов для sol_count-1 альтернатив
                             for (int j = 0; j < a.marks.Count(); j++)
                             {
                                 a.marks[j] = Convert.ToInt32(words[j + 1]);
@@ -112,6 +110,7 @@ namespace system_analysis
                         a.id_exp = form.list_prob[form.N].exp[i].id_exp;
                         if (a.id_exp == form1_main.num_expert)
                             E = i;
+                        a.marks = new int[sol_count]; // выделили память для результата экспертов для sol_count-1 альтернатив
                         for (int j = 0; j < a.marks.Count(); j++)
                         {
                             a.marks[j] = -1;

@@ -30,6 +30,7 @@ namespace system_analysis
         public bool correct = false; // флаг правильных значений ячеек
         public bool change = false; // флаг внесенных изменений
         public bool is_edit; // флаг, что после редактирования не проверяем повторно ячейку
+        public bool is_sort = false; // флаг, что во время редактирования не проверяем ячейки
         public int exp_count = 0; // количество экспертов
         public int E = -1; //порядковый номер нашего эксперта в exp_res
         public int sol_count; // количество альтернатив про выбранной проблеме
@@ -47,7 +48,9 @@ namespace system_analysis
         List<string> list_sol;  // список для просто альтернатив
 
         public bool[] numbers; // массив порядковых
-        
+
+        DataTable table; // таблица , к которой привязаня данные датагрида
+
         // при ЗАГРУЗКЕ ФОРМЫ 
         private void Form11_rang_Load(object sender, EventArgs e)
         {
@@ -86,7 +89,6 @@ namespace system_analysis
                 numbers = new bool[sol_count + 1]; // индексы используем с 1 по sol_count, по умолчанию false
                 numbers[0] = true; // 0 индекс не используем, т.к. оценки с 1 по sol_count
 
-                a.marks = new int[sol_count]; // выделили память для результата экспертов для нулевой альтернативы
                 // проверяем, есть ли у нас уже какие-то результаты опроса, если да, то читаем их
                 // иначе заполняем список -1 (типа не оценено)
                 FileInfo fileInf = new FileInfo(directory + "matrix" + form.num_problem + "m2.txt");
@@ -103,11 +105,11 @@ namespace system_analysis
                             a.id_exp = Convert.ToInt32(words[0]);
                             if (a.id_exp == form1_main.num_expert)
                                 E = m;
-                            if (m > 0)
-                                a.marks = new int[sol_count]; // выделили память для результата экспертов для sol_count-1 альтернатив
+                            a.marks = new int[sol_count]; // выделили память для результата экспертов для sol_count-1 альтернатив
                             for (int j = 0; j < a.marks.Count(); j++)
                             {
                                 a.marks[j] = Convert.ToInt32(words[j + 1]);
+                                numbers[a.marks[j]] = true;
                             }
                             m++;
                             exp_res.Add(a);
@@ -122,6 +124,7 @@ namespace system_analysis
                         a.id_exp = form.list_prob[form.N].exp[i].id_exp;
                         if (a.id_exp == form1_main.num_expert)
                             E = i;
+                        a.marks = new int[sol_count]; // выделили память для результата экспертов для sol_count-1 альтернатив
                         for (int j = 0; j < a.marks.Count(); j++)
                         {
                             a.marks[j] = -1;
@@ -131,7 +134,7 @@ namespace system_analysis
                 }
 
 
-                DataTable table = new DataTable("Альтернативы и оценки");
+                table = new DataTable("Альтернативы и оценки");
                 table.Clear();
                 table.Columns.Clear();
                 table.Rows.Clear();
@@ -176,7 +179,7 @@ namespace system_analysis
         }
 
         // функция СОХРАНЕНИЯ
-        private void save()
+        private void save_matrix()
         {
             Form9_expert form = this.Owner as Form9_expert; // 9 форма - хозяин этой формы
 
@@ -240,23 +243,23 @@ namespace system_analysis
                     }
                 }
 
-                if (correct == true) // если так и осталось правильно
+                if (correct == true) // если все ячейки нормально заполнены
                 {
-                    //label3.BackColor = this.BackColor; // цвет label = цвет формы нейтральный
-                    //label2.BackColor = this.BackColor; // цвет label = цвет формы нейтральный
+                    label2.BackColor = this.BackColor; // цвет label = цвет формы нейтральный
+                    label3.BackColor = this.BackColor; // цвет label = цвет формы нейтральный
 
                     // СОХРАНЯЕМ
                     // сохраняем в файл matrix...
-                    /*save();
+                    save_matrix();
                     //============================================
                     // в форме эксперта обновляем данные на ней
                     form.list_prob[form.N].exp[form.E].m2 = 1;  // опрос пройден
                     form.save_group(); // сохраняем измененное в файл group...
-                    form.update(form.N, form.E);*/  // обновляем на 9 форме 
+                    form.update(form.N, form.E);  // обновляем на 9 форме 
                     //============================================
                     this.Hide();  // СКРЫВАЕМ ФОРМУ пока MessageBox показывается 
                     MessageBox.Show(
-                    "Изменения сохранены!(нет)",
+                    "Изменения сохранены!",
                     "Сохранение",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information,
@@ -272,7 +275,9 @@ namespace system_analysis
                     dataGridView1.Rows[0].Cells[0].Selected = true;
                     this.Hide(); // СКРЫВАЕМ ФОРМУ пока MessageBox показывается 
                     DialogResult otvet = MessageBox.Show(
-                    "Все ячейки должны быть заполнены\nоценками от 1 до " + sol_count +"!",
+                    "Не все ячейки заполнены корректными значениями!\n" +
+                    "или\n" +
+                    "Есть ячейки с повторяющимися оценками!",
                     "Внимание",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error,
@@ -280,6 +285,7 @@ namespace system_analysis
                     MessageBoxOptions.DefaultDesktopOnly);
                     this.Show();
                     label2.BackColor = Color.FromArgb(254, 254, 34); // желтый фон
+
                     this.TopMost = true; this.TopMost = false;
                     this.TopMost = true; this.TopMost = false;
                 }
@@ -346,7 +352,13 @@ namespace system_analysis
                     this.Close();
                 }
             }
-            
+            else
+            {
+                form.Show();  // Показываем форму эксперта
+                form.TopMost = true; form.TopMost = false;
+                this.Close();
+            }
+
         }
 
         // НАВОДИМ НА АЛЬТЕРНАТИВУ КУРСОР отображается полностью весь текст в сноске
@@ -361,7 +373,7 @@ namespace system_analysis
         }
 
         // функция ПРОВЕРКА ЗНАЧЕНИЙ У ячейки
-        // для dataGridView1_CellMouseDown И dataGridView1_CellValueChanged // КОГДА ПЕРЕЩЕЛКИВАЮ , ТО СРАВНИВАЮ НОВОЕ ЗНАЧЕНИЕ В ПРЕДЫДУЩЕЙ ЯЧЕЙКИ С СТАРАЫМ ЗНАЧЕНИЕМ В НОВОЙ ЯЧЕЙКИ
+        // для dataGridView1_CellValueChanged 
         private bool check_cell_value(int r, int c)
         {
             string text = dataGridView1.Rows[r].Cells[c].Value.ToString();
@@ -566,8 +578,11 @@ namespace system_analysis
         {
             if(e.ColumnIndex == 1 && e.RowIndex >= 0 && e.RowIndex < sol_count) // если ячейки с оценками
             {
-                check_cell_value(e.RowIndex, e.ColumnIndex);
-                is_edit = true;
+                if(is_sort == false)
+                {
+                    check_cell_value(e.RowIndex, e.ColumnIndex);
+                    is_edit = true;
+                }
             }
         }
 
@@ -586,10 +601,6 @@ namespace system_analysis
                     dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.BackColor = Color.FromName("ButtonHighlight"); // белый фон
                     dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.ForeColor = Color.FromName("Black"); // черный текст
                 }
-                /*if (e.ColumnIndex == 1 && e.RowIndex >= 0 && e.RowIndex < sol_count)  // если ячейки с оценками
-                {
-                    check_cell_value(e.RowIndex, e.ColumnIndex);
-                }*/
             }
             is_edit = false;
         }
@@ -599,11 +610,12 @@ namespace system_analysis
         {
             if (e.ColumnIndex == 1 && e.RowIndex >= 0 && e.RowIndex < sol_count) // если ячейки с оценками
             {
+                // если мы тыкнули на ячейку и у нее желтый фон, то запомнили 
                 if (dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.BackColor == Color.FromArgb(254, 254, 34)) // желтый фон
                 {
                     is_yellow = true;
                 }
-                else
+                else // если не желтый тоже запомнили
                 {
                     is_yellow = false;
                 }
@@ -615,7 +627,7 @@ namespace system_analysis
                 string text = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
                 if (text != "")
                     int.TryParse(text, out old_value);
-                else
+                else // Если занчение ячейки пустоя то занчит -1 присваиваем
                     old_value = -1;
             }
         }
@@ -623,7 +635,76 @@ namespace system_analysis
         // кнопка СОРТИРОВАТЬ
         private void btn_sort_Click(object sender, EventArgs e)
         {
+            correct = true;
+            for (int i = 0; i < sol_count; i++)
+            {
+                if(dataGridView1.Rows[i].Cells[1].Value.ToString() == "" || dataGridView1.Rows[i].Cells[1].Style.BackColor == Color.FromArgb(254, 254, 34))
+                {
+                    correct = false;
+                }
+            }
 
+            if (correct == true)
+            {
+                label2.BackColor = this.BackColor; // цвет label = цвет формы нейтральный
+                label3.BackColor = this.BackColor; // цвет label = цвет формы нейтральный
+
+                is_sort = true; // флаг сортировки включили 
+                table.Columns[0].ReadOnly = false; // в таблице, к которой привязан датагрид снимаем на альтернативах только чтение
+                dataGridView1.Columns[0].ReadOnly = false; // затем в альтернативах дата грида снимаем только чтение
+                // Сортировка взята с сайта  https://metanit.com/sharp/tutorial/2.7.php
+                string tmp_str = "";
+                int tmp_mark;
+                int Ni = -1;
+                int Nj = -1;
+                bool is_int_i = false;
+                bool is_int_j = false;
+                for (int i = 0; i < sol_count - 1; i++)
+                {
+                    for (int j = i + 1; j < sol_count; j++)
+                    {
+                        is_int_i = int.TryParse(dataGridView1.Rows[i].Cells[1].Value.ToString(), out Ni);
+                        is_int_j = int.TryParse(dataGridView1.Rows[j].Cells[1].Value.ToString(), out Nj);
+                        if (is_int_i == true && is_int_j == true)
+                        {
+                            if(Ni > Nj)
+                            {
+                                // в temp запомнили i элемент
+                                tmp_str = dataGridView1.Rows[i].Cells[0].Value.ToString(); // альтернатива
+                                tmp_mark = Ni; // оценка
+                                // в i элемент запоминаем j элемент
+                                dataGridView1.Rows[i].Cells[0].Value = dataGridView1.Rows[j].Cells[0].Value;// альтернатива
+                                dataGridView1.Rows[i].Cells[1].Value = dataGridView1.Rows[j].Cells[1].Value;// оценка
+                                // в j элемент запоминаем temp
+                                dataGridView1.Rows[j].Cells[0].Value = tmp_str; // альтернатива
+                                dataGridView1.Rows[j].Cells[1].Value = tmp_mark;// оценка
+                            }
+                        }
+                    }
+                }
+                dataGridView1.Rows[0].Cells[0].Selected = true; // активной 00 ячейку делаем
+                is_sort = false;// флаг сортировки вЫключили  
+                table.Columns[0].ReadOnly = true; // в таблице, к которой привязан датагрид ставим опять на альтернативы только чтение
+                dataGridView1.Columns[0].ReadOnly = true; // затем в альтернативах дата грида ставим опять только чтение
+            }
+            else
+            {
+                dataGridView1.Rows[0].Cells[0].Selected = true;
+                this.Hide(); // СКРЫВАЕМ ФОРМУ пока MessageBox показывается 
+                DialogResult otvet = MessageBox.Show(
+                "Не все ячейки заполнены корректными значениями!\n" +
+                "или\n" +
+                "Есть ячейки с повторяющимися оценками!",
+                "Ошибка",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Error,
+                MessageBoxDefaultButton.Button1,
+                MessageBoxOptions.DefaultDesktopOnly);
+                this.Show();
+
+                label2.BackColor = Color.FromArgb(254, 254, 34); // желтый фон
+                label3.BackColor = Color.FromArgb(254, 254, 34); // желтый фон
+            }
         }
     }
 }

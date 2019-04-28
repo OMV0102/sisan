@@ -25,6 +25,8 @@ namespace system_analysis
         private string directory = global_class.main_directory;
         //======================================================
 
+       // ЛК ЭКСПЕРТА
+
         public struct st_exp //  структура для хранения группы экспертов к прооблеме
         {
             public int id_exp;
