@@ -372,6 +372,8 @@ namespace system_analysis
                 bool is_uniq;
                 int old_cell = -1;
                 bool old_neskolko;
+                int num;
+                string alt;
                 if (is_int == true) // если введено целое число
                 {
                     if(chislo > 0 && chislo <= sol_count)// если введено целое число в правильном интервале
@@ -410,6 +412,20 @@ namespace system_analysis
                                 {
                                     dataGridView1.Rows[old_cell].Cells[c].Style.ForeColor = Color.FromName("Black"); // черный текст
                                     dataGridView1.Rows[old_cell].Cells[c].Style.BackColor = Color.FromName("ButtonHighlight"); // нейтральный фон
+                                    //=================================================================================================
+                                    // т.к. у нас может отсортировано , то мы по тексту альтернативы должны найти ее номер в списке
+                                    num = -1;
+                                    alt = dataGridView1.Rows[old_cell].Cells[0].Value.ToString();
+                                    for (int i = 0; i < list_sol.Count(); i++)
+                                    {
+                                        if (list_sol[i] == alt)
+                                        {
+                                            num = i;
+                                        }
+                                    }
+                                    if (num >= 0 && num < exp_res[E].marks.Count())
+                                        exp_res[E].marks[num] = old_value; // запомнили введеную оценку
+                                    //=================================================================================================
                                 }
                             }
                             // освобождаем старое число
@@ -419,9 +435,10 @@ namespace system_analysis
                             }
                             change = true; // изменение засчитано
                             numbers[chislo] = true; // оценка занята
+                            //=================================================================================================
                             // т.к. у нас может отсортировано , то мы по тексту альтернативы должны найти ее номер в списке
-                            int num = -1;
-                            string alt = dataGridView1.Rows[r].Cells[0].Value.ToString();
+                            num = -1;
+                            alt = dataGridView1.Rows[r].Cells[0].Value.ToString();
                             for (int i = 0; i < list_sol.Count(); i++)
                             {
                                 if (list_sol[i] == alt)
@@ -431,11 +448,12 @@ namespace system_analysis
                             }
                             if(num >= 0 && num < exp_res[E].marks.Count())
                                 exp_res[E].marks[num] = chislo; // запомнили введеную оценку
+                            //=================================================================================================
                             return true;
                         }
                         else // если введеное число ЗАНЯТО
                         {
-                            //===========================================================================================================
+                            //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
                             // поищем, не занято ли кем-то старое число
                             is_uniq = true;
                             old_neskolko = false;
@@ -468,6 +486,20 @@ namespace system_analysis
                                 {
                                     dataGridView1.Rows[old_cell].Cells[c].Style.ForeColor = Color.FromName("Black"); // черный текст
                                     dataGridView1.Rows[old_cell].Cells[c].Style.BackColor = Color.FromName("ButtonHighlight"); // нейтральный фон
+                                    //=================================================================================================
+                                    // т.к. у нас может отсортировано , то мы по тексту альтернативы должны найти ее номер в списке
+                                    num = -1;
+                                    alt = dataGridView1.Rows[old_cell].Cells[0].Value.ToString();
+                                    for (int i = 0; i < list_sol.Count(); i++)
+                                    {
+                                        if (list_sol[i] == alt)
+                                        {
+                                            num = i;
+                                        }
+                                    }
+                                    if (num >= 0 && num < exp_res[E].marks.Count())
+                                        exp_res[E].marks[num] = old_value; // запомнили введеную оценку
+                                    //=================================================================================================
                                 }
                             }
                             // освобождаем старое число
@@ -475,7 +507,7 @@ namespace system_analysis
                             {
                                 numbers[old_value] = false;
                             }
-                            //===========================================================================================================
+                            //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
                             // тогда мы найдем какой ячейкой это число занято
                             is_uniq = true;
                             for(int i = 0; i < sol_count; i++)
