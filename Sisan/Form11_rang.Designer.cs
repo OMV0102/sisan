@@ -238,8 +238,10 @@
             // 
             // Form11_rang
             // 
+            this.AcceptButton = this.btn_save;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.button_back;
             this.ClientSize = new System.Drawing.Size(800, 600);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label6);

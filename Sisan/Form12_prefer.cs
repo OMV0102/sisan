@@ -435,7 +435,47 @@ namespace system_analysis
                         }
                         else // если введеное число ЗАНЯТО
                         {
-
+                            //===========================================================================================================
+                            // поищем, не занято ли кем-то старое число
+                            is_uniq = true;
+                            old_neskolko = false;
+                            for (int i = 0; i < sol_count; i++)
+                            {
+                                if (i != r)
+                                {
+                                    if (dataGridView1.Rows[i].Cells[c].Value.ToString() == old_value.ToString() && old_value > 0 && old_value <= sol_count)
+                                    {
+                                        is_uniq = false;
+                                        if (old_cell != -1) // если нашли уже не одну ячейку с старым значением , карсим предыдущу.
+                                        {
+                                            // сигналим желтым с красным этим , кто занял число
+                                            dataGridView1.Rows[old_cell].Cells[c].Style.ForeColor = Color.FromName("Red"); // красный текст
+                                            dataGridView1.Rows[old_cell].Cells[c].Style.BackColor = Color.FromArgb(254, 254, 34); // желтый фон
+                                            old_neskolko = true;
+                                        }
+                                        old_cell = i; // и запоминаем новую
+                                    }
+                                }
+                            }
+                            if (old_neskolko == true)
+                            {
+                                dataGridView1.Rows[old_cell].Cells[c].Style.ForeColor = Color.FromName("Red"); // красный текст
+                                dataGridView1.Rows[old_cell].Cells[c].Style.BackColor = Color.FromArgb(254, 254, 34); // желтый фон
+                            }
+                            else
+                            {
+                                if (old_cell >= 0 && old_cell < sol_count)
+                                {
+                                    dataGridView1.Rows[old_cell].Cells[c].Style.ForeColor = Color.FromName("Black"); // черный текст
+                                    dataGridView1.Rows[old_cell].Cells[c].Style.BackColor = Color.FromName("ButtonHighlight"); // нейтральный фон
+                                }
+                            }
+                            // освобождаем старое число
+                            if (is_uniq == true && old_value > 0 && old_value <= sol_count)
+                            {
+                                numbers[old_value] = false;
+                            }
+                            //===========================================================================================================
                             // тогда мы найдем какой ячейкой это число занято
                             is_uniq = true;
                             for(int i = 0; i < sol_count; i++)
@@ -544,12 +584,20 @@ namespace system_analysis
                 {
                     is_yellow = true;
                 }
+                else
+                {
+                    is_yellow = false;
+                }
                 // делаем нормальной, если тыкаем
                 dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.BackColor = Color.FromName("ButtonHighlight"); // белый фон
                 dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.ForeColor = Color.FromName("Black"); // черный текст
-                
+
                 // запоминаем старое значение, чтоб его освободить потом
-                int.TryParse(dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString(), out old_value);
+                string text = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                if (text != "")
+                    int.TryParse(text, out old_value);
+                else
+                    old_value = -1;
             }
         }
 

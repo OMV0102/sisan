@@ -320,7 +320,13 @@ namespace system_analysis
                     this.Close();
                 }
             }
-            
+            else
+            {
+                form.Show();  // Показываем форму эксперта
+                form.TopMost = true; form.TopMost = false;
+                this.Close();
+            }
+
         }
 
         // НАВОДИМ НА АЛЬТЕРНАТИВУ КУРСОР отображается полностью весь текст в сноске

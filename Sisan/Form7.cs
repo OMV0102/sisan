@@ -33,7 +33,7 @@ namespace system_analysis
         public bool is_edit; // флаг, что после редактирования не проверяем повторно ячейку
         public int exp_count = 0; // количество экспертов
         public int E = -1; //порядковый номер нашего эксперта в exp_res
-        public int sol_count; // количество альтернатив про выбранной проблеме
+        public int sol_count; // количество альтернатив по выбранной проблеме
 
         public struct result
         {
@@ -66,7 +66,6 @@ namespace system_analysis
             sol_count = 0;
             if (text.Length != 0)
             {
-               
                 using (StreamReader sr = new StreamReader(directory + "solutions" + form.num_problem + ".txt", System.Text.Encoding.UTF8))
                 {
                     string line;
@@ -111,6 +110,8 @@ namespace system_analysis
                     for (int i = 0; i < exp_count; i++)
                     {
                         a.id_exp = form.list_prob[form.N].exp[i].id_exp;
+                        if (a.id_exp == form1_main.num_expert)
+                            E = i;
                         for (int j = 0; j < a.marks.Count(); j++)
                         {
                             a.marks[j] = -1;
@@ -118,7 +119,6 @@ namespace system_analysis
                         exp_res.Add(a);
                     }
                 }
-
 
                 DataTable table = new DataTable("Альтернативы и оценки");
                 table.Clear();
@@ -129,10 +129,9 @@ namespace system_analysis
                 table.Columns[0].ReadOnly = true; // альтернативы можно только смотреть
                 table.Columns.Add(new DataColumn("Оценка"));
 
-                int n = exp_res[E].marks.Count();
-                string[] tmp = new string[n];
+                string[] tmp = new string[sol_count];
                 // заполнение датагрида
-                for (int j = 0; j < n; j++)
+                for (int j = 0; j < sol_count; j++)
                 {
                     if (exists == false) // никаких результатов нет ни у одного эксперта
                     {
@@ -140,9 +139,9 @@ namespace system_analysis
                     }
                     else // есь уже какие-то результаты
                     {
-                        if (exp_res[E].marks[0] == -1) // если у нашего эксперта нет результатов
+                        if (exp_res[E].marks[0] == -1) // если у нашего эксперта нет результатов в файле
                             tmp[j] = "";
-                        else // если у нашего эксперт есть результаты
+                        else // если у нашего эксперт есть результаты в файле
                             tmp[j] = exp_res[E].marks[j].ToString();
                     }
                 }
@@ -360,7 +359,13 @@ namespace system_analysis
                     this.Close();
                 }
             }
-            
+            else
+            {
+                form.Show();  // Показываем форму эксперта
+                form.TopMost = true; form.TopMost = false;
+                this.Close();
+            }
+
         }
 
         // НАВОДИМ НА АЛЬТЕРНАТИВУ КУРСОР отображается полностью весь текст в сноске
