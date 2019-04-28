@@ -41,6 +41,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.btn_sort = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -49,7 +50,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label1.ForeColor = System.Drawing.Color.Black;
-            this.label1.Location = new System.Drawing.Point(322, 223);
+            this.label1.Location = new System.Drawing.Point(322, 265);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(152, 23);
             this.label1.TabIndex = 49;
@@ -60,7 +61,7 @@
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label7.ForeColor = System.Drawing.Color.Black;
-            this.label7.Location = new System.Drawing.Point(342, 59);
+            this.label7.Location = new System.Drawing.Point(342, 50);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(109, 23);
             this.label7.TabIndex = 48;
@@ -76,13 +77,14 @@
             this.dataGridView1.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-            this.dataGridView1.Location = new System.Drawing.Point(50, 262);
+            this.dataGridView1.Location = new System.Drawing.Point(50, 299);
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowHeadersWidth = 40;
-            this.dataGridView1.Size = new System.Drawing.Size(700, 250);
+            this.dataGridView1.Size = new System.Drawing.Size(700, 200);
             this.dataGridView1.TabIndex = 53;
+            this.dataGridView1.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dataGridView1_CellBeginEdit);
             this.dataGridView1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellEndEdit);
             this.dataGridView1.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_CellMouseDown);
             this.dataGridView1.CellToolTipTextNeeded += new System.Windows.Forms.DataGridViewCellToolTipTextNeededEventHandler(this.dataGridView1_CellToolTipTextNeeded);
@@ -94,7 +96,7 @@
             this.label_problem.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label_problem.Font = new System.Drawing.Font("Tahoma", 12.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label_problem.ForeColor = System.Drawing.Color.Black;
-            this.label_problem.Location = new System.Drawing.Point(50, 94);
+            this.label_problem.Location = new System.Drawing.Point(50, 85);
             this.label_problem.Name = "label_problem";
             this.label_problem.Size = new System.Drawing.Size(700, 27);
             this.label_problem.TabIndex = 56;
@@ -182,7 +184,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label4.ForeColor = System.Drawing.Color.Black;
-            this.label4.Location = new System.Drawing.Point(46, 177);
+            this.label4.Location = new System.Drawing.Point(46, 222);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(515, 19);
             this.label4.TabIndex = 70;
@@ -217,11 +219,11 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label2.ForeColor = System.Drawing.Color.Black;
-            this.label2.Location = new System.Drawing.Point(46, 139);
+            this.label2.Location = new System.Drawing.Point(46, 121);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(389, 19);
+            this.label2.Size = new System.Drawing.Size(229, 38);
             this.label2.TabIndex = 73;
-            this.label2.Text = "Этот label заполняется в коде при загрузке формы.";
+            this.label2.Text = "Этот label заполняется в коде\r\nпри загрузке формы.";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // btn_sort
@@ -240,11 +242,25 @@
             this.btn_sort.UseVisualStyleBackColor = false;
             this.btn_sort.Click += new System.EventHandler(this.btn_sort_Click);
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label3.ForeColor = System.Drawing.Color.Black;
+            this.label3.Location = new System.Drawing.Point(46, 172);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(447, 38);
+            this.label3.TabIndex = 75;
+            this.label3.Text = "После проставления оценок, нажмите \"Сортировать\",\r\nчтобы расположить альтернативы" +
+    " по порядку по оценкам.";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // Form12_prefer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 600);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.btn_sort);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label6);
@@ -284,5 +300,6 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btn_sort;
+        private System.Windows.Forms.Label label3;
     }
 }

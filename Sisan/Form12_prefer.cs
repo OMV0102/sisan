@@ -79,8 +79,8 @@ namespace system_analysis
                     }
                 }
 
-                label2.Text = "Сопоставьте оценки от 1 до " + sol_count + " для альтернатив, (1 - самая предпочтительная, " + sol_count + " - не предпочтительная)";
-
+                label2.Text = "Расположите оценки от 1 до " + sol_count + " для альтернатив,\n";
+                label2.Text += "(1 - самая предпочтительная, " + sol_count + " - не предпочтительная)";
                 // выделяем память для массива порядковых чисел
                 numbers = new bool[sol_count + 1]; // индексы используем с 1 по sol_count, по умолчанию false
                 numbers[0] = true; // 0 индекс не используем, т.к. оценки с 1 по sol_count
@@ -211,57 +211,74 @@ namespace system_analysis
             Form9_expert form = this.Owner as Form9_expert;
             if(change == true)
             {
-                correct = true;
-                for (int i = 0; i < sol_count; i++) // ищем НЕправильные ячейки
+                // заполняем порядковый массив чисел типа не заняты все
+                for (int i = 1; i < numbers.Count(); i++)
                 {
-                    if (check_cell_value(i, 1) == false)
+                    numbers[i] = false;
+                }
+
+                // по оценкам смотрим занятые номера и запоминаем
+                int chislo = -1;
+                bool is_int;
+                for (int i = 0; i < sol_count; i++)
+                {
+                    is_int = int.TryParse(dataGridView1.Rows[i].Cells[1].Value.ToString(), out chislo);
+                    if(is_int == true && chislo > 0 && chislo <= sol_count)
+                    {
+                        numbers[chislo] = true;
+                    }
+                    
+                }
+
+                correct = true;  //допустим все правильно
+                for (int i = 1; i < numbers.Count(); i++) // ищем НЕправильные ячейки
+                {
+                    if (numbers[i] == false)
                     {
                         correct = false;
                     }
                 }
 
-                if (correct == true)
+                if (correct == true) // если так и осталось правильно
                 {
                     //label3.BackColor = this.BackColor; // цвет label = цвет формы нейтральный
                     //label2.BackColor = this.BackColor; // цвет label = цвет формы нейтральный
 
                     // СОХРАНЯЕМ
                     // сохраняем в файл matrix...
-                    save();
+                    /*save();
                     //============================================
                     // в форме эксперта обновляем данные на ней
                     form.list_prob[form.N].exp[form.E].m2 = 1;  // опрос пройден
                     form.save_group(); // сохраняем измененное в файл group...
-                    form.update(form.N, form.E);  // обновляем на 9 форме 
+                    form.update(form.N, form.E);*/  // обновляем на 9 форме 
                     //============================================
                     this.Hide();  // СКРЫВАЕМ ФОРМУ пока MessageBox показывается 
                     MessageBox.Show(
-                    "Изменения сохранены!",
+                    "Изменения сохранены!(нет)",
                     "Сохранение",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information,
                     MessageBoxDefaultButton.Button1,
                     MessageBoxOptions.DefaultDesktopOnly);
-
-                    form.Show();
+                    this.Show(); // ВРЕМЕННАЯ СТРОКА , УДАЛИТЬ ПОСЛЕ ОТЛАДКИ
+                    /*form.Show();
                     form.TopMost = true; form.TopMost = false;
-                    this.Close();
+                    this.Close();*/
                 }
                 else
                 {
                     dataGridView1.Rows[0].Cells[0].Selected = true;
                     this.Hide(); // СКРЫВАЕМ ФОРМУ пока MessageBox показывается 
                     DialogResult otvet = MessageBox.Show(
-                    "Все ячейки оценок должны быть заполнены \nчислами от 0 до " + "???" +"!\n" +
-                    "Если для альтернативы по вашему мнению оценка не нужна, впишите в ячейку ноль!\n",
-                    "Ошибка",
+                    "Все ячейки должны быть заполнены\nоценками от 1 до " + sol_count +"!",
+                    "Внимание",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error,
                     MessageBoxDefaultButton.Button1,
                     MessageBoxOptions.DefaultDesktopOnly);
                     this.Show();
-                    //label2.BackColor = Color.FromArgb(254, 254, 34); // желтый фон
-                    //label3.BackColor = Color.FromArgb(254, 254, 34); // желтый фон
+                    label2.BackColor = Color.FromArgb(254, 254, 34); // желтый фон
                     this.TopMost = true; this.TopMost = false;
                     this.TopMost = true; this.TopMost = false;
                 }
@@ -351,35 +368,103 @@ namespace system_analysis
             {
                 int chislo = -1;
                 bool is_int = int.TryParse(text, out chislo);
+                bool is_uniq;
+                int old_cell = -1;
+                bool old_neskolko;
                 if (is_int == true) // если введено целое число
                 {
                     if(chislo > 0 && chislo <= sol_count)// если введено целое число в правильном интервале
                     {
-                        if (chislo != old_value)  // если новое число отлично от старого // QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ 
+                        if (numbers[chislo] == false)   //Если введеное число свободно
                         {
-                            if (numbers[chislo] == false) //Если введеное число свободно
+                            // поищем, не занято ли кем-то старое число
+                            is_uniq = true;
+                            old_neskolko = false;
+                            for (int i = 0; i < sol_count; i++)
                             {
-                                if (old_value > 0 && old_value <= sol_count)
+                                if (i != r)
                                 {
-                                    numbers[old_value] = false;
+                                    if (dataGridView1.Rows[i].Cells[c].Value.ToString() == old_value.ToString())
+                                    {
+                                        is_uniq = false;
+                                        if(old_cell != -1) // если нашли уже не одну ячейку с старым значением , карсим предыдущу.
+                                        {
+                                            // сигналим желтым с красным этим , кто занял число
+                                            dataGridView1.Rows[old_cell].Cells[c].Style.ForeColor = Color.FromName("Red"); // красный текст
+                                            dataGridView1.Rows[old_cell].Cells[c].Style.BackColor = Color.FromArgb(254, 254, 34); // желтый фон
+                                            old_neskolko = true;
+                                        }
+                                        old_cell = i; // и запоминаем новую
+                                    }
                                 }
-                                change = true; // изменение засчитано
-                                numbers[chislo] = true; // оценка занята
-                                exp_res[E].marks[r] = chislo; // запомнили введеную оценку
+                            }
+                            if(old_neskolko == true)
+                            {
+                                dataGridView1.Rows[old_cell].Cells[c].Style.ForeColor = Color.FromName("Red"); // красный текст
+                                dataGridView1.Rows[old_cell].Cells[c].Style.BackColor = Color.FromArgb(254, 254, 34); // желтый фон
+                            }
+                            else
+                            {
+                                if(old_cell >= 0 && old_cell < sol_count)
+                                {
+                                    dataGridView1.Rows[old_cell].Cells[c].Style.ForeColor = Color.FromName("Black"); // черный текст
+                                    dataGridView1.Rows[old_cell].Cells[c].Style.BackColor = Color.FromName("ButtonHighlight"); // нейтральный фон
+                                }
+                            }
+                            // освобождаем старое число
+                            if (is_uniq == true && old_value > 0 && old_value <= sol_count)
+                            {
+                                numbers[old_value] = false;
+                            }
+                            change = true; // изменение засчитано
+                            numbers[chislo] = true; // оценка занята
+                            // т.к. у нас может отсортировано , то мы по тексту альтернативы должны найти ее номер в списке
+                            int num = -1;
+                            string alt = dataGridView1.Rows[r].Cells[0].Value.ToString();
+                            for (int i = 0; i < list_sol.Count(); i++)
+                            {
+                                if (list_sol[i] == alt)
+                                {
+                                    num = i;
+                                }
+                            }
+                            if(num >= 0 && num < exp_res[E].marks.Count())
+                                exp_res[E].marks[num] = chislo; // запомнили введеную оценку
+                            return true;
+                        }
+                        else // если введеное число ЗАНЯТО
+                        {
+
+                            // тогда мы найдем какой ячейкой это число занято
+                            is_uniq = true;
+                            for(int i = 0; i < sol_count; i++)
+                            {
+                                if (i != r)
+                                {
+                                    if (dataGridView1.Rows[i].Cells[c].Value.ToString() == chislo.ToString())
+                                    {
+                                        // сигналим желтым с красным этим , кто занял число
+                                        dataGridView1.Rows[i].Cells[c].Style.ForeColor = Color.FromName("Red"); // красный текст
+                                        dataGridView1.Rows[i].Cells[c].Style.BackColor = Color.FromArgb(254, 254, 34); // желтый фон
+                                        is_uniq = false;
+                                    }
+                                }
+                            }
+                            // потом проверяем че мы нашли
+                            if(is_uniq == true) // если НЕ нашли, что введенное число кем-то занято
+                            {
+                                // значит число занято самим собой, то есть мы оставили старое значение в ячейке
+                                dataGridView1.Rows[r].Cells[c].Style.ForeColor = Color.FromName("Black"); // черный текст
+                                dataGridView1.Rows[r].Cells[c].Style.BackColor = Color.FromName("ButtonHighlight"); // нейтральный фон
                                 return true;
                             }
-                            else // если введеное число НЕ свободно
+                            else // если НАШЛИ, что введенное число кем-то занято
                             {
+                                // сигналим желтым с красным
                                 dataGridView1.Rows[r].Cells[c].Style.ForeColor = Color.FromName("Red"); // красный текст
                                 dataGridView1.Rows[r].Cells[c].Style.BackColor = Color.FromArgb(254, 254, 34); // желтый фон
                                 return false;
                             }
-                        }
-                        else// Если число НЕ меняли  // QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ 
-                        {
-                            dataGridView1.Rows[r].Cells[c].Style.ForeColor = Color.FromName("Red"); // черный текст
-                            dataGridView1.Rows[r].Cells[c].Style.BackColor = Color.FromName("ButtonHighlight"); // нейтральный фон
-                            return true;
                         }
                     }
                     else // если введено целое число НЕ в интервале
@@ -406,14 +491,14 @@ namespace system_analysis
         // когда НАЖИМАЕМ НА ЯЧЕЙКУ (приоритет_0) 
         private void dataGridView1_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if (e.ColumnIndex == 1 && e.RowIndex >= 0 && e.RowIndex < sol_count) // если ячейки с оценками
+            /*if (e.ColumnIndex == 1 && e.RowIndex >= 0 && e.RowIndex < sol_count) // если ячейки с оценками
             {
                 // делаем нормальной, если тыкаем
                 dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.BackColor = Color.FromName("ButtonHighlight"); // белый фон
                 dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.ForeColor = Color.FromName("Black"); // черный текст
                 // запоминаем старое значение, чтоб его освободить потом
                 int.TryParse(dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString(), out old_value);
-            }
+            }*/
         }
 
         // когда РЕДАКТИРУЕМ ЯЧЕЙКУ (именно меняется значение) (приоритет_1)
@@ -437,6 +522,19 @@ namespace system_analysis
                 }
             }
             is_edit = false;
+        }
+
+        // когда НАЖИМАЕМ НА ЯЧЕЙКУ (приоритет_3) 
+        private void dataGridView1_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
+        {
+            if (e.ColumnIndex == 1 && e.RowIndex >= 0 && e.RowIndex < sol_count) // если ячейки с оценками
+            {
+                // делаем нормальной, если тыкаем
+                dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.BackColor = Color.FromName("ButtonHighlight"); // белый фон
+                dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.ForeColor = Color.FromName("Black"); // черный текст
+                // запоминаем старое значение, чтоб его освободить потом
+                int.TryParse(dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString(), out old_value);
+            }
         }
 
         // кнопка СОРТИРОВАТЬ
