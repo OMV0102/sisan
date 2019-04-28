@@ -35,6 +35,7 @@ namespace system_analysis
         public int sol_count; // количество альтернатив про выбранной проблеме
         public int max = 100; // максимальная оценка для ОДНОЙ альтернативы
         public int old_value = -1;  // Старое значение, котрое харнится в ячейке
+        public bool is_yellow = false;
 
         public struct result
         {
@@ -384,7 +385,7 @@ namespace system_analysis
                             {
                                 if (i != r)
                                 {
-                                    if (dataGridView1.Rows[i].Cells[c].Value.ToString() == old_value.ToString())
+                                    if (dataGridView1.Rows[i].Cells[c].Value.ToString() == old_value.ToString() && old_value > 0 && old_value <= sol_count)
                                     {
                                         is_uniq = false;
                                         if(old_cell != -1) // если нашли уже не одну ячейку с старым значением , карсим предыдущу.
@@ -516,10 +517,20 @@ namespace system_analysis
         {
             if (is_edit == false)
             {
-                if (e.ColumnIndex == 1 && e.RowIndex >= 0 && e.RowIndex < sol_count)  // если ячейки с оценками
+                if(is_yellow == true)
+                {
+                    dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.ForeColor = Color.FromName("Red"); // красный текст
+                    dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.BackColor = Color.FromArgb(254, 254, 34); // желтый фон
+                }
+                else
+                {
+                    dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.BackColor = Color.FromName("ButtonHighlight"); // белый фон
+                    dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.ForeColor = Color.FromName("Black"); // черный текст
+                }
+                /*if (e.ColumnIndex == 1 && e.RowIndex >= 0 && e.RowIndex < sol_count)  // если ячейки с оценками
                 {
                     check_cell_value(e.RowIndex, e.ColumnIndex);
-                }
+                }*/
             }
             is_edit = false;
         }
@@ -529,9 +540,14 @@ namespace system_analysis
         {
             if (e.ColumnIndex == 1 && e.RowIndex >= 0 && e.RowIndex < sol_count) // если ячейки с оценками
             {
+                if (dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.BackColor == Color.FromArgb(254, 254, 34)) // желтый фон
+                {
+                    is_yellow = true;
+                }
                 // делаем нормальной, если тыкаем
                 dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.BackColor = Color.FromName("ButtonHighlight"); // белый фон
                 dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.ForeColor = Color.FromName("Black"); // черный текст
+                
                 // запоминаем старое значение, чтоб его освободить потом
                 int.TryParse(dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString(), out old_value);
             }
