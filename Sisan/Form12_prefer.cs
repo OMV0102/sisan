@@ -109,7 +109,8 @@ namespace system_analysis
                             for (int j = 0; j < a.marks.Count(); j++)
                             {
                                 a.marks[j] = Convert.ToInt32(words[j + 1]);
-                                numbers[a.marks[j]] = true;
+                                if(a.marks[j] > 0 && a.marks[j] <= sol_count)
+                                    numbers[a.marks[j]] = true;
                             }
                             m++;
                             exp_res.Add(a);
@@ -265,10 +266,9 @@ namespace system_analysis
                     MessageBoxIcon.Information,
                     MessageBoxDefaultButton.Button1,
                     MessageBoxOptions.DefaultDesktopOnly);
-                    this.Show(); // ВРЕМЕННАЯ СТРОКА , УДАЛИТЬ ПОСЛЕ ОТЛАДКИ
-                    /*form.Show();
+                    form.Show();
                     form.TopMost = true; form.TopMost = false;
-                    this.Close();*/
+                    this.Close();
                 }
                 else
                 {
@@ -704,6 +704,7 @@ namespace system_analysis
 
                 label2.BackColor = Color.FromArgb(254, 254, 34); // желтый фон
                 label3.BackColor = Color.FromArgb(254, 254, 34); // желтый фон
+                this.TopMost = true; this.TopMost = false;
             }
         }
     }
