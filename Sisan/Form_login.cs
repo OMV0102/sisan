@@ -59,8 +59,8 @@ namespace system_analysis
             // если зашли как аналитик
             if (form1_main.an_or_exp == true)
             {
-                if (password_file.Length != 0)
-                {
+                //if (password_file.Length != 0)
+                //{
 
                     if (password_file == txt_password.Text)
                     {
@@ -79,18 +79,18 @@ namespace system_analysis
                         this.ActiveControl = txt_password;
                     }
 
-                }
-                else
-                {
-                    //если пароль из файла не считался, то ниче не делаем
-                    // (грустим)
-                }
+                //}
+                //else
+                //{
+                //    //если пароль из файла не считался, то ниче не делаем
+                //    // (грустим)
+                //}
             }
             // если зашли как эксперт
             else if (form1_main.an_or_exp == false)
             {
-                if (password_file.Length != 0)
-                {
+                //if (password_file.Length != 0)
+                //{
                     if (password_file == txt_password.Text)
                     {
                         //запоминаем номер эксперта по котрым зашли
@@ -114,12 +114,12 @@ namespace system_analysis
                         this.ActiveControl = txt_password;
                     }
 
-                }
-                else
-                {
-                    //если пароль из файла не считался, то тоже ниче не делаем
-                    // (грустим)
-                }
+                //}
+                //else
+                //{
+                //    //если пароль из файла не считался, то тоже ниче не делаем
+                //    // (грустим)
+                //}
 
             }
         }
@@ -164,7 +164,7 @@ namespace system_analysis
 
                 string text = "";
                 FileInfo fileInf = new FileInfo(directory + "experts.txt");
-                if (fileInf.Exists) // если фпйл существует вообще
+                if (fileInf.Exists) // если файл существует вообще
                 {
                     using (StreamReader sr = new StreamReader(directory + "experts.txt", System.Text.Encoding.UTF8))
                     {
@@ -172,7 +172,7 @@ namespace system_analysis
                     }
                 }
 
-                if (text.Length != 0)
+                if (text.Length > 0)
                 {
 
                     text = "";
@@ -257,7 +257,7 @@ namespace system_analysis
             
         }
 
-        // когда выбираем эксперта из списка
+        // когда ВЫБИРАЕМ ЭКСПЕРТА из списка
         private void comboBox_user_SelectedIndexChanged(object sender, EventArgs e)
         {
             int select_num = comboBox_user.SelectedIndex;

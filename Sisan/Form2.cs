@@ -142,16 +142,16 @@ namespace system_analysis
 
                 // считаем количество вопросов
                 N = (i * i - i) / 2;
+                start_func();
             }
             else
             {
                 alter = false;
-                btn_start.Enabled = false;
             }
         }
 
-        //Кнопка НАЧАТЬ ОЦЕНИВАНИЕ 
-        private void btn_start_Click(object sender, EventArgs e)
+        //Кнопка НАЧАТЬ ОЦЕНИВАНИЕ (теперь просто функция)
+        private void start_func()
         {
             Form9_expert form = this.Owner as Form9_expert;
             question a;  // впомогательная переменная
@@ -196,9 +196,10 @@ namespace system_analysis
                     comboBox_number.Items.Add(i + 1);
                 }
 
-                comboBox_number.Text = "1";
+                comboBox_number.SelectedIndex = 0;
+                /*comboBox_number.Text = "1";
                 textBox2.Text = q[current - 1].A;
-                textBox3.Text = q[current - 1].B;
+                textBox3.Text = q[current - 1].B;*/
 
                 string path;
 
@@ -277,9 +278,6 @@ namespace system_analysis
                     }
 
                 }
-
-                // так как начался опрос, блочим кнопку "начать опрос"
-                btn_start.Enabled = false;
             }
         }
     
@@ -532,13 +530,13 @@ namespace system_analysis
                     MessageBox.Show("Изменения сохранены!", "Сохранено",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    radioButton1.Checked = false;
+                    /*radioButton1.Checked = false;
                     radioButton2.Checked = false;
                     radioButton3.Checked = false;
 
                     label10.Text = " из N";
                     textBox2.Text = "";
-                    textBox2.Text = "";
+                    textBox2.Text = "";*/
 
 
                     //==================================
@@ -546,9 +544,7 @@ namespace system_analysis
                     form.TopMost = true; form.TopMost = false;
                     this.Close();
                     //===================================
-
                 }
-                btn_start.Enabled = true;
             }
         }
 

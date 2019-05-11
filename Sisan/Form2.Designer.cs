@@ -44,7 +44,6 @@
             this.list_solution = new System.Windows.Forms.ListBox();
             this.btn_next = new System.Windows.Forms.Button();
             this.btn_prev = new System.Windows.Forms.Button();
-            this.btn_start = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.comboBox_number = new System.Windows.Forms.ComboBox();
             this.label_problems = new System.Windows.Forms.Label();
@@ -295,25 +294,6 @@
             this.btn_prev.UseVisualStyleBackColor = false;
             this.btn_prev.Click += new System.EventHandler(this.btn_prev_Click);
             // 
-            // btn_start
-            // 
-            this.btn_start.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.btn_start.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(118)))), ((int)(((byte)(168)))));
-            this.btn_start.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_start.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btn_start.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkOrange;
-            this.btn_start.FlatAppearance.MouseOverBackColor = System.Drawing.Color.SandyBrown;
-            this.btn_start.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_start.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btn_start.Location = new System.Drawing.Point(233, 380);
-            this.btn_start.Name = "btn_start";
-            this.btn_start.Size = new System.Drawing.Size(244, 52);
-            this.btn_start.TabIndex = 47;
-            this.btn_start.TabStop = false;
-            this.btn_start.Text = "Начать оценивание";
-            this.btn_start.UseVisualStyleBackColor = false;
-            this.btn_start.Click += new System.EventHandler(this.btn_start_Click);
-            // 
             // label3
             // 
             this.label3.Anchor = System.Windows.Forms.AnchorStyles.Top;
@@ -410,7 +390,6 @@
             this.Controls.Add(this.label_problems);
             this.Controls.Add(this.comboBox_number);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.btn_start);
             this.Controls.Add(this.btn_prev);
             this.Controls.Add(this.btn_next);
             this.Controls.Add(this.list_solution);
@@ -456,7 +435,6 @@
         public System.Windows.Forms.ListBox list_solution;
         private System.Windows.Forms.Button btn_next;
         private System.Windows.Forms.Button btn_prev;
-        private System.Windows.Forms.Button btn_start;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox comboBox_number;
         private System.Windows.Forms.Label label_problems;
