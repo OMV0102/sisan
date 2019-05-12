@@ -474,9 +474,9 @@
             this.label_no.ForeColor = System.Drawing.Color.Red;
             this.label_no.Location = new System.Drawing.Point(66, 132);
             this.label_no.Name = "label_no";
-            this.label_no.Size = new System.Drawing.Size(709, 27);
+            this.label_no.Size = new System.Drawing.Size(713, 27);
             this.label_no.TabIndex = 57;
-            this.label_no.Text = "У вас нет проблем, альтернативы которой нужно оценивать!";
+            this.label_no.Text = "У вас нет проблем, альтернативы которых нужно оценивать!";
             this.label_no.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label13

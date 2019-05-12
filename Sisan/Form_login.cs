@@ -41,7 +41,7 @@ namespace system_analysis
             form.Close();  // Закрываем главную форму, а значит закрываем вообще всё
         }
 
-        public static string password_file = ""; // пароль из файла
+        public static string password_file; // пароль из файла
 
         struct exp //  структура для хранения одного эксперта
         {
@@ -89,8 +89,8 @@ namespace system_analysis
             // если зашли как эксперт
             else if (form1_main.an_or_exp == false)
             {
-                //if (password_file.Length != 0)
-                //{
+                if (password_file.Length != 0)
+                {
                     if (password_file == txt_password.Text)
                     {
                         //запоминаем номер эксперта по котрым зашли
@@ -114,12 +114,12 @@ namespace system_analysis
                         this.ActiveControl = txt_password;
                     }
 
-                //}
-                //else
-                //{
-                //    //если пароль из файла не считался, то тоже ниче не делаем
-                //    // (грустим)
-                //}
+                }
+                else
+                {
+                    //если пароль из файла не считался, то тоже ниче не делаем
+                    // (грустим)
+                }
 
             }
         }
@@ -141,6 +141,8 @@ namespace system_analysis
             label_error.Visible = false; // убираем надпись красную
             checkBox1.Checked = false;
 
+            password_file = "";
+
             // если зашли как аналитик, загружаем сразу его пароль
             if (form1_main.an_or_exp == true)
             {
@@ -155,6 +157,9 @@ namespace system_analysis
                     }
                 }
                 ActiveControl = txt_password;
+
+                if (password_file == null)
+                    password_file = "";
             }
             // если зашли как эксперт, загружаем список экспертов из файла
             else if (form1_main.an_or_exp == false)
@@ -222,7 +227,8 @@ namespace system_analysis
                     // Если файл с экспертами не загрузился, просто плачем
                     // и ничо не делаем
                 }
-
+                if (password_file == null)
+                    password_file = "";
 
             }
         }
