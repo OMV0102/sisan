@@ -31,7 +31,7 @@ namespace system_analysis
         {
             public string A;
             public string B;
-            public double result;
+            public string result;
         }
 
         List<question> q;
@@ -150,7 +150,8 @@ namespace system_analysis
             }
         }
 
-        //Кнопка НАЧАТЬ ОЦЕНИВАНИЕ (теперь просто функция)
+        // кнопка НАЧАТЬ ОЦЕНИВАНИЕ (теперь ПРОСТО ФУНКЦИЯ, кнопка убрана)
+        // вызывается при загрузке формы
         private void start_func()
         {
             Form9_expert form = this.Owner as Form9_expert;
@@ -161,13 +162,10 @@ namespace system_analysis
 
             if (alter)
             {
-
-
                 //Делаем активными radiobutton
                 radioButton1.Enabled = true;
                 radioButton2.Enabled = true;
                 radioButton3.Enabled = true;
-
 
                 label3.Text = " из " + Convert.ToString(N);
                 start = true;
@@ -185,7 +183,7 @@ namespace system_analysis
                     {
                         a.A = alt[i];
                         a.B = alt[j];
-                        a.result = -1;
+                        a.result = "-1";
                         q.Add(a);
                     }
                 }
@@ -197,9 +195,6 @@ namespace system_analysis
                 }
 
                 comboBox_number.SelectedIndex = 0;
-                /*comboBox_number.Text = "1";
-                textBox2.Text = q[current - 1].A;
-                textBox3.Text = q[current - 1].B;*/
 
                 string path;
 
@@ -216,7 +211,7 @@ namespace system_analysis
 
                 if (text.Length > 0)
                 {
-                    String[] numbs;
+                    String[] words;
                     string[,] arr = new string[n, n];
 
                     using (StreamReader sr = new StreamReader(path, System.Text.Encoding.UTF8))
@@ -225,12 +220,11 @@ namespace system_analysis
                         int i = 0;
                         while ((line = sr.ReadLine()) != null)
                         {
-                            //line = line.Replace(',', '.');
-                            numbs = line.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                            words = line.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
                             for (int j = 0; j < n; j++)
                             {
-                                arr[i, j] = numbs[j];
+                                arr[i, j] = words[j];
                             }
                             i++;
                         }
@@ -254,7 +248,7 @@ namespace system_analysis
                                 else
                                 {
                                     question b = q[count];
-                                    b.result = Convert.ToDouble(arr[i, j]);
+                                    b.result = arr[i, j];
                                     q[count] = b;
 
                                 }
@@ -264,13 +258,13 @@ namespace system_analysis
 
                     switch (q[current - 1].result)
                     {
-                        case 1:
+                        case "100":
                             radioButton1.Checked = true;
                             break;
-                        case 0:
+                        case "0":
                             radioButton2.Checked = true;
                             break;
-                        case 0.5:
+                        case "50":
                             radioButton3.Checked = true;
                             break;
                         default:
@@ -287,7 +281,7 @@ namespace system_analysis
             if (start)
             {
                 question a = q[current - 1];
-                a.result = 1;
+                a.result = "100";
                 q[current - 1] = a;
             }
         }
@@ -298,7 +292,7 @@ namespace system_analysis
             if (start)
             {
                 question a = q[current - 1];
-                a.result = 0;
+                a.result = "0";
                 q[current - 1] = a;
             }
         }
@@ -309,7 +303,7 @@ namespace system_analysis
             if (start)
             {
                 question a = q[current - 1];
-                a.result = 0.5;
+                a.result = "50";
                 q[current - 1] = a;
             }
         }
@@ -335,13 +329,13 @@ namespace system_analysis
                
                 switch (q[current - 1].result)
                 {
-                    case 1:
+                    case "100":
                         radioButton1.Checked = true;
                         break;
-                    case 0:
+                    case "0":
                         radioButton2.Checked = true;
                         break;
-                    case 0.5:
+                    case "50":
                         radioButton3.Checked = true;
                         break;
                     default:
@@ -370,13 +364,13 @@ namespace system_analysis
 
                 switch (q[current - 1].result)
                 {
-                    case 1:
+                    case "100":
                         radioButton1.Checked = true;
                         break;
-                    case 0:
+                    case "0":
                         radioButton2.Checked = true;
                         break;
-                    case 0.5:
+                    case "50":
                         radioButton3.Checked = true;
                         break;
                     default:
@@ -427,7 +421,7 @@ namespace system_analysis
 
                         }
                         else
-                            arr[i, j] = Convert.ToString(q[count].result);
+                            arr[i, j] = q[count].result;
                     }
                 }
             }
@@ -468,7 +462,7 @@ namespace system_analysis
 
                 bool end = true;
                 for (int i = 0; i < q.Count; i++)
-                    if (q[i].result == -1)
+                    if (q[i].result == "-1")
                         end = false;
 
                 if (!end)
@@ -527,17 +521,11 @@ namespace system_analysis
                     form.update(form.N, form.E);  // обновляем на 9 форме 
                     //============================================
 
-                    MessageBox.Show("Изменения сохранены!", "Сохранено",
-                        MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                    /*radioButton1.Checked = false;
-                    radioButton2.Checked = false;
-                    radioButton3.Checked = false;
-
-                    label10.Text = " из N";
-                    textBox2.Text = "";
-                    textBox2.Text = "";*/
-
+                    MessageBox.Show(
+                        "Изменения сохранены!",
+                        "Сохранено",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
 
                     //==================================
                     form.Show();
@@ -565,13 +553,13 @@ namespace system_analysis
 
                 switch (q[current - 1].result)
                 {
-                    case 1:
+                    case "100":
                         radioButton1.Checked = true;
                         break;
-                    case 0:
+                    case "0":
                         radioButton2.Checked = true;
                         break;
-                    case 0.5:
+                    case "50":
                         radioButton3.Checked = true;
                         break;
                     default:
