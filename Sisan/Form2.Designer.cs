@@ -113,7 +113,6 @@
             this.button_cross.TabStop = false;
             this.button_cross.Text = "✖";
             this.button_cross.UseVisualStyleBackColor = false;
-            this.button_cross.Visible = false;
             this.button_cross.Click += new System.EventHandler(this.button_cross_Click);
             // 
             // label7
