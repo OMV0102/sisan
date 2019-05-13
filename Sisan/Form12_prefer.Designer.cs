@@ -183,7 +183,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label4.ForeColor = System.Drawing.Color.Black;
-            this.label4.Location = new System.Drawing.Point(46, 222);
+            this.label4.Location = new System.Drawing.Point(46, 171);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(515, 19);
             this.label4.TabIndex = 70;
@@ -246,7 +246,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label3.ForeColor = System.Drawing.Color.Black;
-            this.label3.Location = new System.Drawing.Point(46, 173);
+            this.label3.Location = new System.Drawing.Point(46, 204);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(691, 38);
             this.label3.TabIndex = 75;

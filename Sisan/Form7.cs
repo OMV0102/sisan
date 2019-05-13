@@ -223,6 +223,8 @@ namespace system_analysis
                     if (sum == max)
                     {
                         label2.BackColor = this.BackColor; // цвет label = цвет формы нейтральный
+                        label8.BackColor = this.BackColor;
+                        label9.BackColor = this.BackColor;
 
                         // СОХРАНЯЕМ
                         // сохраняем в файл matrix...
@@ -276,6 +278,8 @@ namespace system_analysis
                         }
                         this.TopMost = true; this.TopMost = false;
                         label2.BackColor = Color.FromArgb(254, 254, 34); // желтый фон
+                        label8.BackColor = Color.FromArgb(254, 254, 34);
+                        label9.BackColor = Color.FromArgb(254, 254, 34);
                     }
                 }
                 else

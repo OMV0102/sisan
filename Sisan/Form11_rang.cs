@@ -29,6 +29,7 @@ namespace system_analysis
 
         public bool correct = false; // флаг правильных значений ячеек
         public bool change = false; // флаг внесенных изменений
+        public bool empty = false; // флаг пустых значений ячеек
         public bool is_edit; // флаг, что после редактирования не проверяем повторно ячейку
         public int exp_count = 0; // количество экспертов
         public int E = -1; //порядковый номер нашего эксперта в exp_res
@@ -202,48 +203,80 @@ namespace system_analysis
             Form9_expert form = this.Owner as Form9_expert;
             if(change == true)
             {
-                correct = true;
+                empty = false;
                 for (int i = 0; i < sol_count; i++) // ищем НЕправильные ячейки
                 {
-                    if (check_cell_value(i, 1) == false)
+                    if (dataGridView1.Rows[i].Cells[1].Value.ToString() == "")
                     {
-                        correct = false;
+                        dataGridView1.Rows[i].Cells[1].Style.ForeColor = Color.FromName("Red"); // красный текст
+                        dataGridView1.Rows[i].Cells[1].Style.BackColor = Color.FromArgb(254, 254, 34); // желтый фон
+                        empty = true;
                     }
                 }
 
-                if (correct == true)
+                if (empty == false)
                 {
                     label3.BackColor = this.BackColor; // цвет label = цвет формы нейтральный
-                    label2.BackColor = this.BackColor; // цвет label = цвет формы нейтральный
+                    correct = true;
+                    for (int i = 0; i < sol_count; i++) // ищем НЕправильные ячейки
+                    {
+                        if (check_cell_value(i, 1) == false)
+                        {
+                            correct = false;
+                        }
+                    }
 
-                    // СОХРАНЯЕМ
-                    // сохраняем в файл matrix...
-                    save();
-                    //============================================
-                    // в форме эксперта обновляем данные на ней
-                    form.list_prob[form.N].exp[form.E].m3 = 1;  // опрос пройден
-                    form.save_group(); // сохраняем измененное в файл group...
-                    form.update(form.N, form.E);  // обновляем на 9 форме 
-                    //============================================
-                    this.Hide();  // СКРЫВАЕМ ФОРМУ пока MessageBox показывается 
-                    MessageBox.Show(
-                    "Изменения сохранены!",
-                    "Сохранение",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information,
-                    MessageBoxDefaultButton.Button1,
-                    MessageBoxOptions.DefaultDesktopOnly);
+                    if (correct == true)
+                    {
+                        label2.BackColor = this.BackColor; // цвет label = цвет формы нейтральный
+                        label8.BackColor = this.BackColor;
 
-                    form.Show();
-                    form.TopMost = true; form.TopMost = false;
-                    this.Close();
+                        // СОХРАНЯЕМ
+                        // сохраняем в файл matrix...
+                        save();
+                        //============================================
+                        // в форме эксперта обновляем данные на ней
+                        form.list_prob[form.N].exp[form.E].m3 = 1;  // опрос пройден
+                        form.save_group(); // сохраняем измененное в файл group...
+                        form.update(form.N, form.E);  // обновляем на 9 форме 
+                        //============================================
+                        this.Hide();  // СКРЫВАЕМ ФОРМУ пока MessageBox показывается 
+                        MessageBox.Show(
+                        "Изменения сохранены!",
+                        "Сохранение",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information,
+                        MessageBoxDefaultButton.Button1,
+                        MessageBoxOptions.DefaultDesktopOnly);
+
+                        form.Show();
+                        form.TopMost = true; form.TopMost = false;
+                        this.Close();
+                    }
+                    else
+                    {
+                        dataGridView1.Rows[0].Cells[0].Selected = true;
+                        this.Hide(); // СКРЫВАЕМ ФОРМУ пока MessageBox показывается 
+                        DialogResult otvet = MessageBox.Show(
+                        "Все ячейки оценок должны быть заполнены \nчислами от 0 до " + max + "!\n",
+                        "Ошибка",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error,
+                        MessageBoxDefaultButton.Button1,
+                        MessageBoxOptions.DefaultDesktopOnly);
+                        this.Show();
+                        label2.BackColor = Color.FromArgb(254, 254, 34); // желтый фон
+                        label8.BackColor = Color.FromArgb(254, 254, 34); // желтый фон
+                        this.TopMost = true; this.TopMost = false;
+                        this.TopMost = true; this.TopMost = false;
+                    }
                 }
                 else
                 {
                     dataGridView1.Rows[0].Cells[0].Selected = true;
                     this.Hide(); // СКРЫВАЕМ ФОРМУ пока MessageBox показывается 
                     DialogResult otvet = MessageBox.Show(
-                    "Все ячейки оценок должны быть заполнены \nчислами от 0 до "+max+"!\n" +
+                    "Все ячейки должны быть заполнены!\n" +
                     "Если для альтернативы по вашему мнению оценка не нужна, впишите в ячейку ноль!\n",
                     "Ошибка",
                     MessageBoxButtons.OK,
@@ -251,10 +284,9 @@ namespace system_analysis
                     MessageBoxDefaultButton.Button1,
                     MessageBoxOptions.DefaultDesktopOnly);
                     this.Show();
-                    label2.BackColor = Color.FromArgb(254, 254, 34); // желтый фон
                     label3.BackColor = Color.FromArgb(254, 254, 34); // желтый фон
                     this.TopMost = true; this.TopMost = false;
-                    this.TopMost = true; this.TopMost = false;
+                    
                 }
             }
         }
@@ -354,6 +386,8 @@ namespace system_analysis
                     {
                         change = true; // изменение засчитано
                         exp_res[E].marks[r] = chislo; // запомнили введеную оценку
+                        dataGridView1.Rows[r].Cells[c].Style.BackColor = Color.FromName("ButtonHighlight"); // белый фон
+                        dataGridView1.Rows[r].Cells[c].Style.ForeColor = Color.FromName("Black"); // черный текст
                         return true;
                     }
                     else// если введено целое число НЕ в интервале
