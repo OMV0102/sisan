@@ -23,9 +23,10 @@ namespace system_analysis
         // МЕТОД 0 (МЕТОД ПАРНЫХ СРАВНЕНИЙ)
 
         private int N = 0; // количество вопросов
-        private bool start = false;
-        private int current = 1;
+        private int current = 0;
         private bool alter;
+        private int sol_count = 0;
+        private bool change = false;
 
         public struct question
         {
@@ -45,8 +46,9 @@ namespace system_analysis
         private void button_back_Click(object sender, EventArgs e)
         {
             Form9_expert form = this.Owner as Form9_expert;
-            if (start == true)
+            if (change == true)
             {
+                this.Hide();
                 DialogResult otvet = MessageBox.Show(
                 "Все несохраненные изменения будут потеряны.\n" +
                 "Закрыть оценивание?",
@@ -65,6 +67,7 @@ namespace system_analysis
 
                 if (otvet == DialogResult.No)
                 {
+                    this.Show();
                     this.TopMost = true; this.TopMost = false;
                 }
             }
@@ -98,17 +101,13 @@ namespace system_analysis
             this.WndProc(ref m);
         }
 
-        // при загрузке формы
+        // при ЗАГРУЗКЕ ФОРМЫ
         private void form2_opros0_Load(object sender, EventArgs e)
         {
             Form9_expert form = this.Owner as Form9_expert;
             //String[] words = СТРОКА.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);  // это на всякий под рукой
             list_solution.Items.Clear();
-
-            //При загрузке radiobutton неактивны
-            radioButton1.Enabled = false;
-            radioButton2.Enabled = false;
-            radioButton3.Enabled = false;
+            change = false;
 
             // Заполняем проблему
             label_problems.Text = form.problem;
@@ -124,83 +123,55 @@ namespace system_analysis
                 }
             }
 
-            if (text.Length != 0)
+            if (text.Length > 0)
             {
-                int i = 0;
+                sol_count = 0;
 
                 using (StreamReader sr = new StreamReader(directory + "solutions" + form.num_problem + ".txt", System.Text.Encoding.UTF8))
                 {
                     while ((text = sr.ReadLine()) != null)
                     {
                         list_solution.Items.Add(text);
-                        i++;
+                        sol_count++;
                     }
                 }
 
                 alter = true;
-
-
-                // считаем количество вопросов
-                N = (i * i - i) / 2;
-                start_func();
             }
             else
             {
                 alter = false;
             }
-        }
 
-        // кнопка НАЧАТЬ ОЦЕНИВАНИЕ (теперь ПРОСТО ФУНКЦИЯ, кнопка убрана)
-        // вызывается при загрузке формы
-        private void start_func()
-        {
-            Form9_expert form = this.Owner as Form9_expert;
-            question a;  // впомогательная переменная
-            q = new List<question>(); // список вопросов
-            List<string> alt = new List<string>();
-            int n = 0;
-
-            if (alter)
+            if(alter == true)
             {
-                //Делаем активными radiobutton
-                radioButton1.Enabled = true;
-                radioButton2.Enabled = true;
-                radioButton3.Enabled = true;
+                // считаем количество вопросов
+                N = (sol_count * sol_count - sol_count) / 2;
+                label3.Text = " из " + N;
+                question a;  // впомогательная переменная
+                q = new List<question>(); // список вопросов
 
-                label3.Text = " из " + Convert.ToString(N);
-                start = true;
-
-                // добавляем из списка на форме в список alt
-                for (int i = 0; i < list_solution.Items.Count; i++)
+                //добавляем альтернативы в структуру
+                for (int i = 0; i < sol_count; i++)
                 {
-                    alt.Add(list_solution.Items[i].ToString());
-                    n++;
-                }
-
-                for (int i = 0; i < n; i++)
-                {
-                    for (int j = i + 1; j < n; j++)
+                    for (int j = i + 1; j < sol_count; j++)
                     {
-                        a.A = alt[i];
-                        a.B = alt[j];
+                        a.A = list_solution.Items[i].ToString();
+                        a.B = list_solution.Items[j].ToString();
                         a.result = "-1";
                         q.Add(a);
                     }
                 }
 
-                // тута добавляется номер вопроса в комбобокс
+                // добавляем номера вопросов в комбобокс
                 for (int i = 0; i < N; i++)
                 {
                     comboBox_number.Items.Add(i + 1);
                 }
 
-                comboBox_number.SelectedIndex = 0;
+                string path = directory + "matrix" + form.num_problem + "m0e" + form1_main.num_expert + ".txt";
 
-                string path;
-
-                path = directory + "matrix" + form.num_problem + "m0e" + form1_main.num_expert + ".txt";
-
-                string text = "";
+                text = "";
                 if (System.IO.File.Exists(path))
                 {
                     using (StreamReader sr = new StreamReader(path, System.Text.Encoding.UTF8))
@@ -209,172 +180,102 @@ namespace system_analysis
                     }
                 }
 
+                //если матрица существует и там чето даже есть
                 if (text.Length > 0)
                 {
-                    String[] words;
-                    string[,] arr = new string[n, n];
+                    string[] words;
+                    string[,] matr = new string[sol_count, sol_count];
 
+                    //
                     using (StreamReader sr = new StreamReader(path, System.Text.Encoding.UTF8))
                     {
-                        string line;
+                        string line = "";
                         int i = 0;
                         while ((line = sr.ReadLine()) != null)
                         {
                             words = line.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
-                            for (int j = 0; j < n; j++)
+                            for (int j = 0; j < sol_count; j++)
                             {
-                                arr[i, j] = words[j];
+                                matr[i, j] = words[j];
                             }
                             i++;
                         }
                     }
 
                     int count = 0;
-                    for (int i = 0; i < n; i++)
+                    for (int i = 0; i < sol_count-1; i++)// до предпоследней строки
                     {
-                        for (int j = 0; j < n; j++, count++)
+                        for (int j = 0; j < sol_count; j++)
                         {
-                            if (i == j)
+                            if(i < j)
                             {
-                                count--;
-                            }
-                            else
-                            {
-                                if (i > j)
-                                {
-                                    count--;
-                                }
-                                else
-                                {
-                                    question b = q[count];
-                                    b.result = arr[i, j];
-                                    q[count] = b;
-
-                                }
+                                question b = q[count];
+                                b.result = matr[i, j];
+                                q[count] = b;
+                                count++;
                             }
                         }
                     }
-
-                    switch (q[current - 1].result)
-                    {
-                        case "100":
-                            radioButton1.Checked = true;
-                            break;
-                        case "0":
-                            radioButton2.Checked = true;
-                            break;
-                        case "50":
-                            radioButton3.Checked = true;
-                            break;
-                        default:
-                            break;
-                    }
-
                 }
+
+                // выбираем первый вопрос (индекс 0)
+                comboBox_number.SelectedIndex = 0;
             }
         }
     
         // при выборе ПУНКТ1
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
-            if (start)
+            if (current >= 0 && current < sol_count)
             {
-                question a = q[current - 1];
+                question a = q[current];
                 a.result = "100";
-                q[current - 1] = a;
+                q[current] = a;
             }
         }
 
         // при выборе ПУНКТ2
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
-            if (start)
+            if (current >= 0 && current < sol_count)
             {
-                question a = q[current - 1];
+                question a = q[current];
                 a.result = "0";
-                q[current - 1] = a;
+                q[current] = a;
             }
         }
 
         // при выборе ПУНКТ3
         private void radioButton3_CheckedChanged(object sender, EventArgs e)
         {
-            if (start)
+            if (current >= 0 && current < sol_count)
             {
-                question a = q[current - 1];
+                question a = q[current];
                 a.result = "50";
-                q[current - 1] = a;
+                q[current] = a;
             }
         }
 
         // кнопка > (СЛЕДУЮЩИЙ ВОПРОС)
         private void btn_next_Click(object sender, EventArgs e)
         {
-            if (start)
-            {
-                radioButton1.Checked = false;
-                radioButton2.Checked = false;
-                radioButton3.Checked = false;
-
-                if (current < N)
-                    current++;
-                else
-                    current = 1;
-
-                textBox2.Text = q[current - 1].A;
-                textBox3.Text = q[current - 1].B;
-                //label10.Text = "Вопрос " + Convert.ToString(current) + " из " + Convert.ToString(N);
-                comboBox_number.Text = current.ToString();
-               
-                switch (q[current - 1].result)
-                {
-                    case "100":
-                        radioButton1.Checked = true;
-                        break;
-                    case "0":
-                        radioButton2.Checked = true;
-                        break;
-                    case "50":
-                        radioButton3.Checked = true;
-                        break;
-                    default:
-                        break;
-                }
-            }
+            
         }
 
         // кнопка < (ПРЕДЫДУЩИЙ ВОПРОС)
         private void btn_prev_Click(object sender, EventArgs e)
         {
-            if (start)
+            if (comboBox_number.SelectedIndex >= 0 && comboBox_number.SelectedIndex < sol_count)
             {
-                radioButton1.Checked = false;
-                radioButton2.Checked = false;
-                radioButton3.Checked = false;
-
-                if (current != 1)
-                    current--;
-                else
-                    current = N;
-
-                textBox2.Text = q[current - 1].A;
-                textBox3.Text = q[current - 1].B;
-                comboBox_number.Text = current.ToString();
-
-                switch (q[current - 1].result)
+                int index = comboBox_number.SelectedIndex;
+                if (index == 0)
                 {
-                    case "100":
-                        radioButton1.Checked = true;
-                        break;
-                    case "0":
-                        radioButton2.Checked = true;
-                        break;
-                    case "50":
-                        radioButton3.Checked = true;
-                        break;
-                    default:
-                        break;
+                    comboBox_number.SelectedIndex = sol_count - 1;
+                }
+                else
+                {
+                    comboBox_number.SelectedIndex = index + 1;
                 }
             }
         }
@@ -385,7 +286,6 @@ namespace system_analysis
             Form9_expert form = this.Owner as Form9_expert;
 
             string path = directory + "matrix" + form.num_problem + "m0e" + form1_main.num_expert + ".txt";
-            //System.IO.File.Create(path);
             
             int n = list_solution.Items.Count;
 
@@ -426,29 +326,17 @@ namespace system_analysis
                 }
             }
             
-            //  замена 0.5 на 0,5 (с запятой)
-            //=======================
-            for (int i = 0; i < n; i++)
-                for (int j = 0; j < n; j++)
-                    if (arr[i, j] == "0.5" || arr[i, j] == "0,5")
-                        arr[i, j] = "0,5";
-            //===========================
-            FileInfo fileInf = new FileInfo(path);
-            if (fileInf.Exists)
-                fileInf.Delete();
-
             using (StreamWriter sw = new StreamWriter(path, false, System.Text.Encoding.UTF8))
             {
-                string matrix = "";
+                string matrix = ""; 
                 for (int i = 0; i < n; i++)
                 {
+                    matrix = "";
                     for (int j = 0; j < n; j++)
                     {
-                        matrix += arr[i, j];
-                        matrix += ' ';
+                        matrix += arr[i, j] + " ";
                     }
                     sw.WriteLine(matrix);
-                    matrix = "";
                 }
             }
         }
@@ -468,7 +356,7 @@ namespace system_analysis
                 if (!end)
                 {
                     this.Hide();
-                    DialogResult result = MessageBox.Show(
+                    DialogResult otvet = MessageBox.Show(
                     "Вы не прошли опрос до конца.\n" +
                     "Можете вернуться и продолжить в любое время.\n" +
                     "Сохранить?",
@@ -477,7 +365,7 @@ namespace system_analysis
                     MessageBoxIcon.Warning,
                     MessageBoxDefaultButton.Button1,
                     MessageBoxOptions.DefaultDesktopOnly);
-                    if (result == DialogResult.Yes)
+                    if (otvet == DialogResult.Yes)
                     {
                         start = false;
                         // сохраняем в файл matrix...
@@ -502,7 +390,7 @@ namespace system_analysis
                         this.Close();
                         //===================================
                     }
-                    if (result == DialogResult.No)
+                    if (otvet == DialogResult.No)
                     {
                         this.Show();
                         this.TopMost = true; this.TopMost = false;
@@ -539,19 +427,17 @@ namespace system_analysis
         // при выборе НОМЕРА ВОПРОСА 
         private void comboBox_number_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string selectedState = comboBox_number.SelectedItem.ToString();
-            current = Convert.ToInt32(selectedState);
-
-            if (start)
+            current = comboBox_number.SelectedIndex;
+            if (current >= 0 && current < sol_count)
             {
                 radioButton1.Checked = false;
                 radioButton2.Checked = false;
                 radioButton3.Checked = false;
 
-                textBox2.Text = q[current - 1].A;
-                textBox3.Text = q[current - 1].B;
+                textBox2.Text = q[current].A;
+                textBox3.Text = q[current].B;
 
-                switch (q[current - 1].result)
+                switch (q[current].result)
                 {
                     case "100":
                         radioButton1.Checked = true;
@@ -566,6 +452,7 @@ namespace system_analysis
                         break;
                 }
             }
+            
         }
 
     }

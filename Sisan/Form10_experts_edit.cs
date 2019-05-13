@@ -85,7 +85,7 @@ namespace system_analysis
             this.WndProc(ref m);
         }
 
-        // кнопка ← (ПРЕДЫДУЩИЙ ЭКСПЕРТ)
+        // кнопка < (ПРЕДЫДУЩИЙ ЭКСПЕРТ)
         private void btn_prev_Click(object sender, EventArgs e)
         {
             if(comboBox_experts.Items.Count > 2 && comboBox_experts.SelectedIndex != -1)
@@ -119,10 +119,10 @@ namespace system_analysis
 
         }
 
-        // кнопка → (СЛЕДУЮЩИЙ ЭКСПЕРТ)
+        // кнопка > (СЛЕДУЮЩИЙ ЭКСПЕРТ)
         private void btn_next_Click(object sender, EventArgs e)
         {
-            // тут включение и выключение кнопко при переходе между экспертами
+            
             if (comboBox_experts.Items.Count > 2 && comboBox_experts.SelectedIndex != -1)
             {
                 int n = comboBox_experts.SelectedIndex;
