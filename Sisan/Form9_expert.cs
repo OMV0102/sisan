@@ -459,7 +459,7 @@ namespace system_analysis
         }
 
         // кнопка МЕТОД 1 (МЕТОД ВЗВЕШЕННЫХ ЭКСПЕРТНЫХ ОЦЕНОК)
-        private void btn_start_m1_Click(object sender, EventArgs e)
+        private void btn_m1_Click(object sender, EventArgs e)
         {            
             Form7 form = new Form7();
             form.Owner = this;
@@ -492,6 +492,36 @@ namespace system_analysis
             form.Owner = this;
             form.Show();
             this.Hide();
+        }
+
+        // чтоб НАЖИМАТЬ КНОПКИ ЧИСЛАМИ
+        private void Form9_expert_KeyDown(object sender, KeyEventArgs e)
+        {
+            // ЧИСЛО 0 (МЕТОД ПАРНЫХ СРАВНЕНИЙ)
+            if (e.KeyData == Keys.NumPad0 || e.KeyData == Keys.D0)
+            {
+                btn_m0_Click(null, null);
+            }
+            // ЧИСЛО 1  (МЕТОД ВЗВЕШЕННЫХ ЭКСПЕРТНЫХ ОЦЕНОК)
+            if (e.KeyData == Keys.NumPad1 || e.KeyData == Keys.D1)
+            {
+                btn_m1_Click(null, null);
+            }
+            // ЧИСЛО 2 (МЕТОД ПРЕДПОЧТЕНИЯ)
+            if (e.KeyData == Keys.NumPad2 || e.KeyData == Keys.D2)
+            {
+                btn_m2_Click(null, null);
+            }
+            // ЧИСЛО 3 (МЕТОД РАНГА)
+            if (e.KeyData == Keys.NumPad3 || e.KeyData == Keys.D3)
+            {
+                btn_m3_Click(null, null);
+            }
+            // ЧИСЛО 4 (МЕТОД ПОЛНОГО ПОПАРНОГО СОСПОСТАВЛЕНИЯ)
+            if (e.KeyData == Keys.NumPad4 || e.KeyData == Keys.D4)
+            {
+                btn_m4_Click(null, null);
+            }
         }
     }
 }

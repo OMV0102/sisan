@@ -32,11 +32,10 @@ namespace system_analysis
         private bool empty = false; // флаг пустых значений ячеек
         private bool is_edit; // флаг, что после редактирования не проверяем повторно ячейку
         private int exp_count = 0; // количество экспертов
-        private int E = -1; //порядковый номер нашего эксперта в exp_res
         private int sol_count; // количество альтернатив про выбранной проблеме
         private int q_count = 0; // количество вопросов
         private int max = 100; // ШКАЛА, по которой оценивается КАЖДАЯ АЛЬТЕРНАТИВА
-        private bool end;
+        public bool is_yellow = false;
 
 
         public struct question
@@ -163,11 +162,11 @@ namespace system_analysis
                 table.Columns.Clear();
                 table.Rows.Clear();
 
-                table.Columns.Add(new DataColumn("Альтернатива"));
+                table.Columns.Add(new DataColumn("Альтернатива 1"));
                 table.Columns[0].ReadOnly = true; // альтернативы слева можно только смотреть
-                table.Columns.Add(new DataColumn("⇐ Оценка"));
-                table.Columns.Add(new DataColumn("Оценка ⇒"));
-                table.Columns.Add(new DataColumn("Альтернатива"));
+                table.Columns.Add(new DataColumn("<== Оценка"));
+                table.Columns.Add(new DataColumn("Оценка ==>"));
+                table.Columns.Add(new DataColumn("Альтернатива 2"));
                 table.Columns[3].ReadOnly = true; // альтернативы справа можно только смотреть
 
                 // заполнение таблицы
@@ -195,16 +194,19 @@ namespace system_analysis
 
                 dataGridView1.DataSource = table; // данные таблицы в датагрид засунули
 
-                dataGridView1.Columns[0].Width = 300; // ширина столбца левой альтерантивы
-                dataGridView1.Columns[1].Width = 45; // ширина столбца оценки для левой альтернативы
-                dataGridView1.Columns[2].Width = 45; // ширина столбца оценки для правой альтернативы
-                dataGridView1.Columns[3].Width = 300; // ширина столбца правой альтерантивы
+                dataGridView1.Columns[0].Width = 264; // ширина столбца левой альтерантивы
+                dataGridView1.Columns[1].Width = 80; // ширина столбца оценки для левой альтернативы
+                dataGridView1.Columns[2].Width = 80; // ширина столбца оценки для правой альтернативы
+                dataGridView1.Columns[3].Width = 263; // ширина столбца правой альтерантивы
 
                 // шобы столбцы нельзя было сортировать
-                dataGridView1.Columns[0].SortMode = DataGridViewColumnSortMode.NotSortable;
-                dataGridView1.Columns[1].SortMode = DataGridViewColumnSortMode.NotSortable;
-                dataGridView1.Columns[2].SortMode = DataGridViewColumnSortMode.NotSortable;
-                dataGridView1.Columns[3].SortMode = DataGridViewColumnSortMode.NotSortable;
+                for (int j = 0; j < 4; j++)
+                {
+                    dataGridView1.Columns[j].SortMode = DataGridViewColumnSortMode.NotSortable;
+                }
+
+                // выравнивание заголовков столбцов по центру
+                dataGridView1.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             }
         }
 
@@ -406,11 +408,11 @@ namespace system_analysis
         // НАВОДИМ НА АЛЬТЕРНАТИВУ КУРСОР отображается полностью весь текст в сноске
         private void dataGridView1_CellToolTipTextNeeded(object sender, DataGridViewCellToolTipTextNeededEventArgs e)
         {
-            if (e.RowIndex >= 0 && e.RowIndex < sol_count && (e.ColumnIndex == 0 || e.ColumnIndex == 3))
+            if (e.RowIndex >= 0 && e.RowIndex < q_count && (e.ColumnIndex == 0 || e.ColumnIndex == 3))
             {
                 string[] words;
                 string text = "";
-                int max_length = 5;
+                int max_length = 4;
 
                 text = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
                 words = text.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
@@ -476,23 +478,12 @@ namespace system_analysis
             }
         }
 
-        // когда НАЖИМАЕМ НА ЯЧЕЙКУ (приоритет_0)
-        private void dataGridView1_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            if (e.ColumnIndex == 1 && e.RowIndex >= 0 && e.RowIndex < sol_count) // если ячейки с оценками
-            {
-                // делаем нормальной, если тыкаем
-                dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.BackColor = Color.FromName("ButtonHighlight"); // белый фон
-                dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.ForeColor = Color.FromName("Black"); // черный текст
-            }
-        }
-
         // когда РЕДАКТИРУЕМ ЯЧЕЙКУ (именно меняется значение) (приоритет_1)
         private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            if(e.ColumnIndex == 1 && e.RowIndex >= 0 && e.RowIndex < sol_count) // если ячейки с оценками
+            if ((e.ColumnIndex == 1 || e.ColumnIndex == 2) && e.RowIndex >= 0 && e.RowIndex < q_count) // если ячейки с оценками
             {
-                //check_cell_value(e.RowIndex, e.ColumnIndex);
+                check_cell_value(e.RowIndex, e.ColumnIndex);
                 is_edit = true;
             }
         }
@@ -500,14 +491,42 @@ namespace system_analysis
         // когда УШЛИ С ЯЧЕЙКИ (срабатывает, если НЕ РЕДАКТИРУЕМ) (приоритет_2)
         private void dataGridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            if (is_edit == false)
+            if ((e.ColumnIndex == 1 || e.ColumnIndex == 2) && e.RowIndex >= 0 && e.RowIndex < q_count) // если ячейки с оценками
             {
-                if (e.ColumnIndex == 1 && e.RowIndex >= 0 && e.RowIndex < sol_count)  // если ячейки с оценками
+                if (is_edit == false)
                 {
-                    //check_cell_value(e.RowIndex, e.ColumnIndex);
+                    if (is_yellow == true)
+                    {
+                        dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.ForeColor = Color.FromName("Red"); // красный текст
+                        dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.BackColor = Color.FromArgb(254, 254, 34); // желтый фон
+                    }
+                    else
+                    {
+                        dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.BackColor = Color.FromName("ButtonHighlight"); // белый фон
+                        dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.ForeColor = Color.FromName("Black"); // черный текст
+                    }
                 }
             }
             is_edit = false;
+        }
+
+        // когда НАЖИМАЕМ НА ЯЧЕЙКУ (приоритет_3)
+        private void dataGridView1_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
+        {
+            if ((e.ColumnIndex == 1 || e.ColumnIndex == 2) && e.RowIndex >= 0 && e.RowIndex < q_count) // если ячейки с оценками
+            {
+                if (dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.BackColor == Color.FromArgb(254, 254, 34)) // желтый фон
+                {
+                    is_yellow = true;
+                }
+                else // если не желтый тоже запомнили
+                {
+                    is_yellow = false;
+                }
+                // делаем нормальной, если тыкаем
+                dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.BackColor = Color.FromName("ButtonHighlight"); // белый фон
+                dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.ForeColor = Color.FromName("Black"); // черный текст
+            }
         }
     }
 }

@@ -705,7 +705,7 @@ namespace system_analysis
                 string text = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
                 if (text != "")
                     int.TryParse(text, out old_value);
-                else // Если занчение ячейки пустоя то занчит -1 присваиваем
+                else // Если занчение ячейки пустоя то значит -1 присваиваем
                     old_value = -1;
             }
         }

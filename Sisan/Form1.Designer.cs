@@ -153,6 +153,7 @@
             this.Name = "form1_main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Экспертные оценки";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.form1_main_KeyDown);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.form1_main_MouseDown);
             this.ResumeLayout(false);
             this.PerformLayout();

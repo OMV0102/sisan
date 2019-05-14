@@ -68,6 +68,20 @@ namespace system_analysis
             this.Close();
         }
 
+        // чтоб НАЖИМАТЬ КНОПКИ ЧИСЛАМИ
+        private void form1_main_KeyDown(object sender, KeyEventArgs e)
+        {
+            // ЧИСЛО 1 - АНАЛИТИК
+            if(e.KeyData == Keys.NumPad1 || e.KeyData == Keys.D1)
+            {
+                button_analyst_Click(null, null);
+            }
+            // ЧИСЛО 1 - ЭКСПЕРТ
+            if (e.KeyData == Keys.NumPad2 || e.KeyData == Keys.D2)
+            {
+                button_expert_Click(null, null);
+            }
+        }
     }
 
     public static class global_class  // ---ГЛОБАЛЬНЫЙ КЛАСС---

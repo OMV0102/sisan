@@ -182,7 +182,7 @@
             this.btn_m1.TabStop = false;
             this.btn_m1.Text = "Начать оценивание";
             this.btn_m1.UseVisualStyleBackColor = false;
-            this.btn_m1.Click += new System.EventHandler(this.btn_start_m1_Click);
+            this.btn_m1.Click += new System.EventHandler(this.btn_m1_Click);
             // 
             // label2
             // 
@@ -545,6 +545,7 @@
             this.Name = "Form9_expert";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Load += new System.EventHandler(this.Form9_expert_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form9_expert_KeyDown);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form9_expert_MouseDown);
             this.ResumeLayout(false);
             this.PerformLayout();

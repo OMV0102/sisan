@@ -218,7 +218,7 @@ namespace system_analysis
                     // выбираем сразу же 0 эксперта
                     if(comboBox_user.Items.Count != 0)
                     {
-                        comboBox_user.SelectedIndex = 0;
+                        comboBox_user.SelectedIndex = 2;  // ВЫБОР ПО УМОЛЧАНИЮ КТО ПОКАЗЫВАЕТСЯ ПРИ ЗАПУСКЕ
                     }
 
                 }
