@@ -22,13 +22,12 @@ namespace system_analysis
 
         // МЕТОД 0 (МЕТОД ПАРНЫХ СРАВНЕНИЙ)
 
-        private int N = 0; // количество вопросов
+        private int q_count = 0; // количество вопросов
         private int current = 0;
         private bool alter;
         private int sol_count = 0;
         private bool change = false;
         private bool end;
-        private bool begin;
 
 
         public struct question
@@ -142,7 +141,6 @@ namespace system_analysis
                         sol_count++;
                     }
                 }
-
                 alter = true;
             }
             else
@@ -153,8 +151,8 @@ namespace system_analysis
             if(alter == true)
             {
                 // считаем количество вопросов
-                N = (sol_count * sol_count - sol_count) / 2;
-                label3.Text = " из " + N;
+                q_count = (sol_count * sol_count - sol_count) / 2;
+                label3.Text = " из " + q_count;
                 question a;  // впомогательная переменная
                 q = new List<question>(); // список вопросов
 
@@ -171,7 +169,7 @@ namespace system_analysis
                 }
 
                 // добавляем номера вопросов в комбобокс
-                for (int i = 0; i < N; i++)
+                for (int i = 0; i < q_count; i++)
                 {
                     comboBox_number.Items.Add(i + 1);
                 }
@@ -193,7 +191,7 @@ namespace system_analysis
                     string[] words;
                     string[,] matr = new string[sol_count, sol_count];
 
-                    //
+                    // читаем матрицу
                     using (StreamReader sr = new StreamReader(path, System.Text.Encoding.UTF8))
                     {
                         string line = "";
@@ -226,57 +224,19 @@ namespace system_analysis
                     }
                 }
 
-                begin = true;
                 // выбираем первый вопрос (индекс 0)
                 comboBox_number.SelectedIndex = 0;
 
             }
         }
     
-        // при выборе ПУНКТ1
-        private void radioButton1_CheckedChanged(object sender, EventArgs e)
-        {
-            if (begin == false && current >= 0 && current < sol_count)
-            {
-                question a = q[current];
-                a.result = "100";
-                q[current] = a;
-                change = true;
-            }
-            begin = false;
-        }
-
-        // при выборе ПУНКТ2
-        private void radioButton2_CheckedChanged(object sender, EventArgs e)
-        {
-            if (current >= 0 && current < sol_count)
-            {
-                question a = q[current];
-                a.result = "0";
-                q[current] = a;
-                change = true;
-            }
-        }
-
-        // при выборе ПУНКТ3
-        private void radioButton3_CheckedChanged(object sender, EventArgs e)
-        {
-            if (current >= 0 && current < sol_count)
-            {
-                question a = q[current];
-                a.result = "50";
-                q[current] = a;
-                change = true;
-            }
-        }
-
         // кнопка > (СЛЕДУЮЩИЙ ВОПРОС)
         private void btn_next_Click(object sender, EventArgs e)
         {
-            if (comboBox_number.SelectedIndex >= 0 && comboBox_number.SelectedIndex < sol_count)
+            if (comboBox_number.SelectedIndex >= 0 && comboBox_number.SelectedIndex < q_count)
             {
                 int index = comboBox_number.SelectedIndex;
-                if (index == sol_count - 1)
+                if (index == q_count - 1)
                 {
                     comboBox_number.SelectedIndex = 0;
                 }
@@ -290,12 +250,12 @@ namespace system_analysis
         // кнопка < (ПРЕДЫДУЩИЙ ВОПРОС)
         private void btn_prev_Click(object sender, EventArgs e)
         {
-            if (comboBox_number.SelectedIndex >= 0 && comboBox_number.SelectedIndex < sol_count)
+            if (comboBox_number.SelectedIndex >= 0 && comboBox_number.SelectedIndex < q_count)
             {
                 int index = comboBox_number.SelectedIndex;
                 if (index == 0)
                 {
-                    comboBox_number.SelectedIndex = sol_count - 1;
+                    comboBox_number.SelectedIndex = q_count - 1;
                 }
                 else
                 {
@@ -327,8 +287,8 @@ namespace system_analysis
                     {
                         if (i < j)
                         {
-                            count++;
                             matr[i, j] = q[count].result;
+                            count++;
                         }
                         else
                         {
@@ -375,7 +335,7 @@ namespace system_analysis
                     if (q[i].result == "-1")
                         end = false;
 
-                if (end == true) // если опрос НЕ закончен
+                if (end == false) // если опрос НЕ закончен
                 {
                     this.Hide();
                     DialogResult otvet = MessageBox.Show(
@@ -441,7 +401,7 @@ namespace system_analysis
         private void comboBox_number_SelectedIndexChanged(object sender, EventArgs e)
         {
             current = comboBox_number.SelectedIndex;
-            if (current >= 0 && current < sol_count)
+            if (current >= 0 && current < q_count)
             {
                 textBox2.Text = q[current].A;
                 textBox3.Text = q[current].B;
@@ -457,19 +417,68 @@ namespace system_analysis
                     case "50":
                         radioButton3.Checked = true;
                         break;
-                    case "-1":
+                    default:
                     {
                         radioButton1.Checked = false;
                         radioButton2.Checked = false;
                         radioButton3.Checked = false;
                         break;
                     }
-                    default:
-                        break;
+                        
                 }
             }
             
         }
 
+        // при выборе ПУНКТ1
+        private void radioButton1_MouseDown(object sender, MouseEventArgs e)
+        {
+            radioButton1.Checked = true;
+            radioButton2.Checked = false;
+            radioButton3.Checked = false;
+            current = comboBox_number.SelectedIndex;
+
+            if (current >= 0 && current < q_count)
+            {
+                question a = q[current];
+                a.result = "100";
+                q[current] = a;
+                change = true;
+            }
+        }
+
+        // при выборе ПУНКТ2
+        private void radioButton2_MouseDown(object sender, MouseEventArgs e)
+        {
+            radioButton1.Checked = false;
+            radioButton2.Checked = true;
+            radioButton3.Checked = false;
+            current = comboBox_number.SelectedIndex;
+
+            if (current >= 0 && current < q_count)
+            {
+                question a = q[current];
+                a.result = "0";
+                q[current] = a;
+                change = true;
+            }
+        }
+
+        // при выборе ПУНКТ3
+        private void radioButton3_MouseDown(object sender, MouseEventArgs e)
+        {
+            radioButton1.Checked = false;
+            radioButton2.Checked = false;
+            radioButton3.Checked = true;
+            current = comboBox_number.SelectedIndex;
+
+            if (current >= 0 && current < q_count)
+            {
+                question a = q[current];
+                a.result = "50";
+                q[current] = a;
+                change = true;
+            }
+        }
     }
 }

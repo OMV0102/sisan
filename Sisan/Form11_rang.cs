@@ -366,8 +366,7 @@ namespace system_analysis
             string text = "";
             if(e.RowIndex >= 0 && e.RowIndex < sol_count && e.ColumnIndex == 0)
             {
-                text = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
-                e.ToolTipText = text;
+                e.ToolTipText = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
             }
         }
 

@@ -163,7 +163,7 @@
             this.label2.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label2.Location = new System.Drawing.Point(27, 590);
+            this.label2.Location = new System.Drawing.Point(48, 590);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(18, 19);
             this.label2.TabIndex = 37;
@@ -174,7 +174,7 @@
             this.label8.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label8.Location = new System.Drawing.Point(27, 551);
+            this.label8.Location = new System.Drawing.Point(48, 551);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(20, 19);
             this.label8.TabIndex = 36;
@@ -205,43 +205,43 @@
             // 
             this.radioButton1.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.radioButton1.AutoSize = true;
+            this.radioButton1.FlatAppearance.BorderSize = 0;
             this.radioButton1.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.radioButton1.Location = new System.Drawing.Point(164, 633);
+            this.radioButton1.Location = new System.Drawing.Point(163, 633);
             this.radioButton1.Name = "radioButton1";
             this.radioButton1.Size = new System.Drawing.Size(410, 23);
             this.radioButton1.TabIndex = 40;
-            this.radioButton1.TabStop = true;
             this.radioButton1.Text = "Альтернатива A предпочтительнее альтернативы B";
             this.radioButton1.UseVisualStyleBackColor = true;
-            this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
+            this.radioButton1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.radioButton1_MouseDown);
             // 
             // radioButton2
             // 
             this.radioButton2.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.radioButton2.AutoSize = true;
+            this.radioButton2.FlatAppearance.BorderSize = 0;
             this.radioButton2.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.radioButton2.Location = new System.Drawing.Point(163, 656);
+            this.radioButton2.Location = new System.Drawing.Point(163, 663);
             this.radioButton2.Name = "radioButton2";
             this.radioButton2.Size = new System.Drawing.Size(410, 23);
             this.radioButton2.TabIndex = 41;
-            this.radioButton2.TabStop = true;
             this.radioButton2.Text = "Альтернатива B предпочтительнее альтернативы A";
             this.radioButton2.UseVisualStyleBackColor = true;
-            this.radioButton2.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged);
+            this.radioButton2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.radioButton2_MouseDown);
             // 
             // radioButton3
             // 
             this.radioButton3.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.radioButton3.AutoSize = true;
+            this.radioButton3.FlatAppearance.BorderSize = 0;
             this.radioButton3.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.radioButton3.Location = new System.Drawing.Point(164, 679);
+            this.radioButton3.Location = new System.Drawing.Point(163, 693);
             this.radioButton3.Name = "radioButton3";
             this.radioButton3.Size = new System.Drawing.Size(275, 23);
             this.radioButton3.TabIndex = 42;
-            this.radioButton3.TabStop = true;
             this.radioButton3.Text = "Альтернатива A и B равнозначны";
             this.radioButton3.UseVisualStyleBackColor = true;
-            this.radioButton3.CheckedChanged += new System.EventHandler(this.radioButton3_CheckedChanged);
+            this.radioButton3.MouseDown += new System.Windows.Forms.MouseEventHandler(this.radioButton3_MouseDown);
             // 
             // list_solution
             // 
@@ -334,7 +334,7 @@
             this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.textBox2.Font = new System.Drawing.Font("Tahoma", 12F);
             this.textBox2.ForeColor = System.Drawing.Color.Black;
-            this.textBox2.Location = new System.Drawing.Point(51, 551);
+            this.textBox2.Location = new System.Drawing.Point(72, 551);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(611, 26);
             this.textBox2.TabIndex = 56;
@@ -346,7 +346,7 @@
             this.textBox3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.textBox3.Font = new System.Drawing.Font("Tahoma", 12F);
             this.textBox3.ForeColor = System.Drawing.Color.Black;
-            this.textBox3.Location = new System.Drawing.Point(51, 586);
+            this.textBox3.Location = new System.Drawing.Point(72, 586);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(611, 26);
             this.textBox3.TabIndex = 57;

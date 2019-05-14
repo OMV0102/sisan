@@ -416,11 +416,9 @@ namespace system_analysis
         // НАВОДИМ НА АЛЬТЕРНАТИВУ КУРСОР отображается полностью весь текст в сноске
         private void dataGridView1_CellToolTipTextNeeded(object sender, DataGridViewCellToolTipTextNeededEventArgs e)
         {
-            string text = "";
             if(e.RowIndex >= 0 && e.RowIndex < sol_count && e.ColumnIndex == 0)
             {
-                text = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
-                e.ToolTipText = text;
+                e.ToolTipText = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
             }
         }
 
