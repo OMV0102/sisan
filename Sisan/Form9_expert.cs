@@ -488,7 +488,10 @@ namespace system_analysis
         // кнопка МЕТОД 4 (МЕТОД ПОЛНОГО ПОПАРНОГО СОСПОСТАВЛЕНИЯ)
         private void btn_m4_Click(object sender, EventArgs e)
         {
-
+            Form13_full_pair form = new Form13_full_pair();
+            form.Owner = this;
+            form.Show();
+            this.Hide();
         }
     }
 }

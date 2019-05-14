@@ -36,7 +36,6 @@ namespace system_analysis
             public string B;
             public string result;
         }
-
         List<question> q;
 
         public form2_opros0()
