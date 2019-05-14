@@ -63,65 +63,56 @@ namespace system_analysis
             // если зашли как аналитик
             if (form1_main.an_or_exp == true)
             {
-                if (password_file.Length != 0) // Если пароль из файла считался
+                if (txt_pass_curr.Text == password_file) // Если юзер угадал текущий пароль
                 {
-                    if (txt_pass_curr.Text == password_file) // Если юзер угадал текущий пароль
+                    if (txt_pass_new.Text.Length == 0) // Если новый пароль не введен
                     {
-                        if (txt_pass_new.Text.Length == 0) // Если новый пароль не введен
-                        {
-                            // если новый пароль не введен, орем на пользователя
-                            // красным цветом
-                            label_error2.Visible = true;
-                            txt_pass_new.ForeColor = Color.FromName("Red");
-                        }
-                        else // Если новый пароль введен
-                        {
-                            if (txt_pass_new.Text.Length < 6 || txt_pass_new.Text.Length > 15) // Если новый пароль меньше 4 символов
-                            {
-                                // орем на пользователя
-                                // красным цветом
-                                MessageBox.Show(
-                                "Пароль должен быть не менее 6 символов и не более 15.\n",
-                                "Предупреждение",
-                                MessageBoxButtons.OK,
-                                MessageBoxIcon.Warning,
-                                MessageBoxDefaultButton.Button1,
-                                MessageBoxOptions.DefaultDesktopOnly);
-                                txt_pass_new.ForeColor = Color.FromName("Red");
-                                this.TopMost = true; this.TopMost = false;
-                            }
-                            else
-                            {
-                                // Сохраняем новый пароль
-                                using (StreamWriter sr = new StreamWriter(directory + "analyst_password.txt", false, System.Text.Encoding.UTF8))
-                                {
-                                    sr.WriteLine(txt_pass_new.Text);
-                                }
-
-                                is_ok = true;
-                                // Переходим назад на форму аналитика
-                                form4_analyst_choice form = new form4_analyst_choice();
-                                form.Show();
-                                this.Close();
-                                
-                                
-                            }
-                        }
-                    }
-                    else
-                    {
-                        // если пароль введен неверно, орем на пользователя
+                        // если новый пароль не введен, орем на пользователя
                         // красным цветом
-                        label_error.Visible = true;
-                        txt_pass_curr.ForeColor = Color.FromName("Red");
+                        label_error2.Visible = true;
+                        txt_pass_new.ForeColor = Color.FromName("Red");
+                    }
+                    else // Если новый пароль введен
+                    {
+                        if (txt_pass_new.Text.Length < 6 || txt_pass_new.Text.Length > 15) // Если новый пароль меньше 4 символов
+                        {
+                            // орем на пользователя
+                            // красным цветом
+                            MessageBox.Show(
+                            "Пароль должен быть не менее 6 символов и не более 15.\n",
+                            "Предупреждение",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Warning,
+                            MessageBoxDefaultButton.Button1,
+                            MessageBoxOptions.DefaultDesktopOnly);
+                            txt_pass_new.ForeColor = Color.FromName("Red");
+                            this.TopMost = true; this.TopMost = false;
+                        }
+                        else
+                        {
+                            // Сохраняем новый пароль
+                            using (StreamWriter sr = new StreamWriter(directory + "analyst_password.txt", false, System.Text.Encoding.UTF8))
+                            {
+                                sr.WriteLine(txt_pass_new.Text);
+                            }
+
+                            is_ok = true;
+                            // Переходим назад на форму аналитика
+                            form4_analyst_choice form = new form4_analyst_choice();
+                            form.Show();
+                            this.Close();
+                                
+                                
+                        }
                     }
                 }
                 else
                 {
-                    //если пароль из файла не считался, то ниче не делаем
-                    // (грустим)
+                    // если пароль введен неверно, орем на пользователя
+                    // красным цветом
+                    label_error.Visible = true;
+                    txt_pass_curr.ForeColor = Color.FromName("Red");
                 }
-
             }
             // если зашли как эксперт, загружаем пароль эксперта
             else if (form1_main.an_or_exp == false)

@@ -27,15 +27,17 @@ namespace system_analysis
 
         // МЕТОД 4 (МЕТОД ПОПАРНОГО ПОПАРНОГО СОПОСТАВЛЕНИЯ)
 
-        public bool correct = false; // флаг правильных значений ячеек
-        public bool change = false; // флаг внесенных изменений
-        public bool empty = false; // флаг пустых значений ячеек
-        public bool is_edit; // флаг, что после редактирования не проверяем повторно ячейку
-        public int exp_count = 0; // количество экспертов
-        public int E = -1; //порядковый номер нашего эксперта в exp_res
-        public int sol_count; // количество альтернатив про выбранной проблеме
-        public int q_count; // количество вопросов
-        public int max = 100; // ШКАЛА, по которой оценивается КАЖДАЯ АЛЬТЕРНАТИВА
+        private bool correct = false; // флаг правильных значений ячеек
+        private bool change = false; // флаг внесенных изменений
+        private bool empty = false; // флаг пустых значений ячеек
+        private bool is_edit; // флаг, что после редактирования не проверяем повторно ячейку
+        private int exp_count = 0; // количество экспертов
+        private int E = -1; //порядковый номер нашего эксперта в exp_res
+        private int sol_count; // количество альтернатив про выбранной проблеме
+        private int q_count = 0; // количество вопросов
+        private int max = 100; // ШКАЛА, по которой оценивается КАЖДАЯ АЛЬТЕРНАТИВА
+        private bool end;
+
 
         public struct question
         {
@@ -52,20 +54,25 @@ namespace system_analysis
             Form9_expert form = this.Owner as Form9_expert;
 
             label9.Text = "нужно распределить " + max + " баллов между двумя альтернативами.";
-            string[] words;
             label_problem.Text = form.problem; // проблему вывели в форму
             exp_count = form.list_prob[form.N].exp.Count();  // узнали сколько всего экспертов
-            q_list = new List<question>(); // выделили списку оценок экспертов память 
-            question a; // переменная, для добавления в список оценок
+            
             bool exists;
-            // читаем проблемы
+            // читаем альтернатвы
             string text = "";
-            using (StreamReader sr = new StreamReader(directory + "solutions" + form.num_problem + ".txt", System.Text.Encoding.UTF8))
+            FileInfo fileInf = new FileInfo(directory + "solutions" + form.num_problem + ".txt");
+            if (fileInf.Exists)
             {
-                text = sr.ReadToEnd();
+                using (StreamReader sr = new StreamReader(directory + "solutions" + form.num_problem + ".txt", System.Text.Encoding.UTF8))
+                {
+                    text = sr.ReadToEnd();
+                }
             }
+
             sol_count = 0;
-            if (text.Length != 0)
+            bool alter = false;
+
+            if (text.Length > 0)
             {
 
                 using (StreamReader sr = new StreamReader(directory + "solutions" + form.num_problem + ".txt", System.Text.Encoding.UTF8))
@@ -73,97 +80,131 @@ namespace system_analysis
                     string line;
                     while ((line = sr.ReadLine()) != null)
                     {
-                        list_sol.Add(line);
+                        list_solution.Items.Add(line);
                         sol_count++;
+                    }
+                }
+                alter = true;
+            }
+            else
+            {
+                alter = false;
+            }
+
+            if (alter == true)
+            {
+                // считаем количество вопросов
+                q_count = (sol_count * sol_count - sol_count) / 2;
+
+                q_list = new List<question>(); // выделили списку оценок экспертов память 
+                question a; // переменная, для добавления в список оценок
+
+                //добавляем альтернативы в структуру
+                for (int i = 0; i < sol_count; i++)
+                {
+                    for (int j = i + 1; j < sol_count; j++)
+                    {
+                        a.A = list_solution.Items[i].ToString();
+                        a.B = list_solution.Items[j].ToString();
+                        a.res_A = -1; // у всех нет оценки
+                        a.res_B = -1;// у всех нет оценки
+                        q_list.Add(a);
                     }
                 }
 
                 // проверяем, есть ли у нас уже какие-то результаты опроса, если да, то читаем их
-                // иначе заполняем список -1 (типа не оценено)
-                FileInfo fileInf = new FileInfo(directory + "matrix" + form.num_problem + "m3.txt");
+                fileInf = new FileInfo(directory + "matrix" + form.num_problem + "m4e" + form1_main.num_expert + ".txt");
                 if (fileInf.Exists)
                 {
                     exists = true;  // уже есть какие то результаты
-                    int m = 0;
-                    using (StreamReader sr = new StreamReader(directory + "matrix" + form.num_problem + "m3.txt", System.Text.Encoding.UTF8))
+                    string[] words;
+                    string[,] matr = new string[sol_count, sol_count];
+                    using (StreamReader sr = new StreamReader(directory + "matrix" + form.num_problem + "m4e" + form1_main.num_expert + ".txt", System.Text.Encoding.UTF8))
                     {
-                        string line;
+                        string line = "";
+                        int i = 0;
                         while ((line = sr.ReadLine()) != null)
                         {
                             words = line.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                            a.id_exp = Convert.ToInt32(words[0]);
-                            if (a.id_exp == form1_main.num_expert)
-                                E = m;
-                            a.marks = new int[sol_count]; // выделили память для результата экспертов для sol_count-1 альтернатив
-                            for (int j = 0; j < a.marks.Count(); j++)
+
+                            for (int j = 0; j < sol_count; j++)
                             {
-                                a.marks[j] = Convert.ToInt32(words[j + 1]);
+                                matr[i, j] = words[j];
                             }
-                            m++;
-                            exp_res.Add(a);
+                            i++;
                         }
                     }
+
+                    int count = 0;
+                    for (int i = 0; i < sol_count - 1; i++)// до предпоследней строки
+                    {
+                        for (int j = 0; j < sol_count; j++)
+                        {
+                            if (i < j)
+                            {
+                                a = q_list[count];
+                                a.res_A = Convert.ToInt32(matr[i, j]);
+                                a.res_B = Convert.ToInt32(matr[j, i]);
+                                q_list[count] = a;
+                                count++;
+                            }
+                        }
+                    }
+
                 }
                 else
                 {
-                    exists = false; // нет никаких результатов
-                    for (int i = 0; i < exp_count; i++)
-                    {
-                        a.id_exp = form.list_prob[form.N].exp[i].id_exp;
-                        if (a.id_exp == form1_main.num_expert)
-                            E = i;
-                        a.marks = new int[sol_count]; // выделили память для результата экспертов для sol_count-1 альтернатив
-                        for (int j = 0; j < a.marks.Count(); j++)
-                        {
-                            a.marks[j] = -1;
-                        }
-                        exp_res.Add(a);
-                    }
+                    exists = false;  //результатов (матрицы) НЕТ
                 }
 
-
                 DataTable table = new DataTable("Альтернативы и оценки");
+                // навсякий очищаем все
                 table.Clear();
                 table.Columns.Clear();
                 table.Rows.Clear();
 
                 table.Columns.Add(new DataColumn("Альтернатива"));
-                table.Columns[0].ReadOnly = true; // альтернативы можно только смотреть
-                table.Columns.Add(new DataColumn("Оценка"));
+                table.Columns[0].ReadOnly = true; // альтернативы слева можно только смотреть
+                table.Columns.Add(new DataColumn("⇐ Оценка"));
+                table.Columns.Add(new DataColumn("Оценка ⇒"));
+                table.Columns.Add(new DataColumn("Альтернатива"));
+                table.Columns[3].ReadOnly = true; // альтернативы справа можно только смотреть
 
-                int n = exp_res[E].marks.Count();
-                string[] tmp = new string[n];
-                // заполнение датагрида
-                for (int j = 0; j < n; j++)
-                {
-                    if (exists == false) // никаких результатов нет ни у одного эксперта
-                    {
-                        tmp[j] = "";
-                    }
-                    else // есь уже какие-то результаты
-                    {
-                        if (exp_res[E].marks[0] == -1) // если у нашего эксперта нет результатов
-                            tmp[j] = "";
-                        else // если у нашего эксперт есть результаты
-                            tmp[j] = exp_res[E].marks[j].ToString();
-                    }
-                }
-
-                for (int j = 0; j < list_sol.Count; j++)
+                // заполнение таблицы
+                for (int j = 0; j < q_count; j++)
                 {
                     DataRow dr = table.NewRow();
-                    dr[0] = list_sol[j];
-                    dr[1] = tmp[j];
+                    //записали альтернативу левую
+                    dr[0] = q_list[j].A;
+
+                    if(exists  == true) // если матрицы с результатами уже есть
+                    {
+                        dr[1] = q_list[j].res_A;//записали оценку левой альтернативы
+                        dr[2] = q_list[j].res_B;//записали оценку правой альтернативы
+                    }
+                    else
+                    {
+                        dr[1] = "";//записали пустую оценку левой альтернативы
+                        dr[2] = "";//записали пустую оценку правой альтернативы
+                    }
+
+                    //записали альтернативу правую
+                    dr[3] = q_list[j].B;
                     table.Rows.Add(dr);
                 }
 
-                dataGridView1.DataSource = table;
-                dataGridView1.Columns[0].Width = 600; // ширина столбца альтерантив
-                dataGridView1.Columns[1].Width = 97; // ширина столбца оценок
+                dataGridView1.DataSource = table; // данные таблицы в датагрид засунули
+
+                dataGridView1.Columns[0].Width = 300; // ширина столбца левой альтерантивы
+                dataGridView1.Columns[1].Width = 45; // ширина столбца оценки для левой альтернативы
+                dataGridView1.Columns[2].Width = 45; // ширина столбца оценки для правой альтернативы
+                dataGridView1.Columns[3].Width = 300; // ширина столбца правой альтерантивы
+
                 // шобы столбцы нельзя было сортировать
                 dataGridView1.Columns[0].SortMode = DataGridViewColumnSortMode.NotSortable;
                 dataGridView1.Columns[1].SortMode = DataGridViewColumnSortMode.NotSortable;
-                
+                dataGridView1.Columns[2].SortMode = DataGridViewColumnSortMode.NotSortable;
+                dataGridView1.Columns[3].SortMode = DataGridViewColumnSortMode.NotSortable;
             }
         }
 
@@ -172,7 +213,7 @@ namespace system_analysis
         {
             Form9_expert form = this.Owner as Form9_expert; // 9 форма - хозяин этой формы
 
-            using (StreamWriter sw = new StreamWriter(directory + "matrix" + form.num_problem + "m3.txt", false, System.Text.Encoding.UTF8))
+            /*using (StreamWriter sw = new StreamWriter(directory + "matrix" + form.num_problem + "m3.txt", false, System.Text.Encoding.UTF8))
             {
                 string line = "";
                 for(int i = 0; i < exp_res.Count; i++)
@@ -186,7 +227,7 @@ namespace system_analysis
                     }
                     sw.WriteLine(line);
                 }
-            }
+            }*/
         }
 
         // перетаскивание окна по экрану
@@ -202,7 +243,8 @@ namespace system_analysis
         private void btn_save_Click(object sender, EventArgs e)
         {
             Form9_expert form = this.Owner as Form9_expert;
-            if(change == true)
+            change = false;  // УБРАТЬ ПОТОМ !!!************************************************************************ УБРАААТЬ
+            if (change == true)
             {
                 empty = false;
                 for (int i = 0; i < sol_count; i++) // ищем НЕправильные ячейки
@@ -364,11 +406,12 @@ namespace system_analysis
         // НАВОДИМ НА АЛЬТЕРНАТИВУ КУРСОР отображается полностью весь текст в сноске
         private void dataGridView1_CellToolTipTextNeeded(object sender, DataGridViewCellToolTipTextNeededEventArgs e)
         {
-            string[] words;
-            string text = "";
-            int max_length = 5;
             if (e.RowIndex >= 0 && e.RowIndex < sol_count && (e.ColumnIndex == 0 || e.ColumnIndex == 3))
             {
+                string[] words;
+                string text = "";
+                int max_length = 5;
+
                 text = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
                 words = text.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
                 if (words.Count() <= max_length)
@@ -407,7 +450,7 @@ namespace system_analysis
                     if (chislo >= 0 && chislo <= max)// если введено целое число в правильном интервале
                     {
                         change = true; // изменение засчитано
-                        exp_res[E].marks[r] = chislo; // запомнили введеную оценку
+                        //exp_res[E].marks[r] = chislo; // запомнили введеную оценку  // ЗАКОМЕНТИЛ ПОКА ЧТО*************************************************
                         dataGridView1.Rows[r].Cells[c].Style.BackColor = Color.FromName("ButtonHighlight"); // белый фон
                         dataGridView1.Rows[r].Cells[c].Style.ForeColor = Color.FromName("Black"); // черный текст
                         return true;
@@ -449,7 +492,7 @@ namespace system_analysis
         {
             if(e.ColumnIndex == 1 && e.RowIndex >= 0 && e.RowIndex < sol_count) // если ячейки с оценками
             {
-                check_cell_value(e.RowIndex, e.ColumnIndex);
+                //check_cell_value(e.RowIndex, e.ColumnIndex);
                 is_edit = true;
             }
         }
@@ -461,7 +504,7 @@ namespace system_analysis
             {
                 if (e.ColumnIndex == 1 && e.RowIndex >= 0 && e.RowIndex < sol_count)  // если ячейки с оценками
                 {
-                    check_cell_value(e.RowIndex, e.ColumnIndex);
+                    //check_cell_value(e.RowIndex, e.ColumnIndex);
                 }
             }
             is_edit = false;

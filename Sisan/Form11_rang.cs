@@ -57,12 +57,17 @@ namespace system_analysis
             exp_res = new List<result>(); // выделили списку оценок экспертов память 
             result a; // переменная, для добавления в список оценок
             bool exists;
-            // читаем проблемы
+            // читаем альтернатвы
             string text = "";
-            using (StreamReader sr = new StreamReader(directory + "solutions" + form.num_problem + ".txt", System.Text.Encoding.UTF8))
+            FileInfo fileInf = new FileInfo(directory + "solutions" + form.num_problem + ".txt");
+            if (fileInf.Exists)
             {
-                text = sr.ReadToEnd();
+                using (StreamReader sr = new StreamReader(directory + "solutions" + form.num_problem + ".txt", System.Text.Encoding.UTF8))
+                {
+                    text = sr.ReadToEnd();
+                }
             }
+
             sol_count = 0;
             if (text.Length != 0)
             {
@@ -79,7 +84,7 @@ namespace system_analysis
 
                 // проверяем, есть ли у нас уже какие-то результаты опроса, если да, то читаем их
                 // иначе заполняем список -1 (типа не оценено)
-                FileInfo fileInf = new FileInfo(directory + "matrix" + form.num_problem + "m3.txt");
+                fileInf = new FileInfo(directory + "matrix" + form.num_problem + "m3.txt");
                 if (fileInf.Exists)
                 {
                     exists = true;  // уже есть какие то результаты
@@ -132,7 +137,7 @@ namespace system_analysis
 
                 int n = exp_res[E].marks.Count();
                 string[] tmp = new string[n];
-                // заполнение датагрида
+                // заполнение таблицы
                 for (int j = 0; j < n; j++)
                 {
                     if (exists == false) // никаких результатов нет ни у одного эксперта
