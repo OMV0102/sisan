@@ -71,6 +71,12 @@
     <Compile Include="Form12_prefer.designer.cs">
       <DependentUpon>Form12_prefer.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form13_full_pair.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form13_full_pair.designer.cs">
+      <DependentUpon>Form13_full_pair.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form2.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -156,6 +162,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form12_prefer.resx">
       <DependentUpon>Form12_prefer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form13_full_pair.resx">
+      <DependentUpon>Form13_full_pair.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form2.resx">
       <DependentUpon>Form2.cs</DependentUpon>
