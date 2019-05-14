@@ -44,9 +44,7 @@ namespace system_analysis
             public int res_A;
             public int res_B;
         }
-        List<question> q;// список с оценками экспертов
-
-        List<string> list_sol;  // список для просто альтернатив
+        List<question> q_list;// список с оценками экспертов
         
         // при ЗАГРУЗКЕ ФОРМЫ 
         private void Form11_rang_Load(object sender, EventArgs e)
@@ -57,9 +55,8 @@ namespace system_analysis
             string[] words;
             label_problem.Text = form.problem; // проблему вывели в форму
             exp_count = form.list_prob[form.N].exp.Count();  // узнали сколько всего экспертов
-            list_sol = new List<string>(); // выделили списку альтернатив память
-            exp_res = new List<result>(); // выделили списку оценок экспертов память 
-            result a; // переменная, для добавления в список оценок
+            q_list = new List<question>(); // выделили списку оценок экспертов память 
+            question a; // переменная, для добавления в список оценок
             bool exists;
             // читаем проблемы
             string text = "";

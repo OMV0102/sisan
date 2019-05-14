@@ -43,6 +43,7 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.list_solution = new System.Windows.Forms.ListBox();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -51,7 +52,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label1.ForeColor = System.Drawing.Color.Black;
-            this.label1.Location = new System.Drawing.Point(321, 140);
+            this.label1.Location = new System.Drawing.Point(321, 123);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(152, 23);
             this.label1.TabIndex = 49;
@@ -62,7 +63,7 @@
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label7.ForeColor = System.Drawing.Color.Black;
-            this.label7.Location = new System.Drawing.Point(342, 59);
+            this.label7.Location = new System.Drawing.Point(342, 51);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(109, 23);
             this.label7.TabIndex = 48;
@@ -78,12 +79,12 @@
             this.dataGridView1.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-            this.dataGridView1.Location = new System.Drawing.Point(55, 483);
+            this.dataGridView1.Location = new System.Drawing.Point(55, 411);
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowHeadersWidth = 40;
-            this.dataGridView1.Size = new System.Drawing.Size(700, 250);
+            this.dataGridView1.Size = new System.Drawing.Size(689, 195);
             this.dataGridView1.TabIndex = 53;
             this.dataGridView1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellEndEdit);
             this.dataGridView1.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_CellMouseDown);
@@ -96,7 +97,7 @@
             this.label_problem.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label_problem.Font = new System.Drawing.Font("Tahoma", 12.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label_problem.ForeColor = System.Drawing.Color.Black;
-            this.label_problem.Location = new System.Drawing.Point(50, 94);
+            this.label_problem.Location = new System.Drawing.Point(50, 86);
             this.label_problem.Name = "label_problem";
             this.label_problem.Size = new System.Drawing.Size(700, 27);
             this.label_problem.TabIndex = 56;
@@ -109,7 +110,7 @@
             this.btn_save.FlatAppearance.MouseOverBackColor = System.Drawing.Color.SandyBrown;
             this.btn_save.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_save.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btn_save.Location = new System.Drawing.Point(273, 751);
+            this.btn_save.Location = new System.Drawing.Point(273, 621);
             this.btn_save.Name = "btn_save";
             this.btn_save.Size = new System.Drawing.Size(244, 52);
             this.btn_save.TabIndex = 57;
@@ -184,7 +185,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label3.ForeColor = System.Drawing.Color.Black;
-            this.label3.Location = new System.Drawing.Point(51, 446);
+            this.label3.Location = new System.Drawing.Point(54, 378);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(642, 19);
             this.label3.TabIndex = 69;
@@ -196,7 +197,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label4.ForeColor = System.Drawing.Color.Black;
-            this.label4.Location = new System.Drawing.Point(51, 387);
+            this.label4.Location = new System.Drawing.Point(54, 319);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(558, 19);
             this.label4.TabIndex = 70;
@@ -231,7 +232,7 @@
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label8.ForeColor = System.Drawing.Color.Black;
-            this.label8.Location = new System.Drawing.Point(51, 415);
+            this.label8.Location = new System.Drawing.Point(54, 347);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(227, 19);
             this.label8.TabIndex = 74;
@@ -243,7 +244,7 @@
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label9.ForeColor = System.Drawing.Color.Black;
-            this.label9.Location = new System.Drawing.Point(269, 415);
+            this.label9.Location = new System.Drawing.Point(272, 347);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(475, 19);
             this.label9.TabIndex = 75;
@@ -257,17 +258,29 @@
             this.list_solution.FormattingEnabled = true;
             this.list_solution.HorizontalScrollbar = true;
             this.list_solution.ItemHeight = 19;
-            this.list_solution.Location = new System.Drawing.Point(55, 166);
+            this.list_solution.Location = new System.Drawing.Point(55, 153);
             this.list_solution.Name = "list_solution";
-            this.list_solution.Size = new System.Drawing.Size(689, 99);
+            this.list_solution.Size = new System.Drawing.Size(689, 118);
             this.list_solution.TabIndex = 76;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label2.ForeColor = System.Drawing.Color.Black;
+            this.label2.Location = new System.Drawing.Point(321, 289);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(130, 23);
+            this.label2.TabIndex = 77;
+            this.label2.Text = "Оценивание";
             // 
             // Form13_full_pair
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.button_back;
-            this.ClientSize = new System.Drawing.Size(800, 820);
+            this.ClientSize = new System.Drawing.Size(800, 686);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.list_solution);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
@@ -311,5 +324,6 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
         public System.Windows.Forms.ListBox list_solution;
+        private System.Windows.Forms.Label label2;
     }
 }
