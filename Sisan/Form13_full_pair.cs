@@ -35,7 +35,7 @@ namespace system_analysis
         public int E = -1; //порядковый номер нашего эксперта в exp_res
         public int sol_count; // количество альтернатив про выбранной проблеме
         public int q_count; // количество вопросов
-        public int max = 100; // ШКАЛА по котрой оценивается КАЖДАЯ АЛЬТЕРНАТИВА
+        public int max = 100; // ШКАЛА, по которой оценивается КАЖДАЯ АЛЬТЕРНАТИВА
 
         public struct question
         {
@@ -44,14 +44,7 @@ namespace system_analysis
             public int res_A;
             public int res_B;
         }
-        List<question> q;
-
-        public struct result
-        {
-            public int id_exp;
-            public int[] marks;
-        }
-        List<result> exp_res; // список с оценками экспертов
+        List<question> q;// список с оценками экспертов
 
         List<string> list_sol;  // список для просто альтернатив
         
@@ -59,7 +52,8 @@ namespace system_analysis
         private void Form11_rang_Load(object sender, EventArgs e)
         {
             Form9_expert form = this.Owner as Form9_expert;
-            label2.Text += max + "!";
+
+            label9.Text = "нужно распределить " + max + " баллов между двумя альтернативами.";
             string[] words;
             label_problem.Text = form.problem; // проблему вывели в форму
             exp_count = form.list_prob[form.N].exp.Count();  // узнали сколько всего экспертов
@@ -373,9 +367,32 @@ namespace system_analysis
         // НАВОДИМ НА АЛЬТЕРНАТИВУ КУРСОР отображается полностью весь текст в сноске
         private void dataGridView1_CellToolTipTextNeeded(object sender, DataGridViewCellToolTipTextNeededEventArgs e)
         {
-            if(e.RowIndex >= 0 && e.RowIndex < sol_count && e.ColumnIndex == 0)
+            string[] words;
+            string text = "";
+            int max_length = 5;
+            if (e.RowIndex >= 0 && e.RowIndex < sol_count && (e.ColumnIndex == 0 || e.ColumnIndex == 3))
             {
-                e.ToolTipText = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                text = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                words = text.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                if (words.Count() <= max_length)
+                {
+                    e.ToolTipText = text;
+                }
+                else
+                {
+                    text = "";
+                    int i = 0;
+                    while (i < words.Count())
+                    {
+                        for (int j = 0; j < max_length && i < words.Count(); j++)
+                        {
+                            text += words[i] + " ";
+                            i++;
+                        }
+                        text += "\n";
+                    }
+                    e.ToolTipText = text;
+                }
             }
         }
 
