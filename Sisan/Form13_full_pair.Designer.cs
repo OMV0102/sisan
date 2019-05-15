@@ -36,7 +36,6 @@
             this.button_cross = new System.Windows.Forms.Button();
             this.button_minimize = new System.Windows.Forms.Button();
             this.button_back = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -44,6 +43,7 @@
             this.label9 = new System.Windows.Forms.Label();
             this.list_solution = new System.Windows.Forms.ListBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -180,18 +180,6 @@
             this.button_back.UseVisualStyleBackColor = false;
             this.button_back.Click += new System.EventHandler(this.button_back_Click);
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label3.ForeColor = System.Drawing.Color.Black;
-            this.label3.Location = new System.Drawing.Point(54, 378);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(642, 19);
-            this.label3.TabIndex = 69;
-            this.label3.Text = "Если по вашему мнению для альтернативы оценка не требуется, впишите в ячейку 0.";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -274,6 +262,18 @@
             this.label2.TabIndex = 77;
             this.label2.Text = "Оценивание";
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label3.ForeColor = System.Drawing.Color.Black;
+            this.label3.Location = new System.Drawing.Point(54, 378);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(421, 19);
+            this.label3.TabIndex = 69;
+            this.label3.Text = "Сумма двух оценок в одной строке должна быть равна ";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // Form13_full_pair
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -317,7 +317,6 @@
         private System.Windows.Forms.Button button_cross;
         private System.Windows.Forms.Button button_minimize;
         private System.Windows.Forms.Button button_back;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
@@ -325,5 +324,6 @@
         private System.Windows.Forms.Label label9;
         public System.Windows.Forms.ListBox list_solution;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
     }
 }

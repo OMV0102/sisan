@@ -29,7 +29,7 @@ namespace system_analysis
 
         private bool correct = false; // флаг правильных значений ячеек
         private bool change = false; // флаг внесенных изменений
-        private bool empty = false; // флаг пустых значений ячеек
+        private bool end = false; // флаг пустых значений ячеек и что все ответы получены
         private bool is_edit; // флаг, что после редактирования не проверяем повторно ячейку
         private int exp_count = 0; // количество экспертов
         private int sol_count; // количество альтернатив про выбранной проблеме
@@ -211,26 +211,56 @@ namespace system_analysis
             }
         }
 
-        // функция СОХРАНЕНИЯ
+        // функция СОХРАНЕНИЯ в файл matrix...
         private void save()
         {
             Form9_expert form = this.Owner as Form9_expert; // 9 форма - хозяин этой формы
 
-            /*using (StreamWriter sw = new StreamWriter(directory + "matrix" + form.num_problem + "m3.txt", false, System.Text.Encoding.UTF8))
+            string[,] matr = new string[sol_count, sol_count];
+
+            int count = 0;
+
+            for (int i = 0; i < sol_count; i++)
+            {
+                for (int j = 0; j < sol_count; j++)
+                {
+                    if (i == j)
+                    {
+                        matr[i, j] = "9";
+                    }
+                    else
+                    {
+                        if (i < j)
+                        {
+                            matr[i, j] = q_list[count].res_A.ToString();
+                            count++;
+                        }
+                        else
+                        {
+                            if (matr[j, i] == "-1")
+                                matr[i, j] = "-1";
+                            else
+                            {
+                                matr[i, j] = (max - Convert.ToInt32(matr[j, i])).ToString();
+                            }
+                        }
+                    }
+                }
+            }
+            // ДОДЕЛАТЬ ********************************************************
+            using (StreamWriter sw = new StreamWriter(directory + "matrix" + form.num_problem + "m4e" + form1_main.num_expert + ".txt", false, System.Text.Encoding.UTF8))
             {
                 string line = "";
-                for(int i = 0; i < exp_res.Count; i++)
+                for (int i = 0; i < sol_count; i++)
                 {
-                    //запомнили ID эксперта
-                    line = exp_res[i].id_exp.ToString() + " ";
-                    // запомнили оценочки
-                    for(int j = 0; j < exp_res[i].marks.Count(); j++)
+                    line = "";
+                    for (int j = 0; j < sol_count; j++)
                     {
-                        line += exp_res[i].marks[j].ToString() + " ";
+                        line += matr[i, j] + " ";
                     }
-                    sw.WriteLine(line);
+                    sw.WriteLine(matrix);
                 }
-            }*/
+            }
         }
 
         // перетаскивание окна по экрану
@@ -246,23 +276,20 @@ namespace system_analysis
         private void btn_save_Click(object sender, EventArgs e)
         {
             Form9_expert form = this.Owner as Form9_expert;
-            change = false;  // УБРАТЬ ПОТОМ !!!************************************************************************ УБРАААТЬ
+            
             if (change == true)
             {
-                empty = false;
-                for (int i = 0; i < sol_count; i++) // ищем НЕправильные ячейки
+                correct = true;
+                for (int i = 0; i < q_count; i++) // ищем НЕправильные ячейки
                 {
-                    if (dataGridView1.Rows[i].Cells[1].Value.ToString() == "")
+                    if (dataGridView1.Rows[i].Cells[1].Style.BackColor == Color.FromArgb(254, 254, 34) || dataGridView1.Rows[i].Cells[2].Style.BackColor == Color.FromArgb(254, 254, 34))
                     {
-                        dataGridView1.Rows[i].Cells[1].Style.ForeColor = Color.FromName("Red"); // красный текст
-                        dataGridView1.Rows[i].Cells[1].Style.BackColor = Color.FromArgb(254, 254, 34); // желтый фон
-                        empty = true;
+                        correct = false;
                     }
                 }
 
-                if (empty == false)
+                if (correct == true)
                 {
-                    label3.BackColor = this.BackColor; // цвет label = цвет формы нейтральный
                     correct = true;
                     for (int i = 0; i < sol_count; i++) // ищем НЕправильные ячейки
                     {
