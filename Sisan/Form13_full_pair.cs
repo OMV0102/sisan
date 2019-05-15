@@ -35,7 +35,8 @@ namespace system_analysis
         private int sol_count; // количество альтернатив про выбранной проблеме
         private int q_count = 0; // количество вопросов
         private int max = 100; // ШКАЛА, по которой оценивается КАЖДАЯ АЛЬТЕРНАТИВА
-        public bool is_yellow = false;
+        private bool is_yellow = false;
+        private bool edit_on = false;
 
 
         public struct question
@@ -442,6 +443,12 @@ namespace system_analysis
         // для dataGridView1_CellMouseDown И dataGridView1_CellValueChanged
         private bool check_cell_value(int r, int c)
         {
+            int cc = 1;
+            if (c == 1)
+                cc = 2;
+            if (c == 2)
+                cc = 1;
+
             string text = dataGridView1.Rows[r].Cells[c].Value.ToString();
             if (text != "")// если введено что-то
             {
@@ -451,16 +458,35 @@ namespace system_analysis
                 {
                     if (chislo >= 0 && chislo <= max)// если введено целое число в правильном интервале
                     {
+                        edit_on = true;
+                        dataGridView1.EditMode = DataGridViewEditMode.EditProgrammatically;
+                        dataGridView1.Rows[r].Cells[cc].Value = max - chislo;
+                        dataGridView1.EditMode = DataGridViewEditMode.EditOnEnter;
+                        question a = q_list[r];
+                        if(c == 1)
+                        {
+                            a.res_A = chislo;
+                            a.res_B = max - chislo;
+                        }
+                        else if (c == 2)
+                        {
+                            a.res_A = max - chislo;
+                            a.res_B = chislo;
+                        }
+                        q_list[r] = a;
                         change = true; // изменение засчитано
-                        //exp_res[E].marks[r] = chislo; // запомнили введеную оценку  // ЗАКОМЕНТИЛ ПОКА ЧТО*************************************************
                         dataGridView1.Rows[r].Cells[c].Style.BackColor = Color.FromName("ButtonHighlight"); // белый фон
                         dataGridView1.Rows[r].Cells[c].Style.ForeColor = Color.FromName("Black"); // черный текст
+                        dataGridView1.Rows[r].Cells[cc].Style.BackColor = Color.FromName("ButtonHighlight"); // белый фон
+                        dataGridView1.Rows[r].Cells[cc].Style.ForeColor = Color.FromName("Black"); // черный текст
                         return true;
                     }
                     else// если введено целое число НЕ в интервале
                     {
                         dataGridView1.Rows[r].Cells[c].Style.ForeColor = Color.FromName("Red"); // красный текст
                         dataGridView1.Rows[r].Cells[c].Style.BackColor = Color.FromArgb(254, 254, 34); // желтый фон
+                        dataGridView1.Rows[r].Cells[cc].Style.ForeColor = Color.FromName("Red"); // красный текст
+                        dataGridView1.Rows[r].Cells[cc].Style.BackColor = Color.FromArgb(254, 254, 34); // желтый фон
                         return false;
                     }
                 }
@@ -468,23 +494,35 @@ namespace system_analysis
                 {
                     dataGridView1.Rows[r].Cells[c].Style.ForeColor = Color.FromName("Red");// красный текст
                     dataGridView1.Rows[r].Cells[c].Style.BackColor = Color.FromArgb(254, 254, 34); // желтый фон
+                    dataGridView1.Rows[r].Cells[cc].Style.ForeColor = Color.FromName("Red");// красный текст
+                    dataGridView1.Rows[r].Cells[cc].Style.BackColor = Color.FromArgb(254, 254, 34); // желтый фон
                     return false;
                 }
             }
             else // если НЕ введено
             {
-                dataGridView1.Rows[r].Cells[c].Style.BackColor = Color.FromArgb(254, 254, 34); // желтый фон
-                return false;
+                dataGridView1.Rows[r].Cells[cc].Value = "";
+                question a = q_list[r];
+                a.res_A = -1;
+                a.res_B = -1;
+                q_list[r] = a;
+
+                dataGridView1.Rows[r].Cells[c].Style.BackColor = Color.FromName("ButtonHighlight"); // белый фон
+                dataGridView1.Rows[r].Cells[c].Style.ForeColor = Color.FromName("Black"); // черный текст
+                dataGridView1.Rows[r].Cells[cc].Style.BackColor = Color.FromName("ButtonHighlight"); // белый фон
+                dataGridView1.Rows[r].Cells[cc].Style.ForeColor = Color.FromName("Black"); // черный текст
+                return true; // НЕПОНЯТНО ВОТ НАДО ПОДУМАТЬ
             }
         }
 
         // когда РЕДАКТИРУЕМ ЯЧЕЙКУ (именно меняется значение) (приоритет_1)
         private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            if ((e.ColumnIndex == 1 || e.ColumnIndex == 2) && e.RowIndex >= 0 && e.RowIndex < q_count) // если ячейки с оценками
+            if (edit_on == false && (e.ColumnIndex == 1 || e.ColumnIndex == 2) && e.RowIndex >= 0 && e.RowIndex < q_count) // если ячейки с оценками
             {
-                check_cell_value(e.RowIndex, e.ColumnIndex);
                 is_edit = true;
+                check_cell_value(e.RowIndex, e.ColumnIndex);
+                
             }
         }
 
@@ -507,6 +545,7 @@ namespace system_analysis
                     }
                 }
             }
+            edit_on = false;
             is_edit = false;
         }
 
@@ -523,6 +562,7 @@ namespace system_analysis
                 {
                     is_yellow = false;
                 }
+                edit_on = false;
                 // делаем нормальной, если тыкаем
                 dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.BackColor = Color.FromName("ButtonHighlight"); // белый фон
                 dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.ForeColor = Color.FromName("Black"); // черный текст

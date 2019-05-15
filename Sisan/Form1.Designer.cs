@@ -140,7 +140,6 @@
             // 
             this.AllowDrop = true;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.CancelButton = this.button_cross;
             this.ClientSize = new System.Drawing.Size(672, 297);
             this.Controls.Add(this.button_minimize);
             this.Controls.Add(this.label2);
