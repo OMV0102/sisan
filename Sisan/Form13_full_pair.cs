@@ -265,7 +265,7 @@ namespace system_analysis
                     correct = true;
                     for (int i = 0; i < sol_count; i++) // ищем НЕправильные ячейки
                     {
-                        if (check_cell_value(i, 1) == false)
+                        //if (check_cell_value(i, 1) == false)
                         {
                             correct = false;
                         }
@@ -355,45 +355,28 @@ namespace system_analysis
             Form9_expert form = this.Owner as Form9_expert;
             if (change == true)
             {
-                correct = true;
-                for (int i = 0; i < sol_count; i++) // ищем НЕправильные ячейки
-                {
-                    if (check_cell_value(i, 1) == false)
-                    {
-                        correct = false;
-                    }
-                }
 
-                if (correct == true)
-                {
-                    this.Hide(); // СКРЫВАЕМ ФОРМУ пока MessageBox показывается 
-                    DialogResult otvet = MessageBox.Show(
-                    "Все несохраненные изменения будут потеряны.\n" +
-                    "Закрыть оценивание?",
-                    "Внимание",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Warning,
-                    MessageBoxDefaultButton.Button2,
-                    MessageBoxOptions.DefaultDesktopOnly);
+                this.Hide(); // СКРЫВАЕМ ФОРМУ пока MessageBox показывается 
+                DialogResult otvet = MessageBox.Show(
+                "Все несохраненные изменения будут потеряны.\n" +
+                "Закрыть оценивание?",
+                "Внимание",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning,
+                MessageBoxDefaultButton.Button2,
+                MessageBoxOptions.DefaultDesktopOnly);
 
-                    if (otvet == DialogResult.Yes)
-                    {
-                        form.Show();  // Показываем форму эксперта
-                        form.TopMost = true; form.TopMost = false;
-                        this.Close();
-                    }
-
-                    if (otvet == DialogResult.No)
-                    {
-                        this.Show();
-                        this.TopMost = true; this.TopMost = false;
-                    }
-                }
-                else
+                if (otvet == DialogResult.Yes)
                 {
                     form.Show();  // Показываем форму эксперта
                     form.TopMost = true; form.TopMost = false;
                     this.Close();
+                }
+
+                if (otvet == DialogResult.No)
+                {
+                    this.Show();
+                    this.TopMost = true; this.TopMost = false;
                 }
             }
             else
@@ -442,6 +425,16 @@ namespace system_analysis
         // для dataGridView1_CellMouseDown И dataGridView1_CellValueChanged
         private bool check_cell_value(int r, int c)
         {
+            int cc = 1; // другой столбец с оценкой
+            if (c == 1)
+            {
+                cc = 2;
+            }
+            if (c == 2)
+            {
+                cc = 1;
+            }
+
             string text = dataGridView1.Rows[r].Cells[c].Value.ToString();
             if (text != "")// если введено что-то
             {
@@ -452,15 +445,34 @@ namespace system_analysis
                     if (chislo >= 0 && chislo <= max)// если введено целое число в правильном интервале
                     {
                         change = true; // изменение засчитано
-                        //exp_res[E].marks[r] = chislo; // запомнили введеную оценку  // ЗАКОМЕНТИЛ ПОКА ЧТО*************************************************
+                        dataGridView1.Rows[r].Cells[cc].Value = max - chislo;
+
+                        question a = q_list[r];
+                        if (c == 1)
+                        {
+                            a.res_A = chislo;
+                            a.res_B = max - chislo;
+                        }
+                        else if (c == 2)
+                        {
+                            a.res_A = max - chislo;
+                            a.res_B = chislo;
+                        }
+                        q_list[r] = a;
+
                         dataGridView1.Rows[r].Cells[c].Style.BackColor = Color.FromName("ButtonHighlight"); // белый фон
                         dataGridView1.Rows[r].Cells[c].Style.ForeColor = Color.FromName("Black"); // черный текст
+                        dataGridView1.Rows[r].Cells[cc].Style.BackColor = Color.FromName("ButtonHighlight"); // белый фон
+                        dataGridView1.Rows[r].Cells[cc].Style.ForeColor = Color.FromName("Black"); // черный текст
+
                         return true;
                     }
                     else// если введено целое число НЕ в интервале
                     {
                         dataGridView1.Rows[r].Cells[c].Style.ForeColor = Color.FromName("Red"); // красный текст
                         dataGridView1.Rows[r].Cells[c].Style.BackColor = Color.FromArgb(254, 254, 34); // желтый фон
+                        dataGridView1.Rows[r].Cells[cc].Style.ForeColor = Color.FromName("Red");// красный текст
+                        dataGridView1.Rows[r].Cells[cc].Style.BackColor = Color.FromArgb(254, 254, 34); // желтый фон
                         return false;
                     }
                 }
@@ -468,12 +480,19 @@ namespace system_analysis
                 {
                     dataGridView1.Rows[r].Cells[c].Style.ForeColor = Color.FromName("Red");// красный текст
                     dataGridView1.Rows[r].Cells[c].Style.BackColor = Color.FromArgb(254, 254, 34); // желтый фон
+                    dataGridView1.Rows[r].Cells[cc].Style.ForeColor = Color.FromName("Red");// красный текст
+                    dataGridView1.Rows[r].Cells[cc].Style.BackColor = Color.FromArgb(254, 254, 34); // желтый фон
                     return false;
                 }
             }
             else // если НЕ введено
             {
-                dataGridView1.Rows[r].Cells[c].Style.BackColor = Color.FromArgb(254, 254, 34); // желтый фон
+                dataGridView1.Rows[r].Cells[cc].Value = "";
+                question a = q_list[r];
+                a.res_A = -1;
+                a.res_B = -1;
+                q_list[r] = a;
+
                 return false;
             }
         }
