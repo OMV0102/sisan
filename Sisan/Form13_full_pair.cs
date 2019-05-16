@@ -178,15 +178,22 @@ namespace system_analysis
                     //записали альтернативу левую
                     dr[0] = q_list[j].A;
 
-                    if(exists  == true) // если матрицы с результатами уже есть
+                    if (q_list[j].res_A == -1) // если опрос не закончен
                     {
-                        dr[1] = q_list[j].res_A;//записали оценку левой альтернативы
-                        dr[2] = q_list[j].res_B;//записали оценку правой альтернативы
+                        dr[1] = "";
                     }
                     else
                     {
-                        dr[1] = "";//записали пустую оценку левой альтернативы
-                        dr[2] = "";//записали пустую оценку правой альтернативы
+                        dr[1] = q_list[j].res_A;//записали оценку левой альтернативы
+                    }
+
+                    if (q_list[j].res_B == -1) // если опрос не закончен
+                    {
+                        dr[2] = "";
+                    }
+                    else
+                    {
+                        dr[2] = q_list[j].res_B;//записали оценку правой альтернативы
                     }
 
                     //записали альтернативу правую
@@ -242,7 +249,7 @@ namespace system_analysis
                                 matr[i, j] = "-1";
                             else
                             {
-                                matr[j, i] = (max - Convert.ToInt32(matr[i, j])).ToString();
+                                matr[i, j] = (max - Convert.ToInt32(matr[j, i])).ToString();
                             }
                         }
                     }
@@ -274,81 +281,6 @@ namespace system_analysis
             this.WndProc(ref m);
         }
 
-        // функция ПРОВЕРКА ЗНАЧЕНИЙ для КНОПКИ СОХРАНИТЬ 
-        private bool check_value(int r, int c)
-        {
-            int cc = 1;
-            if (c == 1)
-                cc = 2;
-            if (c == 2)
-                cc = 1;
-
-            string text = dataGridView1.Rows[r].Cells[c].Value.ToString();
-            if (text != "")// если введено что-то
-            {
-                int chislo = -1;
-                bool is_int = int.TryParse(text, out chislo);
-                if (is_int == true) // если введено целое число
-                {
-                    if (chislo >= 0 && chislo <= max)// если введено целое число в правильном интервале
-                    {
-                        edit_on = true;
-                        dataGridView1.EditMode = DataGridViewEditMode.EditProgrammatically;
-                        dataGridView1.Rows[r].Cells[cc].Value = max - chislo;
-                        dataGridView1.EditMode = DataGridViewEditMode.EditOnEnter;
-                        question a = q_list[r];
-                        if (c == 1)
-                        {
-                            a.res_A = chislo;
-                            a.res_B = max - chislo;
-                        }
-                        else if (c == 2)
-                        {
-                            a.res_A = max - chislo;
-                            a.res_B = chislo;
-                        }
-                        q_list[r] = a;
-                        change = true; // изменение засчитано
-                        dataGridView1.Rows[r].Cells[c].Style.BackColor = Color.FromName("ButtonHighlight"); // белый фон
-                        dataGridView1.Rows[r].Cells[c].Style.ForeColor = Color.FromName("Black"); // черный текст
-                        dataGridView1.Rows[r].Cells[cc].Style.BackColor = Color.FromName("ButtonHighlight"); // белый фон
-                        dataGridView1.Rows[r].Cells[cc].Style.ForeColor = Color.FromName("Black"); // черный текст
-                        return true;
-                    }
-                    else// если введено целое число НЕ в интервале
-                    {
-                        dataGridView1.Rows[r].Cells[c].Style.ForeColor = Color.FromName("Red"); // красный текст
-                        dataGridView1.Rows[r].Cells[c].Style.BackColor = Color.FromArgb(254, 254, 34); // желтый фон
-                        dataGridView1.Rows[r].Cells[cc].Style.ForeColor = Color.FromName("Red"); // красный текст
-                        dataGridView1.Rows[r].Cells[cc].Style.BackColor = Color.FromArgb(254, 254, 34); // желтый фон
-                        return false;
-                    }
-                }
-                else // если введено НЕ целое число
-                {
-                    dataGridView1.Rows[r].Cells[c].Style.ForeColor = Color.FromName("Red");// красный текст
-                    dataGridView1.Rows[r].Cells[c].Style.BackColor = Color.FromArgb(254, 254, 34); // желтый фон
-                    dataGridView1.Rows[r].Cells[cc].Style.ForeColor = Color.FromName("Red");// красный текст
-                    dataGridView1.Rows[r].Cells[cc].Style.BackColor = Color.FromArgb(254, 254, 34); // желтый фон
-                    return false;
-                }
-            }
-            else // если НЕ введено
-            {
-                dataGridView1.Rows[r].Cells[cc].Value = "";
-                question a = q_list[r];
-                a.res_A = -1;
-                a.res_B = -1;
-                q_list[r] = a;
-
-                dataGridView1.Rows[r].Cells[c].Style.BackColor = Color.FromName("ButtonHighlight"); // белый фон
-                dataGridView1.Rows[r].Cells[c].Style.ForeColor = Color.FromName("Black"); // черный текст
-                dataGridView1.Rows[r].Cells[cc].Style.BackColor = Color.FromName("ButtonHighlight"); // белый фон
-                dataGridView1.Rows[r].Cells[cc].Style.ForeColor = Color.FromName("Black"); // черный текст
-                return true; // НЕПОНЯТНО ВОТ НАДО ПОДУМАТЬ
-            }
-        }
-
         // кнопка СОХРАНИТЬ
         private void btn_save_Click(object sender, EventArgs e)
         {
@@ -358,9 +290,9 @@ namespace system_analysis
             {
                 //проверяем на пустоту 
                 int empty_count = 0;
-                for (int i = 0; i < q_count; i++) // ищем пустые ячейки
+                for (int i = 0; i < q_count; i++) // ищем пустые и НЕ желтые ячейки
                 {
-                    if (q_list[i].res_A == -1 || q_list[i].res_B == -1)
+                    if (q_list[i].res_A == -1 && dataGridView1.Rows[i].Cells[1].Style.BackColor != Color.FromArgb(254, 254, 34) && q_list[i].res_B == -1 && dataGridView1.Rows[i].Cells[2].Style.BackColor != Color.FromArgb(254, 254, 34))
                         empty_count++;
                 }
 
@@ -392,7 +324,7 @@ namespace system_analysis
 
                 }
                 // если не все клетки пустые, и чето где-то есть
-                else if (empty_count < q_count)
+                else
                 {
                     //проверяем на корректность
                     correct = true;
@@ -406,29 +338,79 @@ namespace system_analysis
 
                     if (correct == true)
                     {
-                        label2.BackColor = this.BackColor; // цвет label = цвет формы нейтральный
-                        label8.BackColor = this.BackColor;
+                        label3.BackColor = this.BackColor; // цвет label = цвет формы нейтральный
+                        label10.BackColor = this.BackColor; // цвет label = цвет формы нейтральный
+                        label11.BackColor = this.BackColor; // цвет label = цвет формы нейтральный
 
-                        // СОХРАНЯЕМ
-                        // сохраняем в файл matrix...
-                        save();
-                        //============================================
-                        // в форме эксперта обновляем данные на ней
-                        form.list_prob[form.N].exp[form.E].m4 = 1;  // опрос пройден
-                        form.save_group(); // сохраняем измененное в файл group...
-                        form.update(form.N, form.E);  // обновляем на 9 форме 
-                        //============================================
-                        this.Hide();  // СКРЫВАЕМ ФОРМУ пока MessageBox показывается 
-                        MessageBox.Show(
-                        "Изменения сохранены!",
-                        "Сохранение",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Information,
-                        MessageBoxDefaultButton.Button1,
-                        MessageBoxOptions.DefaultDesktopOnly);
-                        form.Show();
-                        form.TopMost = true; form.TopMost = false;
-                        this.Close();
+                        if(empty_count == 0)
+                        {
+                            // СОХРАНЯЕМ
+                            // сохраняем в файл matrix...
+
+                            save();
+                            //============================================
+                            // в форме эксперта обновляем данные на ней
+                            form.list_prob[form.N].exp[form.E].m4 = 1;  // опрос пройден
+                            form.save_group(); // сохраняем измененное в файл group...
+                            form.update(form.N, form.E);  // обновляем на 9 форме 
+                            //============================================
+                            this.Hide();  // СКРЫВАЕМ ФОРМУ пока MessageBox показывается 
+                            MessageBox.Show(
+                            "Изменения сохранены!",
+                            "Сохранение",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Information,
+                            MessageBoxDefaultButton.Button1,
+                            MessageBoxOptions.DefaultDesktopOnly);
+                            form.Show();
+                            form.TopMost = true; form.TopMost = false;
+                            this.Close();
+                        }
+                        else if (empty_count < q_count)
+                        {
+                            this.Hide();  // СКРЫВАЕМ ФОРМУ пока MessageBox показывается 
+                            DialogResult otvet =  MessageBox.Show(
+                            "Вы не прошли опрос до конца, есть не заполненные оценки!\n" +
+                            "Продолжить сохранение?\n" +
+                            "\"Да\" - сохранить данные и продолжить оценивание позже.\n" +
+                            "\"Нет\" - продолжить оценивание сейчас.",
+                            "Сохранение",
+                            MessageBoxButtons.YesNo,
+                            MessageBoxIcon.Information,
+                            MessageBoxDefaultButton.Button2,
+                            MessageBoxOptions.DefaultDesktopOnly);
+
+                            if(DialogResult.Yes == otvet)
+                            {
+                                // СОХРАНЯЕМ
+                                // сохраняем в файл matrix...
+
+                                save();
+                                //============================================
+                                // в форме эксперта обновляем данные на ней
+                                form.list_prob[form.N].exp[form.E].m4 = -1;  // опрос НЕ закончен
+                                form.save_group(); // сохраняем измененное в файл group...
+                                form.update(form.N, form.E);  // обновляем на 9 форме 
+                                //============================================
+                                this.Hide();  // СКРЫВАЕМ ФОРМУ пока MessageBox показывается 
+                                MessageBox.Show(
+                                "Изменения сохранены!",
+                                "Сохранение",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information,
+                                MessageBoxDefaultButton.Button2,
+                                MessageBoxOptions.DefaultDesktopOnly);
+                                form.Show();
+                                form.TopMost = true; form.TopMost = false;
+                                this.Close();
+                            }
+
+                            if (DialogResult.No == otvet)
+                            {
+                                this.Show();
+                                this.TopMost = true; this.TopMost = false;
+                            }
+                        }
                     }
                     else
                     {
@@ -625,12 +607,12 @@ namespace system_analysis
                 a.res_A = -1;
                 a.res_B = -1;
                 q_list[r] = a;
-
+                change = true; // изменение засчитано
                 dataGridView1.Rows[r].Cells[c].Style.BackColor = Color.FromName("ButtonHighlight"); // белый фон
                 dataGridView1.Rows[r].Cells[c].Style.ForeColor = Color.FromName("Black"); // черный текст
                 dataGridView1.Rows[r].Cells[cc].Style.BackColor = Color.FromName("ButtonHighlight"); // белый фон
                 dataGridView1.Rows[r].Cells[cc].Style.ForeColor = Color.FromName("Black"); // черный текст
-                return true; // НЕПОНЯТНО ВОТ НАДО ПОДУМАТЬ
+                return true;
             }
         }
 
