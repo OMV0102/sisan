@@ -44,6 +44,8 @@
             this.list_solution = new System.Windows.Forms.ListBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -269,10 +271,37 @@
             this.label3.ForeColor = System.Drawing.Color.Black;
             this.label3.Location = new System.Drawing.Point(54, 378);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(421, 19);
+            this.label3.Size = new System.Drawing.Size(55, 19);
             this.label3.TabIndex = 69;
-            this.label3.Text = "Сумма двух оценок в одной строке должна быть равна ";
+            this.label3.Text = "Сумма";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label3.Visible = false;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label10.ForeColor = System.Drawing.Color.Black;
+            this.label10.Location = new System.Drawing.Point(105, 378);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(216, 19);
+            this.label10.TabIndex = 78;
+            this.label10.Text = "двух оценок в одной строке";
+            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label10.Visible = false;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label11.ForeColor = System.Drawing.Color.Black;
+            this.label11.Location = new System.Drawing.Point(321, 378);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(158, 19);
+            this.label11.TabIndex = 79;
+            this.label11.Text = "должна быть равна ";
+            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label11.Visible = false;
             // 
             // Form13_full_pair
             // 
@@ -280,6 +309,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.button_back;
             this.ClientSize = new System.Drawing.Size(800, 686);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.label10);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.list_solution);
             this.Controls.Add(this.label9);
@@ -325,5 +356,7 @@
         public System.Windows.Forms.ListBox list_solution;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label11;
     }
 }

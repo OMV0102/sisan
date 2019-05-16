@@ -54,7 +54,7 @@ namespace system_analysis
             Form9_expert form = this.Owner as Form9_expert;
 
             label9.Text = "нужно распределить " + max + " баллов между двумя альтернативами.";
-            label3.Text += max + "!";
+            label11.Text += max + "!";
             label_problem.Text = form.problem; // проблему вывели в форму
             exp_count = form.list_prob[form.N].exp.Count();  // узнали сколько всего экспертов
             
@@ -357,7 +357,6 @@ namespace system_analysis
             if (change == true)
             {
                 //проверяем на пустоту 
-                // если все клетки стали пустыми то удаляем файл и статуст НЕ пройден делаем
                 int empty_count = 0;
                 for (int i = 0; i < q_count; i++) // ищем пустые ячейки
                 {
@@ -367,7 +366,7 @@ namespace system_analysis
 
                 if (empty_count == q_count)
                 {
-                    // если все клетки стали пустыми то удаляем файл
+                    // если все клетки стали пустыми то удаляем файл и статуст НЕ пройден делаем
                     FileInfo fileInf = new FileInfo(directory + "matrix" + form.num_problem + "m4e" + form1_main.num_expert + ".txt");
                     if (fileInf.Exists)
                         fileInf.Delete();
@@ -407,74 +406,49 @@ namespace system_analysis
 
                     if (correct == true)
                     {
-                        correct = true;
-                        for (int i = 0; i < sol_count; i++) // ищем НЕправильные ячейки
-                        {
-                            if (check_cell_value(i, 1) == false)
-                            {
-                                correct = false;
-                            }
-                        }
+                        label2.BackColor = this.BackColor; // цвет label = цвет формы нейтральный
+                        label8.BackColor = this.BackColor;
 
-                        if (correct == true)
-                        {
-                            label2.BackColor = this.BackColor; // цвет label = цвет формы нейтральный
-                            label8.BackColor = this.BackColor;
-
-                            // СОХРАНЯЕМ
-                            // сохраняем в файл matrix...
-                            save();
-                            //============================================
-                            // в форме эксперта обновляем данные на ней
-                            form.list_prob[form.N].exp[form.E].m4 = 1;  // опрос пройден
-                            form.save_group(); // сохраняем измененное в файл group...
-                            form.update(form.N, form.E);  // обновляем на 9 форме 
-                                                          //============================================
-                            this.Hide();  // СКРЫВАЕМ ФОРМУ пока MessageBox показывается 
-                            MessageBox.Show(
-                            "Изменения сохранены!",
-                            "Сохранение",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Information,
-                            MessageBoxDefaultButton.Button1,
-                            MessageBoxOptions.DefaultDesktopOnly);
-
-                            form.Show();
-                            form.TopMost = true; form.TopMost = false;
-                            this.Close();
-                        }
-                        else
-                        {
-                            dataGridView1.Rows[0].Cells[0].Selected = true;
-                            this.Hide(); // СКРЫВАЕМ ФОРМУ пока MessageBox показывается 
-                            DialogResult otvet = MessageBox.Show(
-                            "Все ячейки оценок должны быть заполнены \nчислами от 0 до " + max + "!\n",
-                            "Ошибка",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Error,
-                            MessageBoxDefaultButton.Button1,
-                            MessageBoxOptions.DefaultDesktopOnly);
-                            this.Show();
-                            label2.BackColor = Color.FromArgb(254, 254, 34); // желтый фон
-                            label8.BackColor = Color.FromArgb(254, 254, 34); // желтый фон
-                            this.TopMost = true; this.TopMost = false;
-                            this.TopMost = true; this.TopMost = false;
-                        }
+                        // СОХРАНЯЕМ
+                        // сохраняем в файл matrix...
+                        save();
+                        //============================================
+                        // в форме эксперта обновляем данные на ней
+                        form.list_prob[form.N].exp[form.E].m4 = 1;  // опрос пройден
+                        form.save_group(); // сохраняем измененное в файл group...
+                        form.update(form.N, form.E);  // обновляем на 9 форме 
+                        //============================================
+                        this.Hide();  // СКРЫВАЕМ ФОРМУ пока MessageBox показывается 
+                        MessageBox.Show(
+                        "Изменения сохранены!",
+                        "Сохранение",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information,
+                        MessageBoxDefaultButton.Button1,
+                        MessageBoxOptions.DefaultDesktopOnly);
+                        form.Show();
+                        form.TopMost = true; form.TopMost = false;
+                        this.Close();
                     }
                     else
                     {
                         dataGridView1.Rows[0].Cells[0].Selected = true;
                         this.Hide(); // СКРЫВАЕМ ФОРМУ пока MessageBox показывается 
                         DialogResult otvet = MessageBox.Show(
-                        "Все ячейки должны быть заполнены!\n" +
-                        "Если для альтернативы по вашему мнению оценка не нужна, впишите в ячейку ноль!\n",
+                        "Есть ячейки с некорректными значениями, они выделены желтым!\n" +
+                        "Уберите неправильное значение в желтых ячейках, либо укажите корректное значение!",
                         "Ошибка",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Error,
                         MessageBoxDefaultButton.Button1,
                         MessageBoxOptions.DefaultDesktopOnly);
                         this.Show();
+                        label3.Visible = true;
+                        label10.Visible = true;
+                        label11.Visible = true;
                         label3.BackColor = Color.FromArgb(254, 254, 34); // желтый фон
+                        label10.BackColor = Color.FromArgb(254, 254, 34); // желтый фон
+                        label11.BackColor = Color.FromArgb(254, 254, 34); // желтый фон
                         this.TopMost = true; this.TopMost = false;
 
                     }
