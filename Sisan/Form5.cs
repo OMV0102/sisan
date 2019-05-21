@@ -157,7 +157,7 @@ namespace system_analysis
                 }
                 if (pass == false)
                 {
-                    listBox1.Items.Clear();
+                    listBox0_alt.Items.Clear();
                     btn_matrix.Enabled = false;
                     MessageBox.Show(
                    "Прохождение опроса начато экспертом, но еще не закончено!",
@@ -227,7 +227,7 @@ namespace system_analysis
                     // Заполняем список по упорядоченным
                     for (int i = 0; i < sol_sort.Count; i++)
                     {
-                        listBox1.Items.Add(sol_sort[i]);
+                        listBox0_alt.Items.Add(sol_sort[i]);
                     }
 
                     for (int i = 0; i < sol_sort.Count; i++)
@@ -241,7 +241,7 @@ namespace system_analysis
             }
             else
             {
-                listBox1.Items.Clear();
+                listBox0_alt.Items.Clear();
                 btn_matrix.Enabled = false;
                 MessageBox.Show(
                 "Опрос по выбранной проблеме еще не пройден экспертом!",
@@ -329,7 +329,7 @@ namespace system_analysis
 
                 for (int i = 0; i < all.Count; i++)
                 {
-                    listBox1.Items.Add(all[i].A);
+                    listBox0_alt.Items.Add(all[i].A);
                     listBox3.Items.Add(all[i].wt.ToString());
                 }
             }
@@ -340,8 +340,6 @@ namespace system_analysis
             }
         }
             
-    
-
         // когда выбираем проблему в списке
         private void comboBox1_problems_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -349,7 +347,7 @@ namespace system_analysis
              sol_sort = new List<string>();
            
             flag = true;
-            listBox1.Items.Clear();
+            listBox0_alt.Items.Clear();
             listBox2.Items.Clear();
             listBox3.Items.Clear();
 
@@ -470,7 +468,7 @@ namespace system_analysis
             btn_matrix.Visible = false;
             label4.Visible = false;
             comboBox1.Visible = false;
-            listBox1.Items.Clear();
+            listBox0_alt.Items.Clear();
             btn_matrix.Enabled = false;
             string text = "";
             using (StreamReader sr = new StreamReader(directory + "problems.txt", System.Text.Encoding.UTF8))
