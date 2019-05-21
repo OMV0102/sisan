@@ -559,7 +559,7 @@ namespace system_analysis
                 {
                     if (chislo >= 0 && chislo <= max)// если введено целое число в правильном интервале
                     {
-                        edit_on = true;
+                        edit_on = true;// редактирование соседней ячеки идет идет, редактирование антициклическое
                         dataGridView1.EditMode = DataGridViewEditMode.EditProgrammatically;
                         dataGridView1.Rows[r].Cells[cc].Value = max - chislo;
                         dataGridView1.EditMode = DataGridViewEditMode.EditOnEnter;
@@ -602,6 +602,7 @@ namespace system_analysis
             }
             else // если НЕ введено
             {
+                edit_on = true; // редактирование соседней ячеки идет идет, редактирование антициклическое
                 dataGridView1.Rows[r].Cells[cc].Value = "";
                 question a = q_list[r];
                 a.res_A = -1;
@@ -645,7 +646,6 @@ namespace system_analysis
                     }
                 }
             }
-            edit_on = false;
             is_edit = false;
         }
 
@@ -662,7 +662,7 @@ namespace system_analysis
                 {
                     is_yellow = false;
                 }
-                edit_on = false;
+                edit_on = false; // редактирование разрешено, то есть заход в функцию проверки значений
                 // делаем нормальной, если тыкаем
                 dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.BackColor = Color.FromName("ButtonHighlight"); // белый фон
                 dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.ForeColor = Color.FromName("Black"); // черный текст
