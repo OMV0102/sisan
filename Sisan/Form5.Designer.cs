@@ -215,9 +215,9 @@
             this.listBox1_weight.FormattingEnabled = true;
             this.listBox1_weight.HorizontalScrollbar = true;
             this.listBox1_weight.ItemHeight = 19;
-            this.listBox1_weight.Location = new System.Drawing.Point(644, 118);
+            this.listBox1_weight.Location = new System.Drawing.Point(748, 118);
             this.listBox1_weight.Name = "listBox1_weight";
-            this.listBox1_weight.Size = new System.Drawing.Size(71, 213);
+            this.listBox1_weight.Size = new System.Drawing.Size(71, 175);
             this.listBox1_weight.TabIndex = 75;
             // 
             // label12
@@ -227,7 +227,7 @@
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label12.ForeColor = System.Drawing.Color.Black;
-            this.label12.Location = new System.Drawing.Point(434, 5);
+            this.label12.Location = new System.Drawing.Point(489, 5);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(284, 38);
             this.label12.TabIndex = 73;
@@ -244,7 +244,7 @@
             this.listBox1_alt.ItemHeight = 19;
             this.listBox1_alt.Location = new System.Drawing.Point(434, 118);
             this.listBox1_alt.Name = "listBox1_alt";
-            this.listBox1_alt.Size = new System.Drawing.Size(211, 213);
+            this.listBox1_alt.Size = new System.Drawing.Size(315, 175);
             this.listBox1_alt.TabIndex = 74;
             // 
             // label9
@@ -256,7 +256,7 @@
             this.label9.ForeColor = System.Drawing.Color.Black;
             this.label9.Location = new System.Drawing.Point(12, 94);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(315, 48);
+            this.label9.Size = new System.Drawing.Size(315, 25);
             this.label9.TabIndex = 72;
             this.label9.Text = "Альтернативы";
             // 
@@ -268,9 +268,9 @@
             this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(95, 59);
+            this.comboBox1.Location = new System.Drawing.Point(125, 59);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(198, 27);
+            this.comboBox1.Size = new System.Drawing.Size(232, 27);
             this.comboBox1.TabIndex = 70;
             // 
             // listBox0_weight
@@ -293,11 +293,11 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label3.ForeColor = System.Drawing.Color.Black;
-            this.label3.Location = new System.Drawing.Point(62, 5);
+            this.label3.Location = new System.Drawing.Point(86, 15);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(165, 38);
+            this.label3.Size = new System.Drawing.Size(224, 19);
             this.label3.TabIndex = 67;
-            this.label3.Text = "Метод\r\nпарных сравнений";
+            this.label3.Text = "Метод парных сравнений";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // listBox0_alt
@@ -320,7 +320,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label4.ForeColor = System.Drawing.Color.Black;
-            this.label4.Location = new System.Drawing.Point(13, 62);
+            this.label4.Location = new System.Drawing.Point(39, 62);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(83, 19);
             this.label4.TabIndex = 69;
@@ -396,7 +396,7 @@
             this.label8.ForeColor = System.Drawing.Color.Black;
             this.label8.Location = new System.Drawing.Point(326, 94);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(71, 48);
+            this.label8.Size = new System.Drawing.Size(71, 25);
             this.label8.TabIndex = 83;
             this.label8.Text = "Вес";
             // 
@@ -409,7 +409,7 @@
             this.label16.ForeColor = System.Drawing.Color.Black;
             this.label16.Location = new System.Drawing.Point(434, 94);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(211, 48);
+            this.label16.Size = new System.Drawing.Size(315, 25);
             this.label16.TabIndex = 84;
             this.label16.Text = "Альтернативы";
             // 
@@ -420,9 +420,9 @@
             this.label10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label10.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label10.ForeColor = System.Drawing.Color.Black;
-            this.label10.Location = new System.Drawing.Point(644, 94);
+            this.label10.Location = new System.Drawing.Point(748, 94);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(71, 48);
+            this.label10.Size = new System.Drawing.Size(71, 25);
             this.label10.TabIndex = 85;
             this.label10.Text = "Вес";
             // 
@@ -433,7 +433,7 @@
             this.label11.BackColor = System.Drawing.SystemColors.ControlDark;
             this.label11.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label11.ForeColor = System.Drawing.Color.Black;
-            this.label11.Location = new System.Drawing.Point(728, 0);
+            this.label11.Location = new System.Drawing.Point(850, 0);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(10, 339);
             this.label11.TabIndex = 86;
