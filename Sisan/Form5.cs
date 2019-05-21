@@ -348,7 +348,7 @@ namespace system_analysis
            
             flag = true;
             listBox0_alt.Items.Clear();
-            listBox2.Items.Clear();
+            listBox3_alt.Items.Clear();
             listBox3.Items.Clear();
 
             string selectedState = comboBox1_problems.SelectedItem.ToString();
@@ -367,7 +367,7 @@ namespace system_analysis
             // заполняем список с просто альтернативами
             for (int i = 0; i < sol_sort.Count; i++)
             {
-                listBox2.Items.Add(sol_sort[i]);
+                listBox3_alt.Items.Add(sol_sort[i]);
             }
 
             path = directory + "group" + NumbProblem + ".txt";
