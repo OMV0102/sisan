@@ -46,6 +46,12 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.listBox1_weight = new System.Windows.Forms.ListBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.listBox1_alt = new System.Windows.Forms.ListBox();
+            this.label13 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -162,6 +168,12 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.AutoScroll = true;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel1.Controls.Add(this.label13);
+            this.panel1.Controls.Add(this.label10);
+            this.panel1.Controls.Add(this.label11);
+            this.panel1.Controls.Add(this.listBox1_weight);
+            this.panel1.Controls.Add(this.label12);
+            this.panel1.Controls.Add(this.listBox1_alt);
             this.panel1.Controls.Add(this.label9);
             this.panel1.Controls.Add(this.label8);
             this.panel1.Controls.Add(this.comboBox1);
@@ -171,7 +183,7 @@
             this.panel1.Controls.Add(this.label4);
             this.panel1.Location = new System.Drawing.Point(12, 322);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1076, 336);
+            this.panel1.Size = new System.Drawing.Size(1076, 335);
             this.panel1.TabIndex = 63;
             // 
             // label3
@@ -291,6 +303,79 @@
             this.label9.Text = "Альтернативы";
             this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label10.ForeColor = System.Drawing.Color.Black;
+            this.label10.Location = new System.Drawing.Point(306, 96);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(131, 19);
+            this.label10.TabIndex = 79;
+            this.label10.Text = "Альтернативы";
+            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label11.ForeColor = System.Drawing.Color.Black;
+            this.label11.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label11.Location = new System.Drawing.Point(514, 96);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(38, 19);
+            this.label11.TabIndex = 78;
+            this.label11.Text = "Вес";
+            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // listBox1_weight
+            // 
+            this.listBox1_weight.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.listBox1_weight.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.listBox1_weight.FormattingEnabled = true;
+            this.listBox1_weight.HorizontalScrollbar = true;
+            this.listBox1_weight.ItemHeight = 19;
+            this.listBox1_weight.Location = new System.Drawing.Point(516, 118);
+            this.listBox1_weight.Name = "listBox1_weight";
+            this.listBox1_weight.Size = new System.Drawing.Size(71, 194);
+            this.listBox1_weight.TabIndex = 75;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label12.ForeColor = System.Drawing.Color.Black;
+            this.label12.Location = new System.Drawing.Point(306, 8);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(284, 38);
+            this.label12.TabIndex = 73;
+            this.label12.Text = "Метод\r\nвзвешенных экспертных оценок";
+            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // listBox1_alt
+            // 
+            this.listBox1_alt.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.listBox1_alt.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.listBox1_alt.FormattingEnabled = true;
+            this.listBox1_alt.HorizontalScrollbar = true;
+            this.listBox1_alt.ItemHeight = 19;
+            this.listBox1_alt.Location = new System.Drawing.Point(306, 118);
+            this.listBox1_alt.Name = "listBox1_alt";
+            this.listBox1_alt.Size = new System.Drawing.Size(211, 194);
+            this.listBox1_alt.TabIndex = 74;
+            // 
+            // label13
+            // 
+            this.label13.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.label13.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label13.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label13.ForeColor = System.Drawing.Color.Black;
+            this.label13.Location = new System.Drawing.Point(290, -2);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(10, 333);
+            this.label13.TabIndex = 80;
+            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // form5_analyst_report
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -342,5 +427,11 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label11;
+        public System.Windows.Forms.ListBox listBox1_weight;
+        private System.Windows.Forms.Label label12;
+        public System.Windows.Forms.ListBox listBox1_alt;
     }
 }
