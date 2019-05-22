@@ -36,7 +36,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btn_matrix4 = new System.Windows.Forms.Button();
             this.label27 = new System.Windows.Forms.Label();
             this.listBox4_weight = new System.Windows.Forms.ListBox();
             this.label25 = new System.Windows.Forms.Label();
@@ -70,7 +70,7 @@
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.comboBox_exp = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
@@ -78,6 +78,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.lbl_status = new System.Windows.Forms.Label();
+            this.lbl_notprob = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -191,8 +192,7 @@
             // 
             this.panel1.AutoScroll = true;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel1.Controls.Add(this.lbl_status);
-            this.panel1.Controls.Add(this.button1);
+            this.panel1.Controls.Add(this.btn_matrix4);
             this.panel1.Controls.Add(this.label27);
             this.panel1.Controls.Add(this.listBox4_weight);
             this.panel1.Controls.Add(this.label25);
@@ -226,7 +226,7 @@
             this.panel1.Controls.Add(this.label13);
             this.panel1.Controls.Add(this.label12);
             this.panel1.Controls.Add(this.label9);
-            this.panel1.Controls.Add(this.comboBox1);
+            this.panel1.Controls.Add(this.comboBox_exp);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.label15);
@@ -236,23 +236,23 @@
             this.panel1.TabIndex = 63;
             this.panel1.Visible = false;
             // 
-            // button1
+            // btn_matrix4
             // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(118)))), ((int)(((byte)(168)))));
-            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkOrange;
-            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.SandyBrown;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button1.Location = new System.Drawing.Point(1833, 303);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(168, 30);
-            this.button1.TabIndex = 108;
-            this.button1.TabStop = false;
-            this.button1.Text = "Показать матрицу";
-            this.button1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.button1.UseVisualStyleBackColor = false;
+            this.btn_matrix4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(118)))), ((int)(((byte)(168)))));
+            this.btn_matrix4.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_matrix4.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btn_matrix4.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkOrange;
+            this.btn_matrix4.FlatAppearance.MouseOverBackColor = System.Drawing.Color.SandyBrown;
+            this.btn_matrix4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_matrix4.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btn_matrix4.Location = new System.Drawing.Point(1833, 303);
+            this.btn_matrix4.Name = "btn_matrix4";
+            this.btn_matrix4.Size = new System.Drawing.Size(168, 30);
+            this.btn_matrix4.TabIndex = 108;
+            this.btn_matrix4.TabStop = false;
+            this.btn_matrix4.Text = "Показать матрицу";
+            this.btn_matrix4.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btn_matrix4.UseVisualStyleBackColor = false;
             // 
             // label27
             // 
@@ -651,16 +651,16 @@
             this.label9.TabIndex = 72;
             this.label9.Text = "Альтернативы";
             // 
-            // comboBox1
+            // comboBox_exp
             // 
-            this.comboBox1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(125, 59);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(232, 27);
-            this.comboBox1.TabIndex = 70;
+            this.comboBox_exp.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.comboBox_exp.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_exp.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.comboBox_exp.FormattingEnabled = true;
+            this.comboBox_exp.Location = new System.Drawing.Point(125, 59);
+            this.comboBox_exp.Name = "comboBox_exp";
+            this.comboBox_exp.Size = new System.Drawing.Size(232, 27);
+            this.comboBox_exp.TabIndex = 70;
             // 
             // label3
             // 
@@ -737,11 +737,22 @@
             this.lbl_status.AutoSize = true;
             this.lbl_status.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lbl_status.ForeColor = System.Drawing.Color.Red;
-            this.lbl_status.Location = new System.Drawing.Point(200, 119);
+            this.lbl_status.Location = new System.Drawing.Point(213, 400);
             this.lbl_status.Name = "lbl_status";
             this.lbl_status.Size = new System.Drawing.Size(670, 23);
             this.lbl_status.TabIndex = 67;
             this.lbl_status.Text = "По данной проблеме еще ни один эксперт не прошел оценивание!";
+            // 
+            // lbl_notprob
+            // 
+            this.lbl_notprob.AutoSize = true;
+            this.lbl_notprob.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lbl_notprob.ForeColor = System.Drawing.Color.Red;
+            this.lbl_notprob.Location = new System.Drawing.Point(419, 138);
+            this.lbl_notprob.Name = "lbl_notprob";
+            this.lbl_notprob.Size = new System.Drawing.Size(251, 23);
+            this.lbl_notprob.TabIndex = 68;
+            this.lbl_notprob.Text = "Проблемы отсутствуют!";
             // 
             // form5_analyst_report
             // 
@@ -750,6 +761,8 @@
             this.BackColor = System.Drawing.SystemColors.Control;
             this.CancelButton = this.button_back;
             this.ClientSize = new System.Drawing.Size(1100, 670);
+            this.Controls.Add(this.lbl_notprob);
+            this.Controls.Add(this.lbl_status);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.list_solution);
@@ -791,7 +804,7 @@
         public System.Windows.Forms.ListBox listBox0_alt;
         public System.Windows.Forms.ListBox listBox0_weight;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox comboBox_exp;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label13;
         public System.Windows.Forms.ListBox listBox1_weight;
@@ -819,12 +832,13 @@
         private System.Windows.Forms.Label label21;
         public System.Windows.Forms.ListBox listBox3_alt;
         private System.Windows.Forms.Label label22;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btn_matrix4;
         private System.Windows.Forms.Label label27;
         public System.Windows.Forms.ListBox listBox4_weight;
         private System.Windows.Forms.Label label25;
         public System.Windows.Forms.ListBox listBox4_alt;
         private System.Windows.Forms.Label label26;
         private System.Windows.Forms.Label lbl_status;
+        private System.Windows.Forms.Label lbl_notprob;
     }
 }

@@ -247,6 +247,7 @@ namespace system_analysis
                         exp_list = new List<exp>();
                         while ((text = sr.ReadLine()) != null)
                         {
+                            a = new exp();
                             words = text.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
                             // записали номер эксперта
                             a.n_id = Convert.ToInt32(words[0]);
@@ -255,7 +256,7 @@ namespace system_analysis
                                 a.fio = words[1] + " " + words[2];
                             else
                                 a.fio = words[1] + " " + words[2] + " " + words[3];
-                            // запомнили имя
+                            // запомнили фамилию
                             a.surname = words[1];
                             // запомнили имя
                             a.name = words[2];
