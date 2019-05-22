@@ -55,13 +55,9 @@ namespace system_analysis
         // кнопка ЗАКРЫТЬ окно
         private void button_cross_Click(object sender, EventArgs e)
         {
-            // обеспечивает закрытие всего приложения нажатии на крестик
-            // вызываем главную форму приложения, главная форма всегда = 0
-            Form form = Application.OpenForms[0];
-            form.Close();  // Закрываем главную форму, а значит закрываем вообще всё
-
+            button_back_Click(null, null);
         }
-
+        //=================================================================
         public static string NumbProblem = "";
         public static DataTable matrix = new DataTable("Матрица");
 
@@ -158,7 +154,7 @@ namespace system_analysis
                 if (pass == false)
                 {
                     listBox0_alt.Items.Clear();
-                    btn_matrix.Enabled = false;
+                    btn_matrix0.Enabled = false;
                     MessageBox.Show(
                    "Прохождение опроса начато экспертом, но еще не закончено!",
                    "",
@@ -233,16 +229,16 @@ namespace system_analysis
                     for (int i = 0; i < sol_sort.Count; i++)
                     {
                         //listBox3.Items.Add((Math.Round(C[i], 4)));
-                        listBox3.Items.Add((Math.Round(C[i], 4)));
+                        //listBox3.Items.Add((Math.Round(C[i], 4)));
                     }
 
-                    btn_matrix.Enabled = true;
+                    btn_matrix0.Enabled = true;
                 }
             }
             else
             {
                 listBox0_alt.Items.Clear();
-                btn_matrix.Enabled = false;
+                btn_matrix0.Enabled = false;
                 MessageBox.Show(
                 "Опрос по выбранной проблеме еще не пройден экспертом!",
                 "",
@@ -330,7 +326,7 @@ namespace system_analysis
                 for (int i = 0; i < all.Count; i++)
                 {
                     listBox0_alt.Items.Add(all[i].A);
-                    listBox3.Items.Add(all[i].wt.ToString());
+                    //listBox3.Items.Add(all[i].wt.ToString());
                 }
             }
             else
@@ -349,7 +345,7 @@ namespace system_analysis
             flag = true;
             listBox0_alt.Items.Clear();
             listBox3_alt.Items.Clear();
-            listBox3.Items.Clear();
+            //listBox3.Items.Clear();
 
             string selectedState = comboBox1_problems.SelectedItem.ToString();
             String[] words = selectedState.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
@@ -427,7 +423,6 @@ namespace system_analysis
 
                 if(method == 0)
                 {
-                    btn_matrix.Visible = true;
                     label4.Visible = true;
                     comboBox1.Visible = true;
                     for (int i = 0; i < list_experts.Count; i++)
@@ -438,7 +433,6 @@ namespace system_analysis
                 
                 if(method == 1)
                 {
-                    btn_matrix.Visible = false;
                     label4.Visible = false;
                     comboBox1.Visible = false;
                     result_method_1();
@@ -453,7 +447,7 @@ namespace system_analysis
         }
 
         // кнопка ПОКАЗАТЬ МАТРИЦУ 
-        private void btn_matrix_Click(object sender, EventArgs e)
+        private void btn_matrix0_Click(object sender, EventArgs e)
         {
             // показываем форму с введенной матрицей
             Form form_matrix = new form6_matrix();
@@ -465,11 +459,11 @@ namespace system_analysis
         // при ЗАГРУЗКЕ ФОРМЫ
         private void form5_analyst_report_Load(object sender, EventArgs e)
         {
-            btn_matrix.Visible = false;
+            /*btn_matrix0.Visible = false;
             label4.Visible = false;
             comboBox1.Visible = false;
             listBox0_alt.Items.Clear();
-            btn_matrix.Enabled = false;
+            btn_matrix0.Enabled = false;
             string text = "";
             using (StreamReader sr = new StreamReader(directory + "problems.txt", System.Text.Encoding.UTF8))
             {
@@ -487,14 +481,8 @@ namespace system_analysis
                         comboBox1_problems.Items.Add(line);
                     }
                 }
-            }
+            }*/
 
-        }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            string name = comboBox1.SelectedItem.ToString();
-            result_method_0();
         }
     }
 }
