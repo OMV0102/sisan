@@ -203,10 +203,10 @@ namespace system_analysis
 
                 dataGridView1.DataSource = table; // данные таблицы в датагрид засунули
 
-                dataGridView1.Columns[0].Width = 264; // ширина столбца левой альтерантивы
+                dataGridView1.Columns[0].Width = 260; // ширина столбца левой альтерантивы
                 dataGridView1.Columns[1].Width = 80; // ширина столбца оценки для левой альтернативы
                 dataGridView1.Columns[2].Width = 80; // ширина столбца оценки для правой альтернативы
-                dataGridView1.Columns[3].Width = 263; // ширина столбца правой альтерантивы
+                dataGridView1.Columns[3].Width = 261; // ширина столбца правой альтерантивы
 
                 // шобы столбцы нельзя было сортировать
                 for (int j = 0; j < 4; j++)

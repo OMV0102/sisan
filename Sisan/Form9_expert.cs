@@ -27,7 +27,7 @@ namespace system_analysis
 
        // ЛК ЭКСПЕРТА
 
-        public struct st_exp //  структура для хранения группы экспертов к прооблеме
+        public struct st_exp //  структура для хранения группы экспертов к проблеме
         {
             public int id_exp;
             public string comp;
@@ -117,7 +117,6 @@ namespace system_analysis
             string text = "";
             string[] words;
             st_problem a;
-            a.exp = new st_exp[1]; // выделили ПАМЯТЬ под массив экспертов (пока что 1)
             FileInfo fileInf = new FileInfo(directory + "problems.txt");
             if (fileInf.Exists)  // если файл существует вообще
             {
@@ -144,7 +143,7 @@ namespace system_analysis
                         a.txt_prob = "";
                         for (int j = 2; j < words.Count(); j++)
                             a.txt_prob += words[j] + " ";
-
+                        a.exp = new st_exp[1]; // выделили ПАМЯТЬ под массив экспертов (пока что 1)
                         // теперь читаем group
                         int N = 0;
                         FileInfo fileInf1 = new FileInfo(directory + "group" + a.num_prob + ".txt");
@@ -161,7 +160,7 @@ namespace system_analysis
 
                         }
 
-                        if (N != 0)
+                        if (N != 0)  // Количество экспертов
                         {
                             using (StreamReader sr1 = new StreamReader(directory + "group" + a.num_prob + ".txt", System.Text.Encoding.UTF8))
                             {
@@ -203,7 +202,7 @@ namespace system_analysis
             // тут допустим считали проблемы
             // и group
             // теперь просматриваем все, что считали
-            // добавляемв  комбобокс только те проблемы, которые можно смотреть эксперту
+            // добавляем в  комбобокс только те проблемы, которые можно смотреть эксперту
 
             if (list_prob.Count > 0) //если наш могучий список не пуст
             {

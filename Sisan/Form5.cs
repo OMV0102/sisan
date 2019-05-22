@@ -57,15 +57,10 @@ namespace system_analysis
         {
             button_back_Click(null, null);
         }
-        //=================================================================
-        public static string NumbProblem = "";
-        public static DataTable matrix = new DataTable("Матрица");
 
-        
-        public static int count = 0;
-        public bool pass = true;
-        public bool flag = true;
-        private int method = -1;
+
+        //=================================================================
+
 
         public struct experts
         {
