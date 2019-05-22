@@ -60,35 +60,115 @@ namespace system_analysis
 
 
         //=================================================================
-        public struct metod1 //  структура для хранения группы экспертов к проблеме
+
+        //public string problem; // текст проблемы
+        //public int num_problem; // уникальный номер проблемы (ID)
+        //public int N = -1; //порядковый номер проблемы в list_prob
+        //public int E = -1; //порядковый номер эксперта в list_prob
+        public int alter_count = 0;   // количество альтернатив для выбранной проблемы
+
+        //======================================================================
+
+        #region СТРУКТУРЫ
+        struct exp //  структура для хранения одного эксперта
+        {
+            public int id_exp;
+            public string surname;
+            public string name;
+            public string otch;
+            public string fio; // сокращенное ФИО
+            public string password;
+            public string position; // Должность
+        }
+        List<exp> exp_list;
+        //======================================================================
+        public struct metod0_inf //  структура для хранения информации о методе 0
+        {
+            public int id_exp;
+            public int[,] matr;
+            public int[] ves;
+        }
+
+        public struct metod0 //  структура для хранения метода 0
+        {
+            public int status;
+            public metod0_inf[] inf;
+        }
+        //========================================================================
+        public struct metod1_inf //  структура для хранения информации о методе 1
         {
             public int id_exp;
             public string comp;
-            public int m0;
-            public int m1;
-            public int m2;
-            public int m3;
-            public int m4;
+            public int[] marks;
         }
 
+        public struct metod1 //  структура для хранения метода 1
+        {
+            public int mstatus;
+            public metod1_inf[] inf;
+            public int[] ves;
+        }
+        //========================================================================
+        public struct metod2_inf //  структура для хранения информации о методе 2
+        {
+            public int id_exp;
+            public int[] marks;
+        }
+
+        public struct metod2 //  структура для хранения метода 2
+        {
+            public int status;
+            public metod2_inf[] inf;
+            public int[] ves;
+        }
+        //========================================================================
+        public struct metod3_inf //  структура для хранения информации о методе 3
+        {
+            public int id_exp;
+            public int[] marks;
+        }
+
+        public struct metod3 //  структура для хранения метода 3
+        {
+            public int status;
+            public metod3_inf[] inf;
+            public int[] v_matr;
+            public int[] ves;
+        }
+        //========================================================================
+        public struct metod4_inf //  структура для хранения информации о методе 4
+        {
+            public int id_exp;
+            public int[,] matr;
+        }
+
+        public struct metod4 //  структура для хранения метода 4
+        {
+            public int status;
+            public metod0_inf[] inf;
+            public int[] ves;
+        }
+        //========================================================================
         public struct st_problem //  структура для хранения одной проблемы
         {
             public int num_prob;
             public bool open_close;
             public string txt_prob;
-            public st_exp[] exp;
+            metod0 m0;
+            metod1 m1;
+            metod2 m2;
+            metod3 m3;
+            metod4 m4;
+
         }
         public List<st_problem> list_prob;
-
-        public string problem; // текст проблемы
-        public int num_problem; // уникальный номер проблемы (ID)
-        public int N = -1; //порядковый номер проблемы в list_prob
-        public int E = -1; //порядковый номер эксперта в list_prob
+        #endregion
 
         // при ЗАГРУЗКЕ ФОРМЫ
         private void form5_analyst_report_Load(object sender, EventArgs e)
         {
-            /*btn_matrix0.Visible = false;
+            
+            btn_matrix0.Visible = false;
             label4.Visible = false;
             comboBox1.Visible = false;
             listBox0_alt.Items.Clear();
@@ -110,7 +190,7 @@ namespace system_analysis
                         comboBox1_problems.Items.Add(line);
                     }
                 }
-            }*/
+            }
 
         }
 

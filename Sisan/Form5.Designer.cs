@@ -77,6 +77,7 @@
             this.list_solution = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.lbl_status = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -151,7 +152,6 @@
             this.comboBox1_problems.Name = "comboBox1_problems";
             this.comboBox1_problems.Size = new System.Drawing.Size(855, 27);
             this.comboBox1_problems.TabIndex = 45;
-            this.comboBox1_problems.SelectedIndexChanged += new System.EventHandler(this.comboBox1_problems_SelectedIndexChanged);
             // 
             // label7
             // 
@@ -191,6 +191,7 @@
             // 
             this.panel1.AutoScroll = true;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel1.Controls.Add(this.lbl_status);
             this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.label27);
             this.panel1.Controls.Add(this.listBox4_weight);
@@ -233,6 +234,7 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1076, 358);
             this.panel1.TabIndex = 63;
+            this.panel1.Visible = false;
             // 
             // button1
             // 
@@ -730,6 +732,17 @@
             this.label2.TabIndex = 66;
             this.label2.Text = "Результаты оценивания";
             // 
+            // lbl_status
+            // 
+            this.lbl_status.AutoSize = true;
+            this.lbl_status.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lbl_status.ForeColor = System.Drawing.Color.Red;
+            this.lbl_status.Location = new System.Drawing.Point(200, 119);
+            this.lbl_status.Name = "lbl_status";
+            this.lbl_status.Size = new System.Drawing.Size(670, 23);
+            this.lbl_status.TabIndex = 67;
+            this.lbl_status.Text = "По данной проблеме еще ни один эксперт не прошел оценивание!";
+            // 
             // form5_analyst_report
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -812,5 +825,6 @@
         private System.Windows.Forms.Label label25;
         public System.Windows.Forms.ListBox listBox4_alt;
         private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.Label lbl_status;
     }
 }

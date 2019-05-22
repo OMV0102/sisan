@@ -54,7 +54,7 @@ namespace system_analysis
 
 
 
-                    dataGridView1.DataSource = form5_analyst_report.matrix; // выводим матрицу в dataGridView
+                   // dataGridView1.DataSource = form5_analyst_report.matrix; // выводим матрицу в dataGridView
 
                     foreach (DataGridViewColumn column in dataGridView1.Columns)
                     {
@@ -62,10 +62,10 @@ namespace system_analysis
                     }
 
                     //ширина столбцов
-                    for (int i = 0; i < form5_analyst_report.count; i++)
+                    /*for (int i = 0; i < form5_analyst_report.count; i++)
                     {
                         dataGridView1.Columns[i].Width = 35;
-                    }
+                    }*/
 
 
                 
