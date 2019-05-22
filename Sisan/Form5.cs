@@ -60,7 +60,7 @@ namespace system_analysis
 
 
         //=================================================================
-        public struct st_exp //  структура для хранения группы экспертов к проблеме
+        public struct metod1 //  структура для хранения группы экспертов к проблеме
         {
             public int id_exp;
             public string comp;
