@@ -88,6 +88,20 @@ namespace system_analysis
         }
         public List<solutions> alter_list;
         //======================================================================
+        public struct st_problem //  структура для хранения одной проблемы
+        {
+            public int num_prob;
+            public bool open_close;
+            public string txt_prob;
+            public int status_prob;
+            public metod0 m0;
+            public metod1 m1;
+            public metod2 m2;
+            public metod3 m3;
+            public metod4 m4;
+        }
+        public List<st_problem> list_prob;
+        //======================================================================
         public struct metod0_inf //  структура для хранения информации о методе 0
         {
             public int id_exp;
@@ -160,19 +174,7 @@ namespace system_analysis
             public int[] ves;
         }
         //========================================================================
-        public struct st_problem //  структура для хранения одной проблемы
-        {
-            public int num_prob;
-            public bool open_close;
-            public string txt_prob;
-            public int status_prob;
-            public metod0 m0;
-            public metod1 m1;
-            public metod2 m2;
-            public metod3 m3;
-            public metod4 m4;
-        }
-        public List<st_problem> list_prob;
+       
         #endregion
 
         // при ЗАГРУЗКЕ ФОРМЫ
