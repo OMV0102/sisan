@@ -65,6 +65,7 @@ namespace system_analysis
         //public int E = -1; //порядковый номер эксперта в list_prob
         public int prob_count = 0;   // количество проблем
         public int alter_count = 0;   // количество альтернатив для выбранной проблемы
+        public int exp_count = 0;   // количество экспертов для выбранной проблемы
         //======================================================================
 
         #region СТРУКТУРЫ
@@ -109,7 +110,7 @@ namespace system_analysis
 
         public struct metod1 //  структура для хранения метода 1
         {
-            public int mstatus;
+            public int status;
             public metod1_inf[] inf;
             public int[] ves;
         }
@@ -159,11 +160,12 @@ namespace system_analysis
             public int num_prob;
             public bool open_close;
             public string txt_prob;
-            metod0 m0;
-            metod1 m1;
-            metod2 m2;
-            metod3 m3;
-            metod4 m4;
+            public int status_prob;
+            public metod0 m0;
+            public metod1 m1;
+            public metod2 m2;
+            public metod3 m3;
+            public metod4 m4;
         }
         public List<st_problem> list_prob;
         #endregion
@@ -252,11 +254,11 @@ namespace system_analysis
                     prob.num_prob = Convert.ToInt32(words[0]);
                     prob.open_close = Convert.ToBoolean(words[1]);
                     prob.txt_prob = words[2];
-                    // теперь читаем альтернативы
+                    // =========== проблему считали ===========
                     text = "";
-                    FileInfo fileInf3 = new FileInfo(directory + "solutions" + prob.num_prob + ".txt");
                     line = "";
                     alter_count = 0;
+                    FileInfo fileInf3 = new FileInfo(directory + "solutions" + prob.num_prob + ".txt");
                     if (fileInf3.Exists)  // если файл существует вообще
                     {
                         using (StreamReader sr1 = new StreamReader(directory + "solutions" + prob.num_prob + ".txt", System.Text.Encoding.UTF8))
@@ -264,28 +266,51 @@ namespace system_analysis
                             while ((line = sr.ReadLine()) != null)
                                 alter_count++;
                         }
-
-                        using (StreamReader sr1 = new StreamReader(directory + "solutions" + prob.num_prob + ".txt", System.Text.Encoding.UTF8))
-                        {
-                            text = sr1.ReadToEnd();
-                        }
                     }
 
-                    if (text.Length > 0)
+                    if (alter_count > 0)
                     {
-                        StreamReader sr1 = new StreamReader(directory + "solutions" + prob.num_prob + ".txt", System.Text.Encoding.UTF8);
-                        line = "";
-                        sol.alter = new string[alter_count];
-                        sol.id_prob = prob.num_prob;
-                        int i = 0;
-                        while ((line = sr.ReadLine()) != null)
+                        using (StreamReader sr1 = new StreamReader(directory + "solutions" + prob.num_prob + ".txt", System.Text.Encoding.UTF8))
                         {
-                            sol.alter[i] = line;
-                            i++;
+                            line = "";
+                            sol.alter = new string[alter_count];
+                            sol.id_prob = prob.num_prob;
+                            int i = 0;
+                            while ((line = sr.ReadLine()) != null)
+                            {
+                                sol.alter[i] = line;
+                                i++;
+                            } 
                         }
                         alter_list.Add(sol);
                     }
+                    // ========= альтернативы считали ==============
 
+                    // теперь считываем group
+                    text = "";
+                    line = "";
+                    exp_count = 0;
+                    FileInfo fileInf4 = new FileInfo(directory + "group" + prob.num_prob + ".txt");
+                    if (fileInf4.Exists)  // если файл существует вообще
+                    {
+                        using (StreamReader sr1 = new StreamReader(directory + "group" + prob.num_prob + ".txt", System.Text.Encoding.UTF8))
+                        {
+                            while ((line = sr.ReadLine()) != null)
+                                exp_count++;
+                        }
+                    }
+
+                    if(exp_count > 0)
+                    {
+
+
+                    }
+                    else
+                    {
+                        prob.status_prob = -1;
+                        
+                    }
+                    list_prob.Add(prob);
                 }
             }
             else
