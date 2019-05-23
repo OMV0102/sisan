@@ -105,8 +105,8 @@ namespace system_analysis
         public struct metod0_inf //  структура для хранения информации о методе 0
         {
             public int id_exp;
-            public int[,] matr;
-            public int[] ves;
+            public float[,] matr;
+            public float[] ves;
             public int status;
         }
 
@@ -121,20 +121,20 @@ namespace system_analysis
             public int id_exp;
             public string comp;
             public int status;
-            public int[] marks;
+            public float[] marks;
         }
 
         public struct metod1 //  структура для хранения метода 1
         {
             public int status;
             public metod1_inf[] inf;
-            public int[] ves;
+            public float[] ves;
         }
         //========================================================================
         public struct metod2_inf //  структура для хранения информации о методе 2
         {
             public int id_exp;
-            public int[] marks;
+            public float[] marks;
             public int status;
         }
 
@@ -142,13 +142,13 @@ namespace system_analysis
         {
             public int status;
             public metod2_inf[] inf;
-            public int[] ves;
+            public float[] ves;
         }
         //========================================================================
         public struct metod3_inf //  структура для хранения информации о методе 3
         {
             public int id_exp;
-            public int[] marks;
+            public float[] marks;
             public int status;
         }
 
@@ -156,22 +156,22 @@ namespace system_analysis
         {
             public int status;
             public metod3_inf[] inf;
-            public int[] v_matr;
-            public int[] ves;
+            public float[] v_matr;
+            public float[] ves;
         }
         //========================================================================
         public struct metod4_inf //  структура для хранения информации о методе 4
         {
             public int id_exp;
-            public int[,] matr;
+            public float[,] matr;
             public int status;
         }
 
         public struct metod4 //  структура для хранения метода 4
         {
             public int status;
-            public metod0_inf[] inf;
-            public int[] ves;
+            public metod4_inf[] inf;
+            public float[] ves;
         }
         //========================================================================
        
@@ -310,14 +310,38 @@ namespace system_analysis
                     if(exp_count > 0)
                     {
                         line = "";
+                        // ===== выделили память для каждого метода размером с кол-во экспертов
+                        prob.m0.inf = new metod0_inf[exp_count];
+                        prob.m1.inf = new metod1_inf[exp_count];
+                        prob.m2.inf = new metod2_inf[exp_count];
+                        prob.m3.inf = new metod3_inf[exp_count];
+                        prob.m4.inf = new metod4_inf[exp_count];
+                        // ====================================================================
                         using (StreamReader sr1 = new StreamReader(directory + "group" + prob.num_prob + ".txt", System.Text.Encoding.UTF8))
                         {
-                            exp_count = 0;
-                            while ((line = sr.ReadLine()) != null)
+                            for (int i = 0; i < exp_count; i++)
                             {
-                                words = line.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                                prob.m0.inf = new metod0_inf[exp_count + 1];
+                                if ((line = sr.ReadLine()) != null)
+                                {
+                                    words = line.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                                    // ==== Запоминаем для метода 0 ===================
+                                    prob.m0.inf[i].id_exp = Convert.ToInt32(words[0]);
+                                    prob.m0.inf[i].status = Convert.ToInt32(words[2]);
+                                    if(prob.m0.inf[i].status == 1)
+                                    {
+                                        prob.m0.inf[i].matr = new float[alter_count, alter_count + 1];
+                                        prob.m0.inf[i].ves = new float[alter_count];
+                                        using (StreamReader sr2 = new StreamReader(directory + "matrix" + prob.num_prob + "m0e" + prob.m0.inf[i].id_exp + ".txt", System.Text.Encoding.UTF8))
+                                        {
+                                            while ((line = sr.ReadLine()) != null)
+                                            {
 
+                                            }
+                                        }
+
+                                    }
+                                    // ==== Метод 0 запомнили =======================
+                                }
                             }
                         }
                     }
