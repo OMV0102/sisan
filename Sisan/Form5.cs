@@ -319,25 +319,60 @@ namespace system_analysis
                         // ====================================================================
                         using (StreamReader sr1 = new StreamReader(directory + "group" + prob.num_prob + ".txt", System.Text.Encoding.UTF8))
                         {
-                            for (int i = 0; i < exp_count; i++)
+                            for (int k = 0; k < exp_count; k++)
                             {
                                 if ((line = sr.ReadLine()) != null)
                                 {
                                     words = line.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
                                     // ==== Запоминаем для метода 0 ===================
-                                    prob.m0.inf[i].id_exp = Convert.ToInt32(words[0]);
-                                    prob.m0.inf[i].status = Convert.ToInt32(words[2]);
-                                    if(prob.m0.inf[i].status == 1)
+                                    prob.m0.inf[k].id_exp = Convert.ToInt32(words[0]);
+                                    prob.m0.inf[k].status = Convert.ToInt32(words[2]);
+                                    if(prob.m0.inf[k].status == 1)
                                     {
-                                        prob.m0.inf[i].matr = new float[alter_count, alter_count + 1];
-                                        prob.m0.inf[i].ves = new float[alter_count];
-                                        using (StreamReader sr2 = new StreamReader(directory + "matrix" + prob.num_prob + "m0e" + prob.m0.inf[i].id_exp + ".txt", System.Text.Encoding.UTF8))
+                                        prob.m0.inf[k].matr = new float[alter_count, alter_count];
+                                        prob.m0.inf[k].ves = new float[alter_count];
+                                        if (File.Exists(directory + "matrix" + prob.num_prob + "m0e" + prob.m0.inf[k].id_exp + ".txt") == true)
                                         {
-                                            while ((line = sr.ReadLine()) != null)
+                                            using (StreamReader sr2 = new StreamReader(directory + "matrix" + prob.num_prob + "m0e" + prob.m0.inf[k].id_exp + ".txt", System.Text.Encoding.UTF8))
                                             {
-
+                                                string[] words1;
+                                                for (int i = 0; i < alter_count; i++)
+                                                {
+                                                    if ((line = sr.ReadLine()) != null)
+                                                    {
+                                                        words1 = line.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                                                        prob.m0.inf[k].ves[i] = 0;
+                                                        for (int j = 0; j < alter_count; j++)
+                                                        {
+                                                            prob.m0.inf[k].matr[i, j] = Convert.ToSingle(words1[j]);
+                                                            if (prob.m0.inf[k].matr[i, j] == -1)
+                                                            {
+                                                                prob.m0.inf[k].status = -1;
+                                                            }
+                                                            prob.m0.inf[k].ves[i] += prob.m0.inf[k].matr[i, j];
+                                                        }
+                                                    }
+                                                }
+                                                if (prob.m0.inf[k].status == 1)
+                                                {
+                                                    float sum = 0;
+                                                    for (int i = 0; i < alter_count; i++)
+                                                        for (int j = 0; j < alter_count; j++)
+                                                        {
+                                                            if (i != j)
+                                                            {
+                                                                prob.m0.inf[k].ves[i] += prob.m0.inf[k].matr[i, j];
+                                                                sum += prob.m0.inf[k].matr[i, j];
+                                                            }
+                                                        }
+                                                    for (int i = 0; i < alter_count; i++)
+                                                        prob.m0.inf[k].ves[i] /= sum;
+                                                }
                                             }
                                         }
+                                    }
+                                    else if (prob.m0.inf[k].status == -1)
+                                    {
 
                                     }
                                     // ==== Метод 0 запомнили =======================

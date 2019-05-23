@@ -29,7 +29,6 @@ namespace system_analysis
 
         private bool correct = false; // флаг правильных значений ячеек
         private bool change = false; // флаг внесенных изменений
-        private bool end = false; // флаг пустых значений ячеек и что все ответы получены
         private bool is_edit; // флаг, что после редактирования не проверяем повторно ячейку
         private int exp_count = 0; // количество экспертов
         private int sol_count; // количество альтернатив про выбранной проблеме
@@ -57,8 +56,7 @@ namespace system_analysis
             label11.Text += max + "!";
             label_problem.Text = form.problem; // проблему вывели в форму
             exp_count = form.list_prob[form.N].exp.Count();  // узнали сколько всего экспертов
-            
-            bool exists;
+
             // читаем альтернатвы
             string text = "";
             FileInfo fileInf = new FileInfo(directory + "solutions" + form.num_problem + ".txt");
@@ -117,7 +115,6 @@ namespace system_analysis
                 fileInf = new FileInfo(directory + "matrix" + form.num_problem + "m4e" + form1_main.num_expert + ".txt");
                 if (fileInf.Exists)
                 {
-                    exists = true;  // уже есть какие то результаты
                     string[] words;
                     string[,] matr = new string[sol_count, sol_count];
                     using (StreamReader sr = new StreamReader(directory + "matrix" + form.num_problem + "m4e" + form1_main.num_expert + ".txt", System.Text.Encoding.UTF8))
@@ -152,10 +149,6 @@ namespace system_analysis
                         }
                     }
 
-                }
-                else
-                {
-                    exists = false;  //результатов (матрицы) НЕТ
                 }
 
                 DataTable table = new DataTable("Альтернативы и оценки");
