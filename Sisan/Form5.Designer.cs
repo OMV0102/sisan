@@ -234,7 +234,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1076, 358);
             this.panel1.TabIndex = 63;
-            this.panel1.Visible = false;
             // 
             // btn_matrix4
             // 

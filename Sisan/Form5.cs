@@ -93,6 +93,7 @@ namespace system_analysis
             public int id_exp;
             public int[,] matr;
             public int[] ves;
+            public int status;
         }
 
         public struct metod0 //  структура для хранения метода 0
@@ -105,6 +106,7 @@ namespace system_analysis
         {
             public int id_exp;
             public string comp;
+            public int status;
             public int[] marks;
         }
 
@@ -119,6 +121,7 @@ namespace system_analysis
         {
             public int id_exp;
             public int[] marks;
+            public int status;
         }
 
         public struct metod2 //  структура для хранения метода 2
@@ -132,6 +135,7 @@ namespace system_analysis
         {
             public int id_exp;
             public int[] marks;
+            public int status;
         }
 
         public struct metod3 //  структура для хранения метода 3
@@ -146,6 +150,7 @@ namespace system_analysis
         {
             public int id_exp;
             public int[,] matr;
+            public int status;
         }
 
         public struct metod4 //  структура для хранения метода 4
@@ -302,13 +307,21 @@ namespace system_analysis
 
                     if(exp_count > 0)
                     {
+                        line = "";
+                        using (StreamReader sr1 = new StreamReader(directory + "group" + prob.num_prob + ".txt", System.Text.Encoding.UTF8))
+                        {
+                            exp_count = 0;
+                            while ((line = sr.ReadLine()) != null)
+                            {
+                                words = line.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                                prob.m0.inf = new metod0_inf[exp_count + 1];
 
-
+                            }
+                        }
                     }
                     else
                     {
-                        prob.status_prob = -1;
-                        
+                        prob.status_prob = 0;
                     }
                     list_prob.Add(prob);
                 }
