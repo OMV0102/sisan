@@ -727,10 +727,12 @@ namespace system_analysis
                                 }
                             }
                         }
+                        // ВЫБИРАЕМ нулевого эксперта в комбоксе экспертов метода 0
                         if(comboBox_exp.Items.Count > 0)
                             comboBox_exp.SelectedIndex = 0;
                         //=======================
                         // ===== МЕТОД 1 =============
+                        update_m1();
                         //=======================
                     }
                     else if(notmarks == true)
@@ -753,8 +755,6 @@ namespace system_analysis
 
             }
         }
-        
-        
 
         // ВЫБОР ЭКСПЕРТА В МЕТОДЕ 0 (ПАРНЫХ СРАВНЕНИЙ)
         private void comboBox_exp_SelectedIndexChanged(object sender, EventArgs e)
@@ -787,12 +787,77 @@ namespace system_analysis
                     // если нашли индекс эксперта по его id в списке проблем метода 0
                     if (index_exp >= 0 && index_exp < exp_count)
                     {
+                        if (prob_list[index].m0.inf[index_exp].status == 1)
+                        {
+                            //===================================
+                            label8.Visible = true;
+                            label9.Visible = true;
+                            listBox0_alt.Visible = true;
+                            listBox0_ves.Visible = true;
+                            btn_matrix0.Visible = true;
+                            lbl_m0_notmarks.Visible = false;
+                            //================================
+                            listBox0_alt.Items.Clear();
+                            listBox0_ves.Items.Clear();
+                            // записали альтернативы и веса в вспомогательный массив
+                            string alt_temp = "";
+                            int ves_temp = 0;
+                            string[] alter = new string[alter_count];
+                            int[] ves = new int[alter_count];
 
+                            for (int i = 0; i < alter_count; i++)
+                            {
+                                alter[i] = alter_list[index].alters[i];
+                                ves[i] = Convert.ToInt32(prob_list[index].m0.inf[index_exp].ves[i]);
+                            }
+                            // сортируем альтернативы
+                            // сортировка взята с https://metanit.com/sharp/tutorial/2.7.php
+                            for (int i = 0; i < alter_count - 1; i++)
+                            {
+                                for (int j = i + 1; j < alter_count; j++)
+                                {
+                                    if (ves[i] < ves[j])
+                                    {
+                                        alt_temp = alter[i];
+                                        ves_temp = ves[i];
+                                        alter[i] = alter[j];
+                                        ves[i] = ves[j];
+                                        alter[j] = alt_temp;
+                                        ves[j] = ves_temp;
+                                    }
+                                }
+                            }
+                            // выводим в listbox0_alt и listbox0_ves
+                            for (int i = 0; i < alter_count; i++)
+                            {
+                                listBox0_alt.Items.Add(alter[i]);
+                                listBox0_ves.Items.Add(ves[i]);
+                            }
+                        }
+                        else
+                        {
+                            //===================================
+                            // эксперт еще не оценил альтерн
+ативы методом 0
+                            label8.Visible = false;
+                            label9.Visible = false;
+                            listBox0_alt.Visible = false;
+                            listBox0_ves.Visible = false;
+                            btn_matrix0.Visible = false;
+                            lbl_m0_notmarks.Visible = true;
+                            //================================
+                        }
                     }
                 }
             }
         }
-        
+
+        // ВЫВОД РЕЗУЛЬТАТОВ МЕТОДА 1 
+        public void update_m1()
+        {
+
+        }
+
         // кнопка ПОКАЗАТЬ МАТРИЦУ 0
         private void btn_matrix0_Click(object sender, EventArgs e)
         {

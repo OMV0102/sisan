@@ -82,6 +82,14 @@ namespace system_analysis
                 button_expert_Click(null, null);
             }
         }
+
+        // при ЗАГРУЗКЕ ПРИЛОЖЕНИЯ
+        private void form1_main_Load(object sender, EventArgs e)
+        {
+
+            //string a = global_class.path;
+            //string b = global_class.s;
+        }
     }
 
     public static class global_class  // ---ГЛОБАЛЬНЫЙ КЛАСС---
@@ -89,5 +97,7 @@ namespace system_analysis
         // ПУТЬ К ОСНОВНОМУ РАБОЧЕМУ КАТАЛОГУ
         // ЕСЛИ МЕНЯТЬ ПУТЬ, ТО ТОЛЬКО ТУТ
         public static string main_directory = @"C:\expert_marks\";
+        //public static string path = System.Reflection.Assembly.GetExecutingAssembly().Location;
+        //public static string s = Environment.CurrentDirectory;
     }
 }
