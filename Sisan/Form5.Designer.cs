@@ -66,7 +66,7 @@
             this.listBox0_weight = new System.Windows.Forms.ListBox();
             this.label8 = new System.Windows.Forms.Label();
             this.listBox0_alt = new System.Windows.Forms.ListBox();
-            this.label14 = new System.Windows.Forms.Label();
+            this.lbl_statm1 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -77,8 +77,13 @@
             this.list_solution = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.lbl_status = new System.Windows.Forms.Label();
+            this.lbl_notmarks = new System.Windows.Forms.Label();
             this.lbl_notprob = new System.Windows.Forms.Label();
+            this.lbl_notexp = new System.Windows.Forms.Label();
+            this.lbl_statm2 = new System.Windows.Forms.Label();
+            this.lbl_statm3 = new System.Windows.Forms.Label();
+            this.lbl_statm4 = new System.Windows.Forms.Label();
+            this.lbl_statm0 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -193,6 +198,10 @@
             // 
             this.panel1.AutoScroll = true;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel1.Controls.Add(this.lbl_statm0);
+            this.panel1.Controls.Add(this.lbl_statm4);
+            this.panel1.Controls.Add(this.lbl_statm3);
+            this.panel1.Controls.Add(this.lbl_statm2);
             this.panel1.Controls.Add(this.btn_matrix4);
             this.panel1.Controls.Add(this.label27);
             this.panel1.Controls.Add(this.listBox4_weight);
@@ -223,7 +232,7 @@
             this.panel1.Controls.Add(this.listBox0_weight);
             this.panel1.Controls.Add(this.label8);
             this.panel1.Controls.Add(this.listBox0_alt);
-            this.panel1.Controls.Add(this.label14);
+            this.panel1.Controls.Add(this.lbl_statm1);
             this.panel1.Controls.Add(this.label13);
             this.panel1.Controls.Add(this.label12);
             this.panel1.Controls.Add(this.label9);
@@ -605,17 +614,17 @@
             this.listBox0_alt.Size = new System.Drawing.Size(315, 175);
             this.listBox0_alt.TabIndex = 67;
             // 
-            // label14
+            // lbl_statm1
             // 
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label14.ForeColor = System.Drawing.Color.Black;
-            this.label14.Location = new System.Drawing.Point(433, 51);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(289, 38);
-            this.label14.TabIndex = 81;
-            this.label14.Text = "Ранжирование на основе оценок\r\n от ";
-            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lbl_statm1.AutoSize = true;
+            this.lbl_statm1.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lbl_statm1.ForeColor = System.Drawing.Color.Black;
+            this.lbl_statm1.Location = new System.Drawing.Point(433, 51);
+            this.lbl_statm1.Name = "lbl_statm1";
+            this.lbl_statm1.Size = new System.Drawing.Size(335, 38);
+            this.lbl_statm1.TabIndex = 81;
+            this.lbl_statm1.Text = "Ранжирование альтернатив на основе\r\n оценок  ";
+            this.lbl_statm1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label13
             // 
@@ -661,6 +670,7 @@
             this.comboBox_exp.Name = "comboBox_exp";
             this.comboBox_exp.Size = new System.Drawing.Size(232, 27);
             this.comboBox_exp.TabIndex = 70;
+            this.comboBox_exp.SelectedIndexChanged += new System.EventHandler(this.comboBox_exp_SelectedIndexChanged);
             // 
             // label3
             // 
@@ -732,16 +742,16 @@
             this.label2.TabIndex = 66;
             this.label2.Text = "Результаты оценивания";
             // 
-            // lbl_status
+            // lbl_notmarks
             // 
-            this.lbl_status.AutoSize = true;
-            this.lbl_status.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lbl_status.ForeColor = System.Drawing.Color.Red;
-            this.lbl_status.Location = new System.Drawing.Point(213, 400);
-            this.lbl_status.Name = "lbl_status";
-            this.lbl_status.Size = new System.Drawing.Size(670, 23);
-            this.lbl_status.TabIndex = 67;
-            this.lbl_status.Text = "По данной проблеме еще ни один эксперт не прошел оценивание!";
+            this.lbl_notmarks.AutoSize = true;
+            this.lbl_notmarks.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lbl_notmarks.ForeColor = System.Drawing.Color.Red;
+            this.lbl_notmarks.Location = new System.Drawing.Point(218, 400);
+            this.lbl_notmarks.Name = "lbl_notmarks";
+            this.lbl_notmarks.Size = new System.Drawing.Size(670, 23);
+            this.lbl_notmarks.TabIndex = 67;
+            this.lbl_notmarks.Text = "По данной проблеме еще ни один эксперт не прошел оценивание!";
             // 
             // lbl_notprob
             // 
@@ -755,6 +765,67 @@
             this.lbl_notprob.Text = "Проблемы отсутствуют!";
             this.lbl_notprob.Visible = false;
             // 
+            // lbl_notexp
+            // 
+            this.lbl_notexp.AutoSize = true;
+            this.lbl_notexp.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lbl_notexp.ForeColor = System.Drawing.Color.Red;
+            this.lbl_notexp.Location = new System.Drawing.Point(348, 400);
+            this.lbl_notexp.Name = "lbl_notexp";
+            this.lbl_notexp.Size = new System.Drawing.Size(463, 23);
+            this.lbl_notexp.TabIndex = 69;
+            this.lbl_notexp.Text = "По данной проблеме не назначены эксперты!";
+            this.lbl_notexp.Visible = false;
+            // 
+            // lbl_statm2
+            // 
+            this.lbl_statm2.AutoSize = true;
+            this.lbl_statm2.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lbl_statm2.ForeColor = System.Drawing.Color.Black;
+            this.lbl_statm2.Location = new System.Drawing.Point(853, 51);
+            this.lbl_statm2.Name = "lbl_statm2";
+            this.lbl_statm2.Size = new System.Drawing.Size(335, 38);
+            this.lbl_statm2.TabIndex = 109;
+            this.lbl_statm2.Text = "Ранжирование альтернатив на основе\r\n оценок  ";
+            this.lbl_statm2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lbl_statm3
+            // 
+            this.lbl_statm3.AutoSize = true;
+            this.lbl_statm3.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lbl_statm3.ForeColor = System.Drawing.Color.Black;
+            this.lbl_statm3.Location = new System.Drawing.Point(1278, 51);
+            this.lbl_statm3.Name = "lbl_statm3";
+            this.lbl_statm3.Size = new System.Drawing.Size(335, 38);
+            this.lbl_statm3.TabIndex = 110;
+            this.lbl_statm3.Text = "Ранжирование альтернатив на основе\r\n оценок  ";
+            this.lbl_statm3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lbl_statm4
+            // 
+            this.lbl_statm4.AutoSize = true;
+            this.lbl_statm4.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lbl_statm4.ForeColor = System.Drawing.Color.Black;
+            this.lbl_statm4.Location = new System.Drawing.Point(1703, 51);
+            this.lbl_statm4.Name = "lbl_statm4";
+            this.lbl_statm4.Size = new System.Drawing.Size(335, 38);
+            this.lbl_statm4.TabIndex = 111;
+            this.lbl_statm4.Text = "Ранжирование альтернатив на основе\r\n оценок  ";
+            this.lbl_statm4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lbl_statm0
+            // 
+            this.lbl_statm0.AutoSize = true;
+            this.lbl_statm0.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lbl_statm0.ForeColor = System.Drawing.Color.Red;
+            this.lbl_statm0.Location = new System.Drawing.Point(55, 171);
+            this.lbl_statm0.Name = "lbl_statm0";
+            this.lbl_statm0.Size = new System.Drawing.Size(302, 69);
+            this.lbl_statm0.TabIndex = 70;
+            this.lbl_statm0.Text = "Выбранный эксперт\r\nеще не оценил альтернативы\r\nэтим методом!";
+            this.lbl_statm0.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbl_statm0.Visible = false;
+            // 
             // form5_analyst_report
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -762,8 +833,9 @@
             this.BackColor = System.Drawing.SystemColors.Control;
             this.CancelButton = this.button_back;
             this.ClientSize = new System.Drawing.Size(1100, 670);
+            this.Controls.Add(this.lbl_notexp);
             this.Controls.Add(this.lbl_notprob);
-            this.Controls.Add(this.lbl_status);
+            this.Controls.Add(this.lbl_notmarks);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.list_solution);
@@ -811,7 +883,7 @@
         public System.Windows.Forms.ListBox listBox1_weight;
         private System.Windows.Forms.Label label12;
         public System.Windows.Forms.ListBox listBox1_alt;
-        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label lbl_statm1;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label10;
@@ -839,7 +911,12 @@
         private System.Windows.Forms.Label label25;
         public System.Windows.Forms.ListBox listBox4_alt;
         private System.Windows.Forms.Label label26;
-        private System.Windows.Forms.Label lbl_status;
+        private System.Windows.Forms.Label lbl_notmarks;
         private System.Windows.Forms.Label lbl_notprob;
+        private System.Windows.Forms.Label lbl_notexp;
+        private System.Windows.Forms.Label lbl_statm4;
+        private System.Windows.Forms.Label lbl_statm3;
+        private System.Windows.Forms.Label lbl_statm2;
+        private System.Windows.Forms.Label lbl_statm0;
     }
 }

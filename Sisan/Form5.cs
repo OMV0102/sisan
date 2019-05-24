@@ -67,6 +67,8 @@ namespace system_analysis
         st_problem prob; // вспомогательная переменная для добавления проблемы
         public int alter_count = 0;   // количество альтернатив для выбранной проблемы
         public int exp_count = 0;   // количество экспертов для выбранной проблемы
+        public int index = -1; // индекс проблемы при выборе комобобокса проблемы
+        public int index_exp = -1;  // индекс эксперта при выборе комобобокса экспертов в методе 0
         //======================================================================
 
         #region СТРУКТУРЫ
@@ -85,7 +87,7 @@ namespace system_analysis
         public struct solutions //  структура для хранения альтернатив
         {
             public int id_prob;
-            public string[] alter;
+            public string[] alters;
         }
         public List<solutions> alter_list;
         //======================================================================
@@ -181,7 +183,7 @@ namespace system_analysis
         // при ЗАГРУЗКЕ ФОРМЫ
         private void form5_analyst_report_Load(object sender, EventArgs e)
         {
-            lbl_status.Visible = false;
+            lbl_notmarks.Visible = false;
             btn_matrix0.Visible = false;
             btn_matrix1.Visible = false;
             btn_matrix2.Visible = false;
@@ -284,13 +286,15 @@ namespace system_analysis
                             using (StreamReader sr1 = new StreamReader(directory + "solutions" + prob.num_prob + ".txt", System.Text.Encoding.UTF8))
                             {
                                 line = "";
-                                sol.alter = new string[alter_count];
+                                sol.alters = new string[alter_count];
                                 sol.id_prob = prob.num_prob;
                                 int i = 0;
+                                int n = 1;
                                 while ((line = sr1.ReadLine()) != null)
                                 {
-                                    sol.alter[i] = line;
+                                    sol.alters[i] = n + ". " + line;
                                     i++;
+                                    n++;
                                 }
                             }
                             alter_list.Add(sol);
@@ -672,11 +676,120 @@ namespace system_analysis
         // ВЫБОР ПРОБЛЕМЫ в comboBox_problems
         private void comboBox_problems_SelectedIndexChanged(object sender, EventArgs e)
         {
-            int index = comboBox_problems.SelectedIndex;
+            index = comboBox_problems.SelectedIndex;
             if (index >= 0 && index < prob_count)
             {
+                exp_count = prob_list[index].status_prob;
+                alter_count = alter_list[index].alters.Count();
+                //===== ВЫВОДИМ АЛЬТЕРНАТИВЫ ======
+                list_solution.Items.Clear();
+                for (int i = 0; i < alter_count; i++)
+                {
+                    list_solution.Items.Add(alter_list[index].alters[i]);
+                }
+                //=================================
 
+                if (prob_list[index].status_prob > 0)
+                {
+                    //================================
+                    lbl_notexp.Visible = false;
+                    label2.Visible = true;
+                    panel1.Visible = true;
+                    //================================
+                    bool notmarks = true;
+                    for (int i = 0; i < exp_count; i++)
+                    {
+                        if (prob_list[index].m0.inf[i].status != 0 || prob_list[index].m1.inf[i].status != 0)
+                            notmarks = false;
+                        if (prob_list[index].m2.inf[i].status != 0 || prob_list[index].m3.inf[i].status != 0 || prob_list[index].m4.inf[i].status != 0)
+                            notmarks = false;
+                    }
 
+                    if(notmarks == false) // если оценки по проблеме хоть какие то есть
+                    {
+                        //================================
+                        lbl_notmarks.Visible = false;
+                        label2.Visible = true;
+                        panel1.Visible = true;
+                        //================================
+                        // ТУТ ВЫВОДИМ РЕЗУЛЬТАТЫ
+
+                        // ===== МЕТОД 0 =============
+                        // по id эксперта в списке проблем ищем эксперта в списке экспертов 
+                        comboBox_exp.Items.Clear();
+                        for (int k = 0; k < exp_count; k++)
+                        {
+                            for (int i = 0; i < exp_list.Count; i++)
+                            {
+                                if (prob_list[index].m0.inf[k].id_exp == exp_list[i].id_exp)
+                                {
+                                    comboBox_exp.Items.Add(exp_list[i].fio);
+                                }
+                            }
+                        }
+                        if(comboBox_exp.Items.Count > 0)
+                            comboBox_exp.SelectedIndex = 0;
+                        //=======================
+                        // ===== МЕТОД 1 =============
+                        //=======================
+                    }
+                    else if(notmarks == true)
+                    {
+                        //================================
+                        lbl_notmarks.Visible = true;
+                        label2.Visible = false;
+                        panel1.Visible = false;
+                        //================================
+                    }
+                }
+                else if (prob_list[index].status_prob == 0)
+                {
+                    //================================
+                    lbl_notexp.Visible = true;
+                    label2.Visible = false;
+                    panel1.Visible = false;
+                    //================================
+                }
+
+            }
+        }
+        
+        
+
+        // ВЫБОР ЭКСПЕРТА В МЕТОДЕ 0 (ПАРНЫХ СРАВНЕНИЙ)
+        private void comboBox_exp_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            index_exp = comboBox_exp.SelectedIndex;
+            if (index_exp >= 0 && index_exp < exp_count)
+            {
+                string exp_fio = comboBox_exp.SelectedItem.ToString();
+                int id_exp = -1;
+                // ищем id эксперта в списке экспертов по его фио
+                for (int i = 0; i < exp_list.Count; i++)
+                {
+                    if (exp_fio == exp_list[i].fio)
+                    {
+                        id_exp = exp_list[i].id_exp;
+                    }
+                }
+                // если нашли id
+                if (id_exp != -1)
+                {
+                    index_exp = -1;
+                    // ищем в списке проблем в методе 0 эксперта по найдненному id
+                    for (int i = 0; i < exp_count; i++)
+                    {
+                        if (prob_list[index].m0.inf[i].id_exp == id_exp)
+                        {
+                            index_exp = i;
+                        }
+                    }
+                    // если нашли индекс эксперта по его id в списке проблем метода 0
+                    if (index_exp >= 0 && index_exp < exp_count)
+                    {
+
+                    }
+                }
             }
         }
         
