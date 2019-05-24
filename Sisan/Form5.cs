@@ -64,6 +64,7 @@ namespace system_analysis
         //public int N = -1; //порядковый номер проблемы в list_prob
         //public int E = -1; //порядковый номер эксперта в list_prob
         public int prob_count = 0;   // количество проблем
+        st_problem prob; // вспомогательная переменная для добавления проблемы
         public int alter_count = 0;   // количество альтернатив для выбранной проблемы
         public int exp_count = 0;   // количество экспертов для выбранной проблемы
         //======================================================================
@@ -112,14 +113,14 @@ namespace system_analysis
 
         public struct metod0 //  структура для хранения метода 0
         {
-            public int status;
+            public int status;   // по факту не используется в данном методе
             public metod0_inf[] inf;
         }
         //========================================================================
         public struct metod1_inf //  структура для хранения информации о методе 1
         {
             public int id_exp;
-            public string comp;
+            public float comp;
             public int status;
             public float[] marks;
         }
@@ -156,7 +157,7 @@ namespace system_analysis
         {
             public int status;
             public metod3_inf[] inf;
-            public float[] v_matr;
+            public float[] matr_mod;
             public float[] ves;
         }
         //========================================================================
@@ -250,141 +251,105 @@ namespace system_analysis
             if (text.Length > 0)
             {
                 lbl_notprob.Visible = false;
-                StreamReader sr = new StreamReader(directory + "problems.txt", System.Text.Encoding.UTF8);
-                string line = "";
-                list_prob = new List<st_problem>();
-                while ((line = sr.ReadLine()) != null)
+                using (StreamReader sr = new StreamReader(directory + "problems.txt", System.Text.Encoding.UTF8))
                 {
-                    // считываем проблему
-                    words = line.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                    st_problem prob = new st_problem();
-                    prob.num_prob = Convert.ToInt32(words[0]);
-                    prob.open_close = Convert.ToBoolean(words[1]);
-                    prob.txt_prob = words[2];
-                    // =========== проблему считали ===========
-                    text = "";
-                    line = "";
-                    alter_count = 0;
-                    FileInfo fileInf3 = new FileInfo(directory + "solutions" + prob.num_prob + ".txt");
-                    if (fileInf3.Exists)  // если файл существует вообще
+                    string line = "";
+                    list_prob = new List<st_problem>();
+                    while ((line = sr.ReadLine()) != null)
                     {
-                        using (StreamReader sr1 = new StreamReader(directory + "solutions" + prob.num_prob + ".txt", System.Text.Encoding.UTF8))
+                        // считываем проблему
+                        words = line.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                        prob = new st_problem();
+                        prob.num_prob = Convert.ToInt32(words[0]);
+                        prob.open_close = Convert.ToBoolean(words[1]);
+                        prob.txt_prob = words[2];
+                        // =========== проблему считали ===========
+                        text = "";
+                        line = "";
+                        alter_count = 0;
+                        FileInfo fileInf3 = new FileInfo(directory + "solutions" + prob.num_prob + ".txt");
+                        if (fileInf3.Exists)  // если файл существует вообще
                         {
-                            while ((line = sr.ReadLine()) != null)
-                                alter_count++;
+                            using (StreamReader sr1 = new StreamReader(directory + "solutions" + prob.num_prob + ".txt", System.Text.Encoding.UTF8))
+                            {
+                                while ((line = sr.ReadLine()) != null)
+                                    alter_count++;
+                            }
                         }
-                    }
 
-                    if (alter_count > 0)
-                    {
-                        using (StreamReader sr1 = new StreamReader(directory + "solutions" + prob.num_prob + ".txt", System.Text.Encoding.UTF8))
+                        if (alter_count > 0)
+                        {
+                            using (StreamReader sr1 = new StreamReader(directory + "solutions" + prob.num_prob + ".txt", System.Text.Encoding.UTF8))
+                            {
+                                line = "";
+                                sol.alter = new string[alter_count];
+                                sol.id_prob = prob.num_prob;
+                                int i = 0;
+                                while ((line = sr.ReadLine()) != null)
+                                {
+                                    sol.alter[i] = line;
+                                    i++;
+                                }
+                            }
+                            alter_list.Add(sol);
+                        }
+                        // ========= альтернативы считали ==============
+
+                        // теперь считываем group
+                        text = "";
+                        line = "";
+                        exp_count = 0;
+                        FileInfo fileInf4 = new FileInfo(directory + "group" + prob.num_prob + ".txt");
+                        if (fileInf4.Exists)  // если файл существует вообще
+                        {
+                            using (StreamReader sr1 = new StreamReader(directory + "group" + prob.num_prob + ".txt", System.Text.Encoding.UTF8))
+                            {
+                                while ((line = sr.ReadLine()) != null)
+                                    exp_count++;
+                            }
+                        }
+
+                        if (exp_count > 0)
                         {
                             line = "";
-                            sol.alter = new string[alter_count];
-                            sol.id_prob = prob.num_prob;
-                            int i = 0;
-                            while ((line = sr.ReadLine()) != null)
+                            // ===== выделили память для каждого метода размером с кол-во экспертов exp_count
+                            prob.m0.inf = new metod0_inf[exp_count];
+                            prob.m1.inf = new metod1_inf[exp_count];
+                            prob.m2.inf = new metod2_inf[exp_count];
+                            prob.m3.inf = new metod3_inf[exp_count];
+                            prob.m4.inf = new metod4_inf[exp_count];
+                            // ====================================================================
+                            using (StreamReader sr1 = new StreamReader(directory + "group" + prob.num_prob + ".txt", System.Text.Encoding.UTF8))
                             {
-                                sol.alter[i] = line;
-                                i++;
-                            } 
-                        }
-                        alter_list.Add(sol);
-                    }
-                    // ========= альтернативы считали ==============
-
-                    // теперь считываем group
-                    text = "";
-                    line = "";
-                    exp_count = 0;
-                    FileInfo fileInf4 = new FileInfo(directory + "group" + prob.num_prob + ".txt");
-                    if (fileInf4.Exists)  // если файл существует вообще
-                    {
-                        using (StreamReader sr1 = new StreamReader(directory + "group" + prob.num_prob + ".txt", System.Text.Encoding.UTF8))
-                        {
-                            while ((line = sr.ReadLine()) != null)
-                                exp_count++;
-                        }
-                    }
-
-                    if(exp_count > 0)
-                    {
-                        line = "";
-                        // ===== выделили память для каждого метода размером с кол-во экспертов
-                        prob.m0.inf = new metod0_inf[exp_count];
-                        prob.m1.inf = new metod1_inf[exp_count];
-                        prob.m2.inf = new metod2_inf[exp_count];
-                        prob.m3.inf = new metod3_inf[exp_count];
-                        prob.m4.inf = new metod4_inf[exp_count];
-                        // ====================================================================
-                        using (StreamReader sr1 = new StreamReader(directory + "group" + prob.num_prob + ".txt", System.Text.Encoding.UTF8))
-                        {
-                            for (int k = 0; k < exp_count; k++)
-                            {
-                                if ((line = sr.ReadLine()) != null)
+                                for (int k = 0; k < exp_count; k++)
                                 {
-                                    words = line.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                                    // ==== Запоминаем для метода 0 ===================
-                                    prob.m0.inf[k].id_exp = Convert.ToInt32(words[0]);
-                                    prob.m0.inf[k].status = Convert.ToInt32(words[2]);
-                                    if(prob.m0.inf[k].status == 1)
+                                    if ((line = sr1.ReadLine()) != null)
                                     {
-                                        prob.m0.inf[k].matr = new float[alter_count, alter_count];
-                                        prob.m0.inf[k].ves = new float[alter_count];
-                                        if (File.Exists(directory + "matrix" + prob.num_prob + "m0e" + prob.m0.inf[k].id_exp + ".txt") == true)
-                                        {
-                                            using (StreamReader sr2 = new StreamReader(directory + "matrix" + prob.num_prob + "m0e" + prob.m0.inf[k].id_exp + ".txt", System.Text.Encoding.UTF8))
-                                            {
-                                                string[] words1;
-                                                for (int i = 0; i < alter_count; i++)
-                                                {
-                                                    if ((line = sr.ReadLine()) != null)
-                                                    {
-                                                        words1 = line.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                                                        prob.m0.inf[k].ves[i] = 0;
-                                                        for (int j = 0; j < alter_count; j++)
-                                                        {
-                                                            prob.m0.inf[k].matr[i, j] = Convert.ToSingle(words1[j]);
-                                                            if (prob.m0.inf[k].matr[i, j] == -1)
-                                                            {
-                                                                prob.m0.inf[k].status = -1;
-                                                            }
-                                                            prob.m0.inf[k].ves[i] += prob.m0.inf[k].matr[i, j];
-                                                        }
-                                                    }
-                                                }
-                                                if (prob.m0.inf[k].status == 1)
-                                                {
-                                                    float sum = 0;
-                                                    for (int i = 0; i < alter_count; i++)
-                                                        for (int j = 0; j < alter_count; j++)
-                                                        {
-                                                            if (i != j)
-                                                            {
-                                                                prob.m0.inf[k].ves[i] += prob.m0.inf[k].matr[i, j];
-                                                                sum += prob.m0.inf[k].matr[i, j];
-                                                            }
-                                                        }
-                                                    for (int i = 0; i < alter_count; i++)
-                                                        prob.m0.inf[k].ves[i] /= sum;
-                                                }
-                                            }
-                                        }
+                                        words = line.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                                        // ==== Запоминаем для метода 0 ===================
+                                        prob.m0.inf[k].id_exp = Convert.ToInt32(words[0]); // запомнили id эксперта
+                                        prob.m0.inf[k].status = Convert.ToInt32(words[2]); // статус прохождения опроса
+                                        load_m0(k); // загрузка метода 0 для k эксперта
+                                        // ==== Метод 0 запомнили =======================
+                                        // ==== Запоминаем для метода 1 ===================
+                                        
+                                        prob.m1.inf[k].id_exp = Convert.ToInt32(words[0]); // запомнили id эксперта
+                                        prob.m1.inf[k].comp = Convert.ToSingle(words[1]); // запомнили компетентность эксперта
+                                        prob.m1.inf[k].status = Convert.ToInt32(words[2]); // статус прохождения опроса
+                                        prob.m1.inf[k].marks = new float[alter_count];
+                                        prob.m1.ves = new float[alter_count];
+                                        load_m1(k); // загрузка метода 1 для k эксперта
+                                        // ==== Метод 1 запомнили =======================
                                     }
-                                    else if (prob.m0.inf[k].status == -1)
-                                    {
-
-                                    }
-                                    // ==== Метод 0 запомнили =======================
                                 }
                             }
                         }
+                        else
+                        {
+                            prob.status_prob = 0;
+                        }
+                        list_prob.Add(prob);
                     }
-                    else
-                    {
-                        prob.status_prob = 0;
-                    }
-                    list_prob.Add(prob);
                 }
             }
             else
@@ -394,6 +359,124 @@ namespace system_analysis
                 panel1.Visible = false;
                 list_solution.Visible = false;
                 this.Height = 300;
+            }
+        }
+
+        public void load_m0(int k)
+        {
+            prob.m0.inf[k].matr = new float[alter_count, alter_count];
+            prob.m0.inf[k].ves = new float[alter_count];
+
+            if (prob.m0.inf[k].status == 1 || prob.m0.inf[k].status == -1)
+            {
+                // если статус пройден или не до конца пройден то считываем матрицу
+                if (File.Exists(directory + "matrix" + prob.num_prob + "m0e" + prob.m0.inf[k].id_exp + ".txt") == true)
+                {
+                    float sum = 0;
+                    using (StreamReader sr2 = new StreamReader(directory + "matrix" + prob.num_prob + "m0e" + prob.m0.inf[k].id_exp + ".txt", System.Text.Encoding.UTF8))
+                    {
+                        string[] words1;
+                        string line = "";
+                        for (int i = 0; i < alter_count; i++)
+                        {
+                            if ((line = sr2.ReadLine()) != null)
+                            {
+                                words1 = line.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                                prob.m0.inf[k].ves[i] = 0;
+                                for (int j = 0; j < alter_count; j++)
+                                {
+                                    prob.m0.inf[k].matr[i, j] = Convert.ToSingle(words1[j]);
+                                    if (prob.m0.inf[k].status == 1 && i != j)
+                                    {
+                                        sum += prob.m0.inf[k].matr[i, j];
+                                        prob.m0.inf[k].ves[i] += prob.m0.inf[k].matr[i, j];
+                                    }
+
+                                }
+                            }
+                        }
+                    }
+                    // == считали из файла матрицу и если статус 1 то запомнили веса ===
+
+                    if (prob.m0.inf[k].status == 1)
+                    {
+                        for (int i = 0; i < alter_count; i++)
+                            prob.m0.inf[k].ves[i] /= sum;
+                    }
+                    else if (prob.m0.inf[k].status == -1)
+                    {
+                        for (int i = 0; i < alter_count; i++)
+                            prob.m0.inf[k].ves[i] = -1;
+                    }
+                }
+            }
+            else if (prob.m0.inf[k].status == 0)
+            {
+                for (int i = 0; i < alter_count; i++)
+                {
+                    // веса равны -1
+                    prob.m0.inf[k].ves[i] = -1;
+                    for (int j = 0; j < alter_count; j++)
+                        prob.m0.inf[k].matr[i, j] = -1;
+                }
+                    
+            }
+        }
+
+        public void load_m1(int k)
+        {
+            if (prob.m1.inf[k].status == 1)
+            {
+                // если статус пройден или не до конца пройден то считываем матрицу
+                if (File.Exists(directory + "matrix" + prob.num_prob + "m1.txt") == true)
+                {
+                    using (StreamReader sr2 = new StreamReader(directory + "matrix" + prob.num_prob + "m0e" + prob.m0.inf[k].id_exp + ".txt", System.Text.Encoding.UTF8))
+                    {
+                        string[] words1;
+                        string line = "";
+                        for (int i = 0; i < alter_count; i++)
+                        {
+                            if ((line = sr2.ReadLine()) != null)
+                            {
+                                words1 = line.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                                prob.m0.inf[k].ves[i] = 0;
+                                for (int j = 0; j < alter_count; j++)
+                                {
+                                    prob.m0.inf[k].matr[i, j] = Convert.ToSingle(words1[j]);
+                                    if (prob.m0.inf[k].status == 1 && i != j)
+                                    {
+                                        sum += prob.m0.inf[k].matr[i, j];
+                                        prob.m0.inf[k].ves[i] += prob.m0.inf[k].matr[i, j];
+                                    }
+
+                                }
+                            }
+                        }
+                    }
+                    // == считали из файла матрицу и если статус 1 то запомнили веса ===
+
+                    if (prob.m0.inf[k].status == 1)
+                    {
+                        for (int i = 0; i < alter_count; i++)
+                            prob.m0.inf[k].ves[i] /= sum;
+                    }
+                    else if (prob.m0.inf[k].status == -1)
+                    {
+                        for (int i = 0; i < alter_count; i++)
+                            prob.m0.inf[k].ves[i] = -1;
+                    }
+                }
+            }
+            else if (prob.m0.inf[k].status == 0)
+            {
+                for (int i = 0; i < alter_count; i++)
+                {
+                    // веса равны -1
+                    prob.m0.inf[k].ves[i] = -1;
+                    for (int j = 0; j < alter_count; j++)
+                        prob.m0.inf[k].matr[i, j] = -1;
+                }
+
             }
         }
 
