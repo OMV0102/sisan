@@ -36,6 +36,14 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lbl_m4_notmarks = new System.Windows.Forms.Label();
+            this.lbl_m3_notmarks = new System.Windows.Forms.Label();
+            this.lbl_m2_notmarks = new System.Windows.Forms.Label();
+            this.lbl_m1_notmarks = new System.Windows.Forms.Label();
+            this.lbl_m0_notmarks = new System.Windows.Forms.Label();
+            this.lbl_statm4 = new System.Windows.Forms.Label();
+            this.lbl_statm3 = new System.Windows.Forms.Label();
+            this.lbl_statm2 = new System.Windows.Forms.Label();
             this.btn_matrix4 = new System.Windows.Forms.Button();
             this.label27 = new System.Windows.Forms.Label();
             this.listBox4_ves = new System.Windows.Forms.ListBox();
@@ -80,14 +88,6 @@
             this.lbl_notmarks = new System.Windows.Forms.Label();
             this.lbl_notprob = new System.Windows.Forms.Label();
             this.lbl_notexp = new System.Windows.Forms.Label();
-            this.lbl_statm2 = new System.Windows.Forms.Label();
-            this.lbl_statm3 = new System.Windows.Forms.Label();
-            this.lbl_statm4 = new System.Windows.Forms.Label();
-            this.lbl_m0_notmarks = new System.Windows.Forms.Label();
-            this.lbl_m1_notmarks = new System.Windows.Forms.Label();
-            this.lbl_m2_notmarks = new System.Windows.Forms.Label();
-            this.lbl_m3_notmarks = new System.Windows.Forms.Label();
-            this.lbl_m4_notmarks = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -96,9 +96,7 @@
             this.button_back.BackColor = System.Drawing.SystemColors.Control;
             this.button_back.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button_back.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.button_back.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(238)))), ((int)(((byte)(240)))));
-            this.button_back.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(238)))), ((int)(((byte)(240)))));
-            this.button_back.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(238)))), ((int)(((byte)(240)))));
+            this.button_back.FlatAppearance.BorderSize = 0;
             this.button_back.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button_back.Font = new System.Drawing.Font("Tahoma", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button_back.ForeColor = System.Drawing.Color.Black;
@@ -117,9 +115,7 @@
             this.button_minimize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button_minimize.BackColor = System.Drawing.SystemColors.Control;
             this.button_minimize.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button_minimize.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(238)))), ((int)(((byte)(240)))));
-            this.button_minimize.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(238)))), ((int)(((byte)(240)))));
-            this.button_minimize.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(238)))), ((int)(((byte)(240)))));
+            this.button_minimize.FlatAppearance.BorderSize = 0;
             this.button_minimize.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button_minimize.Font = new System.Drawing.Font("Tahoma", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button_minimize.ForeColor = System.Drawing.Color.Black;
@@ -138,9 +134,7 @@
             this.button_cross.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button_cross.BackColor = System.Drawing.SystemColors.Control;
             this.button_cross.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button_cross.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(238)))), ((int)(((byte)(240)))));
-            this.button_cross.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(238)))), ((int)(((byte)(240)))));
-            this.button_cross.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(238)))), ((int)(((byte)(240)))));
+            this.button_cross.FlatAppearance.BorderSize = 0;
             this.button_cross.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button_cross.Font = new System.Drawing.Font("Times New Roman", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button_cross.ForeColor = System.Drawing.Color.Black;
@@ -155,6 +149,9 @@
             // 
             // comboBox_problems
             // 
+            this.comboBox_problems.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBox_problems.Cursor = System.Windows.Forms.Cursors.Hand;
             this.comboBox_problems.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_problems.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.comboBox_problems.FormattingEnabled = true;
@@ -162,6 +159,7 @@
             this.comboBox_problems.Name = "comboBox_problems";
             this.comboBox_problems.Size = new System.Drawing.Size(855, 27);
             this.comboBox_problems.TabIndex = 45;
+            this.comboBox_problems.TabStop = false;
             this.comboBox_problems.SelectedIndexChanged += new System.EventHandler(this.comboBox_problems_SelectedIndexChanged);
             // 
             // label7
@@ -177,6 +175,8 @@
             // 
             // label5
             // 
+            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.label5.BackColor = System.Drawing.SystemColors.ControlDark;
             this.label5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.label5.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -200,6 +200,8 @@
             // 
             // panel1
             // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.AutoScroll = true;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel1.Controls.Add(this.lbl_m4_notmarks);
@@ -253,10 +255,112 @@
             this.panel1.Size = new System.Drawing.Size(1076, 358);
             this.panel1.TabIndex = 63;
             // 
+            // lbl_m4_notmarks
+            // 
+            this.lbl_m4_notmarks.AutoSize = true;
+            this.lbl_m4_notmarks.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lbl_m4_notmarks.ForeColor = System.Drawing.Color.Red;
+            this.lbl_m4_notmarks.Location = new System.Drawing.Point(1755, 171);
+            this.lbl_m4_notmarks.Name = "lbl_m4_notmarks";
+            this.lbl_m4_notmarks.Size = new System.Drawing.Size(302, 69);
+            this.lbl_m4_notmarks.TabIndex = 115;
+            this.lbl_m4_notmarks.Text = "Никто из экспертов\r\nеще не оценил альтернативы\r\nэтим методом!";
+            this.lbl_m4_notmarks.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbl_m4_notmarks.Visible = false;
+            // 
+            // lbl_m3_notmarks
+            // 
+            this.lbl_m3_notmarks.AutoSize = true;
+            this.lbl_m3_notmarks.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lbl_m3_notmarks.ForeColor = System.Drawing.Color.Red;
+            this.lbl_m3_notmarks.Location = new System.Drawing.Point(1295, 171);
+            this.lbl_m3_notmarks.Name = "lbl_m3_notmarks";
+            this.lbl_m3_notmarks.Size = new System.Drawing.Size(302, 69);
+            this.lbl_m3_notmarks.TabIndex = 114;
+            this.lbl_m3_notmarks.Text = "Никто из экспертов\r\nеще не оценил альтернативы\r\nэтим методом!";
+            this.lbl_m3_notmarks.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbl_m3_notmarks.Visible = false;
+            // 
+            // lbl_m2_notmarks
+            // 
+            this.lbl_m2_notmarks.AutoSize = true;
+            this.lbl_m2_notmarks.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lbl_m2_notmarks.ForeColor = System.Drawing.Color.Red;
+            this.lbl_m2_notmarks.Location = new System.Drawing.Point(886, 171);
+            this.lbl_m2_notmarks.Name = "lbl_m2_notmarks";
+            this.lbl_m2_notmarks.Size = new System.Drawing.Size(302, 69);
+            this.lbl_m2_notmarks.TabIndex = 113;
+            this.lbl_m2_notmarks.Text = "Никто из экспертов\r\nеще не оценил альтернативы\r\nэтим методом!";
+            this.lbl_m2_notmarks.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbl_m2_notmarks.Visible = false;
+            // 
+            // lbl_m1_notmarks
+            // 
+            this.lbl_m1_notmarks.AutoSize = true;
+            this.lbl_m1_notmarks.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lbl_m1_notmarks.ForeColor = System.Drawing.Color.Red;
+            this.lbl_m1_notmarks.Location = new System.Drawing.Point(476, 171);
+            this.lbl_m1_notmarks.Name = "lbl_m1_notmarks";
+            this.lbl_m1_notmarks.Size = new System.Drawing.Size(302, 69);
+            this.lbl_m1_notmarks.TabIndex = 112;
+            this.lbl_m1_notmarks.Text = "Никто из экспертов\r\nеще не оценил альтернативы\r\nэтим методом!";
+            this.lbl_m1_notmarks.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbl_m1_notmarks.Visible = false;
+            // 
+            // lbl_m0_notmarks
+            // 
+            this.lbl_m0_notmarks.AutoSize = true;
+            this.lbl_m0_notmarks.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lbl_m0_notmarks.ForeColor = System.Drawing.Color.Red;
+            this.lbl_m0_notmarks.Location = new System.Drawing.Point(55, 171);
+            this.lbl_m0_notmarks.Name = "lbl_m0_notmarks";
+            this.lbl_m0_notmarks.Size = new System.Drawing.Size(302, 69);
+            this.lbl_m0_notmarks.TabIndex = 70;
+            this.lbl_m0_notmarks.Text = "Выбранный эксперт\r\nеще не оценил альтернативы\r\nэтим методом!";
+            this.lbl_m0_notmarks.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbl_m0_notmarks.Visible = false;
+            // 
+            // lbl_statm4
+            // 
+            this.lbl_statm4.AutoSize = true;
+            this.lbl_statm4.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lbl_statm4.ForeColor = System.Drawing.Color.Black;
+            this.lbl_statm4.Location = new System.Drawing.Point(1757, 51);
+            this.lbl_statm4.Name = "lbl_statm4";
+            this.lbl_statm4.Size = new System.Drawing.Size(335, 38);
+            this.lbl_statm4.TabIndex = 111;
+            this.lbl_statm4.Text = "Ранжирование альтернатив на основе\r\n оценок  ";
+            this.lbl_statm4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lbl_statm3
+            // 
+            this.lbl_statm3.AutoSize = true;
+            this.lbl_statm3.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lbl_statm3.ForeColor = System.Drawing.Color.Black;
+            this.lbl_statm3.Location = new System.Drawing.Point(1332, 51);
+            this.lbl_statm3.Name = "lbl_statm3";
+            this.lbl_statm3.Size = new System.Drawing.Size(335, 38);
+            this.lbl_statm3.TabIndex = 110;
+            this.lbl_statm3.Text = "Ранжирование альтернатив на основе\r\n оценок  ";
+            this.lbl_statm3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lbl_statm2
+            // 
+            this.lbl_statm2.AutoSize = true;
+            this.lbl_statm2.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lbl_statm2.ForeColor = System.Drawing.Color.Black;
+            this.lbl_statm2.Location = new System.Drawing.Point(907, 51);
+            this.lbl_statm2.Name = "lbl_statm2";
+            this.lbl_statm2.Size = new System.Drawing.Size(335, 38);
+            this.lbl_statm2.TabIndex = 109;
+            this.lbl_statm2.Text = "Ранжирование альтернатив на основе\r\n оценок  ";
+            this.lbl_statm2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // btn_matrix4
             // 
             this.btn_matrix4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(118)))), ((int)(((byte)(168)))));
             this.btn_matrix4.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_matrix4.Enabled = false;
             this.btn_matrix4.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btn_matrix4.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkOrange;
             this.btn_matrix4.FlatAppearance.MouseOverBackColor = System.Drawing.Color.SandyBrown;
@@ -293,6 +397,7 @@
             this.listBox4_ves.Name = "listBox4_ves";
             this.listBox4_ves.Size = new System.Drawing.Size(71, 175);
             this.listBox4_ves.TabIndex = 104;
+            this.listBox4_ves.TabStop = false;
             // 
             // label25
             // 
@@ -315,6 +420,7 @@
             this.listBox4_alt.Name = "listBox4_alt";
             this.listBox4_alt.Size = new System.Drawing.Size(315, 175);
             this.listBox4_alt.TabIndex = 103;
+            this.listBox4_alt.TabStop = false;
             // 
             // label26
             // 
@@ -331,6 +437,7 @@
             // 
             this.btn_matrix3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(118)))), ((int)(((byte)(168)))));
             this.btn_matrix3.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_matrix3.Enabled = false;
             this.btn_matrix3.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btn_matrix3.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkOrange;
             this.btn_matrix3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.SandyBrown;
@@ -378,6 +485,7 @@
             this.listBox3_ves.Name = "listBox3_ves";
             this.listBox3_ves.Size = new System.Drawing.Size(71, 175);
             this.listBox3_ves.TabIndex = 97;
+            this.listBox3_ves.TabStop = false;
             // 
             // label21
             // 
@@ -400,6 +508,7 @@
             this.listBox3_alt.Name = "listBox3_alt";
             this.listBox3_alt.Size = new System.Drawing.Size(315, 175);
             this.listBox3_alt.TabIndex = 96;
+            this.listBox3_alt.TabStop = false;
             // 
             // label22
             // 
@@ -427,6 +536,7 @@
             // 
             this.btn_matrix2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(118)))), ((int)(((byte)(168)))));
             this.btn_matrix2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_matrix2.Enabled = false;
             this.btn_matrix2.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btn_matrix2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkOrange;
             this.btn_matrix2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.SandyBrown;
@@ -445,6 +555,7 @@
             // 
             this.btn_matrix1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(118)))), ((int)(((byte)(168)))));
             this.btn_matrix1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_matrix1.Enabled = false;
             this.btn_matrix1.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btn_matrix1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkOrange;
             this.btn_matrix1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.SandyBrown;
@@ -469,6 +580,7 @@
             this.listBox2_ves.Name = "listBox2_ves";
             this.listBox2_ves.Size = new System.Drawing.Size(71, 175);
             this.listBox2_ves.TabIndex = 90;
+            this.listBox2_ves.TabStop = false;
             // 
             // label18
             // 
@@ -491,6 +603,7 @@
             this.listBox2_alt.Name = "listBox2_alt";
             this.listBox2_alt.Size = new System.Drawing.Size(315, 175);
             this.listBox2_alt.TabIndex = 89;
+            this.listBox2_alt.TabStop = false;
             // 
             // label19
             // 
@@ -519,6 +632,7 @@
             // 
             this.btn_matrix0.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(118)))), ((int)(((byte)(168)))));
             this.btn_matrix0.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_matrix0.Enabled = false;
             this.btn_matrix0.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btn_matrix0.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkOrange;
             this.btn_matrix0.FlatAppearance.MouseOverBackColor = System.Drawing.Color.SandyBrown;
@@ -555,6 +669,7 @@
             this.listBox1_ves.Name = "listBox1_ves";
             this.listBox1_ves.Size = new System.Drawing.Size(71, 175);
             this.listBox1_ves.TabIndex = 75;
+            this.listBox1_ves.TabStop = false;
             // 
             // label10
             // 
@@ -577,6 +692,7 @@
             this.listBox1_alt.Name = "listBox1_alt";
             this.listBox1_alt.Size = new System.Drawing.Size(315, 175);
             this.listBox1_alt.TabIndex = 74;
+            this.listBox1_alt.TabStop = false;
             // 
             // label16
             // 
@@ -599,6 +715,7 @@
             this.listBox0_ves.Name = "listBox0_ves";
             this.listBox0_ves.Size = new System.Drawing.Size(71, 175);
             this.listBox0_ves.TabIndex = 68;
+            this.listBox0_ves.TabStop = false;
             // 
             // label8
             // 
@@ -621,13 +738,14 @@
             this.listBox0_alt.Name = "listBox0_alt";
             this.listBox0_alt.Size = new System.Drawing.Size(315, 175);
             this.listBox0_alt.TabIndex = 67;
+            this.listBox0_alt.TabStop = false;
             // 
             // lbl_statm1
             // 
             this.lbl_statm1.AutoSize = true;
             this.lbl_statm1.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lbl_statm1.ForeColor = System.Drawing.Color.Black;
-            this.lbl_statm1.Location = new System.Drawing.Point(433, 51);
+            this.lbl_statm1.Location = new System.Drawing.Point(484, 52);
             this.lbl_statm1.Name = "lbl_statm1";
             this.lbl_statm1.Size = new System.Drawing.Size(335, 38);
             this.lbl_statm1.TabIndex = 81;
@@ -678,6 +796,7 @@
             this.comboBox_exp.Name = "comboBox_exp";
             this.comboBox_exp.Size = new System.Drawing.Size(232, 27);
             this.comboBox_exp.TabIndex = 70;
+            this.comboBox_exp.TabStop = false;
             this.comboBox_exp.SelectedIndexChanged += new System.EventHandler(this.comboBox_exp_SelectedIndexChanged);
             // 
             // label3
@@ -718,7 +837,8 @@
             // 
             // list_solution
             // 
-            this.list_solution.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.list_solution.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.list_solution.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.list_solution.FormattingEnabled = true;
             this.list_solution.HorizontalScrollbar = true;
@@ -727,6 +847,8 @@
             this.list_solution.Name = "list_solution";
             this.list_solution.Size = new System.Drawing.Size(855, 118);
             this.list_solution.TabIndex = 64;
+            this.list_solution.TabStop = false;
+            this.list_solution.UseTabStops = false;
             // 
             // label1
             // 
@@ -784,107 +906,6 @@
             this.lbl_notexp.TabIndex = 69;
             this.lbl_notexp.Text = "По данной проблеме не назначены эксперты!";
             this.lbl_notexp.Visible = false;
-            // 
-            // lbl_statm2
-            // 
-            this.lbl_statm2.AutoSize = true;
-            this.lbl_statm2.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lbl_statm2.ForeColor = System.Drawing.Color.Black;
-            this.lbl_statm2.Location = new System.Drawing.Point(853, 51);
-            this.lbl_statm2.Name = "lbl_statm2";
-            this.lbl_statm2.Size = new System.Drawing.Size(335, 38);
-            this.lbl_statm2.TabIndex = 109;
-            this.lbl_statm2.Text = "Ранжирование альтернатив на основе\r\n оценок  ";
-            this.lbl_statm2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // lbl_statm3
-            // 
-            this.lbl_statm3.AutoSize = true;
-            this.lbl_statm3.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lbl_statm3.ForeColor = System.Drawing.Color.Black;
-            this.lbl_statm3.Location = new System.Drawing.Point(1278, 51);
-            this.lbl_statm3.Name = "lbl_statm3";
-            this.lbl_statm3.Size = new System.Drawing.Size(335, 38);
-            this.lbl_statm3.TabIndex = 110;
-            this.lbl_statm3.Text = "Ранжирование альтернатив на основе\r\n оценок  ";
-            this.lbl_statm3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // lbl_statm4
-            // 
-            this.lbl_statm4.AutoSize = true;
-            this.lbl_statm4.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lbl_statm4.ForeColor = System.Drawing.Color.Black;
-            this.lbl_statm4.Location = new System.Drawing.Point(1703, 51);
-            this.lbl_statm4.Name = "lbl_statm4";
-            this.lbl_statm4.Size = new System.Drawing.Size(335, 38);
-            this.lbl_statm4.TabIndex = 111;
-            this.lbl_statm4.Text = "Ранжирование альтернатив на основе\r\n оценок  ";
-            this.lbl_statm4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // lbl_m0_notmarks
-            // 
-            this.lbl_m0_notmarks.AutoSize = true;
-            this.lbl_m0_notmarks.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lbl_m0_notmarks.ForeColor = System.Drawing.Color.Red;
-            this.lbl_m0_notmarks.Location = new System.Drawing.Point(55, 171);
-            this.lbl_m0_notmarks.Name = "lbl_m0_notmarks";
-            this.lbl_m0_notmarks.Size = new System.Drawing.Size(302, 69);
-            this.lbl_m0_notmarks.TabIndex = 70;
-            this.lbl_m0_notmarks.Text = "Выбранный эксперт\r\nеще не оценил альтернативы\r\nэтим методом!";
-            this.lbl_m0_notmarks.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lbl_m0_notmarks.Visible = false;
-            // 
-            // lbl_m1_notmarks
-            // 
-            this.lbl_m1_notmarks.AutoSize = true;
-            this.lbl_m1_notmarks.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lbl_m1_notmarks.ForeColor = System.Drawing.Color.Red;
-            this.lbl_m1_notmarks.Location = new System.Drawing.Point(476, 171);
-            this.lbl_m1_notmarks.Name = "lbl_m1_notmarks";
-            this.lbl_m1_notmarks.Size = new System.Drawing.Size(302, 69);
-            this.lbl_m1_notmarks.TabIndex = 112;
-            this.lbl_m1_notmarks.Text = "Никто из экспертов\r\nеще не оценил альтернативы\r\nэтим методом!";
-            this.lbl_m1_notmarks.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lbl_m1_notmarks.Visible = false;
-            // 
-            // lbl_m2_notmarks
-            // 
-            this.lbl_m2_notmarks.AutoSize = true;
-            this.lbl_m2_notmarks.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lbl_m2_notmarks.ForeColor = System.Drawing.Color.Red;
-            this.lbl_m2_notmarks.Location = new System.Drawing.Point(886, 171);
-            this.lbl_m2_notmarks.Name = "lbl_m2_notmarks";
-            this.lbl_m2_notmarks.Size = new System.Drawing.Size(302, 69);
-            this.lbl_m2_notmarks.TabIndex = 113;
-            this.lbl_m2_notmarks.Text = "Никто из экспертов\r\nеще не оценил альтернативы\r\nэтим методом!";
-            this.lbl_m2_notmarks.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lbl_m2_notmarks.Visible = false;
-            // 
-            // lbl_m3_notmarks
-            // 
-            this.lbl_m3_notmarks.AutoSize = true;
-            this.lbl_m3_notmarks.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lbl_m3_notmarks.ForeColor = System.Drawing.Color.Red;
-            this.lbl_m3_notmarks.Location = new System.Drawing.Point(1295, 171);
-            this.lbl_m3_notmarks.Name = "lbl_m3_notmarks";
-            this.lbl_m3_notmarks.Size = new System.Drawing.Size(302, 69);
-            this.lbl_m3_notmarks.TabIndex = 114;
-            this.lbl_m3_notmarks.Text = "Никто из экспертов\r\nеще не оценил альтернативы\r\nэтим методом!";
-            this.lbl_m3_notmarks.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lbl_m3_notmarks.Visible = false;
-            // 
-            // lbl_m4_notmarks
-            // 
-            this.lbl_m4_notmarks.AutoSize = true;
-            this.lbl_m4_notmarks.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lbl_m4_notmarks.ForeColor = System.Drawing.Color.Red;
-            this.lbl_m4_notmarks.Location = new System.Drawing.Point(1755, 171);
-            this.lbl_m4_notmarks.Name = "lbl_m4_notmarks";
-            this.lbl_m4_notmarks.Size = new System.Drawing.Size(302, 69);
-            this.lbl_m4_notmarks.TabIndex = 115;
-            this.lbl_m4_notmarks.Text = "Никто из экспертов\r\nеще не оценил альтернативы\r\nэтим методом!";
-            this.lbl_m4_notmarks.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lbl_m4_notmarks.Visible = false;
             // 
             // form5_analyst_report
             // 

@@ -97,6 +97,7 @@
             // 
             this.btn_add_problem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(118)))), ((int)(((byte)(168)))));
             this.btn_add_problem.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_add_problem.Enabled = false;
             this.btn_add_problem.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btn_add_problem.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkOrange;
             this.btn_add_problem.FlatAppearance.MouseOverBackColor = System.Drawing.Color.SandyBrown;
@@ -154,6 +155,7 @@
             // 
             this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(118)))), ((int)(((byte)(168)))));
             this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button1.Enabled = false;
             this.button1.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkOrange;
             this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.SandyBrown;
@@ -190,6 +192,7 @@
             // 
             this.btn_expert_edit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(118)))), ((int)(((byte)(168)))));
             this.btn_expert_edit.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_expert_edit.Enabled = false;
             this.btn_expert_edit.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btn_expert_edit.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkOrange;
             this.btn_expert_edit.FlatAppearance.MouseOverBackColor = System.Drawing.Color.SandyBrown;

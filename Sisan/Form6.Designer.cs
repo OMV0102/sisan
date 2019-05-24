@@ -82,6 +82,7 @@
             // 
             // button_cross
             // 
+            this.button_cross.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button_cross.BackColor = System.Drawing.SystemColors.Control;
             this.button_cross.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button_cross.DialogResult = System.Windows.Forms.DialogResult.Cancel;
@@ -89,14 +90,14 @@
             this.button_cross.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(238)))), ((int)(((byte)(240)))));
             this.button_cross.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(238)))), ((int)(((byte)(240)))));
             this.button_cross.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button_cross.Font = new System.Drawing.Font("Times New Roman", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.button_cross.Font = new System.Drawing.Font("Times New Roman", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button_cross.ForeColor = System.Drawing.Color.Black;
-            this.button_cross.Location = new System.Drawing.Point(0, -13);
+            this.button_cross.Location = new System.Drawing.Point(305, -2);
             this.button_cross.Name = "button_cross";
-            this.button_cross.Size = new System.Drawing.Size(54, 40);
+            this.button_cross.Size = new System.Drawing.Size(44, 40);
             this.button_cross.TabIndex = 8;
             this.button_cross.TabStop = false;
-            this.button_cross.Text = "←";
+            this.button_cross.Text = "✖";
             this.button_cross.UseVisualStyleBackColor = false;
             this.button_cross.Click += new System.EventHandler(this.button_cross_Click);
             // 

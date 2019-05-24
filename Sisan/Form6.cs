@@ -27,11 +27,11 @@ namespace system_analysis
         private void button_cross_Click(object sender, EventArgs e)
         {
             // Обеспечивает закрытие формы с матрицей
-            form5_analyst_report owner = this.Owner as form5_analyst_report;
-            if (owner != null)
+            form5_analyst_report form5 = this.Owner as form5_analyst_report;
+            if (form5 != null)
             {
-                owner.TopMost = true; owner.TopMost = false;
-                owner.Show();
+                //form5.Show();
+                //form5.TopMost = true; form5.TopMost = false;
                 this.Close();
             }
         }
