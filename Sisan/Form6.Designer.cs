@@ -34,6 +34,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.button_cross = new System.Windows.Forms.Button();
+            this.comboBox_exp = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -101,6 +102,18 @@
             this.button_cross.UseVisualStyleBackColor = false;
             this.button_cross.Click += new System.EventHandler(this.button_cross_Click);
             // 
+            // comboBox_exp
+            // 
+            this.comboBox_exp.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.comboBox_exp.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_exp.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.comboBox_exp.FormattingEnabled = true;
+            this.comboBox_exp.Location = new System.Drawing.Point(41, 9);
+            this.comboBox_exp.Name = "comboBox_exp";
+            this.comboBox_exp.Size = new System.Drawing.Size(232, 27);
+            this.comboBox_exp.TabIndex = 71;
+            this.comboBox_exp.TabStop = false;
+            // 
             // form6_matrix
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -108,6 +121,7 @@
             this.BackColor = System.Drawing.SystemColors.Control;
             this.CancelButton = this.button_cross;
             this.ClientSize = new System.Drawing.Size(347, 364);
+            this.Controls.Add(this.comboBox_exp);
             this.Controls.Add(this.button_cross);
             this.Controls.Add(this.dataGridView1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -126,5 +140,6 @@
 
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button button_cross;
+        private System.Windows.Forms.ComboBox comboBox_exp;
     }
 }

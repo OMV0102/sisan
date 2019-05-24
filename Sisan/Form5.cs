@@ -69,6 +69,7 @@ namespace system_analysis
         public int exp_count = 0;   // количество экспертов для выбранной проблемы
         public int index = -1; // индекс проблемы при выборе комобобокса проблемы
         public int index_exp = -1;  // индекс эксперта при выборе комобобокса экспертов в методе 0
+        public static int type_matrix = -1;  // тип матрицы для разных методов , при нажатии на кнопку "показать матрицу"
         //======================================================================
 
         #region СТРУКТУРЫ
@@ -738,7 +739,7 @@ namespace system_analysis
                         // ===== МЕТОД 3 =============
                         update_m3();
                         // ===== МЕТОД 4 =============
-                        //update_m4();
+                        update_m4();
                         //=======================
                     }
                     // если эксперты назначены но еще никто ничего не оценил
@@ -914,7 +915,7 @@ namespace system_analysis
                         }
                     }
                 }
-                // выводим в listbox0_alt и listbox0_ves
+                // выводим в listbox1_alt и listbox1_ves
                 for (int i = 0; i < alter_count; i++)
                 {
                     listBox1_alt.Items.Add(alter[i]);
@@ -992,7 +993,7 @@ namespace system_analysis
                         }
                     }
                 }
-                // выводим в listbox0_alt и listbox0_ves
+                // выводим в listbox2_alt и listbox2_ves
                 for (int i = 0; i < alter_count; i++)
                 {
                     listBox2_alt.Items.Add(alter[i]);
@@ -1041,7 +1042,7 @@ namespace system_analysis
                 //================================
                 listBox3_alt.Items.Clear();
                 listBox3_ves.Items.Clear();
-                lbl_statm1.Text = "Ранжирование альтернатив на основе\n оценок " + exp_otvet + " из " + exp_count + " экспертов";
+                lbl_statm3.Text = "Ранжирование альтернатив на основе\n оценок " + exp_otvet + " из " + exp_count + " экспертов";
                 // записали альтернативы и веса в вспомогательный массив
                 string alt_temp = "";
                 int ves_temp = 0;
@@ -1070,7 +1071,7 @@ namespace system_analysis
                         }
                     }
                 }
-                // выводим в listbox0_alt и listbox0_ves
+                // выводим в listbox3_alt и listbox3_ves
                 for (int i = 0; i < alter_count; i++)
                 {
                     listBox3_alt.Items.Add(alter[i]);
@@ -1088,6 +1089,84 @@ namespace system_analysis
                 listBox3_ves.Visible = false;
                 btn_matrix3.Visible = false;
                 lbl_m3_notmarks.Visible = true;
+                //================================
+            }
+
+        }
+
+        // ВЫВОД РЕЗУЛЬТАТОВ МЕТОДА 4
+        public void update_m4()
+        {
+            int exp_otvet = 0;
+            for (int i = 0; i < exp_count; i++)
+            {
+                if (prob_list[index].m4.inf[i].status == 1)
+                {
+                    exp_otvet++;
+                }
+            }
+
+            if (exp_otvet > 0)
+            {
+                //===================================
+                // ХОТЯБЫ ОДИН из экспертов оценил альтернативы методом 3
+                lbl_statm4.Visible = true;
+                label26.Visible = true;
+                label25.Visible = true;
+                listBox4_alt.Visible = true;
+                listBox4_ves.Visible = true;
+                btn_matrix4.Visible = true;
+                lbl_m4_notmarks.Visible = false;
+                //================================
+                listBox4_alt.Items.Clear();
+                listBox4_ves.Items.Clear();
+                lbl_statm4.Text = "Ранжирование альтернатив на основе\n оценок " + exp_otvet + " из " + exp_count + " экспертов";
+                // записали альтернативы и веса в вспомогательный массив
+                string alt_temp = "";
+                int ves_temp = 0;
+                string[] alter = new string[alter_count];
+                int[] ves = new int[alter_count];
+
+                for (int i = 0; i < alter_count; i++)
+                {
+                    alter[i] = alter_list[index].alters[i];
+                    ves[i] = Convert.ToInt32(prob_list[index].m4.ves[i]);
+                }
+                // сортируем альтернативы
+                // сортировка взята с https://metanit.com/sharp/tutorial/2.7.php
+                for (int i = 0; i < alter_count - 1; i++)
+                {
+                    for (int j = i + 1; j < alter_count; j++)
+                    {
+                        if (ves[i] < ves[j])
+                        {
+                            alt_temp = alter[i];
+                            ves_temp = ves[i];
+                            alter[i] = alter[j];
+                            ves[i] = ves[j];
+                            alter[j] = alt_temp;
+                            ves[j] = ves_temp;
+                        }
+                    }
+                }
+                // выводим в listbox4_alt и listbox4_ves
+                for (int i = 0; i < alter_count; i++)
+                {
+                    listBox4_alt.Items.Add(alter[i]);
+                    listBox4_ves.Items.Add(ves[i]);
+                }
+            }
+            else
+            {
+                //===================================
+                // НИКТО из экспертов еще не оценил альтернативы методом 1
+                lbl_statm4.Visible = false;
+                label26.Visible = false;
+                label25.Visible = false;
+                listBox4_alt.Visible = false;
+                listBox4_ves.Visible = false;
+                btn_matrix4.Visible = false;
+                lbl_m4_notmarks.Visible = true;
                 //================================
             }
 
