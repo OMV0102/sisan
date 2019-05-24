@@ -67,7 +67,6 @@ namespace system_analysis
         st_problem prob; // вспомогательная переменная для добавления проблемы
         public int alter_count = 0;   // количество альтернатив для выбранной проблемы
         public int exp_count = 0;   // количество экспертов для выбранной проблемы
-        public float scale = 100;  // 
         //======================================================================
 
         #region СТРУКТУРЫ
@@ -102,7 +101,7 @@ namespace system_analysis
             public metod3 m3;
             public metod4 m4;
         }
-        public List<st_problem> list_prob;
+        public List<st_problem> prob_list;
         //======================================================================
         public struct metod0_inf //  структура для хранения информации о методе 0
         {
@@ -144,6 +143,7 @@ namespace system_analysis
         {
             public int status;
             public metod2_inf[] inf;
+            public float L;
             public float[] ves;
         }
         //========================================================================
@@ -158,7 +158,6 @@ namespace system_analysis
         {
             public int status;
             public metod3_inf[] inf;
-            public float[] matr_mod;
             public float[] ves;
         }
         //========================================================================
@@ -255,7 +254,7 @@ namespace system_analysis
                 using (StreamReader sr = new StreamReader(directory + "problems.txt", System.Text.Encoding.UTF8))
                 {
                     string line = "";
-                    list_prob = new List<st_problem>();
+                    prob_list = new List<st_problem>();
                     while ((line = sr.ReadLine()) != null)
                     {
                         // считываем проблему
@@ -263,7 +262,9 @@ namespace system_analysis
                         prob = new st_problem();
                         prob.num_prob = Convert.ToInt32(words[0]);
                         prob.open_close = Convert.ToBoolean(words[1]);
-                        prob.txt_prob = words[2];
+                        prob.txt_prob = "";
+                        for (int i = 2; i < words.Count(); i++)
+                            prob.txt_prob += words[i] + " ";
                         // =========== проблему считали ===========
                         text = "";
                         line = "";
@@ -352,28 +353,76 @@ namespace system_analysis
                                         prob.m2.inf[k].marks = new float[alter_count]; // память под оценки эксперта k
                                         load_m2(k); // загрузка метода 2 для k эксперта
                                         // ==== Метод 2 запомнили =======================
+                                        // ==== Запоминаем для метода 3 ===================
+                                        prob.m3.inf[k].id_exp = Convert.ToInt32(words[0]); // запомнили id эксперта
+                                        prob.m3.inf[k].status = Convert.ToInt32(words[5]); // статус прохождения опроса
+                                        prob.m3.inf[k].marks = new float[alter_count]; // память под оценки эксперта k
+                                        load_m3(k); // загрузка метода 3 для k эксперта
+                                        // ==== Метод 3 запомнили =======================
+                                        // ==== Запоминаем для метода 4 ===================
+                                        prob.m4.inf[k].id_exp = Convert.ToInt32(words[0]); // запомнили id эксперта
+                                        prob.m4.inf[k].status = Convert.ToInt32(words[6]); // статус прохождения опроса
+                                        prob.m4.inf[k].matr = new float[alter_count, alter_count]; // память под оценки эксперта k
+                                        load_m4(k); // загрузка метода 4 для k эксперта
+                                        // ==== Метод 4 запомнили =======================
                                     }
                                 }
                             }
+                            //  === приводим к целым числам веса для 0 метода ==============
+                            for (int k = 0; k < exp_count; k++)
+                            {
+                                for (int j = 0; j < alter_count; j++)
+                                    prob.m0.inf[k].ves[j] *= 1000; 
+                            }
+                            //  === досчитываем веса для 2 3 4 метода и приводим к целым числам ==============
+                            for (int j = 0; j < alter_count; j++)
+                            {
+                                prob.m2.ves[j] /= prob.m2.L;
+                                prob.m2.ves[j] *= 1000;
+
+                                prob.m3.ves[j] *= 1000;
+
+                                prob.m4.ves[j] *= 10;
+                            }
+                            //====================================================
+                            prob.status_prob = exp_count;
                         }
                         else
                         {
                             prob.status_prob = 0;
                         }
-                        list_prob.Add(prob);
+                        prob_list.Add(prob);
+                        prob_count++;
                     }
+
                 }
             }
             else
             {
+                prob_count = 0;
+                lbl_notprob.Visible = true;
                 label1.Visible = false;
                 label2.Visible = false;
                 panel1.Visible = false;
                 list_solution.Visible = false;
                 this.Height = 300;
             }
+
+            if(prob_count > 0)
+            {
+                for(int i = 0; i < prob_count; i++)
+                {
+                    comboBox_problems.Items.Add(prob_list[i].txt_prob);
+                }
+            }
+
+            if (prob_count > 0)
+            {
+                comboBox_problems.SelectedIndex = 0;
+            }
         }
 
+        // для ЗАГРУЗКИ МЕТОДА 0
         public void load_m0(int k)
         {
             if (prob.m0.inf[k].status == 1 || prob.m0.inf[k].status == -1)
@@ -426,12 +475,18 @@ namespace system_analysis
                     // веса равны -1
                     prob.m0.inf[k].ves[i] = -1;
                     for (int j = 0; j < alter_count; j++)
-                        prob.m0.inf[k].matr[i, j] = -1;
+                    {
+                        if (i == j)
+                            prob.m0.inf[k].matr[i, j] = 9;
+                        else
+                            prob.m0.inf[k].matr[i, j] = -1;
+                    }
                 }
                     
             }
         }
 
+        // для ЗАГРУЗКИ МЕТОДА 1
         public void load_m1(int k)
         {
             if (prob.m1.inf[k].status == 1)
@@ -452,10 +507,9 @@ namespace system_analysis
                                 for (int j = 0; j < alter_count; j++)
                                 {
                                     prob.m1.inf[k].marks[j] = Convert.ToSingle(words1[j+1]);
-                                    if (prob.m1.inf[k].status == 1 )
-                                    {
-                                        prob.m1.ves[j] += prob.m1.inf[k].marks[j] / scale * prob.m1.inf[k].comp;
-                                    }
+                                    //prob.m1.ves[j] += prob.m1.inf[k].marks[j] / scale_m1 * prob.m1.inf[k].comp;
+                                    prob.m1.ves[j] += prob.m1.inf[k].marks[j] * prob.m1.inf[k].comp;
+
                                 }
                             }
                         }
@@ -473,6 +527,7 @@ namespace system_analysis
             }
         }
 
+        // для ЗАГРУЗКИ МЕТОДА 2
         public void load_m2(int k)
         {
             if (prob.m2.inf[k].status == 1)
@@ -480,7 +535,7 @@ namespace system_analysis
                 // если статус пройдeн у эксперта то читаем его оценочки
                 if (File.Exists(directory + "matrix" + prob.num_prob + "m2.txt") == true)
                 {
-                    using (StreamReader sr2 = new StreamReader(directory + "matrix" + prob.num_prob + "m1.txt", System.Text.Encoding.UTF8))
+                    using (StreamReader sr2 = new StreamReader(directory + "matrix" + prob.num_prob + "m2.txt", System.Text.Encoding.UTF8))
                     {
                         string[] words1;
                         string line = "";
@@ -488,19 +543,16 @@ namespace system_analysis
                         while ((line = sr2.ReadLine()) != null)
                         {
                             words1 = line.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                            if (Convert.ToInt32(words1[0]) == prob.m1.inf[k].id_exp)
+                            if (Convert.ToInt32(words1[0]) == prob.m2.inf[k].id_exp)
                             {
                                 for (int j = 0; j < alter_count; j++)
                                 {
-                                    prob.m1.inf[k].marks[j] = Convert.ToSingle(words1[j + 1]);
-                                    if (prob.m1.inf[k].status == 1)
-                                    {
-                                        prob.m1.ves[j] += prob.m1.inf[k].marks[j] / scale * prob.m1.inf[k].comp;
-                                    }
+                                    prob.m2.inf[k].marks[j] = Convert.ToSingle(words1[j + 1]);
+                                    prob.m2.ves[j] += (float)alter_count + 1 - prob.m2.inf[k].marks[j];
+                                    prob.m2.L += prob.m2.ves[j];
                                 }
                             }
                         }
-
                     }
                     // == считали из файла матрицу и если статус 1 то запомнили веса ===
                 }
@@ -514,6 +566,120 @@ namespace system_analysis
             }
         }
 
+        // для ЗАГРУЗКИ МЕТОДА 3
+        public void load_m3(int k)
+        {
+            if (prob.m3.inf[k].status == 1)
+            {
+                // если статус пройдeн у эксперта то читаем его оценочки
+                if (File.Exists(directory + "matrix" + prob.num_prob + "m3.txt") == true)
+                {
+                    float S = 0;
+                    using (StreamReader sr2 = new StreamReader(directory + "matrix" + prob.num_prob + "m3.txt", System.Text.Encoding.UTF8))
+                    {
+                        string[] words1;
+                        string line = "";
+
+                        while ((line = sr2.ReadLine()) != null)
+                        {
+                            words1 = line.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                            if (Convert.ToInt32(words1[0]) == prob.m3.inf[k].id_exp)
+                            {
+                                for (int j = 0; j < alter_count; j++)
+                                {
+                                    prob.m3.inf[k].marks[j] = Convert.ToSingle(words1[j + 1]);
+                                    S += prob.m3.inf[k].marks[j];
+                                }
+
+                                if (S > 0)
+                                {
+                                    for (int j = 0; j < alter_count; j++)
+                                    {
+                                        prob.m3.ves[j] += prob.m3.inf[k].marks[j] / S / exp_count;
+                                    }
+                                }
+                            }
+                        }
+
+                    }
+                    // == считали из файла матрицу и если статус 1 то запомнили веса ===
+                }
+            }
+            else if (prob.m3.inf[k].status == 0)
+            {
+                for (int j = 0; j < alter_count; j++)
+                {
+                    prob.m3.inf[k].marks[j] = -1;
+                }
+            }
+        }
+
+        // для ЗАГРУЗКИ МЕТОДА 4
+        public void load_m4(int k)
+        {
+            if (prob.m4.inf[k].status == 1 || prob.m4.inf[k].status == -1)
+            {
+                // если статус пройден или не до конца пройден то считываем матрицу
+                if (File.Exists(directory + "matrix" + prob.num_prob + "m4e" + prob.m4.inf[k].id_exp + ".txt") == true)
+                {
+                    float N = alter_count * (alter_count - 1);
+                    float sum_str = 0;
+                    using (StreamReader sr2 = new StreamReader(directory + "matrix" + prob.num_prob + "m4e" + prob.m4.inf[k].id_exp + ".txt", System.Text.Encoding.UTF8))
+                    {
+                        string[] words1;
+                        string line = "";
+                        for (int i = 0; i < alter_count; i++)
+                        {
+                            if ((line = sr2.ReadLine()) != null)
+                            {
+                                words1 = line.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                                sum_str = 0;
+                                for (int j = 0; j < alter_count; j++)
+                                {
+                                    prob.m4.inf[k].matr[i, j] = Convert.ToSingle(words1[j]);
+                                    if (prob.m4.inf[k].status == 1 && i != j)
+                                    {
+                                        sum_str += prob.m4.inf[k].matr[i, j];
+                                    }
+                                }
+
+                                if (prob.m4.inf[k].status == 1)
+                                {
+                                    prob.m4.ves[i] += sum_str / N;
+                                }
+                            }
+                        }
+                    }
+                    // == считали из файла матрицу и если статус 1 то запомнили веса ===
+                }
+            }
+            else if (prob.m4.inf[k].status == 0)
+            {
+                for (int i = 0; i < alter_count; i++)
+                {
+                    for (int j = 0; j < alter_count; j++)
+                    {
+                        if (i == j)
+                            prob.m4.inf[k].matr[i, j] = 9;
+                        else
+                            prob.m4.inf[k].matr[i, j] = -1;
+                    }
+                }
+
+            }
+        }
+
+        // ВЫБОР ПРОБЛЕМЫ в comboBox_problems
+        private void comboBox_problems_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int index = comboBox_problems.SelectedIndex;
+            if (index >= 0 && index < prob_count)
+            {
+
+
+            }
+        }
+        
         // кнопка ПОКАЗАТЬ МАТРИЦУ 0
         private void btn_matrix0_Click(object sender, EventArgs e)
         {

@@ -31,7 +31,7 @@
             this.button_back = new System.Windows.Forms.Button();
             this.button_minimize = new System.Windows.Forms.Button();
             this.button_cross = new System.Windows.Forms.Button();
-            this.comboBox1_problems = new System.Windows.Forms.ComboBox();
+            this.comboBox_problems = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -144,15 +144,16 @@
             this.button_cross.UseVisualStyleBackColor = false;
             this.button_cross.Click += new System.EventHandler(this.button_cross_Click);
             // 
-            // comboBox1_problems
+            // comboBox_problems
             // 
-            this.comboBox1_problems.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1_problems.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.comboBox1_problems.FormattingEnabled = true;
-            this.comboBox1_problems.Location = new System.Drawing.Point(112, 75);
-            this.comboBox1_problems.Name = "comboBox1_problems";
-            this.comboBox1_problems.Size = new System.Drawing.Size(855, 27);
-            this.comboBox1_problems.TabIndex = 45;
+            this.comboBox_problems.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_problems.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.comboBox_problems.FormattingEnabled = true;
+            this.comboBox_problems.Location = new System.Drawing.Point(112, 75);
+            this.comboBox_problems.Name = "comboBox_problems";
+            this.comboBox_problems.Size = new System.Drawing.Size(855, 27);
+            this.comboBox_problems.TabIndex = 45;
+            this.comboBox_problems.SelectedIndexChanged += new System.EventHandler(this.comboBox_problems_SelectedIndexChanged);
             // 
             // label7
             // 
@@ -752,6 +753,7 @@
             this.lbl_notprob.Size = new System.Drawing.Size(251, 23);
             this.lbl_notprob.TabIndex = 68;
             this.lbl_notprob.Text = "Проблемы отсутствуют!";
+            this.lbl_notprob.Visible = false;
             // 
             // form5_analyst_report
             // 
@@ -768,7 +770,7 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.comboBox1_problems);
+            this.Controls.Add(this.comboBox_problems);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.button_cross);
             this.Controls.Add(this.button_minimize);
@@ -791,7 +793,7 @@
         private System.Windows.Forms.Button button_back;
         private System.Windows.Forms.Button button_minimize;
         private System.Windows.Forms.Button button_cross;
-        private System.Windows.Forms.ComboBox comboBox1_problems;
+        private System.Windows.Forms.ComboBox comboBox_problems;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
