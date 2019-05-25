@@ -24,32 +24,32 @@ namespace system_analysis
         private string directory = global_class.main_directory;
         //======================================================
 
+        // ЗАКРЫТИЕ ФОРМЫ
         private void button_cross_Click(object sender, EventArgs e)
         {
             // Обеспечивает закрытие формы с матрицей
             form5_analyst_report form5 = this.Owner as form5_analyst_report;
-            if (form5 != null)
-            {
-                //form5.Show();
-                //form5.TopMost = true; form5.TopMost = false;
-                this.Close();
-            }
+            //form5.Show();
+            //form5.TopMost = true; form5.TopMost = false;
+            this.Close();
         }
 
+        // перемещение формы по экрану
         private void form6_matrix_MouseDown(object sender, MouseEventArgs e)
         {
-            // обеспечивает перемещение формы без рамки
             base.Capture = false;
             Message m = Message.Create(base.Handle, 0xa1, new IntPtr(2), IntPtr.Zero);
             this.WndProc(ref m);
         }
 
+        // при ЗАГРУЗКЕ ФОРМЫ   
         private void form6_matrix_Load(object sender, EventArgs e)
         {
-            form5_analyst_report owner = this.Owner as form5_analyst_report;
-            if (owner != null)
+            form5_analyst_report form5 = this.Owner as form5_analyst_report;
+            if (form5 != null)
             {
                 this.TopMost = true; this.TopMost = false;
+                
 
 
 
@@ -62,10 +62,10 @@ namespace system_analysis
                     }
 
                     //ширина столбцов
-                    /*for (int i = 0; i < form5_analyst_report.count; i++)
+                    for (int i = 0; i < form5.alter_count; i++)
                     {
                         dataGridView1.Columns[i].Width = 35;
-                    }*/
+                    }
 
 
                 
