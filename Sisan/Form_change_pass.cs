@@ -74,12 +74,12 @@ namespace system_analysis
                     }
                     else // Если новый пароль введен
                     {
-                        if (txt_pass_new.Text.Length < 6 || txt_pass_new.Text.Length > 15) // Если новый пароль меньше 4 символов
+                        if (txt_pass_new.Text.Length < 4 || txt_pass_new.Text.Length > 15) // Если новый пароль меньше 4 символов
                         {
                             // орем на пользователя
                             // красным цветом
                             MessageBox.Show(
-                            "Пароль должен быть не менее 6 символов и не более 15.\n",
+                            "Пароль должен быть не менее 4 символов и не более 15.\n",
                             "Предупреждение",
                             MessageBoxButtons.OK,
                             MessageBoxIcon.Warning,
@@ -135,7 +135,7 @@ namespace system_analysis
                                 // орем на пользователя
                                 // красным цветом
                                 MessageBox.Show(
-                                "Пароль должен быть не менее 6 символов и не более 15.\n",
+                                "Пароль должен быть не менее 4 символов и не более 15.\n",
                                 "Предупреждение",
                                 MessageBoxButtons.OK,
                                 MessageBoxIcon.Warning,
