@@ -88,10 +88,10 @@
             this.lbl_notmarks = new System.Windows.Forms.Label();
             this.lbl_notprob = new System.Windows.Forms.Label();
             this.lbl_notexp = new System.Windows.Forms.Label();
-            this.lbl_m1_who = new System.Windows.Forms.Label();
-            this.lbl_m2_who = new System.Windows.Forms.Label();
-            this.lbl_m3_who = new System.Windows.Forms.Label();
-            this.lbl_m4_who = new System.Windows.Forms.Label();
+            this.btn_m1_who = new System.Windows.Forms.Button();
+            this.btn_m2_who = new System.Windows.Forms.Button();
+            this.btn_m3_who = new System.Windows.Forms.Button();
+            this.btn_m4_who = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -208,10 +208,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.AutoScroll = true;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel1.Controls.Add(this.lbl_m3_who);
-            this.panel1.Controls.Add(this.lbl_m2_who);
-            this.panel1.Controls.Add(this.lbl_m1_who);
-            this.panel1.Controls.Add(this.lbl_m4_who);
+            this.panel1.Controls.Add(this.btn_m4_who);
+            this.panel1.Controls.Add(this.btn_m3_who);
+            this.panel1.Controls.Add(this.btn_m2_who);
+            this.panel1.Controls.Add(this.btn_m1_who);
             this.panel1.Controls.Add(this.lbl_m4_notmarks);
             this.panel1.Controls.Add(this.lbl_m3_notmarks);
             this.panel1.Controls.Add(this.lbl_m2_notmarks);
@@ -380,7 +380,6 @@
             this.btn_matrix4.TabIndex = 108;
             this.btn_matrix4.TabStop = false;
             this.btn_matrix4.Text = "Показать матрицу";
-            this.btn_matrix4.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btn_matrix4.UseVisualStyleBackColor = false;
             // 
             // label27
@@ -457,7 +456,6 @@
             this.btn_matrix3.TabIndex = 102;
             this.btn_matrix3.TabStop = false;
             this.btn_matrix3.Text = "Показать матрицу";
-            this.btn_matrix3.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btn_matrix3.UseVisualStyleBackColor = false;
             // 
             // label24
@@ -556,7 +554,6 @@
             this.btn_matrix2.TabIndex = 94;
             this.btn_matrix2.TabStop = false;
             this.btn_matrix2.Text = "Показать матрицу";
-            this.btn_matrix2.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btn_matrix2.UseVisualStyleBackColor = false;
             // 
             // btn_matrix1
@@ -575,7 +572,6 @@
             this.btn_matrix1.TabIndex = 93;
             this.btn_matrix1.TabStop = false;
             this.btn_matrix1.Text = "Показать матрицу";
-            this.btn_matrix1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btn_matrix1.UseVisualStyleBackColor = false;
             // 
             // listBox2_ves
@@ -652,7 +648,6 @@
             this.btn_matrix0.TabIndex = 87;
             this.btn_matrix0.TabStop = false;
             this.btn_matrix0.Text = "Показать матрицу";
-            this.btn_matrix0.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btn_matrix0.UseVisualStyleBackColor = false;
             this.btn_matrix0.Click += new System.EventHandler(this.btn_matrix0_Click);
             // 
@@ -915,61 +910,79 @@
             this.lbl_notexp.Text = "По данной проблеме не назначены эксперты!";
             this.lbl_notexp.Visible = false;
             // 
-            // lbl_m1_who
+            // btn_m1_who
             // 
-            this.lbl_m1_who.AutoSize = true;
-            this.lbl_m1_who.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.lbl_m1_who.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lbl_m1_who.Font = new System.Drawing.Font("Wingdings", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(2)));
-            this.lbl_m1_who.ForeColor = System.Drawing.Color.Black;
-            this.lbl_m1_who.Location = new System.Drawing.Point(444, 53);
-            this.lbl_m1_who.Name = "lbl_m1_who";
-            this.lbl_m1_who.Size = new System.Drawing.Size(38, 36);
-            this.lbl_m1_who.TabIndex = 116;
-            this.lbl_m1_who.Text = "2";
-            this.lbl_m1_who.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_m1_who.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btn_m1_who.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_m1_who.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btn_m1_who.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.ControlDark;
+            this.btn_m1_who.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            this.btn_m1_who.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_m1_who.Font = new System.Drawing.Font("Wingdings", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(2)));
+            this.btn_m1_who.Location = new System.Drawing.Point(440, 52);
+            this.btn_m1_who.Name = "btn_m1_who";
+            this.btn_m1_who.Size = new System.Drawing.Size(40, 40);
+            this.btn_m1_who.TabIndex = 120;
+            this.btn_m1_who.TabStop = false;
+            this.btn_m1_who.Text = "2";
+            this.btn_m1_who.UseVisualStyleBackColor = false;
+            this.btn_m1_who.Click += new System.EventHandler(this.btn_m1_who_Click);
             // 
-            // lbl_m2_who
+            // btn_m2_who
             // 
-            this.lbl_m2_who.AutoSize = true;
-            this.lbl_m2_who.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.lbl_m2_who.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lbl_m2_who.Font = new System.Drawing.Font("Wingdings", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(2)));
-            this.lbl_m2_who.ForeColor = System.Drawing.Color.Black;
-            this.lbl_m2_who.Location = new System.Drawing.Point(864, 53);
-            this.lbl_m2_who.Name = "lbl_m2_who";
-            this.lbl_m2_who.Size = new System.Drawing.Size(38, 36);
-            this.lbl_m2_who.TabIndex = 117;
-            this.lbl_m2_who.Text = "2";
-            this.lbl_m2_who.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_m2_who.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btn_m2_who.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_m2_who.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btn_m2_who.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.ControlDark;
+            this.btn_m2_who.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            this.btn_m2_who.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_m2_who.Font = new System.Drawing.Font("Wingdings", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(2)));
+            this.btn_m2_who.Location = new System.Drawing.Point(863, 52);
+            this.btn_m2_who.Name = "btn_m2_who";
+            this.btn_m2_who.Size = new System.Drawing.Size(40, 40);
+            this.btn_m2_who.TabIndex = 121;
+            this.btn_m2_who.TabStop = false;
+            this.btn_m2_who.Text = "2";
+            this.btn_m2_who.UseVisualStyleBackColor = false;
+            this.btn_m2_who.Click += new System.EventHandler(this.btn_m2_who_Click);
             // 
-            // lbl_m3_who
+            // btn_m3_who
             // 
-            this.lbl_m3_who.AutoSize = true;
-            this.lbl_m3_who.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.lbl_m3_who.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lbl_m3_who.Font = new System.Drawing.Font("Wingdings", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(2)));
-            this.lbl_m3_who.ForeColor = System.Drawing.Color.Black;
-            this.lbl_m3_who.Location = new System.Drawing.Point(1289, 53);
-            this.lbl_m3_who.Name = "lbl_m3_who";
-            this.lbl_m3_who.Size = new System.Drawing.Size(38, 36);
-            this.lbl_m3_who.TabIndex = 118;
-            this.lbl_m3_who.Text = "2";
-            this.lbl_m3_who.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_m3_who.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btn_m3_who.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_m3_who.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btn_m3_who.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.ControlDark;
+            this.btn_m3_who.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            this.btn_m3_who.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_m3_who.Font = new System.Drawing.Font("Wingdings", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(2)));
+            this.btn_m3_who.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.btn_m3_who.Location = new System.Drawing.Point(1286, 52);
+            this.btn_m3_who.Name = "btn_m3_who";
+            this.btn_m3_who.Size = new System.Drawing.Size(40, 40);
+            this.btn_m3_who.TabIndex = 122;
+            this.btn_m3_who.TabStop = false;
+            this.btn_m3_who.Text = "2";
+            this.btn_m3_who.TextAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.btn_m3_who.UseVisualStyleBackColor = false;
+            this.btn_m3_who.Click += new System.EventHandler(this.btn_m3_who_Click);
             // 
-            // lbl_m4_who
+            // btn_m4_who
             // 
-            this.lbl_m4_who.AutoSize = true;
-            this.lbl_m4_who.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.lbl_m4_who.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lbl_m4_who.Font = new System.Drawing.Font("Wingdings", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(2)));
-            this.lbl_m4_who.ForeColor = System.Drawing.Color.Black;
-            this.lbl_m4_who.Location = new System.Drawing.Point(1715, 53);
-            this.lbl_m4_who.Name = "lbl_m4_who";
-            this.lbl_m4_who.Size = new System.Drawing.Size(38, 36);
-            this.lbl_m4_who.TabIndex = 119;
-            this.lbl_m4_who.Text = "2";
-            this.lbl_m4_who.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_m4_who.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btn_m4_who.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_m4_who.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btn_m4_who.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.ControlDark;
+            this.btn_m4_who.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            this.btn_m4_who.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_m4_who.Font = new System.Drawing.Font("Wingdings", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(2)));
+            this.btn_m4_who.Location = new System.Drawing.Point(1711, 52);
+            this.btn_m4_who.Name = "btn_m4_who";
+            this.btn_m4_who.Size = new System.Drawing.Size(40, 40);
+            this.btn_m4_who.TabIndex = 123;
+            this.btn_m4_who.TabStop = false;
+            this.btn_m4_who.Text = "2";
+            this.btn_m4_who.UseVisualStyleBackColor = false;
+            this.btn_m4_who.Click += new System.EventHandler(this.btn_m4_who_Click);
             // 
             // form5_analyst_report
             // 
@@ -1067,9 +1080,9 @@
         private System.Windows.Forms.Label lbl_m4_notmarks;
         private System.Windows.Forms.Label lbl_m3_notmarks;
         private System.Windows.Forms.Label lbl_m2_notmarks;
-        private System.Windows.Forms.Label lbl_m1_who;
-        private System.Windows.Forms.Label lbl_m4_who;
-        private System.Windows.Forms.Label lbl_m3_who;
-        private System.Windows.Forms.Label lbl_m2_who;
+        private System.Windows.Forms.Button btn_m1_who;
+        private System.Windows.Forms.Button btn_m4_who;
+        private System.Windows.Forms.Button btn_m3_who;
+        private System.Windows.Forms.Button btn_m2_who;
     }
 }

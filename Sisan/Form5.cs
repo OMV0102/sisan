@@ -65,9 +65,20 @@ namespace system_analysis
         public int exp_count = 0;   // количество экспертов для выбранной проблемы
         public int index_prob = -1; // индекс проблемы при выборе комобобокса проблемы
         public int index_exp = -1;  // индекс эксперта в prob_list при выборе комобобокса экспертов в методе 0
-        //============================
-        public bool 
-        //=========================
+        //====== для кнопок БУМАЖЕК чтоб показать кто именно из экспертов ответил методоми ======================
+        public bool show_whom1;
+        public bool show_whom2;
+        public bool show_whom3;
+        public bool show_whom4;
+        public string txt_whom1;
+        public string txt_whom2;
+        public string txt_whom3;
+        public string txt_whom4;
+        public int ext_n1;
+        public int ext_n2;
+        public int ext_n3;
+        public int ext_n4;
+        //===============================================
         //для будущих фич (пока не используется)
         public int type_matr = -1;  // тип матрицы для разных методов , при нажатии на кнопку "показать матрицу"
         public int matr_count = 0;  // количество открытых форм с матрицами для разных методов , при нажатии на кнопку "показать матрицу"
@@ -864,6 +875,15 @@ namespace system_analysis
         // ВЫВОД РЕЗУЛЬТАТОВ МЕТОДА 1 
         public void update_m1()
         {
+            // ====== настройки для кнопочки с БУМАЖКОЙ =====
+            btn_m1_who.Text = "2";
+            Font font = new Font("Wingdings", 21.75f, FontStyle.Bold);
+            btn_m1_who.Font = font;
+            btn_m1_who.TextAlign = ContentAlignment.MiddleLeft;
+            btn_m1_who.Height = 40;
+            btn_m1_who.Width = 40;
+            show_whom1 = false;
+            //==============================================
             int exp_otvet = 0;
             for (int i = 0; i < exp_count; i++)
             {
@@ -875,9 +895,52 @@ namespace system_analysis
 
             if (exp_otvet > 0)
             {
+                //======================================================
+                txt_whom1 = "(Нажмите, чтобы закрыть)\n\n";
+                ext_n1 = 2;
+                int ind = -1;
+                for (int j = 0; j < exp_count; j++)
+                {
+                    if (prob_list[index_prob].m1.inf[j].status == 1)
+                    {
+                        // ищем в списке экспертов эксперта по айди из списка проблем
+                        // запоминаем его фио и должность
+                        for (int i = 0; i < exp_list.Count; i++)
+                        {
+                            if (exp_list[i].id_exp == prob_list[index_prob].m1.inf[j].id_exp)
+                            {
+                                ind = i;
+                            }
+                        }
+                        txt_whom1 += "√  " + exp_list[ind].fio + "\n";
+                        ext_n1++;
+                    }
+                }
+
+                if(exp_otvet < exp_count)
+                {
+                    for (int j = 0; j < exp_count; j++)
+                    {
+                        if (prob_list[index_prob].m1.inf[j].status == 0)
+                        {
+                            // ищем в списке экспертов эксперта по айди из списка проблем
+                            // запоминаем его фио и должность
+                            for (int i = 0; i < exp_list.Count; i++)
+                            {
+                                if (exp_list[i].id_exp == prob_list[index_prob].m1.inf[j].id_exp)
+                                {
+                                    ind = i;
+                                }
+                            }
+                            txt_whom1 += "☓  " + exp_list[ind].fio + "\n";
+                            ext_n1++;
+                        }
+                    }
+                }
                 //===================================
                 // ХОТЯБЫ ОДИН из экспертов оценил альтернативы методом 1
                 lbl_statm1.Visible = true;
+                btn_m1_who.Visible = true;
                 label16.Visible = true;
                 label10.Visible = true;
                 listBox1_alt.Visible = true;
@@ -928,6 +991,7 @@ namespace system_analysis
                 //===================================
                 // НИКТО из экспертов еще не оценил альтернативы методом 1
                 lbl_statm1.Visible = false;
+                btn_m1_who.Visible = false;
                 label16.Visible = false;
                 label10.Visible = false;
                 listBox1_alt.Visible = false;
@@ -942,6 +1006,15 @@ namespace system_analysis
         // ВЫВОД РЕЗУЛЬТАТОВ МЕТОДА 2 
         public void update_m2()
         {
+            // ====== настройки для кнопочки с БУМАЖКОЙ =====
+            btn_m2_who.Text = "2";
+            Font font = new Font("Wingdings", 21.75f, FontStyle.Bold);
+            btn_m2_who.Font = font;
+            btn_m2_who.TextAlign = ContentAlignment.MiddleLeft;
+            btn_m2_who.Height = 40;
+            btn_m2_who.Width = 40;
+            show_whom2 = false;
+            //==============================================
             int exp_otvet = 0;
             for (int i = 0; i < exp_count; i++)
             {
@@ -953,9 +1026,52 @@ namespace system_analysis
 
             if (exp_otvet > 0)
             {
+                //=====================================================
+                txt_whom2 = "(Нажмите, чтобы закрыть)\n\n";
+                ext_n2 = 2;
+                int ind = -1;
+                for (int j = 0; j < exp_count; j++)
+                {
+                    if (prob_list[index_prob].m2.inf[j].status == 1)
+                    {
+                        // ищем в списке экспертов эксперта по айди из списка проблем
+                        // запоминаем его фио и должность
+                        for (int i = 0; i < exp_list.Count; i++)
+                        {
+                            if (exp_list[i].id_exp == prob_list[index_prob].m2.inf[j].id_exp)
+                            {
+                                ind = i;
+                            }
+                        }
+                        txt_whom2 += "√  " + exp_list[ind].fio + "\n";
+                        ext_n2++;
+                    }
+                }
+
+                if (exp_otvet < exp_count)
+                {
+                    for (int j = 0; j < exp_count; j++)
+                    {
+                        if (prob_list[index_prob].m2.inf[j].status == 0)
+                        {
+                            // ищем в списке экспертов эксперта по айди из списка проблем
+                            // запоминаем его фио и должность
+                            for (int i = 0; i < exp_list.Count; i++)
+                            {
+                                if (exp_list[i].id_exp == prob_list[index_prob].m2.inf[j].id_exp)
+                                {
+                                    ind = i;
+                                }
+                            }
+                            txt_whom2 += "☓  " + exp_list[ind].fio + "\n";
+                            ext_n2++;
+                        }
+                    }
+                }
                 //===================================
                 // ХОТЯБЫ ОДИН из экспертов оценил альтернативы методом 2
                 lbl_statm2.Visible = true;
+                btn_m2_who.Visible = true;
                 label18.Visible = true;
                 label19.Visible = true;
                 listBox2_alt.Visible = true;
@@ -1006,6 +1122,7 @@ namespace system_analysis
                 //===================================
                 // НИКТО из экспертов еще не оценил альтернативы методом 2
                 lbl_statm2.Visible = false;
+                btn_m2_who.Visible = false;
                 label18.Visible = false;
                 label19.Visible = false;
                 listBox2_alt.Visible = false;
@@ -1020,6 +1137,15 @@ namespace system_analysis
         // ВЫВОД РЕЗУЛЬТАТОВ МЕТОДА 3
         public void update_m3()
         {
+            // ====== настройки для кнопочки с БУМАЖКОЙ =====
+            btn_m3_who.Text = "2";
+            Font font = new Font("Wingdings", 21.75f, FontStyle.Bold);
+            btn_m3_who.Font = font;
+            btn_m3_who.TextAlign = ContentAlignment.MiddleLeft;
+            btn_m3_who.Height = 40;
+            btn_m3_who.Width = 40;
+            show_whom3 = false;
+            //==============================================
             int exp_otvet = 0;
             for (int i = 0; i < exp_count; i++)
             {
@@ -1031,9 +1157,53 @@ namespace system_analysis
 
             if (exp_otvet > 0)
             {
+                //======================================================
+                txt_whom3 = "(Нажмите, чтобы закрыть)\n\n";
+                ext_n3 = 2;
+                int ind = -1;
+                for (int j = 0; j < exp_count; j++)
+                {
+                    if (prob_list[index_prob].m3.inf[j].status == 1)
+                    {
+                        // ищем в списке экспертов эксперта по айди из списка проблем
+                        // запоминаем его фио и должность
+                        for (int i = 0; i < exp_list.Count; i++)
+                        {
+                            if (exp_list[i].id_exp == prob_list[index_prob].m3.inf[j].id_exp)
+                            {
+                                ind = i;
+                            }
+                        }
+                        txt_whom3 += "√  " + exp_list[ind].fio + "\n";
+                        ext_n3++;
+                    }
+                }
+
+                if (exp_otvet < exp_count)
+                {
+                    for (int j = 0; j < exp_count; j++)
+                    {
+                        if (prob_list[index_prob].m3.inf[j].status == 0)
+                        {
+                            // ищем в списке экспертов эксперта по айди из списка проблем
+                            // запоминаем его фио и должность
+                            for (int i = 0; i < exp_list.Count; i++)
+                            {
+                                if (exp_list[i].id_exp == prob_list[index_prob].m3.inf[j].id_exp)
+                                {
+                                    ind = i;
+                                }
+                            }
+                            txt_whom3 += "☓  " + exp_list[ind].fio + "\n";
+                            ext_n3++;
+                        }
+                    }
+                }
+                //===================================
                 //===================================
                 // ХОТЯБЫ ОДИН из экспертов оценил альтернативы методом 3
                 lbl_statm3.Visible = true;
+                btn_m3_who.Visible = true;
                 label22.Visible = true;
                 label21.Visible = true;
                 listBox3_alt.Visible = true;
@@ -1084,6 +1254,7 @@ namespace system_analysis
                 //===================================
                 // НИКТО из экспертов еще не оценил альтернативы методом 1
                 lbl_statm3.Visible = false;
+                btn_m3_who.Visible = false;
                 label22.Visible = false;
                 label21.Visible = false;
                 listBox3_alt.Visible = false;
@@ -1098,6 +1269,15 @@ namespace system_analysis
         // ВЫВОД РЕЗУЛЬТАТОВ МЕТОДА 4
         public void update_m4()
         {
+            // ====== настройки для кнопочки с БУМАЖКОЙ =====
+            btn_m4_who.Text = "2";
+            Font font = new Font("Wingdings", 21.75f, FontStyle.Bold);
+            btn_m4_who.Font = font;
+            btn_m4_who.TextAlign = ContentAlignment.MiddleLeft;
+            btn_m4_who.Height = 40;
+            btn_m4_who.Width = 40;
+            show_whom4 = false;
+            //==============================================
             int exp_otvet = 0;
             for (int i = 0; i < exp_count; i++)
             {
@@ -1109,9 +1289,52 @@ namespace system_analysis
 
             if (exp_otvet > 0)
             {
+                //=====================================================
+                txt_whom4 = "(Нажмите, чтобы закрыть)\n\n";
+                ext_n4 = 2;
+                int ind = -1;
+                for (int j = 0; j < exp_count; j++)
+                {
+                    if (prob_list[index_prob].m4.inf[j].status == 1)
+                    {
+                        // ищем в списке экспертов эксперта по айди из списка проблем
+                        // запоминаем его фио и должность
+                        for (int i = 0; i < exp_list.Count; i++)
+                        {
+                            if (exp_list[i].id_exp == prob_list[index_prob].m4.inf[j].id_exp)
+                            {
+                                ind = i;
+                            }
+                        }
+                        txt_whom4 += "√  " + exp_list[ind].fio + "\n";
+                        ext_n4++;
+                    }
+                }
+                //� ? ~
+                if (exp_otvet < exp_count)
+                {
+                    for (int j = 0; j < exp_count; j++)
+                    {
+                        if (prob_list[index_prob].m4.inf[j].status == 0 || prob_list[index_prob].m4.inf[j].status == -1)
+                        {
+                            // ищем в списке экспертов эксперта по айди из списка проблем
+                            // запоминаем его фио и должность
+                            for (int i = 0; i < exp_list.Count; i++)
+                            {
+                                if (exp_list[i].id_exp == prob_list[index_prob].m4.inf[j].id_exp)
+                                {
+                                    ind = i;
+                                }
+                            }
+                            txt_whom4 += "☓  " + exp_list[ind].fio + "\n";
+                            ext_n4++;
+                        }
+                    }
+                }
                 //===================================
                 // ХОТЯБЫ ОДИН из экспертов оценил альтернативы методом 3
                 lbl_statm4.Visible = true;
+                btn_m4_who.Visible = true;
                 label26.Visible = true;
                 label25.Visible = true;
                 listBox4_alt.Visible = true;
@@ -1162,6 +1385,7 @@ namespace system_analysis
                 //===================================
                 // НИКТО из экспертов еще не оценил альтернативы методом 1
                 lbl_statm4.Visible = false;
+                btn_m4_who.Visible = false;
                 label26.Visible = false;
                 label25.Visible = false;
                 listBox4_alt.Visible = false;
@@ -1173,6 +1397,122 @@ namespace system_analysis
 
         }
 
+        // кнопка БУМАЖКА (ПОКАЗАТЬ ЭКСПЕРТОВ ДЛЯ МЕТОДА 1), которые ответили на метод 1
+        private void btn_m1_who_Click(object sender, EventArgs e)
+        {
+            if (show_whom1 == true)
+            {
+                // ====== настройки для кнопочки с БУМАЖКОЙ =====
+                btn_m1_who.Text = "2";
+                Font font = new Font("Wingdings", 21.75f, FontStyle.Bold);
+                btn_m1_who.Font = font;
+                btn_m1_who.TextAlign = ContentAlignment.MiddleLeft;
+                btn_m1_who.Height = 40;
+                btn_m1_who.Width = 40;
+                //==============================================
+                show_whom1 = false;
+            }
+            else
+            {
+                // ====== настройки для кнопочки с БУМАЖКОЙ =====
+                btn_m1_who.Text = txt_whom1;
+                Font font = new Font("Tahoma", 11, FontStyle.Bold);
+                btn_m1_who.Font = font;
+                btn_m1_who.TextAlign = ContentAlignment.TopLeft;
+                btn_m1_who.Height = ext_n1 * 20;
+                btn_m1_who.Width = 250;
+                //==============================================
+                show_whom1 = true;
+            }
+        }
+
+        // кнопка БУМАЖКА (ПОКАЗАТЬ ЭКСПЕРТОВ ДЛЯ МЕТОДА 2), которые ответили на метод 2
+        private void btn_m2_who_Click(object sender, EventArgs e)
+        {
+            if (show_whom2 == true)
+            {
+                // ====== настройки для кнопочки с БУМАЖКОЙ =====
+                btn_m2_who.Text = "2";
+                Font font = new Font("Wingdings", 21.75f, FontStyle.Bold);
+                btn_m2_who.Font = font;
+                btn_m2_who.TextAlign = ContentAlignment.MiddleLeft;
+                btn_m2_who.Height = 40;
+                btn_m2_who.Width = 40;
+                //==============================================
+                show_whom2 = false;
+            }
+            else
+            {
+                // ====== настройки для кнопочки с БУМАЖКОЙ =====
+                btn_m2_who.Text = txt_whom2;
+                Font font = new Font("Tahoma", 11, FontStyle.Bold);
+                btn_m2_who.Font = font;
+                btn_m2_who.TextAlign = ContentAlignment.TopLeft;
+                btn_m2_who.Height = ext_n2 * 20;
+                btn_m2_who.Width = 250;
+                //==============================================
+                show_whom2 = true;
+            }
+        }
+
+        // кнопка БУМАЖКА (ПОКАЗАТЬ ЭКСПЕРТОВ ДЛЯ МЕТОДА 3), которые ответили на метод 3
+        private void btn_m3_who_Click(object sender, EventArgs e)
+        {
+            if (show_whom3 == true)
+            {
+                // ====== настройки для кнопочки с БУМАЖКОЙ =====
+                btn_m3_who.Text = "2";
+                Font font = new Font("Wingdings", 21.75f, FontStyle.Bold);
+                btn_m3_who.Font = font;
+                btn_m3_who.TextAlign = ContentAlignment.MiddleLeft;
+                btn_m3_who.Height = 40;
+                btn_m3_who.Width = 40;
+                //==============================================
+                show_whom3 = false;
+            }
+            else
+            {
+                // ====== настройки для кнопочки с БУМАЖКОЙ =====
+                btn_m3_who.Text = txt_whom3;
+                Font font = new Font("Tahoma", 11, FontStyle.Bold);
+                btn_m3_who.Font = font;
+                btn_m3_who.TextAlign = ContentAlignment.TopLeft;
+                btn_m3_who.Height = ext_n3 * 20;
+                btn_m3_who.Width = 250;
+                //==============================================
+                show_whom3 = true;
+            }
+        }
+
+        // кнопка БУМАЖКА (ПОКАЗАТЬ ЭКСПЕРТОВ ДЛЯ МЕТОДА 4), которые ответили на метод 4
+        private void btn_m4_who_Click(object sender, EventArgs e)
+        {
+            if (show_whom4 == true)
+            {
+                // ====== настройки для кнопочки с БУМАЖКОЙ =====
+                btn_m4_who.Text = "2";
+                Font font = new Font("Wingdings", 21.75f, FontStyle.Bold);
+                btn_m4_who.Font = font;
+                btn_m4_who.TextAlign = ContentAlignment.MiddleLeft;
+                btn_m4_who.Height = 40;
+                btn_m4_who.Width = 40;
+                //==============================================
+                show_whom4 = false;
+            }
+            else
+            {
+                // ====== настройки для кнопочки с БУМАЖКОЙ =====
+                btn_m4_who.Text = txt_whom4;
+                Font font = new Font("Tahoma", 11, FontStyle.Bold);
+                btn_m4_who.Font = font;
+                btn_m4_who.TextAlign = ContentAlignment.TopLeft;
+                btn_m4_who.Height = ext_n4 * 20;
+                btn_m4_who.Width = 250;
+                //==============================================
+                show_whom4 = true;
+            }
+        }
+        
         // кнопка ПОКАЗАТЬ МАТРИЦУ 0
         private void btn_matrix0_Click(object sender, EventArgs e)
         {
