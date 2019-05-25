@@ -88,6 +88,10 @@
             this.lbl_notmarks = new System.Windows.Forms.Label();
             this.lbl_notprob = new System.Windows.Forms.Label();
             this.lbl_notexp = new System.Windows.Forms.Label();
+            this.lbl_m1_who = new System.Windows.Forms.Label();
+            this.lbl_m2_who = new System.Windows.Forms.Label();
+            this.lbl_m3_who = new System.Windows.Forms.Label();
+            this.lbl_m4_who = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -204,6 +208,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.AutoScroll = true;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel1.Controls.Add(this.lbl_m3_who);
+            this.panel1.Controls.Add(this.lbl_m2_who);
+            this.panel1.Controls.Add(this.lbl_m1_who);
+            this.panel1.Controls.Add(this.lbl_m4_who);
             this.panel1.Controls.Add(this.lbl_m4_notmarks);
             this.panel1.Controls.Add(this.lbl_m3_notmarks);
             this.panel1.Controls.Add(this.lbl_m2_notmarks);
@@ -907,6 +915,62 @@
             this.lbl_notexp.Text = "По данной проблеме не назначены эксперты!";
             this.lbl_notexp.Visible = false;
             // 
+            // lbl_m1_who
+            // 
+            this.lbl_m1_who.AutoSize = true;
+            this.lbl_m1_who.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.lbl_m1_who.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lbl_m1_who.Font = new System.Drawing.Font("Wingdings", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(2)));
+            this.lbl_m1_who.ForeColor = System.Drawing.Color.Black;
+            this.lbl_m1_who.Location = new System.Drawing.Point(444, 53);
+            this.lbl_m1_who.Name = "lbl_m1_who";
+            this.lbl_m1_who.Size = new System.Drawing.Size(38, 36);
+            this.lbl_m1_who.TabIndex = 116;
+            this.lbl_m1_who.Text = "2";
+            this.lbl_m1_who.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lbl_m2_who
+            // 
+            this.lbl_m2_who.AutoSize = true;
+            this.lbl_m2_who.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.lbl_m2_who.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lbl_m2_who.Font = new System.Drawing.Font("Wingdings", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(2)));
+            this.lbl_m2_who.ForeColor = System.Drawing.Color.Black;
+            this.lbl_m2_who.Location = new System.Drawing.Point(864, 53);
+            this.lbl_m2_who.Name = "lbl_m2_who";
+            this.lbl_m2_who.Size = new System.Drawing.Size(38, 36);
+            this.lbl_m2_who.TabIndex = 117;
+            this.lbl_m2_who.Text = "2";
+            this.lbl_m2_who.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lbl_m3_who
+            // 
+            this.lbl_m3_who.AutoSize = true;
+            this.lbl_m3_who.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.lbl_m3_who.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lbl_m3_who.Font = new System.Drawing.Font("Wingdings", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(2)));
+            this.lbl_m3_who.ForeColor = System.Drawing.Color.Black;
+            this.lbl_m3_who.Location = new System.Drawing.Point(1289, 53);
+            this.lbl_m3_who.Name = "lbl_m3_who";
+            this.lbl_m3_who.Size = new System.Drawing.Size(38, 36);
+            this.lbl_m3_who.TabIndex = 118;
+            this.lbl_m3_who.Text = "2";
+            this.lbl_m3_who.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lbl_m4_who
+            // 
+            this.lbl_m4_who.AutoSize = true;
+            this.lbl_m4_who.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.lbl_m4_who.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lbl_m4_who.Font = new System.Drawing.Font("Wingdings", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(2)));
+            this.lbl_m4_who.ForeColor = System.Drawing.Color.Black;
+            this.lbl_m4_who.Location = new System.Drawing.Point(1715, 53);
+            this.lbl_m4_who.Name = "lbl_m4_who";
+            this.lbl_m4_who.Size = new System.Drawing.Size(38, 36);
+            this.lbl_m4_who.TabIndex = 119;
+            this.lbl_m4_who.Text = "2";
+            this.lbl_m4_who.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // form5_analyst_report
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1003,5 +1067,9 @@
         private System.Windows.Forms.Label lbl_m4_notmarks;
         private System.Windows.Forms.Label lbl_m3_notmarks;
         private System.Windows.Forms.Label lbl_m2_notmarks;
+        private System.Windows.Forms.Label lbl_m1_who;
+        private System.Windows.Forms.Label lbl_m4_who;
+        private System.Windows.Forms.Label lbl_m3_who;
+        private System.Windows.Forms.Label lbl_m2_who;
     }
 }

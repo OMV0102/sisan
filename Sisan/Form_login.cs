@@ -148,10 +148,10 @@ namespace system_analysis
             {
                 label_analyst.Visible = true;
                 comboBox_user.Visible = false;
-                FileInfo fileInf = new FileInfo(directory + "analyst_password.txt");
+                FileInfo fileInf = new FileInfo(directory + "a_pass.txt");
                 if (fileInf.Exists)  // если файл существует вообще
                 {
-                    using (StreamReader sr = new StreamReader(directory + "analyst_password.txt", System.Text.Encoding.UTF8))
+                    using (StreamReader sr = new StreamReader(directory + "a_pass.txt", System.Text.Encoding.UTF8))
                     {
                         password_file = sr.ReadLine();
                     }

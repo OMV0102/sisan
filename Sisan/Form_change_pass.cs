@@ -91,7 +91,7 @@ namespace system_analysis
                         else
                         {
                             // Сохраняем новый пароль
-                            using (StreamWriter sr = new StreamWriter(directory + "analyst_password.txt", false, System.Text.Encoding.UTF8))
+                            using (StreamWriter sr = new StreamWriter(directory + "a_pass.txt", false, System.Text.Encoding.UTF8))
                             {
                                 sr.WriteLine(txt_pass_new.Text);
                             }
@@ -215,10 +215,10 @@ namespace system_analysis
             // если зашли как аналитик, загружаем сразу его пароль
             if (form1_main.an_or_exp == true)
             {
-                FileInfo fileInf = new FileInfo(directory + "analyst_password.txt");
+                FileInfo fileInf = new FileInfo(directory + "a_pass.txt");
                 if (fileInf.Exists)  // если файл существует вообще
                 {
-                    using (StreamReader sr = new StreamReader(directory + "analyst_password.txt", System.Text.Encoding.UTF8))
+                    using (StreamReader sr = new StreamReader(directory + "a_pass.txt", System.Text.Encoding.UTF8))
                     {
                         password_file = sr.ReadLine();
                     }

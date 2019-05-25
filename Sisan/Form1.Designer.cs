@@ -111,7 +111,7 @@
             this.label2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label2.Font = new System.Drawing.Font("Tahoma", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label2.ForeColor = System.Drawing.Color.Black;
-            this.label2.Location = new System.Drawing.Point(239, 107);
+            this.label2.Location = new System.Drawing.Point(244, 85);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(174, 39);
             this.label2.TabIndex = 4;
@@ -149,6 +149,7 @@
             this.label4.Size = new System.Drawing.Size(670, 5);
             this.label4.TabIndex = 59;
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.label4.Visible = false;
             // 
             // lbl_new_dir
             // 
@@ -171,10 +172,10 @@
             this.AllowDrop = true;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(670, 297);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.lbl_new_dir);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.button_minimize);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.button_cross);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button_expert);

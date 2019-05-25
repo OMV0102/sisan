@@ -87,7 +87,7 @@ namespace system_analysis
         // при ЗАГРУЗКЕ ПРИЛОЖЕНИЯ
         private void form1_main_Load(object sender, EventArgs e)
         {
-            string path = global_class.curr_dir + "\\expert_marks\\";
+            string path = global_class.curr_dir + "\\data\\";
             if (Directory.Exists(path) == false)
             {
                 //lbl_new_dir.Visible = true;
