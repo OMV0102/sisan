@@ -239,7 +239,8 @@
             // 
             // list_solution
             // 
-            this.list_solution.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.list_solution.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.list_solution.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.list_solution.FormattingEnabled = true;
             this.list_solution.HorizontalScrollbar = true;
@@ -311,7 +312,8 @@
             // 
             // label_problems
             // 
-            this.label_problems.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.label_problems.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.label_problems.BackColor = System.Drawing.SystemColors.Window;
             this.label_problems.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.label_problems.Font = new System.Drawing.Font("Tahoma", 14F);
@@ -323,7 +325,8 @@
             // 
             // textBox2
             // 
-            this.textBox2.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox2.BackColor = System.Drawing.SystemColors.Window;
             this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.textBox2.Font = new System.Drawing.Font("Tahoma", 12F);
@@ -332,10 +335,12 @@
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(611, 26);
             this.textBox2.TabIndex = 56;
+            this.textBox2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // textBox3
             // 
-            this.textBox3.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.textBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox3.BackColor = System.Drawing.SystemColors.Window;
             this.textBox3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.textBox3.Font = new System.Drawing.Font("Tahoma", 12F);
@@ -344,6 +349,7 @@
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(611, 26);
             this.textBox3.TabIndex = 57;
+            this.textBox3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label4
             // 
