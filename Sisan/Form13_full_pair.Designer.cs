@@ -46,6 +46,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
+            this.label_N = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -112,7 +114,7 @@
             this.btn_save.FlatAppearance.MouseOverBackColor = System.Drawing.Color.SandyBrown;
             this.btn_save.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_save.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btn_save.Location = new System.Drawing.Point(273, 621);
+            this.btn_save.Location = new System.Drawing.Point(288, 618);
             this.btn_save.Name = "btn_save";
             this.btn_save.Size = new System.Drawing.Size(244, 52);
             this.btn_save.TabIndex = 57;
@@ -162,6 +164,7 @@
             this.button_back.BackColor = System.Drawing.SystemColors.Control;
             this.button_back.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button_back.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.button_back.FlatAppearance.BorderSize = 0;
             this.button_back.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button_back.Font = new System.Drawing.Font("Tahoma", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button_back.ForeColor = System.Drawing.Color.Black;
@@ -253,7 +256,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label2.ForeColor = System.Drawing.Color.Black;
-            this.label2.Location = new System.Drawing.Point(321, 289);
+            this.label2.Location = new System.Drawing.Point(321, 272);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(130, 23);
             this.label2.TabIndex = 77;
@@ -298,12 +301,38 @@
             this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.label11.Visible = false;
             // 
+            // label_N
+            // 
+            this.label_N.AutoSize = true;
+            this.label_N.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label_N.ForeColor = System.Drawing.Color.Black;
+            this.label_N.Location = new System.Drawing.Point(698, 378);
+            this.label_N.Name = "label_N";
+            this.label_N.Size = new System.Drawing.Size(33, 19);
+            this.label_N.TabIndex = 80;
+            this.label_N.Text = "NN";
+            this.label_N.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label12.ForeColor = System.Drawing.Color.Black;
+            this.label12.Location = new System.Drawing.Point(518, 378);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(188, 19);
+            this.label12.TabIndex = 81;
+            this.label12.Text = "Всего пар альтернатив: ";
+            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // Form13_full_pair
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.button_back;
             this.ClientSize = new System.Drawing.Size(800, 686);
+            this.Controls.Add(this.label_N);
+            this.Controls.Add(this.label12);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label2);
@@ -353,5 +382,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label_N;
+        private System.Windows.Forms.Label label12;
     }
 }

@@ -79,8 +79,9 @@ namespace system_analysis
                     string line;
                     while ((line = sr.ReadLine()) != null)
                     {
-                        list_solution.Items.Add(line);
                         sol_count++;
+                        list_solution.Items.Add(sol_count + ". " + line);
+                        
                     }
                 }
                 alter = true;
@@ -94,7 +95,7 @@ namespace system_analysis
             {
                 // считаем количество вопросов
                 q_count = (sol_count * sol_count - sol_count) / 2;
-
+                label_N.Text = q_count.ToString();
                 q_list = new List<question>(); // выделили списку оценок экспертов память 
                 question a; // переменная, для добавления в список оценок
 
@@ -410,7 +411,8 @@ namespace system_analysis
                         dataGridView1.Rows[0].Cells[0].Selected = true;
                         this.Hide(); // СКРЫВАЕМ ФОРМУ пока MessageBox показывается 
                         DialogResult otvet = MessageBox.Show(
-                        "Есть ячейки с некорректными значениями, они выделены желтым!\n" +
+                        "Есть ячейки с некорректными значениями!\n" +
+                        " (они выделены желтым)\n" +
                         "Уберите неправильное значение в желтых ячейках, либо укажите корректное значение!",
                         "Ошибка",
                         MessageBoxButtons.OK,
