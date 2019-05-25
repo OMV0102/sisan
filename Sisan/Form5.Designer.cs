@@ -32,10 +32,14 @@
             this.button_minimize = new System.Windows.Forms.Button();
             this.button_cross = new System.Windows.Forms.Button();
             this.comboBox_problems = new System.Windows.Forms.ComboBox();
-            this.label7 = new System.Windows.Forms.Label();
+            this.label_prob = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
+            this.label_head = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btn_m4_who = new System.Windows.Forms.Button();
+            this.btn_m3_who = new System.Windows.Forms.Button();
+            this.btn_m2_who = new System.Windows.Forms.Button();
+            this.btn_m1_who = new System.Windows.Forms.Button();
             this.lbl_m4_notmarks = new System.Windows.Forms.Label();
             this.lbl_m3_notmarks = new System.Windows.Forms.Label();
             this.lbl_m2_notmarks = new System.Windows.Forms.Label();
@@ -83,15 +87,12 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.list_solution = new System.Windows.Forms.ListBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.label_alt = new System.Windows.Forms.Label();
+            this.label_mark = new System.Windows.Forms.Label();
             this.lbl_notmarks = new System.Windows.Forms.Label();
             this.lbl_notprob = new System.Windows.Forms.Label();
             this.lbl_notexp = new System.Windows.Forms.Label();
-            this.btn_m1_who = new System.Windows.Forms.Button();
-            this.btn_m2_who = new System.Windows.Forms.Button();
-            this.btn_m3_who = new System.Windows.Forms.Button();
-            this.btn_m4_who = new System.Windows.Forms.Button();
+            this.btn_extend = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -159,23 +160,24 @@
             this.comboBox_problems.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_problems.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.comboBox_problems.FormattingEnabled = true;
-            this.comboBox_problems.Location = new System.Drawing.Point(112, 75);
+            this.comboBox_problems.Location = new System.Drawing.Point(82, 75);
             this.comboBox_problems.Name = "comboBox_problems";
-            this.comboBox_problems.Size = new System.Drawing.Size(855, 27);
+            this.comboBox_problems.Size = new System.Drawing.Size(933, 27);
             this.comboBox_problems.TabIndex = 45;
             this.comboBox_problems.TabStop = false;
             this.comboBox_problems.SelectedIndexChanged += new System.EventHandler(this.comboBox_problems_SelectedIndexChanged);
             // 
-            // label7
+            // label_prob
             // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label7.ForeColor = System.Drawing.Color.Black;
-            this.label7.Location = new System.Drawing.Point(494, 49);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(109, 23);
-            this.label7.TabIndex = 44;
-            this.label7.Text = "Проблема";
+            this.label_prob.AutoSize = true;
+            this.label_prob.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label_prob.ForeColor = System.Drawing.Color.Black;
+            this.label_prob.Location = new System.Drawing.Point(495, 50);
+            this.label_prob.Name = "label_prob";
+            this.label_prob.Size = new System.Drawing.Size(109, 23);
+            this.label_prob.TabIndex = 44;
+            this.label_prob.Text = "Проблема";
+            this.label_prob.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label5
             // 
@@ -191,16 +193,17 @@
             this.label5.TabIndex = 61;
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // label6
+            // label_head
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label6.ForeColor = System.Drawing.Color.Black;
-            this.label6.Location = new System.Drawing.Point(421, 5);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(283, 29);
-            this.label6.TabIndex = 62;
-            this.label6.Text = "Результаты оцениваний";
+            this.label_head.AutoSize = true;
+            this.label_head.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label_head.ForeColor = System.Drawing.Color.Black;
+            this.label_head.Location = new System.Drawing.Point(420, 5);
+            this.label_head.Name = "label_head";
+            this.label_head.Size = new System.Drawing.Size(283, 29);
+            this.label_head.TabIndex = 62;
+            this.label_head.Text = "Результаты оцениваний";
+            this.label_head.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panel1
             // 
@@ -262,6 +265,80 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1076, 358);
             this.panel1.TabIndex = 63;
+            // 
+            // btn_m4_who
+            // 
+            this.btn_m4_who.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btn_m4_who.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_m4_who.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btn_m4_who.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.ControlDark;
+            this.btn_m4_who.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            this.btn_m4_who.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_m4_who.Font = new System.Drawing.Font("Wingdings", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(2)));
+            this.btn_m4_who.Location = new System.Drawing.Point(1711, 52);
+            this.btn_m4_who.Name = "btn_m4_who";
+            this.btn_m4_who.Size = new System.Drawing.Size(40, 40);
+            this.btn_m4_who.TabIndex = 123;
+            this.btn_m4_who.TabStop = false;
+            this.btn_m4_who.Text = "2";
+            this.btn_m4_who.UseVisualStyleBackColor = false;
+            this.btn_m4_who.Click += new System.EventHandler(this.btn_m4_who_Click);
+            // 
+            // btn_m3_who
+            // 
+            this.btn_m3_who.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btn_m3_who.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_m3_who.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btn_m3_who.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.ControlDark;
+            this.btn_m3_who.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            this.btn_m3_who.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_m3_who.Font = new System.Drawing.Font("Wingdings", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(2)));
+            this.btn_m3_who.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.btn_m3_who.Location = new System.Drawing.Point(1286, 52);
+            this.btn_m3_who.Name = "btn_m3_who";
+            this.btn_m3_who.Size = new System.Drawing.Size(40, 40);
+            this.btn_m3_who.TabIndex = 122;
+            this.btn_m3_who.TabStop = false;
+            this.btn_m3_who.Text = "2";
+            this.btn_m3_who.TextAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.btn_m3_who.UseVisualStyleBackColor = false;
+            this.btn_m3_who.Click += new System.EventHandler(this.btn_m3_who_Click);
+            // 
+            // btn_m2_who
+            // 
+            this.btn_m2_who.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btn_m2_who.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_m2_who.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btn_m2_who.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.ControlDark;
+            this.btn_m2_who.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            this.btn_m2_who.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_m2_who.Font = new System.Drawing.Font("Wingdings", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(2)));
+            this.btn_m2_who.Location = new System.Drawing.Point(863, 52);
+            this.btn_m2_who.Name = "btn_m2_who";
+            this.btn_m2_who.Size = new System.Drawing.Size(40, 40);
+            this.btn_m2_who.TabIndex = 121;
+            this.btn_m2_who.TabStop = false;
+            this.btn_m2_who.Text = "2";
+            this.btn_m2_who.UseVisualStyleBackColor = false;
+            this.btn_m2_who.Click += new System.EventHandler(this.btn_m2_who_Click);
+            // 
+            // btn_m1_who
+            // 
+            this.btn_m1_who.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btn_m1_who.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_m1_who.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btn_m1_who.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.ControlDark;
+            this.btn_m1_who.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            this.btn_m1_who.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_m1_who.Font = new System.Drawing.Font("Wingdings", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(2)));
+            this.btn_m1_who.Location = new System.Drawing.Point(440, 52);
+            this.btn_m1_who.Name = "btn_m1_who";
+            this.btn_m1_who.Size = new System.Drawing.Size(40, 40);
+            this.btn_m1_who.TabIndex = 120;
+            this.btn_m1_who.TabStop = false;
+            this.btn_m1_who.Text = "2";
+            this.btn_m1_who.UseVisualStyleBackColor = false;
+            this.btn_m1_who.Click += new System.EventHandler(this.btn_m1_who_Click);
             // 
             // lbl_m4_notmarks
             // 
@@ -846,37 +923,40 @@
             this.list_solution.FormattingEnabled = true;
             this.list_solution.HorizontalScrollbar = true;
             this.list_solution.ItemHeight = 19;
-            this.list_solution.Location = new System.Drawing.Point(112, 138);
+            this.list_solution.Location = new System.Drawing.Point(82, 138);
             this.list_solution.Name = "list_solution";
-            this.list_solution.Size = new System.Drawing.Size(855, 118);
+            this.list_solution.Size = new System.Drawing.Size(933, 118);
             this.list_solution.TabIndex = 64;
             this.list_solution.TabStop = false;
             this.list_solution.UseTabStops = false;
             // 
-            // label1
+            // label_alt
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.ForeColor = System.Drawing.Color.Black;
-            this.label1.Location = new System.Drawing.Point(478, 108);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(152, 23);
-            this.label1.TabIndex = 65;
-            this.label1.Text = "Альтернативы";
+            this.label_alt.AutoSize = true;
+            this.label_alt.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label_alt.ForeColor = System.Drawing.Color.Black;
+            this.label_alt.Location = new System.Drawing.Point(475, 108);
+            this.label_alt.Name = "label_alt";
+            this.label_alt.Size = new System.Drawing.Size(152, 23);
+            this.label_alt.TabIndex = 65;
+            this.label_alt.Text = "Альтернативы";
+            this.label_alt.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label2
+            // label_mark
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label2.ForeColor = System.Drawing.Color.Black;
-            this.label2.Location = new System.Drawing.Point(422, 263);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(248, 23);
-            this.label2.TabIndex = 66;
-            this.label2.Text = "Результаты оценивания";
+            this.label_mark.AutoSize = true;
+            this.label_mark.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label_mark.ForeColor = System.Drawing.Color.Black;
+            this.label_mark.Location = new System.Drawing.Point(420, 265);
+            this.label_mark.Name = "label_mark";
+            this.label_mark.Size = new System.Drawing.Size(248, 23);
+            this.label_mark.TabIndex = 66;
+            this.label_mark.Text = "Результаты оценивания";
+            this.label_mark.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lbl_notmarks
             // 
+            this.lbl_notmarks.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.lbl_notmarks.AutoSize = true;
             this.lbl_notmarks.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lbl_notmarks.ForeColor = System.Drawing.Color.Red;
@@ -888,6 +968,7 @@
             // 
             // lbl_notprob
             // 
+            this.lbl_notprob.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.lbl_notprob.AutoSize = true;
             this.lbl_notprob.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lbl_notprob.ForeColor = System.Drawing.Color.Red;
@@ -900,6 +981,7 @@
             // 
             // lbl_notexp
             // 
+            this.lbl_notexp.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.lbl_notexp.AutoSize = true;
             this.lbl_notexp.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lbl_notexp.ForeColor = System.Drawing.Color.Red;
@@ -910,79 +992,26 @@
             this.lbl_notexp.Text = "По данной проблеме не назначены эксперты!";
             this.lbl_notexp.Visible = false;
             // 
-            // btn_m1_who
+            // btn_extend
             // 
-            this.btn_m1_who.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btn_m1_who.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_m1_who.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btn_m1_who.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.ControlDark;
-            this.btn_m1_who.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
-            this.btn_m1_who.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_m1_who.Font = new System.Drawing.Font("Wingdings", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(2)));
-            this.btn_m1_who.Location = new System.Drawing.Point(440, 52);
-            this.btn_m1_who.Name = "btn_m1_who";
-            this.btn_m1_who.Size = new System.Drawing.Size(40, 40);
-            this.btn_m1_who.TabIndex = 120;
-            this.btn_m1_who.TabStop = false;
-            this.btn_m1_who.Text = "2";
-            this.btn_m1_who.UseVisualStyleBackColor = false;
-            this.btn_m1_who.Click += new System.EventHandler(this.btn_m1_who_Click);
-            // 
-            // btn_m2_who
-            // 
-            this.btn_m2_who.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btn_m2_who.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_m2_who.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btn_m2_who.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.ControlDark;
-            this.btn_m2_who.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
-            this.btn_m2_who.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_m2_who.Font = new System.Drawing.Font("Wingdings", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(2)));
-            this.btn_m2_who.Location = new System.Drawing.Point(863, 52);
-            this.btn_m2_who.Name = "btn_m2_who";
-            this.btn_m2_who.Size = new System.Drawing.Size(40, 40);
-            this.btn_m2_who.TabIndex = 121;
-            this.btn_m2_who.TabStop = false;
-            this.btn_m2_who.Text = "2";
-            this.btn_m2_who.UseVisualStyleBackColor = false;
-            this.btn_m2_who.Click += new System.EventHandler(this.btn_m2_who_Click);
-            // 
-            // btn_m3_who
-            // 
-            this.btn_m3_who.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btn_m3_who.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_m3_who.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btn_m3_who.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.ControlDark;
-            this.btn_m3_who.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
-            this.btn_m3_who.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_m3_who.Font = new System.Drawing.Font("Wingdings", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(2)));
-            this.btn_m3_who.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.btn_m3_who.Location = new System.Drawing.Point(1286, 52);
-            this.btn_m3_who.Name = "btn_m3_who";
-            this.btn_m3_who.Size = new System.Drawing.Size(40, 40);
-            this.btn_m3_who.TabIndex = 122;
-            this.btn_m3_who.TabStop = false;
-            this.btn_m3_who.Text = "2";
-            this.btn_m3_who.TextAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.btn_m3_who.UseVisualStyleBackColor = false;
-            this.btn_m3_who.Click += new System.EventHandler(this.btn_m3_who_Click);
-            // 
-            // btn_m4_who
-            // 
-            this.btn_m4_who.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btn_m4_who.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_m4_who.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btn_m4_who.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.ControlDark;
-            this.btn_m4_who.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
-            this.btn_m4_who.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_m4_who.Font = new System.Drawing.Font("Wingdings", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(2)));
-            this.btn_m4_who.Location = new System.Drawing.Point(1711, 52);
-            this.btn_m4_who.Name = "btn_m4_who";
-            this.btn_m4_who.Size = new System.Drawing.Size(40, 40);
-            this.btn_m4_who.TabIndex = 123;
-            this.btn_m4_who.TabStop = false;
-            this.btn_m4_who.Text = "2";
-            this.btn_m4_who.UseVisualStyleBackColor = false;
-            this.btn_m4_who.Click += new System.EventHandler(this.btn_m4_who_Click);
+            this.btn_extend.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.btn_extend.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btn_extend.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_extend.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btn_extend.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.ControlDark;
+            this.btn_extend.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            this.btn_extend.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_extend.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btn_extend.Location = new System.Drawing.Point(1075, 65);
+            this.btn_extend.Name = "btn_extend";
+            this.btn_extend.Size = new System.Drawing.Size(25, 211);
+            this.btn_extend.TabIndex = 124;
+            this.btn_extend.TabStop = false;
+            this.btn_extend.Tag = "0";
+            this.btn_extend.Text = "→\r\n→\r\n→\r\n→\r\n→\r\n→\r\n→\r\n→\r\n→\r\n→\r\n→";
+            this.btn_extend.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btn_extend.UseVisualStyleBackColor = false;
+            this.btn_extend.Click += new System.EventHandler(this.btn_extend_Click);
             // 
             // form5_analyst_report
             // 
@@ -991,17 +1020,18 @@
             this.BackColor = System.Drawing.SystemColors.Control;
             this.CancelButton = this.button_back;
             this.ClientSize = new System.Drawing.Size(1100, 670);
+            this.Controls.Add(this.btn_extend);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.lbl_notexp);
             this.Controls.Add(this.lbl_notprob);
             this.Controls.Add(this.lbl_notmarks);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.label_mark);
+            this.Controls.Add(this.label_alt);
             this.Controls.Add(this.list_solution);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label_head);
             this.Controls.Add(this.comboBox_problems);
-            this.Controls.Add(this.label7);
+            this.Controls.Add(this.label_prob);
             this.Controls.Add(this.button_cross);
             this.Controls.Add(this.button_minimize);
             this.Controls.Add(this.button_back);
@@ -1024,13 +1054,13 @@
         private System.Windows.Forms.Button button_minimize;
         private System.Windows.Forms.Button button_cross;
         private System.Windows.Forms.ComboBox comboBox_problems;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label_prob;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label_head;
         private System.Windows.Forms.Panel panel1;
         public System.Windows.Forms.ListBox list_solution;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label_alt;
+        private System.Windows.Forms.Label label_mark;
         private System.Windows.Forms.Label label3;
         public System.Windows.Forms.ListBox listBox0_alt;
         public System.Windows.Forms.ListBox listBox0_ves;
@@ -1084,5 +1114,6 @@
         private System.Windows.Forms.Button btn_m4_who;
         private System.Windows.Forms.Button btn_m3_who;
         private System.Windows.Forms.Button btn_m2_who;
+        private System.Windows.Forms.Button btn_extend;
     }
 }

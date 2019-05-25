@@ -266,6 +266,7 @@ namespace system_analysis
             if (text.Length > 0)
             {
                 lbl_notprob.Visible = false;
+                btn_extend.Visible = true;
                 using (StreamReader sr = new StreamReader(directory + "problems.txt", System.Text.Encoding.UTF8))
                 {
                     string line = "";
@@ -418,9 +419,10 @@ namespace system_analysis
             {
                 prob_count = 0;
                 lbl_notprob.Visible = true;
-                label1.Visible = false;
-                label2.Visible = false;
+                label_alt.Visible = false;
+                label_mark.Visible = false;
                 panel1.Visible = false;
+                btn_extend.Visible = false;
                 list_solution.Visible = false;
                 this.Height = 300;
             }
@@ -707,8 +709,9 @@ namespace system_analysis
                 {
                     //================================
                     lbl_notexp.Visible = false;
-                    label2.Visible = true;
+                    label_mark.Visible = true;
                     panel1.Visible = true;
+                    btn_extend.Visible = true;
                     //================================
                     bool notmarks = true;
                     for (int i = 0; i < exp_count; i++)
@@ -723,8 +726,10 @@ namespace system_analysis
                     {
                         //================================
                         lbl_notmarks.Visible = false;
-                        label2.Visible = true;
+                        label_mark.Visible = true;
                         panel1.Visible = true;
+                        btn_extend.Visible = true;
+
                         //================================
                         // Дальше ВЫВОДИМ РЕЗУЛЬТАТЫ
 
@@ -759,8 +764,9 @@ namespace system_analysis
                     {
                         //================================
                         lbl_notmarks.Visible = true;
-                        label2.Visible = false;
+                        label_mark.Visible = false;
                         panel1.Visible = false;
+                        btn_extend.Visible = false;
                         //================================
                     }
                 }
@@ -769,8 +775,9 @@ namespace system_analysis
                 {
                     //================================
                     lbl_notexp.Visible = true;
-                    label2.Visible = false;
+                    label_mark.Visible = false;
                     panel1.Visible = false;
+                    btn_extend.Visible = false;
                     //================================
                 }
 
@@ -1512,6 +1519,34 @@ namespace system_analysis
                 show_whom4 = true;
             }
         }
+
+        // кнопка СТРЕЛКА (РАСШИРЯЕТ/СЖИМАЕТ ФОРМУ СЛЕВА )
+        private void btn_extend_Click(object sender, EventArgs e)
+        {
+            // если окно в нормальном состоянии
+            if(btn_extend.Tag.ToString() == "0")
+            {
+                btn_extend.Tag = "1";
+                btn_extend.Text = "←\n←\n←\n←\n←\n←\n←\n←\n←\n←\n←";
+                this.Width = 1710;
+                label_head.Left = 730;
+                label_prob.Left = 800;
+                label_alt.Left = 790;
+                label_mark.Left = 740;
+                
+            }
+            // если окно в растянутом состоянии
+            else if (btn_extend.Tag.ToString() == "1")
+            {
+                btn_extend.Tag = "0";
+                btn_extend.Text = "→\n→\n→\n→\n→\n→\n→\n→\n→\n→\n→";
+                this.Width = 1100;
+                label_head.Left = 420;
+                label_prob.Left = 495;
+                label_alt.Left = 475;
+                label_mark.Left = 420;
+            }
+        }
         
         // кнопка ПОКАЗАТЬ МАТРИЦУ 0
         private void btn_matrix0_Click(object sender, EventArgs e)
@@ -1522,5 +1557,7 @@ namespace system_analysis
             form0.Show();
             this.Hide();*/
         }
+
+       
     }
 }
