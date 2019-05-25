@@ -59,16 +59,14 @@ namespace system_analysis
         }
 
         //=================================================================
-        //public string problem; // текст проблемы
-        //public int num_problem; // уникальный номер проблемы (ID)
-        //public int N = -1; //порядковый номер проблемы в list_prob
-        //public int E = -1; //порядковый номер эксперта в list_prob
         public int prob_count = 0;   // количество проблем
         st_problem prob; // вспомогательная переменная для добавления проблемы
         public int alter_count = 0;   // количество альтернатив для выбранной проблемы
         public int exp_count = 0;   // количество экспертов для выбранной проблемы
-        public int index = -1; // индекс проблемы при выборе комобобокса проблемы
-        public int index_exp = -1;  // индекс эксперта при выборе комобобокса экспертов в методе 0
+        public int index_prob = -1; // индекс проблемы при выборе комобобокса проблемы
+        public int index_exp = -1;  // индекс эксперта в prob_list при выборе комобобокса экспертов в методе 0
+        //=========================
+        //для будущих фич (пока не используется)
         public int type_matr = -1;  // тип матрицы для разных методов , при нажатии на кнопку "показать матрицу"
         public int matr_count = 0;  // количество открытых форм с матрицами для разных методов , при нажатии на кнопку "показать матрицу"
         //======================================================================
@@ -678,21 +676,21 @@ namespace system_analysis
         // ВЫБОР ПРОБЛЕМЫ в comboBox_problems
         private void comboBox_problems_SelectedIndexChanged(object sender, EventArgs e)
         {
-            index = comboBox_problems.SelectedIndex;
-            if (index >= 0 && index < prob_count)
+            index_prob = comboBox_problems.SelectedIndex;
+            if (index_prob >= 0 && index_prob < prob_count)
             {
-                exp_count = prob_list[index].status_prob;
-                alter_count = alter_list[index].alters.Count();
+                exp_count = prob_list[index_prob].status_prob;
+                alter_count = alter_list[index_prob].alters.Count();
                 //===== ВЫВОДИМ АЛЬТЕРНАТИВЫ ======
                 list_solution.Items.Clear();
                 for (int i = 0; i < alter_count; i++)
                 {
-                    list_solution.Items.Add(alter_list[index].alters[i]);
+                    list_solution.Items.Add(alter_list[index_prob].alters[i]);
                 }
                 //=================================
 
                 // если у проблемы как минимум назначен один эксперт
-                if (prob_list[index].status_prob > 0)
+                if (prob_list[index_prob].status_prob > 0)
                 {
                     //================================
                     lbl_notexp.Visible = false;
@@ -702,9 +700,9 @@ namespace system_analysis
                     bool notmarks = true;
                     for (int i = 0; i < exp_count; i++)
                     {
-                        if (prob_list[index].m0.inf[i].status == 1 || prob_list[index].m1.inf[i].status == 1)
+                        if (prob_list[index_prob].m0.inf[i].status == 1 || prob_list[index_prob].m1.inf[i].status == 1)
                             notmarks = false;
-                        if (prob_list[index].m2.inf[i].status == 1 || prob_list[index].m3.inf[i].status == 1 || prob_list[index].m4.inf[i].status == 1)
+                        if (prob_list[index_prob].m2.inf[i].status == 1 || prob_list[index_prob].m3.inf[i].status == 1 || prob_list[index_prob].m4.inf[i].status == 1)
                             notmarks = false;
                     }
 
@@ -724,7 +722,7 @@ namespace system_analysis
                         {
                             for (int i = 0; i < exp_list.Count; i++)
                             {
-                                if (prob_list[index].m0.inf[k].id_exp == exp_list[i].id_exp)
+                                if (prob_list[index_prob].m0.inf[k].id_exp == exp_list[i].id_exp)
                                 {
                                     comboBox_exp.Items.Add(exp_list[i].fio);
                                 }
@@ -754,7 +752,7 @@ namespace system_analysis
                     }
                 }
                 // если у проблемы не назначены эксперты
-                else if (prob_list[index].status_prob == 0)
+                else if (prob_list[index_prob].status_prob == 0)
                 {
                     //================================
                     lbl_notexp.Visible = true;
@@ -766,7 +764,7 @@ namespace system_analysis
             }
         }
 
-        // ВЫБОР ЭКСПЕРТА В МЕТОДЕ 0 (ПАРНЫХ СРАВНЕНИЙ)
+        // ВЫБОР ЭКСПЕРТА В МЕТОДЕ 0 (ВЫВОД РЕЗУЛЬТАТОВ МЕТОДА 0)
         private void comboBox_exp_SelectedIndexChanged(object sender, EventArgs e)
         {
             index_exp = comboBox_exp.SelectedIndex;
@@ -789,7 +787,7 @@ namespace system_analysis
                     // ищем в списке проблем в методе 0 эксперта по найдненному id
                     for (int i = 0; i < exp_count; i++)
                     {
-                        if (prob_list[index].m0.inf[i].id_exp == id_exp)
+                        if (prob_list[index_prob].m0.inf[i].id_exp == id_exp)
                         {
                             index_exp = i;
                         }
@@ -797,7 +795,7 @@ namespace system_analysis
                     // если нашли индекс эксперта по его id в списке проблем метода 0
                     if (index_exp >= 0 && index_exp < exp_count)
                     {
-                        if (prob_list[index].m0.inf[index_exp].status == 1)
+                        if (prob_list[index_prob].m0.inf[index_exp].status == 1)
                         {
                             //===================================
                             label8.Visible = true;
@@ -817,8 +815,8 @@ namespace system_analysis
 
                             for (int i = 0; i < alter_count; i++)
                             {
-                                alter[i] = alter_list[index].alters[i];
-                                ves[i] = Convert.ToInt32(prob_list[index].m0.inf[index_exp].ves[i]);
+                                alter[i] = alter_list[index_prob].alters[i];
+                                ves[i] = Convert.ToInt32(prob_list[index_prob].m0.inf[index_exp].ves[i]);
                             }
                             // сортируем альтернативы
                             // сортировка взята с https://metanit.com/sharp/tutorial/2.7.php
@@ -867,7 +865,7 @@ namespace system_analysis
             int exp_otvet = 0;
             for (int i = 0; i < exp_count; i++)
             {
-                if (prob_list[index].m1.inf[i].status == 1)
+                if (prob_list[index_prob].m1.inf[i].status == 1)
                 {
                     exp_otvet++;
                 }
@@ -896,8 +894,8 @@ namespace system_analysis
 
                 for (int i = 0; i < alter_count; i++)
                 {
-                    alter[i] = alter_list[index].alters[i];
-                    ves[i] = Convert.ToInt32(prob_list[index].m1.ves[i]);
+                    alter[i] = alter_list[index_prob].alters[i];
+                    ves[i] = Convert.ToInt32(prob_list[index_prob].m1.ves[i]);
                 }
                 // сортируем альтернативы
                 // сортировка взята с https://metanit.com/sharp/tutorial/2.7.php
@@ -945,7 +943,7 @@ namespace system_analysis
             int exp_otvet = 0;
             for (int i = 0; i < exp_count; i++)
             {
-                if (prob_list[index].m2.inf[i].status == 1)
+                if (prob_list[index_prob].m2.inf[i].status == 1)
                 {
                     exp_otvet++;
                 }
@@ -974,8 +972,8 @@ namespace system_analysis
 
                 for (int i = 0; i < alter_count; i++)
                 {
-                    alter[i] = alter_list[index].alters[i];
-                    ves[i] = Convert.ToInt32(prob_list[index].m2.ves[i]);
+                    alter[i] = alter_list[index_prob].alters[i];
+                    ves[i] = Convert.ToInt32(prob_list[index_prob].m2.ves[i]);
                 }
                 // сортируем альтернативы
                 // сортировка взята с https://metanit.com/sharp/tutorial/2.7.php
@@ -1023,7 +1021,7 @@ namespace system_analysis
             int exp_otvet = 0;
             for (int i = 0; i < exp_count; i++)
             {
-                if (prob_list[index].m3.inf[i].status == 1)
+                if (prob_list[index_prob].m3.inf[i].status == 1)
                 {
                     exp_otvet++;
                 }
@@ -1052,8 +1050,8 @@ namespace system_analysis
 
                 for (int i = 0; i < alter_count; i++)
                 {
-                    alter[i] = alter_list[index].alters[i];
-                    ves[i] = Convert.ToInt32(prob_list[index].m3.ves[i]);
+                    alter[i] = alter_list[index_prob].alters[i];
+                    ves[i] = Convert.ToInt32(prob_list[index_prob].m3.ves[i]);
                 }
                 // сортируем альтернативы
                 // сортировка взята с https://metanit.com/sharp/tutorial/2.7.php
@@ -1101,7 +1099,7 @@ namespace system_analysis
             int exp_otvet = 0;
             for (int i = 0; i < exp_count; i++)
             {
-                if (prob_list[index].m4.inf[i].status == 1)
+                if (prob_list[index_prob].m4.inf[i].status == 1)
                 {
                     exp_otvet++;
                 }
@@ -1130,8 +1128,8 @@ namespace system_analysis
 
                 for (int i = 0; i < alter_count; i++)
                 {
-                    alter[i] = alter_list[index].alters[i];
-                    ves[i] = Convert.ToInt32(prob_list[index].m4.ves[i]);
+                    alter[i] = alter_list[index_prob].alters[i];
+                    ves[i] = Convert.ToInt32(prob_list[index_prob].m4.ves[i]);
                 }
                 // сортируем альтернативы
                 // сортировка взята с https://metanit.com/sharp/tutorial/2.7.php
@@ -1177,10 +1175,10 @@ namespace system_analysis
         private void btn_matrix0_Click(object sender, EventArgs e)
         {
             // показываем форму с введенной матрицей
-            form6_matrix form0 = new form6_matrix();
+            /*form6_matrix form0 = new form6_matrix();
             form0.Owner = this;
             form0.Show();
-            //this.Hide();
+            this.Hide();*/
         }
     }
 }

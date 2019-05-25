@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace system_analysis
 {
@@ -86,9 +87,14 @@ namespace system_analysis
         // при ЗАГРУЗКЕ ПРИЛОЖЕНИЯ
         private void form1_main_Load(object sender, EventArgs e)
         {
-
-            //string a = global_class.path;
-            //string b = global_class.s;
+            string path = global_class.curr_dir + "\\expert_marks\\";
+            if (Directory.Exists(path) == false)
+            {
+                //lbl_new_dir.Visible = true;
+                Directory.CreateDirectory(path);
+                File.CreateText(path + "problems.txt");
+            }
+            global_class.main_directory = path;
         }
     }
 
@@ -96,8 +102,10 @@ namespace system_analysis
     {
         // ПУТЬ К ОСНОВНОМУ РАБОЧЕМУ КАТАЛОГУ
         // ЕСЛИ МЕНЯТЬ ПУТЬ, ТО ТОЛЬКО ТУТ
-        public static string main_directory = @"C:\expert_marks\";
-        //public static string path = System.Reflection.Assembly.GetExecutingAssembly().Location;
-        //public static string s = Environment.CurrentDirectory;
+        public static string main_directory;  // сюда присваиваем каталог с данными
+        // путь к текущему каталогу где лежит приложение С именем приложения
+        public static string path_app = System.Reflection.Assembly.GetExecutingAssembly().Location;
+        // путь к текущему каталогу где лежит приложение БЕЗ имени приложения
+        public static string curr_dir = Environment.CurrentDirectory;
     }
 }

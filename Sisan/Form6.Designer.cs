@@ -120,11 +120,11 @@
             // lbl_metod
             // 
             this.lbl_metod.AutoSize = true;
-            this.lbl_metod.Font = new System.Drawing.Font("Tahoma", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lbl_metod.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lbl_metod.ForeColor = System.Drawing.Color.Black;
-            this.lbl_metod.Location = new System.Drawing.Point(69, 36);
+            this.lbl_metod.Location = new System.Drawing.Point(60, 2);
             this.lbl_metod.Name = "lbl_metod";
-            this.lbl_metod.Size = new System.Drawing.Size(193, 42);
+            this.lbl_metod.Size = new System.Drawing.Size(186, 38);
             this.lbl_metod.TabIndex = 72;
             this.lbl_metod.Text = "Матрица для метода\r\nназвание метода";
             this.lbl_metod.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;

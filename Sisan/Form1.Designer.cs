@@ -34,6 +34,8 @@
             this.button_cross = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.button_minimize = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.lbl_new_dir = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // button_analyst
@@ -88,13 +90,11 @@
             this.button_cross.BackColor = System.Drawing.SystemColors.Control;
             this.button_cross.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button_cross.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.button_cross.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(238)))), ((int)(((byte)(240)))));
-            this.button_cross.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(238)))), ((int)(((byte)(240)))));
-            this.button_cross.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(238)))), ((int)(((byte)(240)))));
+            this.button_cross.FlatAppearance.BorderSize = 0;
             this.button_cross.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button_cross.Font = new System.Drawing.Font("Times New Roman", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button_cross.ForeColor = System.Drawing.Color.Black;
-            this.button_cross.Location = new System.Drawing.Point(633, 0);
+            this.button_cross.Location = new System.Drawing.Point(631, 0);
             this.button_cross.Name = "button_cross";
             this.button_cross.Size = new System.Drawing.Size(40, 40);
             this.button_cross.TabIndex = 3;
@@ -105,11 +105,13 @@
             // 
             // label2
             // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
             this.label2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label2.Font = new System.Drawing.Font("Tahoma", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label2.ForeColor = System.Drawing.Color.Black;
-            this.label2.Location = new System.Drawing.Point(239, 81);
+            this.label2.Location = new System.Drawing.Point(239, 107);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(174, 39);
             this.label2.TabIndex = 4;
@@ -120,13 +122,11 @@
             this.button_minimize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button_minimize.BackColor = System.Drawing.SystemColors.Control;
             this.button_minimize.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button_minimize.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(238)))), ((int)(((byte)(240)))));
-            this.button_minimize.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(238)))), ((int)(((byte)(240)))));
-            this.button_minimize.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(238)))), ((int)(((byte)(240)))));
+            this.button_minimize.FlatAppearance.BorderSize = 0;
             this.button_minimize.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button_minimize.Font = new System.Drawing.Font("Tahoma", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button_minimize.ForeColor = System.Drawing.Color.Black;
-            this.button_minimize.Location = new System.Drawing.Point(582, -10);
+            this.button_minimize.Location = new System.Drawing.Point(580, -10);
             this.button_minimize.Name = "button_minimize";
             this.button_minimize.Size = new System.Drawing.Size(40, 40);
             this.button_minimize.TabIndex = 5;
@@ -136,11 +136,43 @@
             this.button_minimize.UseVisualStyleBackColor = false;
             this.button_minimize.Click += new System.EventHandler(this.button_minimize_Click);
             // 
+            // label4
+            // 
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label4.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.label4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label4.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label4.ForeColor = System.Drawing.Color.Black;
+            this.label4.Location = new System.Drawing.Point(0, 40);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(670, 5);
+            this.label4.TabIndex = 59;
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // lbl_new_dir
+            // 
+            this.lbl_new_dir.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbl_new_dir.AutoSize = true;
+            this.lbl_new_dir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.lbl_new_dir.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lbl_new_dir.ForeColor = System.Drawing.Color.Black;
+            this.lbl_new_dir.Location = new System.Drawing.Point(128, 51);
+            this.lbl_new_dir.Name = "lbl_new_dir";
+            this.lbl_new_dir.Size = new System.Drawing.Size(418, 46);
+            this.lbl_new_dir.TabIndex = 60;
+            this.lbl_new_dir.Text = "В приложении НЕ сохранено никаких данных.\r\nБыла создана новая директория для данн" +
+    "ых.";
+            this.lbl_new_dir.Visible = false;
+            // 
             // form1_main
             // 
             this.AllowDrop = true;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(672, 297);
+            this.ClientSize = new System.Drawing.Size(670, 297);
+            this.Controls.Add(this.lbl_new_dir);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.button_minimize);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.button_cross);
@@ -168,6 +200,8 @@
         private System.Windows.Forms.Button button_cross;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button button_minimize;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lbl_new_dir;
     }
 }
 
