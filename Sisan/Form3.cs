@@ -608,7 +608,7 @@ namespace system_analysis
             }
         }
 
-        // при загрузке формы
+        // при ЗАГРУЗКЕ ФОРМЫ
         private void form3_analyst_add_Load(object sender, EventArgs e)
         {
             list_solution.Items.Clear();

@@ -691,6 +691,8 @@ namespace system_analysis
         // ВЫБОР ПРОБЛЕМЫ в comboBox_problems
         private void comboBox_problems_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (btn_extend.Tag.ToString() == "1")
+                btn_extend_Click(null, null);
             index_prob = comboBox_problems.SelectedIndex;
             if (index_prob >= 0 && index_prob < prob_count)
             {
