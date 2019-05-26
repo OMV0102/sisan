@@ -261,7 +261,7 @@
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.label15);
-            this.panel1.Location = new System.Drawing.Point(12, 299);
+            this.panel1.Location = new System.Drawing.Point(12, 332);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1076, 358);
             this.panel1.TabIndex = 63;
@@ -923,9 +923,9 @@
             this.list_solution.FormattingEnabled = true;
             this.list_solution.HorizontalScrollbar = true;
             this.list_solution.ItemHeight = 19;
-            this.list_solution.Location = new System.Drawing.Point(82, 138);
+            this.list_solution.Location = new System.Drawing.Point(82, 135);
             this.list_solution.Name = "list_solution";
-            this.list_solution.Size = new System.Drawing.Size(933, 118);
+            this.list_solution.Size = new System.Drawing.Size(933, 156);
             this.list_solution.TabIndex = 64;
             this.list_solution.TabStop = false;
             this.list_solution.UseTabStops = false;
@@ -935,7 +935,7 @@
             this.label_alt.AutoSize = true;
             this.label_alt.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label_alt.ForeColor = System.Drawing.Color.Black;
-            this.label_alt.Location = new System.Drawing.Point(475, 108);
+            this.label_alt.Location = new System.Drawing.Point(475, 105);
             this.label_alt.Name = "label_alt";
             this.label_alt.Size = new System.Drawing.Size(152, 23);
             this.label_alt.TabIndex = 65;
@@ -947,7 +947,7 @@
             this.label_mark.AutoSize = true;
             this.label_mark.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label_mark.ForeColor = System.Drawing.Color.Black;
-            this.label_mark.Location = new System.Drawing.Point(420, 265);
+            this.label_mark.Location = new System.Drawing.Point(420, 299);
             this.label_mark.Name = "label_mark";
             this.label_mark.Size = new System.Drawing.Size(248, 23);
             this.label_mark.TabIndex = 66;
@@ -960,7 +960,7 @@
             this.lbl_notmarks.AutoSize = true;
             this.lbl_notmarks.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lbl_notmarks.ForeColor = System.Drawing.Color.Red;
-            this.lbl_notmarks.Location = new System.Drawing.Point(218, 400);
+            this.lbl_notmarks.Location = new System.Drawing.Point(218, 416);
             this.lbl_notmarks.Name = "lbl_notmarks";
             this.lbl_notmarks.Size = new System.Drawing.Size(670, 23);
             this.lbl_notmarks.TabIndex = 67;
@@ -972,7 +972,7 @@
             this.lbl_notprob.AutoSize = true;
             this.lbl_notprob.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lbl_notprob.ForeColor = System.Drawing.Color.Red;
-            this.lbl_notprob.Location = new System.Drawing.Point(419, 138);
+            this.lbl_notprob.Location = new System.Drawing.Point(419, 154);
             this.lbl_notprob.Name = "lbl_notprob";
             this.lbl_notprob.Size = new System.Drawing.Size(251, 23);
             this.lbl_notprob.TabIndex = 68;
@@ -985,7 +985,7 @@
             this.lbl_notexp.AutoSize = true;
             this.lbl_notexp.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lbl_notexp.ForeColor = System.Drawing.Color.Red;
-            this.lbl_notexp.Location = new System.Drawing.Point(348, 400);
+            this.lbl_notexp.Location = new System.Drawing.Point(348, 416);
             this.lbl_notexp.Name = "lbl_notexp";
             this.lbl_notexp.Size = new System.Drawing.Size(463, 23);
             this.lbl_notexp.TabIndex = 69;
@@ -1002,7 +1002,7 @@
             this.btn_extend.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
             this.btn_extend.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_extend.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btn_extend.Location = new System.Drawing.Point(1075, 65);
+            this.btn_extend.Location = new System.Drawing.Point(1075, 81);
             this.btn_extend.Name = "btn_extend";
             this.btn_extend.Size = new System.Drawing.Size(25, 211);
             this.btn_extend.TabIndex = 124;
@@ -1019,7 +1019,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.CancelButton = this.button_back;
-            this.ClientSize = new System.Drawing.Size(1100, 670);
+            this.ClientSize = new System.Drawing.Size(1100, 703);
             this.Controls.Add(this.btn_extend);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.lbl_notexp);
