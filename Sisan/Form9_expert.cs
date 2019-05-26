@@ -52,6 +52,8 @@ namespace system_analysis
         public int N = -1; //порядковый номер проблемы в list_prob
         public int E = -1; //порядковый номер эксперта в list_prob
         public string fio; // ФИО эксперта для отображения вверху формы
+        public int exp_count; // количество экспертов назначенных к проблеме
+        public int prob_count; // количество проблем
 
         // кнопка СВЕРНУТЬ ОКНО
         private void button_minimize_Click(object sender, EventArgs e)
@@ -124,14 +126,13 @@ namespace system_analysis
                 {
                     text = sr.ReadToEnd();
                 }
-
             }
                 
-            if (text.Length != 0)
+            if (text.Length > 0)
             {
                 using (StreamReader sr = new StreamReader(directory + "problems.txt", System.Text.Encoding.UTF8))
                 {
-                    int i = 0;
+                    prob_count = 0;
                     while ((text = sr.ReadLine()) != null)
                     {
                         words = text.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
@@ -143,31 +144,27 @@ namespace system_analysis
                         a.txt_prob = "";
                         for (int j = 2; j < words.Count(); j++)
                             a.txt_prob += words[j] + " ";
-                        a.exp = new st_exp[1]; // выделили ПАМЯТЬ под массив экспертов (пока что 1)
                         // теперь читаем group
-                        int N = 0;
+                        exp_count = 0;
                         FileInfo fileInf1 = new FileInfo(directory + "group" + a.num_prob + ".txt");
                         if (fileInf1.Exists)  // если файл существует вообще
                         {
                             using (StreamReader sr1 = new StreamReader(directory + "group" + a.num_prob + ".txt", System.Text.Encoding.UTF8))
                             {
-                                
                                 while ((text = sr1.ReadLine()) != null)
                                 {
-                                    N++;
+                                    exp_count++;
                                 }
                             }
-
                         }
 
-                        if (N != 0)  // Количество экспертов
+                        if (exp_count > 0)  // Количество экспертов
                         {
+                            //запоминаем инфу о экспертах 
+                             a.exp = new st_exp[exp_count]; // выделили ПАМЯТЬ под массив экспертов (пока что 1)
+                             int j = 0;
                             using (StreamReader sr1 = new StreamReader(directory + "group" + a.num_prob + ".txt", System.Text.Encoding.UTF8))
                             {
-                                //запоминаем инфу о экспертах 
-                                Array.Resize(ref a.exp, N); // перевыделили ПАМЯТЬ под экспертов
-
-                                int j = 0;
                                 while ((text = sr1.ReadLine()) != null)
                                 {
                                     words = text.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
@@ -191,10 +188,9 @@ namespace system_analysis
                                 }
 
                             }
+                            list_prob.Add(a);
+                            prob_count++;
                         }
-
-                        list_prob.Add(a);
-                        i++;
                     }
                 }
             }
@@ -204,11 +200,11 @@ namespace system_analysis
             // теперь просматриваем все, что считали
             // добавляем в  комбобокс только те проблемы, которые можно смотреть эксперту
 
-            if (list_prob.Count > 0) //если наш могучий список не пуст
+            if (prob_count > 0) //если наш могучий список не пуст
             {
-                for (int i = 0; i < list_prob.Count; i++)
+                for (int i = 0; i < prob_count; i++)
                 {
-                    for (int j = 0; j < list_prob[i].exp.Length; j++)
+                    for (int j = 0; j < list_prob[i].exp.Count(); j++)
                     {
                         if (form1_main.num_expert == list_prob[i].exp[j].id_exp)
                         {
@@ -436,12 +432,14 @@ namespace system_analysis
                 {
                     N = i; // запомнили 
                     num_problem = list_prob[i].num_prob;
-                }
-                    
-                for (int j = 0; j < list_prob[i].exp.Count(); j++)
-                {
-                    if (list_prob[i].exp[j].id_exp == form1_main.num_expert)
-                        E = j;
+
+                    for (int j = 0; j < list_prob[i].exp.Count(); j++)
+                    {
+                        if (list_prob[i].exp[j].id_exp == form1_main.num_expert)
+                        {
+                            E = j;
+                        }
+                    }
                 }
             }
 

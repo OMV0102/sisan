@@ -136,8 +136,9 @@ namespace system_analysis
                 {
                     while ((text = sr.ReadLine()) != null)
                     {
-                        list_solution.Items.Add(text);
                         sol_count++;
+                        list_solution.Items.Add(sol_count + ". " + text);
+                        
                     }
                 }
                 alter = true;

@@ -314,6 +314,7 @@
             // 
             this.label_problems.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.label_problems.AutoEllipsis = true;
             this.label_problems.BackColor = System.Drawing.SystemColors.Window;
             this.label_problems.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.label_problems.Font = new System.Drawing.Font("Tahoma", 14F);
@@ -327,6 +328,7 @@
             // 
             this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox2.AutoEllipsis = true;
             this.textBox2.BackColor = System.Drawing.SystemColors.Window;
             this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.textBox2.Font = new System.Drawing.Font("Tahoma", 12F);
@@ -341,6 +343,7 @@
             // 
             this.textBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox3.AutoEllipsis = true;
             this.textBox3.BackColor = System.Drawing.SystemColors.Window;
             this.textBox3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.textBox3.Font = new System.Drawing.Font("Tahoma", 12F);

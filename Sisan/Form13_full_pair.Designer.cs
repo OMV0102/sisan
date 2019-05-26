@@ -97,6 +97,7 @@
             // 
             // label_problem
             // 
+            this.label_problem.AutoEllipsis = true;
             this.label_problem.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.label_problem.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label_problem.Font = new System.Drawing.Font("Tahoma", 12.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
