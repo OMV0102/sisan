@@ -199,6 +199,7 @@
             // 
             this.radioButton1.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.radioButton1.AutoSize = true;
+            this.radioButton1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.radioButton1.FlatAppearance.BorderSize = 0;
             this.radioButton1.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.radioButton1.Location = new System.Drawing.Point(164, 559);
@@ -213,6 +214,7 @@
             // 
             this.radioButton2.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.radioButton2.AutoSize = true;
+            this.radioButton2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.radioButton2.FlatAppearance.BorderSize = 0;
             this.radioButton2.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.radioButton2.Location = new System.Drawing.Point(164, 589);
@@ -227,6 +229,7 @@
             // 
             this.radioButton3.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.radioButton3.AutoSize = true;
+            this.radioButton3.Cursor = System.Windows.Forms.Cursors.Hand;
             this.radioButton3.FlatAppearance.BorderSize = 0;
             this.radioButton3.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.radioButton3.Location = new System.Drawing.Point(164, 619);

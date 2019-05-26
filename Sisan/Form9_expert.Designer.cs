@@ -170,7 +170,7 @@
             this.btn_m1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.SandyBrown;
             this.btn_m1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_m1.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btn_m1.Location = new System.Drawing.Point(518, 284);
+            this.btn_m1.Location = new System.Drawing.Point(518, 285);
             this.btn_m1.Name = "btn_m1";
             this.btn_m1.Size = new System.Drawing.Size(245, 35);
             this.btn_m1.TabIndex = 35;
@@ -207,7 +207,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label4.ForeColor = System.Drawing.Color.Black;
-            this.label4.Location = new System.Drawing.Point(99, 343);
+            this.label4.Location = new System.Drawing.Point(99, 348);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(160, 23);
             this.label4.TabIndex = 38;
@@ -307,7 +307,7 @@
             this.btn_m0.FlatAppearance.MouseOverBackColor = System.Drawing.Color.SandyBrown;
             this.btn_m0.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_m0.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btn_m0.Location = new System.Drawing.Point(518, 213);
+            this.btn_m0.Location = new System.Drawing.Point(518, 215);
             this.btn_m0.Name = "btn_m0";
             this.btn_m0.Size = new System.Drawing.Size(245, 35);
             this.btn_m0.TabIndex = 46;
@@ -335,7 +335,7 @@
             this.label_m2.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.label_m2.Font = new System.Drawing.Font("Tahoma", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label_m2.ForeColor = System.Drawing.Color.Red;
-            this.label_m2.Location = new System.Drawing.Point(276, 340);
+            this.label_m2.Location = new System.Drawing.Point(276, 347);
             this.label_m2.Name = "label_m2";
             this.label_m2.Size = new System.Drawing.Size(145, 27);
             this.label_m2.TabIndex = 48;
@@ -361,7 +361,7 @@
             this.label_m4.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.label_m4.Font = new System.Drawing.Font("Tahoma", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label_m4.ForeColor = System.Drawing.Color.Red;
-            this.label_m4.Location = new System.Drawing.Point(276, 464);
+            this.label_m4.Location = new System.Drawing.Point(276, 468);
             this.label_m4.Name = "label_m4";
             this.label_m4.Size = new System.Drawing.Size(145, 27);
             this.label_m4.TabIndex = 50;
@@ -378,7 +378,7 @@
             this.btn_m2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.SandyBrown;
             this.btn_m2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_m2.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btn_m2.Location = new System.Drawing.Point(518, 341);
+            this.btn_m2.Location = new System.Drawing.Point(518, 344);
             this.btn_m2.Name = "btn_m2";
             this.btn_m2.Size = new System.Drawing.Size(245, 35);
             this.btn_m2.TabIndex = 51;
@@ -397,7 +397,7 @@
             this.btn_m4.FlatAppearance.MouseOverBackColor = System.Drawing.Color.SandyBrown;
             this.btn_m4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_m4.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btn_m4.Location = new System.Drawing.Point(518, 464);
+            this.btn_m4.Location = new System.Drawing.Point(518, 465);
             this.btn_m4.Name = "btn_m4";
             this.btn_m4.Size = new System.Drawing.Size(245, 35);
             this.btn_m4.TabIndex = 52;
@@ -416,7 +416,7 @@
             this.btn_m3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.SandyBrown;
             this.btn_m3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_m3.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btn_m3.Location = new System.Drawing.Point(518, 394);
+            this.btn_m3.Location = new System.Drawing.Point(518, 402);
             this.btn_m3.Name = "btn_m3";
             this.btn_m3.Size = new System.Drawing.Size(245, 35);
             this.btn_m3.TabIndex = 53;
