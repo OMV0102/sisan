@@ -396,11 +396,11 @@ namespace system_analysis
                             for (int j = 0; j < alter_count; j++)
                             {
                                 prob.m2.ves[j] /= prob.m2.L;
-                                prob.m2.ves[j] *= 1000;
+                                prob.m2.ves[j] *= 10000;
 
                                 prob.m3.ves[j] *= 1000;
 
-                                prob.m4.ves[j] *= 100;
+                                prob.m4.ves[j] *= 10;
                             }
                             //====================================================
                             prob.status_prob = exp_count;
