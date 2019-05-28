@@ -400,7 +400,7 @@ namespace system_analysis
 
                                 prob.m3.ves[j] *= 1000;
 
-                                prob.m4.ves[j] *= 10;
+                                prob.m4.ves[j] *= 100;
                             }
                             //====================================================
                             prob.status_prob = exp_count;
