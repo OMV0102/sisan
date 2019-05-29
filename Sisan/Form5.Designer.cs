@@ -714,7 +714,6 @@
             // 
             this.btn_matrix0.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(118)))), ((int)(((byte)(168)))));
             this.btn_matrix0.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_matrix0.Enabled = false;
             this.btn_matrix0.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btn_matrix0.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkOrange;
             this.btn_matrix0.FlatAppearance.MouseOverBackColor = System.Drawing.Color.SandyBrown;

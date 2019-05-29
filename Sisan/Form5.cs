@@ -82,6 +82,11 @@ namespace system_analysis
         //для будущих фич (пока не используется)
         public int type_matr = -1;  // тип матрицы для разных методов , при нажатии на кнопку "показать матрицу"
         public int matr_count = 0;  // количество открытых форм с матрицами для разных методов , при нажатии на кнопку "показать матрицу"
+        public bool matr0_btnON = true;
+        public bool matr1_btnON = true;
+        public bool matr2_btnON = true;
+        public bool matr3_btnON = true;
+        public bool matr4_btnON = true;
         //======================================================================
 
         #region СТРУКТУРЫ
@@ -968,7 +973,7 @@ namespace system_analysis
                 {
                     for (int j = 0; j < exp_count; j++)
                     {
-                        if (prob_list[index_prob].m1.inf[j].status == 0)
+                        if (prob_list[index_prob].m1.inf[j].status == 0 || prob_list[index_prob].m1.inf[j].status == -1)
                         {
                             // ищем в списке экспертов эксперта по айди из списка проблем
                             // запоминаем его фио и должность
@@ -1099,7 +1104,7 @@ namespace system_analysis
                 {
                     for (int j = 0; j < exp_count; j++)
                     {
-                        if (prob_list[index_prob].m2.inf[j].status == 0)
+                        if (prob_list[index_prob].m2.inf[j].status == 0 || prob_list[index_prob].m2.inf[j].status == -1)
                         {
                             // ищем в списке экспертов эксперта по айди из списка проблем
                             // запоминаем его фио и должность
@@ -1230,7 +1235,7 @@ namespace system_analysis
                 {
                     for (int j = 0; j < exp_count; j++)
                     {
-                        if (prob_list[index_prob].m3.inf[j].status == 0)
+                        if (prob_list[index_prob].m3.inf[j].status == 0 || prob_list[index_prob].m3.inf[j].status == -1)
                         {
                             // ищем в списке экспертов эксперта по айди из списка проблем
                             // запоминаем его фио и должность
@@ -1591,13 +1596,17 @@ namespace system_analysis
         // кнопка ПОКАЗАТЬ МАТРИЦУ 0
         private void btn_matrix0_Click(object sender, EventArgs e)
         {
-            // показываем форму с введенной матрицей
-            /*form6_matrix form0 = new form6_matrix();
-            form0.Owner = this;
-            form0.Show();
-            this.Hide();*/
+            // показываем форму с введенной матрицей для метода 0
+            if(matr0_btnON == true)
+            {
+                form6_matrix form0 = new form6_matrix();
+                form0.Owner = this;
+                form0.Show();
+                //===============
+                type_matr = 0;
+                btn_matrix0.Cursor = Cursors.No;
+                matr0_btnON = false;
+            }
         }
-
-       
     }
 }
