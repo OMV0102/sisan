@@ -23,14 +23,63 @@ namespace system_analysis
         // ЕСЛИ МЕНЯТЬ ПУТЬ, ТО ТОЛЬКО В 1 ФОРМЕ 
         private string directory = global_class.main_directory;
         //======================================================
+        public struct exp2 //  структура для хранения одного эксперта
+        {
+            public int id_exp;
+            public string fio; // сокращенное ФИО
+        }
+        public List<exp2> f6list_exp;
+        // ========== ГЛОБАЛЬНЫЕ переменные =============
+        public int method_N;
+        public int height_start;
+        public int exp_count;
+        //public int prob_num;
+
+        //===============================================
 
         // ЗАКРЫТИЕ ФОРМЫ
         private void button_cross_Click(object sender, EventArgs e)
         {
             // Обеспечивает закрытие формы с матрицей
-            form5_analyst_report form5 = this.Owner as form5_analyst_report;
-            //form5.Show();
-            //form5.TopMost = true; form5.TopMost = false;
+            form5_analyst_report form = this.Owner as form5_analyst_report;
+            form.matr_count--;
+
+            switch (method_N)
+            {
+                case 0:
+                {
+                    form.matr0_btnON = true;
+                    form.btn_matrix0.Cursor = Cursors.Hand;
+                    break;
+                }
+                case 1:
+                {
+                    form.matr1_btnON = true;
+                    form.btn_matrix1.Cursor = Cursors.Hand;
+                    break;
+                }
+                case 2:
+                {
+                    form.matr2_btnON = true;
+                    form.btn_matrix2.Cursor = Cursors.Hand;
+                    break;
+                }
+                case 3:
+                {
+                    form.matr3_btnON = true;
+                    form.btn_matrix3.Cursor = Cursors.Hand;
+                    break;
+                }
+                case 4:
+                {
+                    form.matr4_btnON = true;
+                    form.btn_matrix4.Cursor = Cursors.Hand;
+                    break;
+                }
+                default:
+                    break;
+            }
+
             this.Close();
         }
 
@@ -45,10 +94,44 @@ namespace system_analysis
         // при ЗАГРУЗКЕ ФОРМЫ   
         private void form6_matrix_Load(object sender, EventArgs e)
         {
-            form5_analyst_report form5 = this.Owner as form5_analyst_report;
-            if (form5 != null)
+            form5_analyst_report form = this.Owner as form5_analyst_report;
+            exp_count = form.prob_list[form.index_prob].m0.inf.Count();
+
+            switch (method_N)
             {
-                this.TopMost = true; this.TopMost = false;
+                case 0:
+                    {
+                        comboBox_exp.Visible = true;
+                        height_start = 100;
+                        f6list_exp = new List<exp2>(exp_count);
+                        exp2 tmp;
+                        for (int i = 0; i < exp_count; i++)
+                        {
+                            if (form.prob_list[form.index_prob].m0.inf[form.index_exp].status == 1)
+                            {
+                                tmp = new exp2();
+                                tmp.id_exp = form.prob_list[form.index_prob].m0.inf[form.index_exp].id_exp;
+                                //tmp.fio = form.prob_list[form.index_prob].m0.inf[form.index_exp]
+                            }
+                        }
+                        break;
+                    }
+
+                case 2:
+                    {
+                        comboBox_exp.Visible = false;
+                        height_start = 60;
+                        break;
+                    }
+
+                case 4:
+                    {
+                        comboBox_exp.Visible = true;
+                        height_start = 100;
+                        break;
+                    }
+            }
+
                 
 
 
@@ -62,14 +145,11 @@ namespace system_analysis
                     }
 
                     //ширина столбцов
-                    for (int i = 0; i < form5.alter_count; i++)
+                    for (int i = 0; i < form.alter_count; i++)
                     {
                         dataGridView1.Columns[i].Width = 35;
                     }
 
-
-                
-            }
         }
     }
 }

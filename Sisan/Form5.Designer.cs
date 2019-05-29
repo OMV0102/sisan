@@ -714,6 +714,7 @@
             // 
             this.btn_matrix0.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(118)))), ((int)(((byte)(168)))));
             this.btn_matrix0.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_matrix0.Enabled = false;
             this.btn_matrix0.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btn_matrix0.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkOrange;
             this.btn_matrix0.FlatAppearance.MouseOverBackColor = System.Drawing.Color.SandyBrown;
@@ -1077,7 +1078,6 @@
         public System.Windows.Forms.ListBox listBox0_alt;
         public System.Windows.Forms.ListBox listBox0_ves;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.ComboBox comboBox_exp;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label13;
         public System.Windows.Forms.ListBox listBox1_ves;
@@ -1089,23 +1089,18 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Button btn_matrix0;
         public System.Windows.Forms.ListBox listBox2_ves;
         private System.Windows.Forms.Label label18;
         public System.Windows.Forms.ListBox listBox2_alt;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.Button btn_matrix2;
-        private System.Windows.Forms.Button btn_matrix1;
-        private System.Windows.Forms.Button btn_matrix3;
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.Label label23;
         public System.Windows.Forms.ListBox listBox3_ves;
         private System.Windows.Forms.Label label21;
         public System.Windows.Forms.ListBox listBox3_alt;
         private System.Windows.Forms.Label label22;
-        private System.Windows.Forms.Button btn_matrix4;
         private System.Windows.Forms.Label label27;
         public System.Windows.Forms.ListBox listBox4_ves;
         private System.Windows.Forms.Label label25;
@@ -1128,5 +1123,11 @@
         private System.Windows.Forms.Button btn_m2_who;
         private System.Windows.Forms.Button btn_extend;
         private System.Windows.Forms.Label lbl_alter_not;
+        public System.Windows.Forms.Button btn_matrix0;
+        public System.Windows.Forms.Button btn_matrix2;
+        public System.Windows.Forms.Button btn_matrix1;
+        public System.Windows.Forms.Button btn_matrix3;
+        public System.Windows.Forms.Button btn_matrix4;
+        public System.Windows.Forms.ComboBox comboBox_exp;
     }
 }

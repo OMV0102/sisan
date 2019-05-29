@@ -55,7 +55,9 @@ namespace system_analysis
         // кнопка ЗАКРЫТЬ окно
         private void button_cross_Click(object sender, EventArgs e)
         {
-            button_back_Click(null, null);
+            //button_back_Click(null, null);
+            Form form = Application.OpenForms[0];
+            form.Close();  // Закрываем главную форму, а значит закрываем вообще всё
         }
 
         //=================================================================
@@ -79,8 +81,8 @@ namespace system_analysis
         public int ext_n3;
         public int ext_n4;
         //===============================================
-        //для будущих фич (пока не используется)
-        public int type_matr = -1;  // тип матрицы для разных методов , при нажатии на кнопку "показать матрицу"
+        // ДЛЯ показа МАТРИЦ
+        //public int type_matr = -1;  // НЕ ИСПОЛЬЗУЕТСЯ // тип матрицы для разных методов , при нажатии на кнопку "показать матрицу"
         public int matr_count = 0;  // количество открытых форм с матрицами для разных методов , при нажатии на кнопку "показать матрицу"
         public bool matr0_btnON = true;
         public bool matr1_btnON = true;
@@ -1599,13 +1601,19 @@ namespace system_analysis
             // показываем форму с введенной матрицей для метода 0
             if(matr0_btnON == true)
             {
+                matr_count++;
                 form6_matrix form0 = new form6_matrix();
-                form0.Owner = this;
-                form0.Show();
-                //===============
-                type_matr = 0;
+                form0.Text += " 1";
+                form0.method_N = 0;
+                form0.lbl_header.Text = "Матрица для метода\nПарных сравнений";
+                //form0.lbl_header.Text = "Матрица для метода\nВзвешенных экспертных оценок";
+                //form0.lbl_header.Text = "Матрица для метода\nПолного попарного сравнения";
+                //type_matr = 0;   // возможно не используется
                 btn_matrix0.Cursor = Cursors.No;
                 matr0_btnON = false;
+                //===============
+                form0.Owner = this;
+                form0.Show();
             }
         }
     }
