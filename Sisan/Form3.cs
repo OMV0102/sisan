@@ -25,6 +25,42 @@ namespace system_analysis
             InitializeComponent();
         }
 
+        #region СТРУКТУРЫ
+        public struct exp //  структура для хранения одного эксперта
+        {
+            public int id_exp;
+            public string surname;
+            public string name;
+            public string otch;
+            public string fio; // сокращенное ФИО
+            public string password;
+            public string position; // Должность
+        }
+        public List<exp> exp_list;
+        //======================================================================
+        public struct solutions //  структура для хранения альтернатив
+        {
+            public int id_prob;
+            public string[] alters;
+        }
+        public List<solutions> alter_list;
+        //======================================================================
+        public struct st_problem //  структура для хранения одной проблемы
+        {
+            public int num_prob;
+            public bool open_close;
+            public string txt_prob;
+            public int status_prob;
+            public metod0 m0;
+            public metod1 m1;
+            public metod2 m2;
+            public metod3 m3;
+            public metod4 m4;
+        }
+        public List<st_problem> prob_list;
+
+        #endregion
+
         private bool add_new_prob;
         private bool add_new_sol;
         public bool edit_or_add;  // флаг для ред/добав проблемы

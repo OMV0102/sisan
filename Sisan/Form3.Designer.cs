@@ -254,7 +254,7 @@
             this.btn_add_problem.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_add_problem.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btn_add_problem.ForeColor = System.Drawing.Color.Green;
-            this.btn_add_problem.Location = new System.Drawing.Point(552, 57);
+            this.btn_add_problem.Location = new System.Drawing.Point(953, 50);
             this.btn_add_problem.Name = "btn_add_problem";
             this.btn_add_problem.Size = new System.Drawing.Size(30, 42);
             this.btn_add_problem.TabIndex = 33;
@@ -270,7 +270,7 @@
             this.btn_problem_edit.FlatAppearance.BorderSize = 0;
             this.btn_problem_edit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_problem_edit.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btn_problem_edit.Location = new System.Drawing.Point(587, 58);
+            this.btn_problem_edit.Location = new System.Drawing.Point(998, 56);
             this.btn_problem_edit.Name = "btn_problem_edit";
             this.btn_problem_edit.Size = new System.Drawing.Size(39, 42);
             this.btn_problem_edit.TabIndex = 34;
@@ -287,7 +287,7 @@
             this.btn_problem_delete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_problem_delete.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btn_problem_delete.ForeColor = System.Drawing.Color.Red;
-            this.btn_problem_delete.Location = new System.Drawing.Point(747, 58);
+            this.btn_problem_delete.Location = new System.Drawing.Point(1059, 58);
             this.btn_problem_delete.Name = "btn_problem_delete";
             this.btn_problem_delete.Size = new System.Drawing.Size(30, 42);
             this.btn_problem_delete.TabIndex = 35;
@@ -351,7 +351,7 @@
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.choice});
-            this.dataGridView1.Location = new System.Drawing.Point(719, 273);
+            this.dataGridView1.Location = new System.Drawing.Point(715, 295);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.Size = new System.Drawing.Size(604, 239);
@@ -368,7 +368,7 @@
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label7.ForeColor = System.Drawing.Color.Black;
-            this.label7.Location = new System.Drawing.Point(866, 214);
+            this.label7.Location = new System.Drawing.Point(862, 236);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(310, 23);
             this.label7.TabIndex = 62;
