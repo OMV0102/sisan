@@ -197,13 +197,11 @@ namespace system_analysis
         private void form5_analyst_report_Load(object sender, EventArgs e)
         {
             lbl_notmarks.Visible = false;
-            btn_matrix0.Visible = false;
-            btn_matrix1.Visible = false;
-            btn_matrix2.Visible = false;
-            btn_matrix3.Visible = false;
-            btn_matrix4.Visible = false;
-            String[] words; //СТРОКА.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);  // это на всякий под рукой
+
+            String[] words;              //СТРОКА.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);  // это на всякий под рукой
             string text = "";
+
+
 
             FileInfo fileInf1 = new FileInfo(directory + "experts.txt");
             if (fileInf1.Exists)  // если файл существует вообще
@@ -248,200 +246,201 @@ namespace system_analysis
                         exp_list.Add(a);
                     }
                 }
-            }
-            //======== экспертов запомнили ==============
 
-            alter_list = new List<solutions>();  // память для списка где харанится альтернативы для проблем
-            solutions sol = new solutions();  // вспомогательная переменная для строки выше
-            //====== читаем проблемы ==========
-            FileInfo fileInf2 = new FileInfo(directory + "problems.txt");
-            if (fileInf2.Exists)  // если файл существует вообще
-            {
-                using (StreamReader sr = new StreamReader(directory + "problems.txt", System.Text.Encoding.UTF8))
-                {
-                    text = sr.ReadToEnd();
-                }
-            }
+                //======== экспертов запомнили ==============
 
-            if (text.Length > 0)
-            {
-                lbl_notprob.Visible = false;
-                btn_extend.Visible = true;
-                using (StreamReader sr = new StreamReader(directory + "problems.txt", System.Text.Encoding.UTF8))
+                alter_list = new List<solutions>();  // память для списка где харанится альтернативы для проблем
+                solutions sol = new solutions();  // вспомогательная переменная для строки выше
+                                                  //====== читаем проблемы ==========
+                FileInfo fileInf2 = new FileInfo(directory + "problems.txt");
+                if (fileInf2.Exists)  // если файл существует вообще
                 {
-                    string line = "";
-                    prob_list = new List<st_problem>();
-                    while ((line = sr.ReadLine()) != null)
+                    using (StreamReader sr = new StreamReader(directory + "problems.txt", System.Text.Encoding.UTF8))
                     {
-                        // считываем проблему
-                        words = line.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                        prob = new st_problem();
-                        prob.num_prob = Convert.ToInt32(words[0]);
-                        prob.open_close = Convert.ToBoolean(words[1]);
-                        prob.txt_prob = "";
-                        for (int i = 2; i < words.Count(); i++)
-                            prob.txt_prob += words[i] + " ";
-                        // =========== проблему считали ===========
-                        text = "";
-                        line = "";
-                        alter_count = 0;
-                        FileInfo fileInf3 = new FileInfo(directory + "solutions" + prob.num_prob + ".txt");
-                        if (fileInf3.Exists)  // если файл существует вообще
-                        {
-                            using (StreamReader sr1 = new StreamReader(directory + "solutions" + prob.num_prob + ".txt", System.Text.Encoding.UTF8))
-                            {
-                                while ((line = sr1.ReadLine()) != null)
-                                    alter_count++;
-                            }
-                        }
+                        text = sr.ReadToEnd();
+                    }
+                }
 
-                        if (alter_count > 0)
+                if (text.Length > 0)
+                {
+                    lbl_notprob.Visible = false;
+                    btn_extend.Visible = true;
+                    using (StreamReader sr = new StreamReader(directory + "problems.txt", System.Text.Encoding.UTF8))
+                    {
+                        string line = "";
+                        prob_list = new List<st_problem>();
+                        while ((line = sr.ReadLine()) != null)
                         {
-                            using (StreamReader sr1 = new StreamReader(directory + "solutions" + prob.num_prob + ".txt", System.Text.Encoding.UTF8))
+                            // считываем проблему
+                            words = line.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                            prob = new st_problem();
+                            prob.num_prob = Convert.ToInt32(words[0]);
+                            prob.open_close = Convert.ToBoolean(words[1]);
+                            prob.txt_prob = "";
+                            for (int i = 2; i < words.Count(); i++)
+                                prob.txt_prob += words[i] + " ";
+                            // =========== проблему считали ===========
+                            text = "";
+                            line = "";
+                            alter_count = 0;
+                            FileInfo fileInf3 = new FileInfo(directory + "solutions" + prob.num_prob + ".txt");
+                            if (fileInf3.Exists)  // если файл существует вообще
                             {
-                                line = "";
-                                sol.alters = new string[alter_count];
-                                sol.id_prob = prob.num_prob;
-                                int i = 0;
-                                int n = 1;
-                                while ((line = sr1.ReadLine()) != null)
+                                using (StreamReader sr1 = new StreamReader(directory + "solutions" + prob.num_prob + ".txt", System.Text.Encoding.UTF8))
                                 {
-                                    sol.alters[i] = n + ". " + line;
-                                    i++;
-                                    n++;
+                                    while ((line = sr1.ReadLine()) != null)
+                                        alter_count++;
                                 }
                             }
-                            alter_list.Add(sol);
-                            prob.status_prob = 0; // 0 значит альтернативы считались ,
-                            // то есть теперь считываем экспертов и их пока 0
-                        }
-                        else
-                        {
-                            alter_list.Add(sol);
-                            prob.status_prob = -1;  // -1 значит альтернативы не считались или их нет
-                        }
-                        // ========= альтернативы считали ==============
 
-                        // теперь считываем group
-                        text = "";
-                        line = "";
-                        exp_count = 0;
-
-                        FileInfo fileInf4 = new FileInfo(directory + "group" + prob.num_prob + ".txt");
-                        if (prob.status_prob == 0 && fileInf4.Exists)  // если  альтернативы считались файл существует вообще
-                        {
-                            using (StreamReader sr1 = new StreamReader(directory + "group" + prob.num_prob + ".txt", System.Text.Encoding.UTF8))
+                            if (alter_count > 0)
                             {
-                                while ((line = sr1.ReadLine()) != null)
-                                    exp_count++;
-                            }
-                        }
-
-                        if (exp_count > 0)
-                        {
-                            line = "";
-                            // ===== выделили память для каждого метода размером с кол-во экспертов exp_count
-                            prob.m0.inf = new metod0_inf[exp_count];
-
-                            prob.m1.inf = new metod1_inf[exp_count];
-                            prob.m1.ves = new float[alter_count];
-                            prob.m2.inf = new metod2_inf[exp_count];
-                            prob.m2.ves = new float[alter_count];
-                            prob.m3.inf = new metod3_inf[exp_count];
-                            prob.m3.ves = new float[alter_count];
-                            prob.m4.inf = new metod4_inf[exp_count];
-                            prob.m4.ves = new float[alter_count];
-                            // ====================================================================
-                            using (StreamReader sr1 = new StreamReader(directory + "group" + prob.num_prob + ".txt", System.Text.Encoding.UTF8))
-                            {
-                                for (int k = 0; k < exp_count; k++)
+                                using (StreamReader sr1 = new StreamReader(directory + "solutions" + prob.num_prob + ".txt", System.Text.Encoding.UTF8))
                                 {
-                                    if ((line = sr1.ReadLine()) != null)
+                                    line = "";
+                                    sol.alters = new string[alter_count];
+                                    sol.id_prob = prob.num_prob;
+                                    int i = 0;
+                                    int n = 1;
+                                    while ((line = sr1.ReadLine()) != null)
                                     {
-                                        words = line.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                                        // ==== Запоминаем для метода 0 ===================
-                                        prob.m0.inf[k].id_exp = Convert.ToInt32(words[0]); // запомнили id эксперта
-                                        prob.m0.inf[k].status = Convert.ToInt32(words[2]); // статус прохождения опроса
-                                        prob.m0.inf[k].matr = new float[alter_count, alter_count]; // память под оценки эксперта k
-                                        prob.m0.inf[k].ves = new float[alter_count]; // память под веса оценок эксперта k
-                                        load_m0(k); // загрузка метода 0 для k эксперта
-                                        // ==== Метод 0 запомнили =======================
-                                        // ==== Запоминаем для метода 1 ===================
-                                        prob.m1.inf[k].id_exp = Convert.ToInt32(words[0]); // запомнили id эксперта
-                                        prob.m1.inf[k].comp = Convert.ToSingle(words[1]); // запомнили компетентность эксперта
-                                        prob.m1.inf[k].status = Convert.ToInt32(words[3]); // статус прохождения опроса
-                                        prob.m1.inf[k].marks = new float[alter_count]; // память под оценки эксперта k
-                                        load_m1(k); // загрузка метода 1 для k эксперта
-                                        // ==== Метод 1 запомнили =======================
-                                        // ==== Запоминаем для метода 2 ===================
-                                        prob.m2.inf[k].id_exp = Convert.ToInt32(words[0]); // запомнили id эксперта
-                                        prob.m2.inf[k].status = Convert.ToInt32(words[4]); // статус прохождения опроса
-                                        prob.m2.inf[k].marks = new float[alter_count]; // память под оценки эксперта k
-                                        load_m2(k); // загрузка метода 2 для k эксперта
-                                        // ==== Метод 2 запомнили =======================
-                                        // ==== Запоминаем для метода 3 ===================
-                                        prob.m3.inf[k].id_exp = Convert.ToInt32(words[0]); // запомнили id эксперта
-                                        prob.m3.inf[k].status = Convert.ToInt32(words[5]); // статус прохождения опроса
-                                        prob.m3.inf[k].marks = new float[alter_count]; // память под оценки эксперта k
-                                        load_m3(k); // загрузка метода 3 для k эксперта
-                                        // ==== Метод 3 запомнили =======================
-                                        // ==== Запоминаем для метода 4 ===================
-                                        prob.m4.inf[k].id_exp = Convert.ToInt32(words[0]); // запомнили id эксперта
-                                        prob.m4.inf[k].status = Convert.ToInt32(words[6]); // статус прохождения опроса
-                                        prob.m4.inf[k].matr = new float[alter_count, alter_count]; // память под оценки эксперта k
-                                        load_m4(k); // загрузка метода 4 для k эксперта
-                                        // ==== Метод 4 запомнили =======================
+                                        sol.alters[i] = n + ". " + line;
+                                        i++;
+                                        n++;
                                     }
                                 }
+                                alter_list.Add(sol);
+                                prob.status_prob = 0; // 0 значит альтернативы считались ,
+                                                      // то есть теперь считываем экспертов и их пока 0
                             }
-                            //  === приводим к целым числам веса для 0 метода ==============
-                            for (int k = 0; k < exp_count; k++)
+                            else
                             {
+                                alter_list.Add(sol);
+                                prob.status_prob = -1;  // -1 значит альтернативы не считались или их нет
+                            }
+                            // ========= альтернативы считали ==============
+
+                            // теперь считываем group
+                            text = "";
+                            line = "";
+                            exp_count = 0;
+
+                            FileInfo fileInf4 = new FileInfo(directory + "group" + prob.num_prob + ".txt");
+                            if (prob.status_prob == 0 && fileInf4.Exists)  // если  альтернативы считались файл существует вообще
+                            {
+                                using (StreamReader sr1 = new StreamReader(directory + "group" + prob.num_prob + ".txt", System.Text.Encoding.UTF8))
+                                {
+                                    while ((line = sr1.ReadLine()) != null)
+                                        exp_count++;
+                                }
+                            }
+
+                            if (exp_count > 0)
+                            {
+                                line = "";
+                                // ===== выделили память для каждого метода размером с кол-во экспертов exp_count
+                                prob.m0.inf = new metod0_inf[exp_count];
+
+                                prob.m1.inf = new metod1_inf[exp_count];
+                                prob.m1.ves = new float[alter_count];
+                                prob.m2.inf = new metod2_inf[exp_count];
+                                prob.m2.ves = new float[alter_count];
+                                prob.m3.inf = new metod3_inf[exp_count];
+                                prob.m3.ves = new float[alter_count];
+                                prob.m4.inf = new metod4_inf[exp_count];
+                                prob.m4.ves = new float[alter_count];
+                                // ====================================================================
+                                using (StreamReader sr1 = new StreamReader(directory + "group" + prob.num_prob + ".txt", System.Text.Encoding.UTF8))
+                                {
+                                    for (int k = 0; k < exp_count; k++)
+                                    {
+                                        if ((line = sr1.ReadLine()) != null)
+                                        {
+                                            words = line.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                                            // ==== Запоминаем для метода 0 ===================
+                                            prob.m0.inf[k].id_exp = Convert.ToInt32(words[0]); // запомнили id эксперта
+                                            prob.m0.inf[k].status = Convert.ToInt32(words[2]); // статус прохождения опроса
+                                            prob.m0.inf[k].matr = new float[alter_count, alter_count]; // память под оценки эксперта k
+                                            prob.m0.inf[k].ves = new float[alter_count]; // память под веса оценок эксперта k
+                                            load_m0(k); // загрузка метода 0 для k эксперта
+                                                        // ==== Метод 0 запомнили =======================
+                                                        // ==== Запоминаем для метода 1 ===================
+                                            prob.m1.inf[k].id_exp = Convert.ToInt32(words[0]); // запомнили id эксперта
+                                            prob.m1.inf[k].comp = Convert.ToSingle(words[1]); // запомнили компетентность эксперта
+                                            prob.m1.inf[k].status = Convert.ToInt32(words[3]); // статус прохождения опроса
+                                            prob.m1.inf[k].marks = new float[alter_count]; // память под оценки эксперта k
+                                            load_m1(k); // загрузка метода 1 для k эксперта
+                                                        // ==== Метод 1 запомнили =======================
+                                                        // ==== Запоминаем для метода 2 ===================
+                                            prob.m2.inf[k].id_exp = Convert.ToInt32(words[0]); // запомнили id эксперта
+                                            prob.m2.inf[k].status = Convert.ToInt32(words[4]); // статус прохождения опроса
+                                            prob.m2.inf[k].marks = new float[alter_count]; // память под оценки эксперта k
+                                            load_m2(k); // загрузка метода 2 для k эксперта
+                                                        // ==== Метод 2 запомнили =======================
+                                                        // ==== Запоминаем для метода 3 ===================
+                                            prob.m3.inf[k].id_exp = Convert.ToInt32(words[0]); // запомнили id эксперта
+                                            prob.m3.inf[k].status = Convert.ToInt32(words[5]); // статус прохождения опроса
+                                            prob.m3.inf[k].marks = new float[alter_count]; // память под оценки эксперта k
+                                            load_m3(k); // загрузка метода 3 для k эксперта
+                                                        // ==== Метод 3 запомнили =======================
+                                                        // ==== Запоминаем для метода 4 ===================
+                                            prob.m4.inf[k].id_exp = Convert.ToInt32(words[0]); // запомнили id эксперта
+                                            prob.m4.inf[k].status = Convert.ToInt32(words[6]); // статус прохождения опроса
+                                            prob.m4.inf[k].matr = new float[alter_count, alter_count]; // память под оценки эксперта k
+                                            load_m4(k); // загрузка метода 4 для k эксперта
+                                                        // ==== Метод 4 запомнили =======================
+                                        }
+                                    }
+                                }
+                                //  === приводим к целым числам веса для 0 метода ==============
+                                for (int k = 0; k < exp_count; k++)
+                                {
+                                    for (int j = 0; j < alter_count; j++)
+                                        prob.m0.inf[k].ves[j] *= 1000;
+                                }
+                                //  === досчитываем веса для 2 3 4 метода и приводим к целым числам ==============
                                 for (int j = 0; j < alter_count; j++)
-                                    prob.m0.inf[k].ves[j] *= 1000; 
-                            }
-                            //  === досчитываем веса для 2 3 4 метода и приводим к целым числам ==============
-                            for (int j = 0; j < alter_count; j++)
-                            {
-                                prob.m2.ves[j] /= prob.m2.L;
-                                prob.m2.ves[j] *= 10000;
+                                {
+                                    prob.m2.ves[j] /= prob.m2.L;
+                                    prob.m2.ves[j] *= 10000;
 
-                                prob.m3.ves[j] *= 1000;
+                                    prob.m3.ves[j] *= 1000;
 
-                                prob.m4.ves[j] *= 10;
+                                    prob.m4.ves[j] *= 10;
+                                }
+                                //====================================================
+                                prob.status_prob = exp_count;
                             }
-                            //====================================================
-                            prob.status_prob = exp_count;
+                            prob_list.Add(prob);
+                            prob_count++;
                         }
-                        prob_list.Add(prob);
-                        prob_count++;
+
                     }
-
                 }
-            }
-            else
-            {
-                prob_count = 0;
-                lbl_notprob.Visible = true;
-                label_alt.Visible = false;
-                label_mark.Visible = false;
-                panel1.Visible = false;
-                btn_extend.Visible = false;
-                list_solution.Visible = false;
-                this.Height = 300;
-            }
-
-            if(prob_count > 0)
-            {
-                for(int i = 0; i < prob_count; i++)
+                else
                 {
-                    comboBox_problems.Items.Add(prob_list[i].txt_prob);
+                    prob_count = 0;
+                    lbl_notprob.Visible = true;
+                    label_alt.Visible = false;
+                    label_mark.Visible = false;
+                    panel1.Visible = false;
+                    btn_extend.Visible = false;
+                    list_solution.Visible = false;
+                    this.Height = 300;
                 }
-            }
 
-            if (comboBox_problems.Items.Count > 0)
-            {
-                comboBox_problems.SelectedIndex = 0;
+                if (prob_count > 0)
+                {
+                    for (int i = 0; i < prob_count; i++)
+                    {
+                        comboBox_problems.Items.Add(prob_list[i].txt_prob);
+                    }
+                }
+
+                if (comboBox_problems.Items.Count > 0)
+                {
+                    comboBox_problems.SelectedIndex = 0;
+                }
             }
         }
 
@@ -781,6 +780,13 @@ namespace system_analysis
                 // если у проблемы не назначены эксперты или не считался group
                 else if (exp_count == 0)
                 {
+                    //===== ВЫВОДИМ АЛЬТЕРНАТИВЫ ======
+                        alter_count = alter_list[index_prob].alters.Count();
+                    list_solution.Items.Clear();
+                    for (int i = 0; i < alter_count; i++)
+                    {
+                        list_solution.Items.Add(alter_list[index_prob].alters[i]);
+                    }
                     //================================
                     this.Height = 703;
                     list_solution.Visible = true;
