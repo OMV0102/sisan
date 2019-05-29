@@ -969,7 +969,6 @@
             // 
             // lbl_notprob
             // 
-            this.lbl_notprob.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.lbl_notprob.AutoSize = true;
             this.lbl_notprob.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lbl_notprob.ForeColor = System.Drawing.Color.Red;
@@ -1016,7 +1015,6 @@
             // 
             // lbl_alter_not
             // 
-            this.lbl_alter_not.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.lbl_alter_not.AutoSize = true;
             this.lbl_alter_not.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lbl_alter_not.ForeColor = System.Drawing.Color.Red;

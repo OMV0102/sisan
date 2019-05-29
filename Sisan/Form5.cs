@@ -317,6 +317,7 @@ namespace system_analysis
                         }
                         else
                         {
+                            alter_list.Add(sol);
                             prob.status_prob = -1;  // -1 значит альтернативы не считались или их нет
                         }
                         // ========= альтернативы считали ==============
@@ -412,10 +413,6 @@ namespace system_analysis
                             //====================================================
                             prob.status_prob = exp_count;
                         }
-                        else
-                        {
-                            prob.status_prob = 0;
-                        }
                         prob_list.Add(prob);
                         prob_count++;
                     }
@@ -442,7 +439,7 @@ namespace system_analysis
                 }
             }
 
-            if (prob_count > 0)
+            if (comboBox_problems.Items.Count > 0)
             {
                 comboBox_problems.SelectedIndex = 0;
             }
@@ -707,6 +704,8 @@ namespace system_analysis
                 if (exp_count > 0) // если у проблемы как минимум назначен один эксперт
                 {
                     //================================
+                    this.Height = 703;
+                    list_solution.Visible = true;
                     lbl_notexp.Visible = false;
                     lbl_alter_not.Visible = false;
                     label_mark.Visible = true;
@@ -783,6 +782,8 @@ namespace system_analysis
                 else if (exp_count == 0)
                 {
                     //================================
+                    this.Height = 703;
+                    list_solution.Visible = true;
                     lbl_notexp.Visible = true;
                     lbl_alter_not.Visible = false;
                     label_mark.Visible = false;
@@ -793,6 +794,8 @@ namespace system_analysis
                 else // если -1
                 {
                     //================================
+                    this.Height = 300;
+                    list_solution.Visible = false;
                     lbl_notexp.Visible = false;
                     lbl_alter_not.Visible = true;
                     label_mark.Visible = false;
