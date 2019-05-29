@@ -93,6 +93,7 @@
             this.lbl_notprob = new System.Windows.Forms.Label();
             this.lbl_notexp = new System.Windows.Forms.Label();
             this.btn_extend = new System.Windows.Forms.Button();
+            this.lbl_alter_not = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -1013,6 +1014,19 @@
             this.btn_extend.UseVisualStyleBackColor = false;
             this.btn_extend.Click += new System.EventHandler(this.btn_extend_Click);
             // 
+            // lbl_alter_not
+            // 
+            this.lbl_alter_not.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.lbl_alter_not.AutoSize = true;
+            this.lbl_alter_not.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lbl_alter_not.ForeColor = System.Drawing.Color.Red;
+            this.lbl_alter_not.Location = new System.Drawing.Point(294, 194);
+            this.lbl_alter_not.Name = "lbl_alter_not";
+            this.lbl_alter_not.Size = new System.Drawing.Size(539, 23);
+            this.lbl_alter_not.TabIndex = 125;
+            this.lbl_alter_not.Text = "По выбранной проблеме отсутствуют альтернативы!";
+            this.lbl_alter_not.Visible = false;
+            // 
             // form5_analyst_report
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1020,6 +1034,7 @@
             this.BackColor = System.Drawing.SystemColors.Control;
             this.CancelButton = this.button_back;
             this.ClientSize = new System.Drawing.Size(1100, 703);
+            this.Controls.Add(this.lbl_alter_not);
             this.Controls.Add(this.btn_extend);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.lbl_notexp);
@@ -1115,5 +1130,6 @@
         private System.Windows.Forms.Button btn_m3_who;
         private System.Windows.Forms.Button btn_m2_who;
         private System.Windows.Forms.Button btn_extend;
+        private System.Windows.Forms.Label lbl_alter_not;
     }
 }

@@ -312,6 +312,12 @@ namespace system_analysis
                                 }
                             }
                             alter_list.Add(sol);
+                            prob.status_prob = 0; // 0 значит альтернативы считались ,
+                            // то есть теперь считываем экспертов и их пока 0
+                        }
+                        else
+                        {
+                            prob.status_prob = -1;  // -1 значит альтернативы не считались или их нет
                         }
                         // ========= альтернативы считали ==============
 
@@ -319,8 +325,9 @@ namespace system_analysis
                         text = "";
                         line = "";
                         exp_count = 0;
+
                         FileInfo fileInf4 = new FileInfo(directory + "group" + prob.num_prob + ".txt");
-                        if (fileInf4.Exists)  // если файл существует вообще
+                        if (prob.status_prob == 0 && fileInf4.Exists)  // если  альтернативы считались файл существует вообще
                         {
                             using (StreamReader sr1 = new StreamReader(directory + "group" + prob.num_prob + ".txt", System.Text.Encoding.UTF8))
                             {
@@ -691,30 +698,30 @@ namespace system_analysis
         // ВЫБОР ПРОБЛЕМЫ в comboBox_problems
         private void comboBox_problems_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (btn_extend.Tag.ToString() == "1")
-                btn_extend_Click(null, null);
+            //if (btn_extend.Tag.ToString() == "1")
+            //    btn_extend_Click(null, null);
             index_prob = comboBox_problems.SelectedIndex;
             if (index_prob >= 0 && index_prob < prob_count)
             {
                 exp_count = prob_list[index_prob].status_prob;
-                alter_count = alter_list[index_prob].alters.Count();
-                //===== ВЫВОДИМ АЛЬТЕРНАТИВЫ ======
-                list_solution.Items.Clear();
-                for (int i = 0; i < alter_count; i++)
-                {
-                    list_solution.Items.Add(alter_list[index_prob].alters[i]);
-                }
-                //=================================
-
-                // если у проблемы как минимум назначен один эксперт
-                if (prob_list[index_prob].status_prob > 0)
+                if (exp_count > 0) // если у проблемы как минимум назначен один эксперт
                 {
                     //================================
                     lbl_notexp.Visible = false;
+                    lbl_alter_not.Visible = false;
                     label_mark.Visible = true;
                     panel1.Visible = true;
                     btn_extend.Visible = true;
                     //================================
+
+                    //===== ВЫВОДИМ АЛЬТЕРНАТИВЫ ======
+                    alter_count = alter_list[index_prob].alters.Count();
+                    list_solution.Items.Clear();
+                    for (int i = 0; i < alter_count; i++)
+                    {
+                        list_solution.Items.Add(alter_list[index_prob].alters[i]);
+                    }
+                    //=================================  
                     bool notmarks = true;
                     for (int i = 0; i < exp_count; i++)
                     {
@@ -724,7 +731,7 @@ namespace system_analysis
                             notmarks = false;
                     }
 
-                    if(notmarks == false) // если оценки по проблеме хоть какие то есть
+                    if (notmarks == false) // если оценки по проблеме хоть какие то есть
                     {
                         //================================
                         lbl_notmarks.Visible = false;
@@ -749,7 +756,7 @@ namespace system_analysis
                             }
                         }
                         // ВЫБИРАЕМ нулевого эксперта в комбоксе экспертов метода 0
-                        if(comboBox_exp.Items.Count > 0)
+                        if (comboBox_exp.Items.Count > 0)
                             comboBox_exp.SelectedIndex = 0;
                         // ===== МЕТОД 1 =============
                         update_m1();
@@ -762,7 +769,7 @@ namespace system_analysis
                         //=======================
                     }
                     // если эксперты назначены но еще никто ничего не оценил
-                    else if(notmarks == true)
+                    else if (notmarks == true)
                     {
                         //================================
                         lbl_notmarks.Visible = true;
@@ -772,11 +779,22 @@ namespace system_analysis
                         //================================
                     }
                 }
-                // если у проблемы не назначены эксперты
-                else if (prob_list[index_prob].status_prob == 0)
+                // если у проблемы не назначены эксперты или не считался group
+                else if (exp_count == 0)
                 {
                     //================================
                     lbl_notexp.Visible = true;
+                    lbl_alter_not.Visible = false;
+                    label_mark.Visible = false;
+                    panel1.Visible = false;
+                    btn_extend.Visible = false;
+                    //================================
+                }
+                else // если -1
+                {
+                    //================================
+                    lbl_notexp.Visible = false;
+                    lbl_alter_not.Visible = true;
                     label_mark.Visible = false;
                     panel1.Visible = false;
                     btn_extend.Visible = false;
