@@ -27,7 +27,10 @@ namespace system_analysis
 
         private bool add_new_prob;
         private bool add_new_sol;
-        
+        public bool edit_or_add;  // флаг для ред/добав проблемы
+        public int predN_prob; // предыдущий номер проблемы, используется в comboBox_problems_SelectedIndexChanged
+        public bool mem = false;  // флаг, если ничего не выведено в список альтернатив, то не сохраняем их
+
         // кнопка ЗАКРЫТЬ ОКНО
         private void button_cross_Click(object sender, EventArgs e)
         {
@@ -639,8 +642,6 @@ namespace system_analysis
             list_solution.Items.Clear();
         }
 
-        public bool edit_or_add;  // флаг для ред/добав проблемы
-
         // кнопка + (ДОБАВИТЬ ПРОБЛЕМУ)
         private void btn_add_problem_Click(object sender, EventArgs e)
         {
@@ -862,12 +863,7 @@ namespace system_analysis
             }
         }
 
-
-        public int predN_prob; // предыдущий номер проблемы, используется в comboBox_problems_SelectedIndexChanged
-        
-        public bool mem = false;  // флаг, если ничего не выведено в список альтернатив, то не сохраняем их
-
-        // когда выбираем проблему в списке
+        // ВЫБОР ПРОБЛЕМЫ В КОМБОБОКС
         private void comboBox_problems_SelectedIndexChanged(object sender, EventArgs e)
         {
             string selectedState;
