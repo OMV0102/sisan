@@ -158,6 +158,7 @@
             this.comboBox_experts.Name = "comboBox_experts";
             this.comboBox_experts.Size = new System.Drawing.Size(409, 27);
             this.comboBox_experts.TabIndex = 49;
+            this.comboBox_experts.TabStop = false;
             this.comboBox_experts.SelectedIndexChanged += new System.EventHandler(this.comboBox_experts_SelectedIndexChanged);
             // 
             // label7
@@ -433,14 +434,14 @@
             // 
             // label_error
             // 
-            this.label_error.AutoSize = true;
             this.label_error.Font = new System.Drawing.Font("Tahoma", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label_error.ForeColor = System.Drawing.Color.Red;
-            this.label_error.Location = new System.Drawing.Point(278, 433);
+            this.label_error.Location = new System.Drawing.Point(167, 96);
             this.label_error.Name = "label_error";
-            this.label_error.Size = new System.Drawing.Size(208, 21);
+            this.label_error.Size = new System.Drawing.Size(430, 53);
             this.label_error.TabIndex = 70;
             this.label_error.Text = "некорректно введено.";
+            this.label_error.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.label_error.Visible = false;
             // 
             // Form10_experts_edit
@@ -448,7 +449,6 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(764, 484);
-            this.Controls.Add(this.label_error);
             this.Controls.Add(this.btn_pass);
             this.Controls.Add(this.btn_delete);
             this.Controls.Add(this.btn_new);
@@ -475,6 +475,7 @@
             this.Controls.Add(this.button_cross);
             this.Controls.Add(this.button_minimize);
             this.Controls.Add(this.label_save_status);
+            this.Controls.Add(this.label_error);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Form10_experts_edit";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

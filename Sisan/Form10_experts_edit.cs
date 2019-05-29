@@ -158,33 +158,56 @@ namespace system_analysis
         // ВЫБОР в КОМБОБОКСЕ эксперта
         private void comboBox_experts_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (comboBox_experts.Items.Count > 1 && comboBox_experts.SelectedIndex == 0)
+            if (comboBox_experts.SelectedIndex >= 0 && comboBox_experts.SelectedIndex < exp_count)
             {
-                btn_prev.Visible = false;
+                //===========================================
+                if (comboBox_experts.Items.Count > 1 && comboBox_experts.SelectedIndex == 0)
+                {
+                    btn_prev.Visible = false;
+                }
+                else if (comboBox_experts.Items.Count > 1)
+                {
+                    btn_prev.Visible = true;
+                }
+                //===========================================
+                if (comboBox_experts.Items.Count > 1 && comboBox_experts.SelectedIndex == comboBox_experts.Items.Count - 1)
+                {
+                    btn_next.Visible = false;
+                }
+                else if (comboBox_experts.Items.Count > 1)
+                {
+                    btn_next.Visible = true;
+                }
+                //===========================================
+                int n = comboBox_experts.SelectedIndex;
+                txt_id.Text = exp_list[n].n_id.ToString();
+                txt_name.Text = exp_list[n].name;
+                txt_surname.Text = exp_list[n].surname;
+                txt_otch.Text = exp_list[n].otch;
+                txt_position.Text = exp_list[n].position;
+                txt_password.PasswordChar = '*';
+                txt_password.Text = exp_list[n].password_exp;
+
             }
-            else if (comboBox_experts.Items.Count > 1)
+        }
+
+        // СОРТИРОВКА ПО фИО
+        private void sort_fio()
+        {
+            // сортируем по ФИО
+            exp b;
+            for (int i = 0; i < exp_count - 1; i++)
             {
-                btn_prev.Visible = true;
+                for (int j = i + 1; j < exp_count; j++)
+                {
+                    if (string.Compare(exp_list[i].fio, exp_list[j].fio) > 0)
+                    {
+                        b = exp_list[i];
+                        exp_list[i] = exp_list[j];
+                        exp_list[j] = b;
+                    }
+                }
             }
-            
-            if(comboBox_experts.Items.Count > 1 && comboBox_experts.SelectedIndex == comboBox_experts.Items.Count - 1)
-            {
-                btn_next.Visible = false;
-            }
-            else if (comboBox_experts.Items.Count > 1)
-            {
-                btn_next.Visible = true;
-            }
-
-            int n = comboBox_experts.SelectedIndex;
-            txt_id.Text = exp_list[n].n_id.ToString();
-            txt_name.Text = exp_list[n].name;
-            txt_surname.Text = exp_list[n].surname;
-            txt_otch.Text = exp_list[n].otch;
-            txt_position.Text = exp_list[n].position;
-
-
-
         }
 
         // при ЗАГРУЗКЕ ФОРМЫ
@@ -255,20 +278,7 @@ namespace system_analysis
                     }
                 }
                 // считали из файла всех 
-                // сортируем пор ФИО
-                exp b;
-                for (int i = 0; i < exp_count - 1; i++)
-                {
-                    for (int j = i + 1; j < exp_count; j++)
-                    {
-                        if (string.Compare(exp_list[i].fio, exp_list[j].fio) > 0)
-                        {
-                            b = exp_list[i];
-                            exp_list[i] = exp_list[j];
-                            exp_list[j] = b;
-                        }
-                    }
-                }
+                sort_fio();
 
                 // ============ отсортировали ============
 
@@ -298,7 +308,7 @@ namespace system_analysis
             }
         }
 
-        //===========================================================================
+        //===================================================================================
         // нажимаем на  label_view (статус просмотра)
         // ВКЛЮЧЕН РЕДАКТИРОВАНИЕ
         // ПЕРЕХОДИМ В РЕЖИМ ПРОСМОТРА
@@ -375,18 +385,18 @@ namespace system_analysis
                     txt_password.ReadOnly = true;
                     txt_password.PasswordChar = '*';
                     add_new = true;
-
-                }
-                
-
-                    
-
-                
+                }                
             }
             else
             {
                 label_view.Visible = false;
                 label_edit.Visible = true;
+                // кнопки
+                btn_delete.Visible = false;
+                btn_save.Visible = false;
+                btn_save.Text = "Сохранить";
+                btn_new.Visible = true;
+                btn_pass.Visible = false;
                 //показываем комбобокс и кнопки перелистывания
                 comboBox_experts.Enabled = true;
                 btn_prev.Visible = true;
@@ -414,7 +424,7 @@ namespace system_analysis
             label_view.Height = 20;
         }
 
-        //======================
+        //===================================================================================
 
         // нажимаем на label_edit (статус редактирования)
         // ВКЛЮЧЕН ПРОСМОТР
@@ -562,27 +572,28 @@ namespace system_analysis
                 txt_password.PasswordChar = '\0';
                 txt_password.Text = "";
 
+                id_free = 0;
                 // поиск свободного id
                 while (find == false)
                 {
-                    for (int j = 0; j < exp_list.Count; j++)
+                    for (int j = 0; j < exp_count; j++)
                     {
-                        int idold = id_free;
                         if (id_free == exp_list[j].n_id)
                         {
                             id_free++;
-                            
+                            j = 0;
                         }
-                        if(idold == id_free)
+                        else if (j == exp_count - 1)
                         {
-                            j = exp_list.Count;
                             find = true;
-                            txt_id.Text = id_free.ToString();
                         }
-                            
                     }
-                }
 
+                    if (find == true)
+                    {
+                        txt_id.Text = id_free.ToString();
+                    }  
+                }
             }
             else if (btn_new.Text == "Отмена")
             {
@@ -594,8 +605,6 @@ namespace system_analysis
                 comboBox_experts_SelectedIndexChanged(null, null);
 
             }
-
-
         }
 
         // кнопка УДАЛИТЬ ЭКСПЕРТА
@@ -784,21 +793,21 @@ namespace system_analysis
         private void btn_save_Click(object sender, EventArgs e)
         {
             Regex rgx1 = new Regex(@"^\w+\s*", RegexOptions.IgnoreCase); // слово1+ пробел0+
-            MatchCollection matches1 = rgx1.Matches(txt_name.Text); // число совпадений имени с rgx1
-            MatchCollection matches2 = rgx1.Matches(txt_surname.Text); // число совпадений фамилии с rgx1
+            MatchCollection matches1 = rgx1.Matches(txt_surname.Text); // число совпадений имени с rgx1
+            MatchCollection matches2 = rgx1.Matches(txt_name.Text); // число совпадений фамилии с rgx1
             MatchCollection matches3 = rgx1.Matches(txt_otch.Text);  // число совпадений отчества с rgx1
             MatchCollection matches4 = rgx1.Matches(txt_position.Text);  // число совпадений должности с rgx1
             if (matches1.Count < 1) //Имя
             {
-                label_error.Text = "Имя введенно некорректно!";
-                label_error.Visible = true;
-                txt_name.ForeColor = Color.FromName("Red");
-            }
-            else if (matches2.Count < 1) // фамилия
-            {
                 label_error.Text = "Фамилия введенна некорректно!";
                 label_error.Visible = true;
                 txt_surname.ForeColor = Color.FromName("Red");
+            }
+            else if (matches2.Count < 1) // фамилия
+            {
+                label_error.Text = "Имя введенно некорректно!";
+                label_error.Visible = true;
+                txt_name.ForeColor = Color.FromName("Red");
             }
             else if (txt_otch.Text.Length != 0 && matches3.Count < 1) // отчество
             {
@@ -812,9 +821,9 @@ namespace system_analysis
                 label_error.Visible = true;
                 txt_position.ForeColor = Color.FromName("Red");
             }
-            else if (txt_password.Text.Length < 6 || txt_password.Text.Length > 15)
+            else if (txt_password.Text.Length < 4 || txt_password.Text.Length > 15)
             {
-                label_error.Text = "Пароль должен быть не менее 6 символов\n и не более 15!";
+                label_error.Text = "Пароль должен быть не менее 4 символов\n и не более 15!";
                 label_error.Visible = true;
                 txt_password.ForeColor = Color.FromName("Red");
             }
@@ -848,18 +857,25 @@ namespace system_analysis
                     if(result == DialogResult.Yes)
                     {
                         this.TopMost = true; this.TopMost = false;
+                        comboBox_experts.Items.Clear();
                         exp_list.Add(a);
-                        comboBox_experts.Items.Add(exp_list[exp_list.Count - 1].fio);
+                        exp_count++;
+                        sort_fio();
+                        for (int i = 0; i < exp_count; i++)
+                        {
+                            comboBox_experts.Items.Add(exp_list[i].fio);
+                        }
                         add_new = true;
 
                         label_view_Click(null, null);
 
-                        comboBox_experts.SelectedIndex = comboBox_experts.Items.Count - 1;
+                        comboBox_experts.SelectedIndex = 0;
                         comboBox_experts.Visible = true;
                         label_save_status.Visible = true;
                         btn_new.Text = "Добавить нового эксперта";
                         btn_new.Visible = false;
                         btn_save.Text = "Сохранить";
+                        btn_save.Visible = true;
                     }
                     else if (result == DialogResult.No)
                     {
@@ -879,7 +895,9 @@ namespace system_analysis
                             for (int i = 0; i < exp_list.Count; i++)
                             {
                                 line = exp_list[i].n_id + " ";
-                                line += exp_list[i].fio + " ";
+                                line += exp_list[i].surname + " ";
+                                line += exp_list[i].name + " ";
+                                line += exp_list[i].otch + " ";
                                 line += exp_list[i].password_exp + " ";
                                 line += exp_list[i].position;
 
@@ -893,7 +911,7 @@ namespace system_analysis
                 }
                 else if(btn_save.Text == "Изменить")
                 {
-                    int id = exp_list[comboBox_experts.SelectedIndex].n_id;
+                    int n = comboBox_experts.SelectedIndex;
                     DialogResult result = MessageBox.Show(
                    "Все данные верны?\n",
                    "Добавление",
@@ -904,17 +922,20 @@ namespace system_analysis
                     if (result == DialogResult.Yes)
                     {
                         this.TopMost = true; this.TopMost = false;
-                        exp_list.Insert(id, a);
-                        exp_list.RemoveAt(id + 1);
-                        comboBox_experts.Items.Insert(id, exp_list[id].fio);
-                        
-                        comboBox_experts.Items.RemoveAt(id + 1);
-                        //comboBox_experts.Items.Add(exp_list[exp_list.Count - 1].fio);
+
+                        exp_list.RemoveAt(n);
+                        comboBox_experts.Items.Clear();
+                        exp_list.Add(a);
+                        sort_fio();
+                        for(int i = 0; i < exp_count; i++)
+                        {
+                            comboBox_experts.Items.Add(exp_list[i].fio);
+                        }
                         add_new = true;
 
                         label_view_Click(null, null);
 
-                        comboBox_experts.SelectedIndex = id;
+                        comboBox_experts.SelectedIndex = 0;
                         comboBox_experts.Visible = true;
                         label_save_status.Visible = true;
                         btn_new.Text = "Добавить нового эксперта";
