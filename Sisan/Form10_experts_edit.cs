@@ -183,7 +183,10 @@ namespace system_analysis
                 txt_id.Text = exp_list[n].n_id.ToString();
                 txt_name.Text = exp_list[n].name;
                 txt_surname.Text = exp_list[n].surname;
-                txt_otch.Text = exp_list[n].otch;
+                if (exp_list[n].otch == "-")
+                    txt_otch.Text = "";
+                else
+                    txt_otch.Text = exp_list[n].otch;
                 txt_position.Text = exp_list[n].position;
                 txt_password.PasswordChar = '*';
                 txt_password.Text = exp_list[n].password_exp;
@@ -615,6 +618,7 @@ namespace system_analysis
 
             if(exp_list.Count != 0)
             {
+
                 DialogResult result = MessageBox.Show(
                 "Удаление эксперта будет невозможно отменить.\n" +
                 "Удалить?",
@@ -640,7 +644,9 @@ namespace system_analysis
                         int id = exp_list[n].n_id;
                         exp_list.RemoveAt(n);
                         comboBox_experts.Items.RemoveAt(n);
-
+                        label_view_Click(null, null);
+                        comboBox_experts.SelectedIndex = 0;
+                        //label_save_status.Visible = true;
                         // удаляем старый файл
                         FileInfo fileInf = new FileInfo(directory + "experts.txt");
                         if (fileInf.Exists)
@@ -654,7 +660,9 @@ namespace system_analysis
                             while (i < exp_list.Count)
                             {
                                 line = exp_list[i].n_id + " ";
-                                line += exp_list[i].fio + " ";
+                                line += exp_list[i].surname + " ";
+                                line += exp_list[i].name + " ";
+                                line += exp_list[i].otch + " ";
                                 line += exp_list[i].password_exp + " ";
                                 line += exp_list[i].position;
 
@@ -662,7 +670,7 @@ namespace system_analysis
                                 i++;
                             }
                         }
-
+                        /*
                         FileInfo fileInf1 = new FileInfo(directory + "problems.txt");
                         if (fileInf1.Exists)
                         { 
@@ -769,7 +777,7 @@ namespace system_analysis
                                 }
 
                             }
-                        }
+                        }*/
 
 
                         if (exp_list.Count != 0)
@@ -792,172 +800,167 @@ namespace system_analysis
         // кнопка СОХРАНИТЬ / ДОБАВИТЬ / ИЗМЕНИТЬ
         private void btn_save_Click(object sender, EventArgs e)
         {
-            Regex rgx1 = new Regex(@"^\w+\s*", RegexOptions.IgnoreCase); // слово1+ пробел0+
-            MatchCollection matches1 = rgx1.Matches(txt_surname.Text); // число совпадений имени с rgx1
-            MatchCollection matches2 = rgx1.Matches(txt_name.Text); // число совпадений фамилии с rgx1
-            MatchCollection matches3 = rgx1.Matches(txt_otch.Text);  // число совпадений отчества с rgx1
-            MatchCollection matches4 = rgx1.Matches(txt_position.Text);  // число совпадений должности с rgx1
-            if (matches1.Count < 1) //Имя
+            if (btn_save.Text == "Сохранить")
             {
-                label_error.Text = "Фамилия введенна некорректно!";
-                label_error.Visible = true;
-                txt_surname.ForeColor = Color.FromName("Red");
-            }
-            else if (matches2.Count < 1) // фамилия
-            {
-                label_error.Text = "Имя введенно некорректно!";
-                label_error.Visible = true;
-                txt_name.ForeColor = Color.FromName("Red");
-            }
-            else if (txt_otch.Text.Length != 0 && matches3.Count < 1) // отчество
-            {
-                label_error.Text = "Отчество введенно некорректно!";
-                label_error.Visible = true;
-                txt_otch.ForeColor = Color.FromName("Red");
-            }
-            else if (matches4.Count < 1) // должность
-            {
-                label_error.Text = "Должность введенна некорректно!";
-                label_error.Visible = true;
-                txt_position.ForeColor = Color.FromName("Red");
-            }
-            else if (txt_password.Text.Length < 4 || txt_password.Text.Length > 15)
-            {
-                label_error.Text = "Пароль должен быть не менее 4 символов\n и не более 15!";
-                label_error.Visible = true;
-                txt_password.ForeColor = Color.FromName("Red");
+                if (label_save_status.Visible == true)
+                {
+                    // тупо сохраняем список экспертов в файл
+
+                    using (StreamWriter sr = new StreamWriter(directory + "experts.txt", false, System.Text.Encoding.UTF8))
+                    {
+                        string line = "";
+                        for (int i = 0; i < exp_list.Count; i++)
+                        {
+                            line = exp_list[i].n_id + " ";
+                            line += exp_list[i].surname + " ";
+                            line += exp_list[i].name + " ";
+                            line += exp_list[i].otch + " ";
+                            line += exp_list[i].password_exp + " ";
+                            line += exp_list[i].position;
+
+                            sr.WriteLine(line);
+                        }
+                    }
+                    label_save_status.Visible = false;
+                    btn_new.Visible = true;
+
+                }
             }
             else
             {
-                exp a;
-                a.n_id = Convert.ToInt32(txt_id.Text);
-                if (txt_otch.Text == "")
-                    a.fio = txt_surname.Text + " " + txt_name.Text;
-                else
-                    a.fio = txt_surname.Text + " " + txt_name.Text + " " + txt_otch.Text;
-
-                a.name = txt_name.Text;
-                a.surname = txt_surname.Text;
-                if (txt_otch.Text != "")
-                    a.otch = txt_otch.Text;
-                else
-                    a.otch = "-";
-                a.password_exp = txt_password.Text;
-                a.position = txt_position.Text;
-
-                if (btn_save.Text == "Добавить")
+                Regex rgx1 = new Regex(@"^\w+\s*", RegexOptions.IgnoreCase); // слово1+ пробел0+
+                MatchCollection matches1 = rgx1.Matches(txt_surname.Text); // число совпадений имени с rgx1
+                MatchCollection matches2 = rgx1.Matches(txt_name.Text); // число совпадений фамилии с rgx1
+                MatchCollection matches3 = rgx1.Matches(txt_otch.Text);  // число совпадений отчества с rgx1
+                MatchCollection matches4 = rgx1.Matches(txt_position.Text);  // число совпадений должности с rgx1
+                if (matches1.Count < 1) //Имя
                 {
-                    DialogResult result = MessageBox.Show(
-                    "Все данные верны?\n",
-                    "Добавление",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Warning,
-                    MessageBoxDefaultButton.Button2,
-                    MessageBoxOptions.DefaultDesktopOnly);
-                    if(result == DialogResult.Yes)
-                    {
-                        this.TopMost = true; this.TopMost = false;
-                        comboBox_experts.Items.Clear();
-                        exp_list.Add(a);
-                        exp_count++;
-                        sort_fio();
-                        for (int i = 0; i < exp_count; i++)
-                        {
-                            comboBox_experts.Items.Add(exp_list[i].fio);
-                        }
-                        add_new = true;
-
-                        label_view_Click(null, null);
-
-                        comboBox_experts.SelectedIndex = 0;
-                        comboBox_experts.Visible = true;
-                        label_save_status.Visible = true;
-                        btn_new.Text = "Добавить нового эксперта";
-                        btn_new.Visible = false;
-                        btn_save.Text = "Сохранить";
-                        btn_save.Visible = true;
-                    }
-                    else if (result == DialogResult.No)
-                    {
-                        this.TopMost = true; this.TopMost = false;
-                    }
-                    
+                    label_error.Text = "Фамилия введенна некорректно!";
+                    label_error.Visible = true;
+                    txt_surname.ForeColor = Color.FromName("Red");
                 }
-                else if (btn_save.Text == "Сохранить")
+                else if (matches2.Count < 1) // фамилия
                 {
-                    if(label_save_status.Visible == true)
-                    {
-                        // тупо сохраняем список экспертов в файл
+                    label_error.Text = "Имя введенно некорректно!";
+                    label_error.Visible = true;
+                    txt_name.ForeColor = Color.FromName("Red");
+                }
+                else if (txt_otch.Text.Length != 0 && matches3.Count < 1) // отчество
+                {
+                    label_error.Text = "Отчество введенно некорректно!";
+                    label_error.Visible = true;
+                    txt_otch.ForeColor = Color.FromName("Red");
+                }
+                else if (matches4.Count < 1) // должность
+                {
+                    label_error.Text = "Должность введенна некорректно!";
+                    label_error.Visible = true;
+                    txt_position.ForeColor = Color.FromName("Red");
+                }
+                else if (txt_password.Text.Length < 4 || txt_password.Text.Length > 15)
+                {
+                    label_error.Text = "Пароль должен быть не менее 4 символов\n и не более 15!";
+                    label_error.Visible = true;
+                    txt_password.ForeColor = Color.FromName("Red");
+                }
+                else
+                {
+                    exp a;
+                    a.n_id = Convert.ToInt32(txt_id.Text);
+                    if (txt_otch.Text == "")
+                        a.fio = txt_surname.Text + " " + txt_name.Text;
+                    else
+                        a.fio = txt_surname.Text + " " + txt_name.Text + " " + txt_otch.Text;
 
-                        using (StreamWriter sr = new StreamWriter(directory + "experts.txt", false, System.Text.Encoding.UTF8))
+                    a.name = txt_name.Text;
+                    a.surname = txt_surname.Text;
+                    if (txt_otch.Text != "")
+                        a.otch = txt_otch.Text;
+                    else
+                        a.otch = "-";
+                    a.password_exp = txt_password.Text;
+                    a.position = txt_position.Text;
+
+                    if (btn_save.Text == "Добавить")
+                    {
+                        DialogResult result = MessageBox.Show(
+                        "Все данные верны?\n",
+                        "Добавление",
+                        MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Warning,
+                        MessageBoxDefaultButton.Button2,
+                        MessageBoxOptions.DefaultDesktopOnly);
+                        if (result == DialogResult.Yes)
                         {
-                            string line = "";
-                            for (int i = 0; i < exp_list.Count; i++)
+                            this.TopMost = true; this.TopMost = false;
+                            comboBox_experts.Items.Clear();
+                            exp_list.Add(a);
+                            exp_count++;
+                            sort_fio();
+                            for (int i = 0; i < exp_count; i++)
                             {
-                                line = exp_list[i].n_id + " ";
-                                line += exp_list[i].surname + " ";
-                                line += exp_list[i].name + " ";
-                                line += exp_list[i].otch + " ";
-                                line += exp_list[i].password_exp + " ";
-                                line += exp_list[i].position;
-
-                                sr.WriteLine(line);
+                                comboBox_experts.Items.Add(exp_list[i].fio);
                             }
+                            add_new = true;
+
+                            label_view_Click(null, null);
+
+                            comboBox_experts.SelectedIndex = 0;
+                            comboBox_experts.Visible = true;
+                            label_save_status.Visible = true;
+                            btn_new.Text = "Добавить нового эксперта";
+                            btn_new.Visible = false;
+                            btn_save.Text = "Сохранить";
+                            btn_save.Visible = true;
                         }
-                        label_save_status.Visible = false;
-                        btn_new.Visible = true;
-
-                    }
-                }
-                else if(btn_save.Text == "Изменить")
-                {
-                    int n = comboBox_experts.SelectedIndex;
-                    DialogResult result = MessageBox.Show(
-                   "Все данные верны?\n",
-                   "Добавление",
-                   MessageBoxButtons.YesNo,
-                   MessageBoxIcon.Warning,
-                   MessageBoxDefaultButton.Button2,
-                   MessageBoxOptions.DefaultDesktopOnly);
-                    if (result == DialogResult.Yes)
-                    {
-                        this.TopMost = true; this.TopMost = false;
-
-                        exp_list.RemoveAt(n);
-                        comboBox_experts.Items.Clear();
-                        exp_list.Add(a);
-                        sort_fio();
-                        for(int i = 0; i < exp_count; i++)
+                        else if (result == DialogResult.No)
                         {
-                            comboBox_experts.Items.Add(exp_list[i].fio);
+                            this.TopMost = true; this.TopMost = false;
                         }
-                        add_new = true;
 
-                        label_view_Click(null, null);
-
-                        comboBox_experts.SelectedIndex = 0;
-                        comboBox_experts.Visible = true;
-                        label_save_status.Visible = true;
-                        btn_new.Text = "Добавить нового эксперта";
-                        btn_new.Visible = false;
-                        btn_save.Text = "Сохранить";
-                        btn_delete.Visible = false;
                     }
-                    else if (result == DialogResult.No)
+                    else if (btn_save.Text == "Изменить")
                     {
-                        this.TopMost = true; this.TopMost = false;
+                        int n = comboBox_experts.SelectedIndex;
+                        DialogResult result = MessageBox.Show(
+                       "Все данные верны?\n",
+                       "Добавление",
+                       MessageBoxButtons.YesNo,
+                       MessageBoxIcon.Warning,
+                       MessageBoxDefaultButton.Button2,
+                       MessageBoxOptions.DefaultDesktopOnly);
+                        if (result == DialogResult.Yes)
+                        {
+                            this.TopMost = true; this.TopMost = false;
+
+                            exp_list.RemoveAt(n);
+                            comboBox_experts.Items.Clear();
+                            exp_list.Add(a);
+                            sort_fio();
+                            for (int i = 0; i < exp_count; i++)
+                            {
+                                comboBox_experts.Items.Add(exp_list[i].fio);
+                            }
+                            add_new = true;
+
+                            label_view_Click(null, null);
+
+                            comboBox_experts.SelectedIndex = 0;
+                            comboBox_experts.Visible = true;
+                            label_save_status.Visible = true;
+                            btn_new.Text = "Добавить нового эксперта";
+                            btn_new.Visible = false;
+                            btn_save.Text = "Сохранить";
+                            btn_save.Visible = true;
+                            btn_delete.Visible = false;
+                        }
+                        else if (result == DialogResult.No)
+                        {
+                            this.TopMost = true; this.TopMost = false;
+                        }
                     }
-
-
                 }
-
-
-
-
             }
-
-
-            
         }
 
 
