@@ -47,10 +47,11 @@ namespace system_analysis
             "k", "m", "n", "p", "q", "r",
             "s", "t", "v", "w", "x", "z",
             "A", "E", "U", "Y", "a", "e",
-            "i", "u", "y", "a", "A"
+            "i", "u", "y", "a", "A", 
         };
 
         private bool add_new;
+        private int exp_count; // кол-во экспертов
 
         // кнопка СВЕРНУТЬ ОКНО
         private void button_minimize_Click(object sender, EventArgs e)
@@ -154,7 +155,7 @@ namespace system_analysis
 
         }
 
-        // когда выбрали эксперта в комбобокс
+        // ВЫБОР в КОМБОБОКСЕ эксперта
         private void comboBox_experts_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (comboBox_experts.Items.Count > 1 && comboBox_experts.SelectedIndex == 0)
@@ -203,23 +204,26 @@ namespace system_analysis
 
 
             string text = "";
-            using (StreamReader sr = new StreamReader(directory + "experts.txt", System.Text.Encoding.UTF8))
+            if (File.Exists(directory + "experts.txt") == true)
             {
-                text = sr.ReadToEnd();
+                using (StreamReader sr = new StreamReader(directory + "experts.txt", System.Text.Encoding.UTF8))
+                {
+                    text = sr.ReadToEnd();
+                }
             }
 
-            if (text.Length != 0)
+            if (text.Length > 0)
             {
-
                 text = "";
                 string[] words;
-
+                exp_count = 0;
                 using (StreamReader sr = new StreamReader(directory + "experts.txt", System.Text.Encoding.UTF8))
                 {
                     exp a;
                     exp_list = new List<exp>();
                     while ((text = sr.ReadLine()) != null)
                     {
+                        //a = new exp();
                         words = text.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
                         // записали номер эксперта
                         a.n_id = Convert.ToInt32(words[0]);
@@ -246,11 +250,29 @@ namespace system_analysis
                         for (int i = 5; i < words.Count(); i++)
                             a.position += words[i] + " ";
 
+                        exp_count++;
                         exp_list.Add(a);
                     }
                 }
+                // считали из файла всех 
+                // сортируем пор ФИО
+                exp b;
+                for (int i = 0; i < exp_count - 1; i++)
+                {
+                    for (int j = i + 1; j < exp_count; j++)
+                    {
+                        if (string.Compare(exp_list[i].fio, exp_list[j].fio) > 0)
+                        {
+                            b = exp_list[i];
+                            exp_list[i] = exp_list[j];
+                            exp_list[j] = b;
+                        }
+                    }
+                }
 
-                for (int i = 0; i < exp_list.Count; i++)
+                // ============ отсортировали ============
+
+                for (int i = 0; i < exp_count; i++)
                 {
                     comboBox_experts.Items.Add(exp_list[i].fio);
                 }
@@ -258,14 +280,13 @@ namespace system_analysis
                 if (comboBox_experts.Items.Count > 0)
                 {
                     comboBox_experts.SelectedIndex = 0;
-                    txt_id.Text = exp_list[0].n_id.ToString();
+                    /*txt_id.Text = exp_list[0].n_id.ToString();
                     txt_name.Text = exp_list[0].name;
                     txt_surname.Text = exp_list[0].surname;
                     txt_otch.Text = exp_list[0].otch;
                     txt_position.Text = exp_list[0].position;
                     txt_password.PasswordChar = '*';
-                    txt_password.Text = exp_list[0].password_exp;
-
+                    txt_password.Text = exp_list[0].password_exp;*/
 
                 }
 
@@ -918,64 +939,69 @@ namespace system_analysis
             
         }
 
-        private void txt_surname_TextChanged(object sender, EventArgs e)
+
+        #region НАЖАТИЕ_НА_ТЕКСТБОКСЫ_ДЛЯ_их_НЕЙТРАЛЬНОСТИ
+
+        private void txt_surname_TextChanged(object sender, EventArgs e)  //  когда МЕНЯЕМ ФАМИЛИЮ
         {
             txt_surname.ForeColor = Color.FromName("WindowText");
             label_error.Visible = false;
         }
 
-        private void txt_surname_MouseDown(object sender, MouseEventArgs e)
+        private void txt_surname_MouseDown(object sender, MouseEventArgs e)  //  когда НАЖИМАЕМ на ФАМИЛИЮ
         {
             txt_surname.ForeColor = Color.FromName("WindowText");
             label_error.Visible = false;
         }
 
-        private void txt_name_TextChanged(object sender, EventArgs e)
+        private void txt_name_TextChanged(object sender, EventArgs e)  //  когда МЕНЯЕМ ИМЯ
         {
             txt_name.ForeColor = Color.FromName("WindowText");
             label_error.Visible = false;
         }
 
-        private void txt_name_MouseDown(object sender, MouseEventArgs e)
+        private void txt_name_MouseDown(object sender, MouseEventArgs e)  //  когда НАЖИМАЕМ на ИМЯ
         {
             txt_name.ForeColor = Color.FromName("WindowText");
             label_error.Visible = false;
         }
 
-        private void txt_otch_TextChanged(object sender, EventArgs e)
+        private void txt_otch_TextChanged(object sender, EventArgs e)  //  когда МЕНЯЕМ ОТЧЕСТВО
         {
             txt_otch.ForeColor = Color.FromName("WindowText");
             label_error.Visible = false;
         }
 
-        private void txt_otch_MouseDown(object sender, MouseEventArgs e)
+        private void txt_otch_MouseDown(object sender, MouseEventArgs e)  //  когда НАЖИМАЕМ на ОТЧЕСТВО
         {
             txt_otch.ForeColor = Color.FromName("WindowText");
             label_error.Visible = false;
         }
 
-        private void txt_position_TextChanged(object sender, EventArgs e)
+        private void txt_position_TextChanged(object sender, EventArgs e)  //  когда МЕНЯЕМ ДОЛЖНОСТЬ
         {
             txt_position.ForeColor = Color.FromName("WindowText");
             label_error.Visible = false;
         }
 
-        private void txt_position_MouseDown(object sender, MouseEventArgs e)
+        private void txt_position_MouseDown(object sender, MouseEventArgs e)  //  когда НАЖИМАЕМ на ДОЛЖНОСТЬ
         {
             txt_position.ForeColor = Color.FromName("WindowText");
             label_error.Visible = false;
         }
 
-        private void txt_password_TextChanged(object sender, EventArgs e)
+        private void txt_password_TextChanged(object sender, EventArgs e)   //  когда МЕНЯЕМ ПАРОЛЬ
         {
             txt_password.ForeColor = Color.FromName("WindowText");
             label_error.Visible = false;
         }
 
-        private void txt_password_MouseDown(object sender, MouseEventArgs e)
+        private void txt_password_MouseDown(object sender, MouseEventArgs e)  //  когда НАЖИМАЕМ на ПАРОЛЬ
         {
             txt_password.ForeColor = Color.FromName("WindowText");
             label_error.Visible = false;
         }
+
+        #endregion
     }
 }

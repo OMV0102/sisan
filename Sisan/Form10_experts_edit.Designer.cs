@@ -453,7 +453,6 @@
             this.Controls.Add(this.btn_delete);
             this.Controls.Add(this.btn_new);
             this.Controls.Add(this.btn_save);
-            this.Controls.Add(this.label_save_status);
             this.Controls.Add(this.label_edit);
             this.Controls.Add(this.label_view);
             this.Controls.Add(this.label6);
@@ -475,6 +474,7 @@
             this.Controls.Add(this.button_back);
             this.Controls.Add(this.button_cross);
             this.Controls.Add(this.button_minimize);
+            this.Controls.Add(this.label_save_status);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Form10_experts_edit";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

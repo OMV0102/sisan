@@ -93,6 +93,7 @@ namespace system_analysis
                 //lbl_new_dir.Visible = true;
                 Directory.CreateDirectory(path);
                 File.CreateText(path + "problems.txt");
+                File.CreateText(path + "experts.txt");
             }
             global_class.main_directory = path;
         }

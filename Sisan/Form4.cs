@@ -60,7 +60,6 @@ namespace system_analysis
         // кнопка ПОСМОТРЕТЬ ОПРОС
         private void btn_show_report_Click(object sender, EventArgs e)
         {
-            // переход на форму аналитика (отчет) при нажатии на кнопку "Посмотреть результаты"
             Form form = new form5_analyst_report();
             form.Show();
             this.Close();

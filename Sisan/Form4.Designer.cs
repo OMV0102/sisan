@@ -186,7 +186,6 @@
             // 
             this.btn_expert_edit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(118)))), ((int)(((byte)(168)))));
             this.btn_expert_edit.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_expert_edit.Enabled = false;
             this.btn_expert_edit.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btn_expert_edit.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkOrange;
             this.btn_expert_edit.FlatAppearance.MouseOverBackColor = System.Drawing.Color.SandyBrown;
@@ -197,7 +196,7 @@
             this.btn_expert_edit.Size = new System.Drawing.Size(263, 65);
             this.btn_expert_edit.TabIndex = 21;
             this.btn_expert_edit.TabStop = false;
-            this.btn_expert_edit.Text = "Редактирование списка экспертов";
+            this.btn_expert_edit.Text = "Редактирование экспертов\r\nи их характеристик";
             this.btn_expert_edit.UseVisualStyleBackColor = false;
             this.btn_expert_edit.Click += new System.EventHandler(this.btn_expert_edit_Click);
             // 
