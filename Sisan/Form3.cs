@@ -25,6 +25,20 @@ namespace system_analysis
             InitializeComponent();
         }
 
+        //=================================================================
+        public int prob_count = 0;   // количество проблем
+        st_problem prob; // вспомогательная переменная для добавления проблемы
+        public int alter_count = 0;   // количество альтернатив для выбранной проблемы
+        public int exp_count = 0;   // количество экспертов для выбранной проблемы
+        public int index_prob = -1; // индекс проблемы при выборе комобобокса проблемы
+        //=================================================================
+        private bool add_new_prob;
+        private bool add_new_sol;
+        public bool edit_or_add;  // флаг для ред/добав проблемы
+        public int predN_prob; // предыдущий номер проблемы, используется в comboBox_problems_SelectedIndexChanged
+        public bool mem = false;  // флаг, если ничего не выведено в список альтернатив, то не сохраняем их
+        //=================================================================
+
         #region СТРУКТУРЫ
         public struct exp //  структура для хранения одного эксперта
         {
@@ -51,22 +65,49 @@ namespace system_analysis
             public bool open_close;
             public string txt_prob;
             public int status_prob;
-            public metod0 m0;
-            public metod1 m1;
-            public metod2 m2;
-            public metod3 m3;
-            public metod4 m4;
+            public metod0_inf m0;
+            public metod1_inf m1;
+            public metod2_inf m2;
+            public metod3_inf m3;
+            public metod4_inf m4;
         }
         public List<st_problem> prob_list;
+        public struct metod0_inf //  структура для хранения информации о методе 0
+        {
+            public int id_exp;
+            public float[,] matr;
+            public float[] ves;
+            public int status;
+        }
 
+        public struct metod1_inf //  структура для хранения информации о методе 1
+        {
+            public int id_exp;
+            public float comp;
+            public int status;
+            public float[] marks;
+        }
+        public struct metod2_inf //  структура для хранения информации о методе 2
+        {
+            public int id_exp;
+            public float[] marks;
+            public int status;
+        }
+        public struct metod3_inf //  структура для хранения информации о методе 2
+        {
+            public int id_exp;
+            public float[] marks;
+            public int status;
+        }
+        public struct metod4_inf //  структура для хранения информации о методе 4
+        {
+            public int id_exp;
+            public float[,] matr;
+            public int status;
+        }
         #endregion
 
-        private bool add_new_prob;
-        private bool add_new_sol;
-        public bool edit_or_add;  // флаг для ред/добав проблемы
-        public int predN_prob; // предыдущий номер проблемы, используется в comboBox_problems_SelectedIndexChanged
-        public bool mem = false;  // флаг, если ничего не выведено в список альтернатив, то не сохраняем их
-
+        
         // кнопка ЗАКРЫТЬ ОКНО
         private void button_cross_Click(object sender, EventArgs e)
         {
@@ -167,6 +208,7 @@ namespace system_analysis
             }
 
         }
+        //==========================================================================================================
 
         // кнопка СОХРАНИТЬ
         private void btn_save_all_Click(object sender, EventArgs e)
@@ -278,6 +320,8 @@ namespace system_analysis
                 }
             }
         }
+
+        //==========================================================================================================
 
         // нажатие по списку альтернатив
         private void list_solution_MouseDown(object sender, MouseEventArgs e)
@@ -647,6 +691,8 @@ namespace system_analysis
             }
         }
 
+        //==========================================================================================================
+
         // при ЗАГРУЗКЕ ФОРМЫ
         private void form3_analyst_add_Load(object sender, EventArgs e)
         {
@@ -944,5 +990,7 @@ namespace system_analysis
             }
 
         }
+
+        //==========================================================================================================
     }
 }
