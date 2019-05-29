@@ -39,6 +39,7 @@
             this.btn_expert_edit = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -93,7 +94,6 @@
             // 
             this.btn_add_problem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(118)))), ((int)(((byte)(168)))));
             this.btn_add_problem.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_add_problem.Enabled = false;
             this.btn_add_problem.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btn_add_problem.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkOrange;
             this.btn_add_problem.FlatAppearance.MouseOverBackColor = System.Drawing.Color.SandyBrown;
@@ -117,7 +117,7 @@
             this.btn_show_report.FlatAppearance.MouseOverBackColor = System.Drawing.Color.SandyBrown;
             this.btn_show_report.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_show_report.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btn_show_report.Location = new System.Drawing.Point(370, 118);
+            this.btn_show_report.Location = new System.Drawing.Point(190, 216);
             this.btn_show_report.Name = "btn_show_report";
             this.btn_show_report.Size = new System.Drawing.Size(263, 68);
             this.btn_show_report.TabIndex = 9;
@@ -162,6 +162,7 @@
             this.button1.TabStop = false;
             this.button1.Text = "Изменение списков экспертов к проблемам";
             this.button1.UseVisualStyleBackColor = false;
+            this.button1.Visible = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // btn_change_pass
@@ -173,7 +174,7 @@
             this.btn_change_pass.FlatAppearance.MouseOverBackColor = System.Drawing.Color.SandyBrown;
             this.btn_change_pass.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_change_pass.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btn_change_pass.Location = new System.Drawing.Point(248, 305);
+            this.btn_change_pass.Location = new System.Drawing.Point(246, 309);
             this.btn_change_pass.Name = "btn_change_pass";
             this.btn_change_pass.Size = new System.Drawing.Size(171, 34);
             this.btn_change_pass.TabIndex = 20;
@@ -191,7 +192,7 @@
             this.btn_expert_edit.FlatAppearance.MouseOverBackColor = System.Drawing.Color.SandyBrown;
             this.btn_expert_edit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_expert_edit.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btn_expert_edit.Location = new System.Drawing.Point(370, 217);
+            this.btn_expert_edit.Location = new System.Drawing.Point(370, 119);
             this.btn_expert_edit.Name = "btn_expert_edit";
             this.btn_expert_edit.Size = new System.Drawing.Size(263, 65);
             this.btn_expert_edit.TabIndex = 21;
@@ -225,6 +226,20 @@
             this.label2.TabIndex = 61;
             this.label2.Text = "Аналитик";
             // 
+            // label3
+            // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label3.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.label3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label3.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label3.ForeColor = System.Drawing.Color.Black;
+            this.label3.Location = new System.Drawing.Point(0, 298);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(677, 5);
+            this.label3.TabIndex = 62;
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // form4_analyst_choice
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -232,13 +247,14 @@
             this.BackColor = System.Drawing.SystemColors.Control;
             this.CancelButton = this.button_back;
             this.ClientSize = new System.Drawing.Size(677, 351);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.btn_show_report);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.btn_expert_edit);
             this.Controls.Add(this.btn_change_pass);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.button_back);
-            this.Controls.Add(this.btn_show_report);
             this.Controls.Add(this.btn_add_problem);
             this.Controls.Add(this.button_cross);
             this.Controls.Add(this.button_minimize);
@@ -268,5 +284,6 @@
         private System.Windows.Forms.Button btn_expert_edit;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
     }
 }
