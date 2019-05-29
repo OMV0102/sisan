@@ -196,13 +196,24 @@ namespace system_analysis
         // при ЗАГРУЗКЕ ФОРМЫ
         private void form5_analyst_report_Load(object sender, EventArgs e)
         {
+            // проверка ширины экрана и количества дисплеев
+            Rectangle screenSize = System.Windows.Forms.Screen.PrimaryScreen.Bounds;
+            int display_count = Screen.AllScreens.Count();  // количество дисплеев
+            if (display_count > 1 || screenSize.Width > 1712)  // если больше чем 1710 с запасом
+            {
+                btn_extend.Enabled = true;
+            }
+            else
+            {
+                btn_extend.BackColor = Color.FromName("Control");
+                btn_extend.Text = "";
+                btn_extend.Enabled = false;
+                btn_extend.FlatAppearance.BorderSize = 0;
+            }
+            //===================================================
             lbl_notmarks.Visible = false;
-
             String[] words;              //СТРОКА.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);  // это на всякий под рукой
             string text = "";
-
-
-
             FileInfo fileInf1 = new FileInfo(directory + "experts.txt");
             if (fileInf1.Exists)  // если файл существует вообще
             {
