@@ -210,27 +210,39 @@ namespace system_analysis
         }
         //==========================================================================================================
 
-        // кнопка СОХРАНИТЬ
+        // кнопка СОХРАНИТЬ    // НЕ ГОТОВО
         private void btn_save_all_Click(object sender, EventArgs e)
         {
             if (label_save_status.Visible == true)
             {
-                if (comboBox_problems.Items.Count == 0)
+                prob_count = prob_list.Count();
+                if (prob_count == 0)
                 {
-                    MessageBox.Show(
-                    "Проблемы отсутствуют!",
-                    "Ошибка",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error,
-                    MessageBoxDefaultButton.Button1,
-                    MessageBoxOptions.DefaultDesktopOnly);
-                    this.TopMost = true; this.TopMost = false;
+                    // сохраняем файл problems пустым
+                    using (StreamWriter sr = new StreamWriter(directory + "problems.txt", false, System.Text.Encoding.UTF8))
+                    {
+                        sr.Write("");
+                    }
+                    DirectoryInfo dir = new DirectoryInfo(directory);
+                    foreach (FileInfo file in dir.GetFiles("solutions*.txt"))
+                    {
+                        file.Delete();
+                    }
+                    foreach (FileInfo file in dir.GetFiles("group*.txt"))
+                    {
+                        file.Delete();
+                    }
+                    foreach (FileInfo file in dir.GetFiles("matrix*.txt"))
+                    {
+                        file.Delete();
+                    }
                 }
                 else
                 // Обеспечивает сохранение проблемы и альтернатив в файл
                 // Возникает при нажатии на кнопку "Сохранить"
                 if (list_solution.Items.Count < 2)
                 {
+                    this.Hide();
                     MessageBox.Show(
                     "Альтернатив в списке должно быть как минимум 2!",
                     "Ошибка",
@@ -238,10 +250,25 @@ namespace system_analysis
                     MessageBoxIcon.Error,
                     MessageBoxDefaultButton.Button1,
                     MessageBoxOptions.DefaultDesktopOnly);
+                    this.Show();
+                    this.TopMost = true; this.TopMost = false;
+                }
+                else if (exp_count < 1)
+                {
+                    this.Hide();
+                    MessageBox.Show(
+                    "Вы забыли назначить экспертов по проблеме:\n" +
+                    "",
+                    "Ошибка",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error,
+                    MessageBoxDefaultButton.Button1,
+                    MessageBoxOptions.DefaultDesktopOnly);
+                    this.Show();
                     this.TopMost = true; this.TopMost = false;
                 }
                 else
-                {
+                { 
                     DialogResult result = MessageBox.Show(
                     "Сохранить проблему и альтернативы?",
                     "",
@@ -754,7 +781,8 @@ namespace system_analysis
 
                 alter_list = new List<solutions>();  // память для списка где харанится альтернативы для проблем
                 solutions sol = new solutions();  // вспомогательная переменная для строки выше
-                                                  //====== читаем проблемы ==========
+                //====== читаем проблемы ==========
+                prob_list = new List<st_problem>();
                 FileInfo fileInf2 = new FileInfo(directory + "problems.txt");
                 if (fileInf2.Exists)  // если файл существует вообще
                 {
@@ -769,7 +797,6 @@ namespace system_analysis
                     using (StreamReader sr = new StreamReader(directory + "problems.txt", System.Text.Encoding.UTF8))
                     {
                         string line = "";
-                        prob_list = new List<st_problem>();
                         prob_count = 0;
                         while ((line = sr.ReadLine()) != null)
                         {

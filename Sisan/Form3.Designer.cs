@@ -52,8 +52,8 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.label7 = new System.Windows.Forms.Label();
             this.Выбор = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.label7 = new System.Windows.Forms.Label();
             this.box_open_close = new System.Windows.Forms.CheckBox();
             this.lbl_notprob = new System.Windows.Forms.Label();
             this.list_menu.SuspendLayout();
@@ -363,6 +363,13 @@
             this.dataGridView1.TabIndex = 61;
             this.dataGridView1.TabStop = false;
             // 
+            // Выбор
+            // 
+            this.Выбор.Frozen = true;
+            this.Выбор.HeaderText = "Выбор";
+            this.Выбор.Name = "Выбор";
+            this.Выбор.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            // 
             // label7
             // 
             this.label7.AutoSize = true;
@@ -373,13 +380,6 @@
             this.label7.Size = new System.Drawing.Size(533, 23);
             this.label7.TabIndex = 62;
             this.label7.Text = "Список экспертов, которые оцнивают альтернативы";
-            // 
-            // Выбор
-            // 
-            this.Выбор.Frozen = true;
-            this.Выбор.HeaderText = "Выбор";
-            this.Выбор.Name = "Выбор";
-            this.Выбор.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
             // box_open_close
             // 

@@ -269,7 +269,8 @@ namespace system_analysis
 
                 alter_list = new List<solutions>();  // память для списка где харанится альтернативы для проблем
                 solutions sol = new solutions();  // вспомогательная переменная для строки выше
-                                                  //====== читаем проблемы ==========
+                //====== читаем проблемы ==========
+                prob_list = new List<st_problem>();
                 FileInfo fileInf2 = new FileInfo(directory + "problems.txt");
                 if (fileInf2.Exists)  // если файл существует вообще
                 {
@@ -286,7 +287,6 @@ namespace system_analysis
                     using (StreamReader sr = new StreamReader(directory + "problems.txt", System.Text.Encoding.UTF8))
                     {
                         string line = "";
-                        prob_list = new List<st_problem>();
                         while ((line = sr.ReadLine()) != null)
                         {
                             // считываем проблему
