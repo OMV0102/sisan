@@ -55,14 +55,9 @@
             this.label7 = new System.Windows.Forms.Label();
             this.box_open_close = new System.Windows.Forms.CheckBox();
             this.lbl_notprob = new System.Windows.Forms.Label();
+            this.txt_scale = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.Выбор = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.comp = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.m1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.m2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.m3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.m4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.m5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.list_menu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -173,7 +168,7 @@
             this.btn_alter_add.FlatAppearance.MouseOverBackColor = System.Drawing.Color.SandyBrown;
             this.btn_alter_add.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_alter_add.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btn_alter_add.Location = new System.Drawing.Point(205, 228);
+            this.btn_alter_add.Location = new System.Drawing.Point(204, 255);
             this.btn_alter_add.Name = "btn_alter_add";
             this.btn_alter_add.Size = new System.Drawing.Size(239, 40);
             this.btn_alter_add.TabIndex = 26;
@@ -227,7 +222,7 @@
             // txt_solution
             // 
             this.txt_solution.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.txt_solution.Location = new System.Drawing.Point(32, 192);
+            this.txt_solution.Location = new System.Drawing.Point(31, 219);
             this.txt_solution.Name = "txt_solution";
             this.txt_solution.Size = new System.Drawing.Size(604, 27);
             this.txt_solution.TabIndex = 30;
@@ -238,7 +233,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label2.ForeColor = System.Drawing.Color.Black;
-            this.label2.Location = new System.Drawing.Point(191, 157);
+            this.label2.Location = new System.Drawing.Point(190, 184);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(276, 23);
             this.label2.TabIndex = 31;
@@ -362,14 +357,8 @@
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Выбор,
-            this.comp,
-            this.fio,
-            this.m1,
-            this.m2,
-            this.m3,
-            this.m4,
-            this.m5});
+            this.Выбор});
+            this.dataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.dataGridView1.Location = new System.Drawing.Point(684, 297);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
@@ -395,7 +384,7 @@
             this.box_open_close.CheckState = System.Windows.Forms.CheckState.Checked;
             this.box_open_close.Cursor = System.Windows.Forms.Cursors.Hand;
             this.box_open_close.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.box_open_close.Location = new System.Drawing.Point(786, 196);
+            this.box_open_close.Location = new System.Drawing.Point(38, 128);
             this.box_open_close.Name = "box_open_close";
             this.box_open_close.Size = new System.Drawing.Size(353, 27);
             this.box_open_close.TabIndex = 63;
@@ -408,12 +397,33 @@
             this.lbl_notprob.AutoSize = true;
             this.lbl_notprob.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lbl_notprob.ForeColor = System.Drawing.Color.Red;
-            this.lbl_notprob.Location = new System.Drawing.Point(560, 157);
+            this.lbl_notprob.Location = new System.Drawing.Point(538, 143);
             this.lbl_notprob.Name = "lbl_notprob";
             this.lbl_notprob.Size = new System.Drawing.Size(251, 23);
             this.lbl_notprob.TabIndex = 69;
             this.lbl_notprob.Text = "Проблемы отсутствуют!";
             this.lbl_notprob.Visible = false;
+            // 
+            // txt_scale
+            // 
+            this.txt_scale.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txt_scale.Location = new System.Drawing.Point(1039, 177);
+            this.txt_scale.Name = "txt_scale";
+            this.txt_scale.Size = new System.Drawing.Size(69, 27);
+            this.txt_scale.TabIndex = 70;
+            this.txt_scale.TabStop = false;
+            this.txt_scale.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label8.ForeColor = System.Drawing.Color.Black;
+            this.label8.Location = new System.Drawing.Point(722, 166);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(311, 38);
+            this.label8.TabIndex = 71;
+            this.label8.Text = "Шкала для оценивания методом\r\n полного попарного сопоставления:";
             // 
             // Выбор
             // 
@@ -423,79 +433,6 @@
             this.Выбор.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.Выбор.Width = 50;
             // 
-            // comp
-            // 
-            this.comp.Frozen = true;
-            this.comp.HeaderText = "Компетентность";
-            this.comp.Name = "comp";
-            this.comp.ReadOnly = true;
-            this.comp.Width = 95;
-            // 
-            // fio
-            // 
-            this.fio.Frozen = true;
-            this.fio.HeaderText = "ФИО";
-            this.fio.Name = "fio";
-            this.fio.ReadOnly = true;
-            this.fio.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.fio.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.fio.Width = 270;
-            // 
-            // m1
-            // 
-            this.m1.Frozen = true;
-            this.m1.HeaderText = "М1";
-            this.m1.MaxInputLength = 1;
-            this.m1.Name = "m1";
-            this.m1.ReadOnly = true;
-            this.m1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.m1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.m1.Width = 50;
-            // 
-            // m2
-            // 
-            this.m2.Frozen = true;
-            this.m2.HeaderText = "М2";
-            this.m2.MaxInputLength = 1;
-            this.m2.Name = "m2";
-            this.m2.ReadOnly = true;
-            this.m2.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.m2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.m2.Width = 50;
-            // 
-            // m3
-            // 
-            this.m3.Frozen = true;
-            this.m3.HeaderText = "М3";
-            this.m3.MaxInputLength = 1;
-            this.m3.Name = "m3";
-            this.m3.ReadOnly = true;
-            this.m3.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.m3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.m3.Width = 50;
-            // 
-            // m4
-            // 
-            this.m4.Frozen = true;
-            this.m4.HeaderText = "М4";
-            this.m4.MaxInputLength = 1;
-            this.m4.Name = "m4";
-            this.m4.ReadOnly = true;
-            this.m4.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.m4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.m4.Width = 50;
-            // 
-            // m5
-            // 
-            this.m5.Frozen = true;
-            this.m5.HeaderText = "М5";
-            this.m5.MaxInputLength = 1;
-            this.m5.Name = "m5";
-            this.m5.ReadOnly = true;
-            this.m5.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.m5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.m5.Width = 50;
-            // 
             // form3_analyst_add
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -503,6 +440,8 @@
             this.BackColor = System.Drawing.SystemColors.Control;
             this.CancelButton = this.button_back;
             this.ClientSize = new System.Drawing.Size(1400, 663);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.txt_scale);
             this.Controls.Add(this.lbl_notprob);
             this.Controls.Add(this.box_open_close);
             this.Controls.Add(this.comboBox_problems);
@@ -566,13 +505,8 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.CheckBox box_open_close;
         private System.Windows.Forms.Label lbl_notprob;
+        private System.Windows.Forms.TextBox txt_scale;
+        private System.Windows.Forms.Label label8;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Выбор;
-        private System.Windows.Forms.DataGridViewTextBoxColumn comp;
-        private System.Windows.Forms.DataGridViewTextBoxColumn fio;
-        private System.Windows.Forms.DataGridViewTextBoxColumn m1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn m2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn m3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn m4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn m5;
     }
 }

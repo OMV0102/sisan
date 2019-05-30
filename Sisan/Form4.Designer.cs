@@ -149,7 +149,6 @@
             // 
             this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(118)))), ((int)(((byte)(168)))));
             this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button1.Enabled = false;
             this.button1.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkOrange;
             this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.SandyBrown;

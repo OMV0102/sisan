@@ -44,7 +44,7 @@ namespace system_analysis
         private bool group_OK = false; // флаг файла группы
         private bool method_OK = false; // флаг метода
 
-        private DataTable table = new DataTable("Эксперты");
+        private DataTable table = new DataTable("experts_choice");
 
         // при загрузке формы
         private void Form8_Load(object sender, EventArgs e)

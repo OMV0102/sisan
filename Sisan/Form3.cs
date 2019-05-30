@@ -65,6 +65,7 @@ namespace system_analysis
             public bool open_close;
             public string txt_prob;
             public int status_prob;
+            public int scale;
             public metod0_inf[] m0;
             public metod1_inf[] m1;
             public metod2_inf[] m2;
@@ -76,7 +77,6 @@ namespace system_analysis
         {
             public int id_exp;
             public float[,] matr;
-            public float[] ves;
             public int status;
         }
 
@@ -754,9 +754,9 @@ namespace system_analysis
                         a.id_exp = Convert.ToInt32(words[0]);
                         // записали ФИО эксперта сокращенное Фамилия И.О.
                         if (words[3] == "-")
-                            a.fio = words[1] + " " + words[2];
+                            a.fio = words[1] + " " + words[2].First() + ".";
                         else
-                            a.fio = words[1] + " " + words[2] + words[3];
+                            a.fio = words[1] + " " + words[2].First() + "." + words[3].First() + ".";
                         // запомнили фамилию
                         a.surname = words[1];
                         // запомнили имя
@@ -806,6 +806,18 @@ namespace system_analysis
                             for (int i = 2; i < words.Count(); i++)
                                 prob.txt_prob += words[i] + " ";
                             // =========== проблему считали ===========
+                            //считываем шкалу
+                            if (File.Exists(directory + "scale" + prob.num_prob + ".txt") == true)
+                            {
+                                using (StreamReader sr5 = new StreamReader(directory + "scale" + prob.num_prob + ".txt", System.Text.Encoding.UTF8))
+                                {
+                                    text = sr5.ReadToEnd();
+                                }
+                                int.TryParse(text, out prob.scale);
+                            }
+                            else
+                                prob.scale = 100;
+                            //=========================================
                             text = "";
                             line = "";
                             alter_count = 0;
@@ -849,7 +861,7 @@ namespace system_analysis
                             exp_count = 0;
 
                             FileInfo fileInf4 = new FileInfo(directory + "group" + prob.num_prob + ".txt");
-                            if (prob.status_prob == 0 && fileInf4.Exists)  // если  альтернативы считались файл существует вообще
+                            if (fileInf4.Exists)  // если  альтернативы считались файл существует вообще
                             {
                                 using (StreamReader sr1 = new StreamReader(directory + "group" + prob.num_prob + ".txt", System.Text.Encoding.UTF8))
                                 {
@@ -918,11 +930,6 @@ namespace system_analysis
                         }
                     }
                     // файл problems закрылся
-                    // выбираем проблему 0
-                    if(comboBox_problems.Items.Count > 0)
-                    {
-                        comboBox_problems.SelectedIndex = 0;
-                    }
                 }
                 else
                 {
@@ -930,14 +937,6 @@ namespace system_analysis
                     lbl_notprob.Visible = true;
                     btn_alter_add.Cursor = Cursors.No;
                     box_open_close.Visible = false;
-                }
-
-                if (prob_count > 0)
-                {
-                    for (int i = 0; i < prob_count; i++)
-                    {
-                        comboBox_problems.Items.Add(prob_list[i].txt_prob);
-                    }
                 }
 
                 if (comboBox_problems.Items.Count > 0)
@@ -955,7 +954,6 @@ namespace system_analysis
                 // если статус пройден или не до конца пройден то считываем матрицу
                 if (File.Exists(directory + "matrix" + prob.num_prob + "m0e" + prob.m0[k].id_exp + ".txt") == true)
                 {
-                    float sum = 0;
                     using (StreamReader sr2 = new StreamReader(directory + "matrix" + prob.num_prob + "m0e" + prob.m0[k].id_exp + ".txt", System.Text.Encoding.UTF8))
                     {
                         string[] words1;
@@ -965,15 +963,9 @@ namespace system_analysis
                             if ((line = sr2.ReadLine()) != null)
                             {
                                 words1 = line.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                                prob.m0[k].ves[i] = 0;
                                 for (int j = 0; j < alter_count; j++)
                                 {
                                     prob.m0[k].matr[i, j] = Convert.ToSingle(words1[j]);
-                                    if (prob.m0[k].status == 1 && i != j)
-                                    {
-                                        sum += prob.m0[k].matr[i, j];
-                                        prob.m0[k].ves[i] += prob.m0[k].matr[i, j];
-                                    }
                                 }
                             }
                         }
@@ -1379,6 +1371,8 @@ namespace system_analysis
                 else
                     box_open_close.Checked = false;
                 //============================================
+                txt_scale.Text = prob_list[index_prob].scale.ToString();
+                //============================================
 
                 //===== выводим альтернативы из alters =======
                 int alt_index = 0;
@@ -1396,8 +1390,105 @@ namespace system_analysis
                     list_solution.Items.Add(alter_list[alt_index].alters[i]);
                 }
                 //============================================
+                DataTable table = new DataTable("Эксперты");
+                table.Clear();
+                table.Columns.Clear();
+                table.Rows.Clear();
+                table.Columns.Add(new DataColumn("ФИО"));
+                table.Columns.Add(new DataColumn("Компетентность"));
+                table.Columns.Add(new DataColumn("Должность"));
+                table.Columns.Add(new DataColumn("M1"));
+                table.Columns.Add(new DataColumn("M2"));
+                table.Columns.Add(new DataColumn("M3"));
+                table.Columns.Add(new DataColumn("M4"));
+                table.Columns.Add(new DataColumn("M5"));
+                int index;
+                for (int j = 0; j < exp_list.Count; j++)
+                {
+                    index = 0;
+                    bool flag = false;
+                    for(int i = 0; i < prob_count; i++)
+                    {
+                        if(prob_list[index_prob].m0[i].id_exp == exp_list[j].id_exp)
+                        {
+                            index = i;
+                            flag = true;
+                        }
+                    }
+                    DataRow dr = table.NewRow();
+                    dr[0] = exp_list[j].fio;
+                    dr[1] = prob_list[index_prob].m1[index].comp;
+                    dr[2] = exp_list[j].position;
+                    dr[3] = prob_list[index_prob].m0[index].status;
+                    dr[4] = prob_list[index_prob].m1[index].status;
+                    dr[5] = prob_list[index_prob].m2[index].status;
+                    dr[6] = prob_list[index_prob].m3[index].status;
+                    dr[7] = prob_list[index_prob].m4[index].status;
 
+                    table.Rows.Add(dr);
+                }
 
+                dataGridView1.DataSource = table;
+                dataGridView1.Columns[0].Width = 50;
+                dataGridView1.Columns[1].Width = 120;
+                dataGridView1.Columns[2].Width = 95;
+                dataGridView1.Columns[3].Width = 237;
+                dataGridView1.Columns[4].Width = 30;
+                dataGridView1.Columns[5].Width = 30;
+                dataGridView1.Columns[6].Width = 30;
+                dataGridView1.Columns[7].Width = 30;
+                dataGridView1.Columns[8].Width = 30;
+
+                // расскраска статусов методов
+                string stroka;
+                for (int j = 4; j < 9; j++)
+                {
+                    for (int i = 0; i < exp_list.Count; i++)
+                    {
+                        stroka = dataGridView1.Rows[i].Cells[j].Value.ToString();
+                        switch (stroka)
+                        {
+                            case "-1":
+                                {
+                                    dataGridView1.Rows[i].Cells[j].Style.BackColor = Color.FromName("Yellow");
+                                    break;
+                                }
+                            case "0":
+                                {
+                                    dataGridView1.Rows[i].Cells[j].Style.BackColor = Color.FromName("Red");
+                                    break;
+                                }
+                            case "1":
+                                {
+                                    dataGridView1.Rows[i].Cells[j].Style.BackColor = Color.FromName("Green");
+                                    break;
+                                }
+                        }
+                        dataGridView1.Rows[i].Cells[j].Value = "";
+                    }
+                }
+                // расстановка галочек
+                /*for (int k = 0; k < dataGridView1.Rows.Count; k++)
+                {
+                    for (int j = 0; j < exp_list.Count; j++)
+                    {
+                        index = 0;
+                        bool flag = false;
+                        for (int i = 0; i < prob_count; i++)
+                        {
+                            if (prob_list[index_prob].m0[i].id_exp == exp_list[j].id_exp)
+                            {
+                                index = i;
+                                flag = true;
+                            }
+                        }
+                    }
+                        if (exp_list[i].choice == true)
+                    {
+                        dataGridView1.Rows[i].Cells[0].Value = true;
+                    }
+                }*/
+                //============================================
             }
         }
     }
