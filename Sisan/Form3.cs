@@ -1438,7 +1438,14 @@ namespace system_analysis
                 dataGridView1.Columns[6].Width = 30;
                 dataGridView1.Columns[7].Width = 30;
                 dataGridView1.Columns[8].Width = 30;
-
+                for (int i = 0; i < dataGridView1.Columns.Count;i++)
+                {
+                    if(i != 0)
+                        dataGridView1.Columns[i].ReadOnly = true;
+                    dataGridView1.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
+                }
+                dataGridView1.AllowUserToResizeColumns = false;
+                dataGridView1.AllowUserToResizeRows = false;
                 // расскраска статусов методов
                 string stroka;
                 for (int j = 4; j < 9; j++)
