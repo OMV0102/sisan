@@ -65,11 +65,11 @@ namespace system_analysis
             public bool open_close;
             public string txt_prob;
             public int status_prob;
-            public metod0_inf m0;
-            public metod1_inf m1;
-            public metod2_inf m2;
-            public metod3_inf m3;
-            public metod4_inf m4;
+            public metod0_inf[] m0;
+            public metod1_inf[] m1;
+            public metod2_inf[] m2;
+            public metod3_inf[] m3;
+            public metod4_inf[] m4;
         }
         public List<st_problem> prob_list;
         public struct metod0_inf //  структура для хранения информации о методе 0
@@ -213,111 +213,114 @@ namespace system_analysis
         // кнопка СОХРАНИТЬ
         private void btn_save_all_Click(object sender, EventArgs e)
         {
-
-            if (comboBox_problems.Items.Count == 0)
+            if (label_save_status.Visible == true)
             {
-                MessageBox.Show(
-                "Проблемы отсутствуют!",
-                "Ошибка",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Error,
-                MessageBoxDefaultButton.Button1,
-                MessageBoxOptions.DefaultDesktopOnly);
-                this.TopMost = true; this.TopMost = false;
-            }
-            else
-            // Обеспечивает сохранение проблемы и альтернатив в файл
-            // Возникает при нажатии на кнопку "Сохранить"
-            if (list_solution.Items.Count < 2)
-            {
-                MessageBox.Show(
-                "Альтернатив в списке должно быть как минимум 2!",
-                "Ошибка",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Error,
-                MessageBoxDefaultButton.Button1,
-                MessageBoxOptions.DefaultDesktopOnly);
-                this.TopMost = true; this.TopMost = false;
-            }
-            else
-            {
-                DialogResult result = MessageBox.Show(
-                "Сохранить проблему и альтернативы?",
-                "",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Information,
-                MessageBoxDefaultButton.Button1,
-                MessageBoxOptions.DefaultDesktopOnly);
-
-                if (result == DialogResult.Yes)
+                if (comboBox_problems.Items.Count == 0)
                 {
-                    string selectedState = comboBox_problems.SelectedItem.ToString();
-                    string[] words = selectedState.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                    string path = directory + "problems.txt";
-
-                    using (StreamWriter sr = new StreamWriter(path, false, System.Text.Encoding.UTF8))
-                    {
-                        for (int i = 0; i < comboBox_problems.Items.Count; i++)
-                        {
-                            string line = comboBox_problems.Items[i].ToString();
-                            string[] line1 = line.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                            line1[0] = Convert.ToString(i);
-                            line = "";
-                            for (int j = 0; j < line1.Length; j++)
-                            {
-                                line += line1[j];
-                                line += " ";
-                            }
-                            sr.WriteLine(line);
-
-                        }
-                    }
-
-                    //selectedState = comboBox_problems.SelectedItem.ToString();
-                    //words = selectedState.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                    int num = comboBox_problems.SelectedIndex;
-                    path = directory + "solutions" + Convert.ToString(num) + ".txt";
-
-                    using (StreamWriter sr = new StreamWriter(path, false, System.Text.Encoding.UTF8))
-                    {
-                        for (int i = 0; i < list_solution.Items.Count; i++)
-                        {
-                            string line = list_solution.Items[i].ToString();
-                            string[] line1 = line.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                            //line1[0] = Convert.ToString(i);
-                            line = "";
-                            for (int j = 0; j < line1.Length; j++)
-                            {
-                                line += line1[j];
-                                line += " ";
-                            }
-                            sr.WriteLine(line);
-
-                        }
-                    }
-
-
-                    //тут все сохраняем
-                    // после сохранения вывести месэдж что сохранили и внизу переход назад
-                    Form form = new form4_analyst_choice();
-                    form.Show();
-                    form.TopMost = true; form.TopMost = false;
-                    this.Close();
-
-                    // Убираем надпись о несохраненных данных
-                    label_save_status.Visible = false;
-                    add_new_prob = false;
-
-                    Form8.three_or_four = true;
-                    Form8 form1 = new Form8();
-                    form1.Show();
-                    this.Close();
-                }
-
-                if (result == DialogResult.No)
-                {
+                    MessageBox.Show(
+                    "Проблемы отсутствуют!",
+                    "Ошибка",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error,
+                    MessageBoxDefaultButton.Button1,
+                    MessageBoxOptions.DefaultDesktopOnly);
                     this.TopMost = true; this.TopMost = false;
                 }
+                else
+                // Обеспечивает сохранение проблемы и альтернатив в файл
+                // Возникает при нажатии на кнопку "Сохранить"
+                if (list_solution.Items.Count < 2)
+                {
+                    MessageBox.Show(
+                    "Альтернатив в списке должно быть как минимум 2!",
+                    "Ошибка",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error,
+                    MessageBoxDefaultButton.Button1,
+                    MessageBoxOptions.DefaultDesktopOnly);
+                    this.TopMost = true; this.TopMost = false;
+                }
+                else
+                {
+                    DialogResult result = MessageBox.Show(
+                    "Сохранить проблему и альтернативы?",
+                    "",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Information,
+                    MessageBoxDefaultButton.Button1,
+                    MessageBoxOptions.DefaultDesktopOnly);
+
+                    if (result == DialogResult.Yes)
+                    {
+                        string selectedState = comboBox_problems.SelectedItem.ToString();
+                        string[] words = selectedState.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                        string path = directory + "problems.txt";
+
+                        using (StreamWriter sr = new StreamWriter(path, false, System.Text.Encoding.UTF8))
+                        {
+                            for (int i = 0; i < comboBox_problems.Items.Count; i++)
+                            {
+                                string line = comboBox_problems.Items[i].ToString();
+                                string[] line1 = line.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                                line1[0] = Convert.ToString(i);
+                                line = "";
+                                for (int j = 0; j < line1.Length; j++)
+                                {
+                                    line += line1[j];
+                                    line += " ";
+                                }
+                                sr.WriteLine(line);
+
+                            }
+                        }
+
+                        //selectedState = comboBox_problems.SelectedItem.ToString();
+                        //words = selectedState.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                        int num = comboBox_problems.SelectedIndex;
+                        path = directory + "solutions" + Convert.ToString(num) + ".txt";
+
+                        using (StreamWriter sr = new StreamWriter(path, false, System.Text.Encoding.UTF8))
+                        {
+                            for (int i = 0; i < list_solution.Items.Count; i++)
+                            {
+                                string line = list_solution.Items[i].ToString();
+                                string[] line1 = line.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                                //line1[0] = Convert.ToString(i);
+                                line = "";
+                                for (int j = 0; j < line1.Length; j++)
+                                {
+                                    line += line1[j];
+                                    line += " ";
+                                }
+                                sr.WriteLine(line);
+
+                            }
+                        }
+
+
+                        //тут все сохраняем
+                        // после сохранения вывести месэдж что сохранили и внизу переход назад
+                        Form form = new form4_analyst_choice();
+                        form.Show();
+                        form.TopMost = true; form.TopMost = false;
+                        this.Close();
+
+                        // Убираем надпись о несохраненных данных
+                        label_save_status.Visible = false;
+                        add_new_prob = false;
+
+                        Form8.three_or_four = true;
+                        Form8 form1 = new Form8();
+                        form1.Show();
+                        this.Close();
+                    }
+
+                    if (result == DialogResult.No)
+                    {
+                        this.TopMost = true; this.TopMost = false;
+                    }
+                }
+                label_save_status.Visible = false;
             }
         }
 
@@ -344,7 +347,7 @@ namespace system_analysis
         }
 
         // кнопка ДОБАВИТЬ АЛЬТЕРНАТИВУ
-        private void btn_save_Click(object sender, EventArgs e)
+        private void btn_alter_add_Click(object sender, EventArgs e)
         {
             // Возникает при нажатии на кнопку "Добавить альтернативу"
             if (Convert.ToString(comboBox_problems.SelectedItem) == "")
@@ -697,32 +700,430 @@ namespace system_analysis
         private void form3_analyst_add_Load(object sender, EventArgs e)
         {
             list_solution.Items.Clear();
+
             add_new_sol = false;
             add_new_prob = false;
 
-            // Убираем надпись о несохраненных данных
-            label_save_status.Visible = false;
-
+            String[] words;              //СТРОКА.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);  // это на всякий под рукой
             string text = "";
-            using (StreamReader sr = new StreamReader(directory + "problems.txt", System.Text.Encoding.UTF8))
+            FileInfo fileInf1 = new FileInfo(directory + "experts.txt");
+            if (fileInf1.Exists)  // если файл существует вообще
             {
-                text = sr.ReadToEnd();
-            }
-
-
-            if (text.Length != 0)
-            {
-                using (StreamReader sr = new StreamReader(directory + "problems.txt", System.Text.Encoding.UTF8))
+                using (StreamReader sr = new StreamReader(directory + "experts.txt", System.Text.Encoding.UTF8))
                 {
-                    string line;
-                    while ((line = sr.ReadLine()) != null)
-                    {                
-                        comboBox_problems.Items.Add(line);
-                    }                          
+                    text = sr.ReadToEnd();
                 }
             }
-            list_solution.Items.Clear();
+
+            if (text.Length > 0)
+            {
+                exp_list = new List<exp>();
+                using (StreamReader sr = new StreamReader(directory + "experts.txt", System.Text.Encoding.UTF8))
+                {
+                    string line = "";
+                    exp a;
+                    while ((line = sr.ReadLine()) != null)
+                    {
+                        a = new exp();
+                        words = line.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                        // записали номер эксперта
+                        a.id_exp = Convert.ToInt32(words[0]);
+                        // записали ФИО эксперта сокращенное Фамилия И.О.
+                        if (words[3] == "-")
+                            a.fio = words[1] + " " + words[2].First() + ".";
+                        else
+                            a.fio = words[1] + " " + words[2].First() + ". " + words[3].First() + ".";
+                        // запомнили фамилию
+                        a.surname = words[1];
+                        // запомнили имя
+                        a.name = words[2];
+                        // запомнили отчество
+                        a.otch = words[3];
+                        // запомнили пароль
+                        a.password = words[4];
+                        // запомнили должность
+                        a.position = "";
+                        for (int i = 5; i < words.Count(); i++)
+                            a.position += words[i] + " ";
+
+                        exp_list.Add(a);
+                    }
+                }
+
+                //======== экспертов запомнили ==============
+
+                alter_list = new List<solutions>();  // память для списка где харанится альтернативы для проблем
+                solutions sol = new solutions();  // вспомогательная переменная для строки выше
+                                                  //====== читаем проблемы ==========
+                FileInfo fileInf2 = new FileInfo(directory + "problems.txt");
+                if (fileInf2.Exists)  // если файл существует вообще
+                {
+                    using (StreamReader sr = new StreamReader(directory + "problems.txt", System.Text.Encoding.UTF8))
+                    {
+                        text = sr.ReadToEnd();
+                    }
+                }
+
+                if (text.Length > 0)
+                {
+                    using (StreamReader sr = new StreamReader(directory + "problems.txt", System.Text.Encoding.UTF8))
+                    {
+                        string line = "";
+                        prob_list = new List<st_problem>();
+                        prob_count = 0;
+                        while ((line = sr.ReadLine()) != null)
+                        {
+                            // считываем проблему
+                            words = line.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                            prob = new st_problem();
+                            prob.num_prob = Convert.ToInt32(words[0]);
+                            prob.open_close = Convert.ToBoolean(words[1]);
+                            prob.txt_prob = "";
+                            for (int i = 2; i < words.Count(); i++)
+                                prob.txt_prob += words[i] + " ";
+                            // =========== проблему считали ===========
+                            text = "";
+                            line = "";
+                            alter_count = 0;
+                            FileInfo fileInf3 = new FileInfo(directory + "solutions" + prob.num_prob + ".txt");
+                            if (fileInf3.Exists)  // если файл существует вообще
+                            {
+                                using (StreamReader sr1 = new StreamReader(directory + "solutions" + prob.num_prob + ".txt", System.Text.Encoding.UTF8))
+                                {
+                                    while ((line = sr1.ReadLine()) != null)
+                                        alter_count++;
+                                }
+                            }
+
+                            if (alter_count > 0)
+                            {
+                                using (StreamReader sr1 = new StreamReader(directory + "solutions" + prob.num_prob + ".txt", System.Text.Encoding.UTF8))
+                                {
+                                    line = "";
+                                    sol.alters = new string[alter_count];
+                                    sol.id_prob = prob.num_prob;
+                                    int i = 0;
+                                    while ((line = sr1.ReadLine()) != null)
+                                    {
+                                        sol.alters[i] = line;
+                                        i++;
+                                    }
+                                }
+                                alter_list.Add(sol);
+                                prob.status_prob = 0; // 0 значит альтернативы считались ,
+                                                      // то есть теперь считываем экспертов и их пока 0
+                            }
+                            else // ХЗ  НАДО ПОДУМАТЬ (ВООБЩЕ ТАКОГО НЕ МОЖЕТ БЫТЬ)
+                            {
+                                alter_list.Add(sol);
+                            }
+                            // ========= альтернативы считали ==============
+
+                            // теперь считываем group
+                            text = "";
+                            line = "";
+                            exp_count = 0;
+
+                            FileInfo fileInf4 = new FileInfo(directory + "group" + prob.num_prob + ".txt");
+                            if (prob.status_prob == 0 && fileInf4.Exists)  // если  альтернативы считались файл существует вообще
+                            {
+                                using (StreamReader sr1 = new StreamReader(directory + "group" + prob.num_prob + ".txt", System.Text.Encoding.UTF8))
+                                {
+                                    while ((line = sr1.ReadLine()) != null)
+                                        exp_count++;
+                                }
+                            }
+
+                            if (exp_count > 0)
+                            {
+                                line = "";
+                                // ===== выделили память для каждого метода размером с кол-во экспертов exp_count
+                                prob.m0 = new metod0_inf[exp_count];
+                                prob.m1 = new metod1_inf[exp_count];
+                                prob.m2 = new metod2_inf[exp_count];
+                                prob.m3 = new metod3_inf[exp_count];
+                                prob.m4 = new metod4_inf[exp_count];
+                                // ====================================================================
+                                using (StreamReader sr1 = new StreamReader(directory + "group" + prob.num_prob + ".txt", System.Text.Encoding.UTF8))
+                                {
+                                    for (int k = 0; k < exp_count; k++)
+                                    {
+                                        if ((line = sr1.ReadLine()) != null)
+                                        {
+                                            words = line.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                                            // ==== Запоминаем для метода 0 ===================
+                                            prob.m0[k].id_exp = Convert.ToInt32(words[0]); // запомнили id эксперта
+                                            prob.m0[k].status = Convert.ToInt32(words[2]); // статус прохождения опроса
+                                            prob.m0[k].matr = new float[alter_count, alter_count]; // память под оценки эксперта k
+                                            load_m0(k); // загрузка метода 0 для k эксперта
+                                                        // ==== Метод 0 запомнили =======================
+                                                        // ==== Запоминаем для метода 1 ===================
+                                            prob.m1[k].id_exp = Convert.ToInt32(words[0]); // запомнили id эксперта
+                                            prob.m1[k].comp = Convert.ToSingle(words[1]); // запомнили компетентность эксперта
+                                            prob.m1[k].status = Convert.ToInt32(words[3]); // статус прохождения опроса
+                                            prob.m1[k].marks = new float[alter_count]; // память под оценки эксперта k
+                                            load_m1(k); // загрузка метода 1 для k эксперта
+                                                        // ==== Метод 1 запомнили =======================
+                                                        // ==== Запоминаем для метода 2 ===================
+                                            prob.m2[k].id_exp = Convert.ToInt32(words[0]); // запомнили id эксперта
+                                            prob.m2[k].status = Convert.ToInt32(words[4]); // статус прохождения опроса
+                                            prob.m2[k].marks = new float[alter_count]; // память под оценки эксперта k
+                                            load_m2(k); // загрузка метода 2 для k эксперта
+                                                        // ==== Метод 2 запомнили =======================
+                                                        // ==== Запоминаем для метода 3 ===================
+                                            prob.m3[k].id_exp = Convert.ToInt32(words[0]); // запомнили id эксперта
+                                            prob.m3[k].status = Convert.ToInt32(words[5]); // статус прохождения опроса
+                                            prob.m3[k].marks = new float[alter_count]; // память под оценки эксперта k
+                                            load_m3(k); // загрузка метода 3 для k эксперта
+                                                        // ==== Метод 3 запомнили =======================
+                                                        // ==== Запоминаем для метода 4 ===================
+                                            prob.m4[k].id_exp = Convert.ToInt32(words[0]); // запомнили id эксперта
+                                            prob.m4[k].status = Convert.ToInt32(words[6]); // статус прохождения опроса
+                                            prob.m4[k].matr = new float[alter_count, alter_count]; // память под оценки эксперта k
+                                            load_m4(k); // загрузка метода 4 для k эксперта
+                                                        // ==== Метод 4 запомнили =======================
+                                        }
+                                    }
+                                }
+                                //====================================================
+                                prob.status_prob = exp_count;
+                            }
+                            prob_list.Add(prob);
+                            prob_count++;
+                        }
+
+                    }
+                }
+                else
+                {
+                    prob_count = 0;
+                    lbl_notprob.Visible = true;
+                    btn_alter_add.Cursor = Cursors.No;
+                    box_open_close.Visible = false;
+                }
+
+                if (prob_count > 0)
+                {
+                    for (int i = 0; i < prob_count; i++)
+                    {
+                        comboBox_problems.Items.Add(prob_list[i].txt_prob);
+                    }
+                }
+
+                if (comboBox_problems.Items.Count > 0)
+                {
+                    comboBox_problems.SelectedIndex = 0;
+                }
+            }
         }
+
+        // для ЗАГРУЗКИ МЕТОДА 0
+        public void load_m0(int k)
+        {
+            if (prob.m0[k].status == 1 || prob.m0[k].status == -1)
+            {
+                // если статус пройден или не до конца пройден то считываем матрицу
+                if (File.Exists(directory + "matrix" + prob.num_prob + "m0e" + prob.m0[k].id_exp + ".txt") == true)
+                {
+                    float sum = 0;
+                    using (StreamReader sr2 = new StreamReader(directory + "matrix" + prob.num_prob + "m0e" + prob.m0[k].id_exp + ".txt", System.Text.Encoding.UTF8))
+                    {
+                        string[] words1;
+                        string line = "";
+                        for (int i = 0; i < alter_count; i++)
+                        {
+                            if ((line = sr2.ReadLine()) != null)
+                            {
+                                words1 = line.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                                prob.m0[k].ves[i] = 0;
+                                for (int j = 0; j < alter_count; j++)
+                                {
+                                    prob.m0[k].matr[i, j] = Convert.ToSingle(words1[j]);
+                                    if (prob.m0[k].status == 1 && i != j)
+                                    {
+                                        sum += prob.m0[k].matr[i, j];
+                                        prob.m0[k].ves[i] += prob.m0[k].matr[i, j];
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    // == считали из файла матрицу и если статус 1 то запомнили веса ===
+                }
+            }
+            else if (prob.m0[k].status == 0)
+            {
+                for (int i = 0; i < alter_count; i++)
+                {
+                    for (int j = 0; j < alter_count; j++)
+                    {
+                        if (i == j)
+                            prob.m0[k].matr[i, j] = 9;
+                        else
+                            prob.m0[k].matr[i, j] = -1;
+                    }
+                }
+
+            }
+        }
+
+        // для ЗАГРУЗКИ МЕТОДА 1
+        public void load_m1(int k)
+        {
+            if (prob.m1[k].status == 1 || prob.m1[k].status == -1)
+            {
+                // если статус пройдeн у эксперта то читаем его оценочки
+                if (File.Exists(directory + "matrix" + prob.num_prob + "m1.txt") == true)
+                {
+                    using (StreamReader sr2 = new StreamReader(directory + "matrix" + prob.num_prob + "m1.txt", System.Text.Encoding.UTF8))
+                    {
+                        string[] words1;
+                        string line = "";
+
+                        while ((line = sr2.ReadLine()) != null)
+                        {
+                            words1 = line.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                            if (Convert.ToInt32(words1[0]) == prob.m1[k].id_exp)
+                            {
+                                for (int j = 0; j < alter_count; j++)
+                                {
+                                    prob.m1[k].marks[j] = Convert.ToSingle(words1[j + 1]);
+                                }
+                            }
+                        }
+
+                    }
+                    // == считали из файла матрицу и если статус 1 то запомнили веса ===
+                }
+            }
+            else if (prob.m1[k].status == 0)
+            {
+                for (int j = 0; j < alter_count; j++)
+                {
+                    prob.m1[k].marks[j] = -1;
+                }
+            }
+        }
+
+        // для ЗАГРУЗКИ МЕТОДА 2
+        public void load_m2(int k)
+        {
+            if (prob.m2[k].status == 1 || prob.m2[k].status == -1)
+            {
+                // если статус пройдeн у эксперта то читаем его оценочки
+                if (File.Exists(directory + "matrix" + prob.num_prob + "m2.txt") == true)
+                {
+                    using (StreamReader sr2 = new StreamReader(directory + "matrix" + prob.num_prob + "m2.txt", System.Text.Encoding.UTF8))
+                    {
+                        string[] words1;
+                        string line = "";
+
+                        while ((line = sr2.ReadLine()) != null)
+                        {
+                            words1 = line.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                            if (Convert.ToInt32(words1[0]) == prob.m2[k].id_exp)
+                            {
+                                for (int j = 0; j < alter_count; j++)
+                                {
+                                    prob.m2[k].marks[j] = Convert.ToSingle(words1[j + 1]);
+                                }
+                            }
+                        }
+                    }
+                    // == считали из файла матрицу и если статус 1 то запомнили веса ===
+                }
+            }
+            else if (prob.m2[k].status == 0)
+            {
+                for (int j = 0; j < alter_count; j++)
+                {
+                    prob.m2[k].marks[j] = -1;
+                }
+            }
+        }
+
+        // для ЗАГРУЗКИ МЕТОДА 3
+        public void load_m3(int k)
+        {
+            if (prob.m3[k].status == 1 || prob.m3[k].status == -1)
+            {
+                // если статус пройдeн у эксперта то читаем его оценочки
+                if (File.Exists(directory + "matrix" + prob.num_prob + "m3.txt") == true)
+                {
+                    using (StreamReader sr2 = new StreamReader(directory + "matrix" + prob.num_prob + "m3.txt", System.Text.Encoding.UTF8))
+                    {
+                        string[] words1;
+                        string line = "";
+
+                        while ((line = sr2.ReadLine()) != null)
+                        {
+                            words1 = line.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                            if (Convert.ToInt32(words1[0]) == prob.m3[k].id_exp)
+                            {
+                                for (int j = 0; j < alter_count; j++)
+                                {
+                                    prob.m3[k].marks[j] = Convert.ToSingle(words1[j + 1]);
+                                }
+                            }
+                        }
+
+                    }
+                    // == считали из файла матрицу и если статус 1 то запомнили веса ===
+                }
+            }
+            else if (prob.m3[k].status == 0)
+            {
+                for (int j = 0; j < alter_count; j++)
+                {
+                    prob.m3[k].marks[j] = -1;
+                }
+            }
+        }
+
+        // для ЗАГРУЗКИ МЕТОДА 4
+        public void load_m4(int k)
+        {
+            if (prob.m4[k].status == 1 || prob.m4[k].status == -1)
+            {
+                // если статус пройден или не до конца пройден то считываем матрицу
+                if (File.Exists(directory + "matrix" + prob.num_prob + "m4e" + prob.m4[k].id_exp + ".txt") == true)
+                {
+                    using (StreamReader sr2 = new StreamReader(directory + "matrix" + prob.num_prob + "m4e" + prob.m4[k].id_exp + ".txt", System.Text.Encoding.UTF8))
+                    {
+                        string[] words1;
+                        string line = "";
+                        for (int i = 0; i < alter_count; i++)
+                        {
+                            if ((line = sr2.ReadLine()) != null)
+                            {
+                                words1 = line.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                                for (int j = 0; j < alter_count; j++)
+                                {
+                                    prob.m4[k].matr[i, j] = Convert.ToSingle(words1[j]);
+                                }
+                            }
+                        }
+                    }
+                    // == считали из файла матрицу и если статус 1 то запомнили веса ===
+                }
+            }
+            else if (prob.m4[k].status == 0)
+            {
+                for (int i = 0; i < alter_count; i++)
+                {
+                    for (int j = 0; j < alter_count; j++)
+                    {
+                        if (i == j)
+                            prob.m4[k].matr[i, j] = 9;
+                        else
+                            prob.m4[k].matr[i, j] = -1;
+                    }
+                }
+
+            }
+        }
+
+        //==========================================================================================================
 
         // кнопка + (ДОБАВИТЬ ПРОБЛЕМУ)
         private void btn_add_problem_Click(object sender, EventArgs e)

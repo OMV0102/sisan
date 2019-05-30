@@ -43,6 +43,8 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.lbl_sum = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -259,12 +261,38 @@
             this.label9.Text = "по всем альтернативам";
             this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label10.ForeColor = System.Drawing.Color.Black;
+            this.label10.Location = new System.Drawing.Point(556, 515);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(126, 19);
+            this.label10.TabIndex = 75;
+            this.label10.Text = "Текущая сумма:";
+            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_sum
+            // 
+            this.lbl_sum.AutoSize = true;
+            this.lbl_sum.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lbl_sum.ForeColor = System.Drawing.Color.Black;
+            this.lbl_sum.Location = new System.Drawing.Point(679, 515);
+            this.lbl_sum.Name = "lbl_sum";
+            this.lbl_sum.Size = new System.Drawing.Size(19, 19);
+            this.lbl_sum.TabIndex = 76;
+            this.lbl_sum.Text = "0";
+            this.lbl_sum.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // Form7
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.button_back;
             this.ClientSize = new System.Drawing.Size(800, 600);
+            this.Controls.Add(this.lbl_sum);
+            this.Controls.Add(this.label10);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label6);
@@ -308,5 +336,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label lbl_sum;
     }
 }

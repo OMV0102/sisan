@@ -35,7 +35,7 @@
             this.button_cross = new System.Windows.Forms.Button();
             this.button_back = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
-            this.btn_save = new System.Windows.Forms.Button();
+            this.btn_alter_add = new System.Windows.Forms.Button();
             this.list_solution = new System.Windows.Forms.ListBox();
             this.list_menu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.list_menu_edit = new System.Windows.Forms.ToolStripMenuItem();
@@ -52,8 +52,10 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.choice = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.label7 = new System.Windows.Forms.Label();
+            this.Выбор = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.box_open_close = new System.Windows.Forms.CheckBox();
+            this.lbl_notprob = new System.Windows.Forms.Label();
             this.list_menu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -63,7 +65,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label1.ForeColor = System.Drawing.Color.Black;
-            this.label1.Location = new System.Drawing.Point(632, 69);
+            this.label1.Location = new System.Drawing.Point(632, 60);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(109, 23);
             this.label1.TabIndex = 13;
@@ -78,7 +80,7 @@
             this.btn_save_all.FlatAppearance.MouseOverBackColor = System.Drawing.Color.SandyBrown;
             this.btn_save_all.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_save_all.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btn_save_all.Location = new System.Drawing.Point(576, 585);
+            this.btn_save_all.Location = new System.Drawing.Point(818, 584);
             this.btn_save_all.Name = "btn_save_all";
             this.btn_save_all.Size = new System.Drawing.Size(165, 53);
             this.btn_save_all.TabIndex = 14;
@@ -149,29 +151,29 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label3.ForeColor = System.Drawing.Color.Black;
-            this.label3.Location = new System.Drawing.Point(254, 309);
+            this.label3.Location = new System.Drawing.Point(151, 317);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(152, 23);
+            this.label3.Size = new System.Drawing.Size(395, 23);
             this.label3.TabIndex = 27;
-            this.label3.Text = "Альтернативы";
+            this.label3.Text = "Альтернативы для решения проблемы";
             // 
-            // btn_save
+            // btn_alter_add
             // 
-            this.btn_save.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(118)))), ((int)(((byte)(168)))));
-            this.btn_save.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_save.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btn_save.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkOrange;
-            this.btn_save.FlatAppearance.MouseOverBackColor = System.Drawing.Color.SandyBrown;
-            this.btn_save.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_save.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btn_save.Location = new System.Drawing.Point(209, 241);
-            this.btn_save.Name = "btn_save";
-            this.btn_save.Size = new System.Drawing.Size(239, 40);
-            this.btn_save.TabIndex = 26;
-            this.btn_save.TabStop = false;
-            this.btn_save.Text = "Добавить альтернативу";
-            this.btn_save.UseVisualStyleBackColor = false;
-            this.btn_save.Click += new System.EventHandler(this.btn_save_Click);
+            this.btn_alter_add.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(118)))), ((int)(((byte)(168)))));
+            this.btn_alter_add.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_alter_add.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btn_alter_add.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkOrange;
+            this.btn_alter_add.FlatAppearance.MouseOverBackColor = System.Drawing.Color.SandyBrown;
+            this.btn_alter_add.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_alter_add.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btn_alter_add.Location = new System.Drawing.Point(205, 228);
+            this.btn_alter_add.Name = "btn_alter_add";
+            this.btn_alter_add.Size = new System.Drawing.Size(239, 40);
+            this.btn_alter_add.TabIndex = 26;
+            this.btn_alter_add.TabStop = false;
+            this.btn_alter_add.Text = "Добавить альтернативу";
+            this.btn_alter_add.UseVisualStyleBackColor = false;
+            this.btn_alter_add.Click += new System.EventHandler(this.btn_alter_add_Click);
             // 
             // list_solution
             // 
@@ -184,6 +186,7 @@
             this.list_solution.Name = "list_solution";
             this.list_solution.Size = new System.Drawing.Size(604, 194);
             this.list_solution.TabIndex = 29;
+            this.list_solution.TabStop = false;
             this.list_solution.MouseDown += new System.Windows.Forms.MouseEventHandler(this.list_solution_MouseDown);
             // 
             // list_menu
@@ -221,13 +224,14 @@
             this.txt_solution.Name = "txt_solution";
             this.txt_solution.Size = new System.Drawing.Size(604, 27);
             this.txt_solution.TabIndex = 30;
+            this.txt_solution.TabStop = false;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label2.ForeColor = System.Drawing.Color.Black;
-            this.label2.Location = new System.Drawing.Point(172, 145);
+            this.label2.Location = new System.Drawing.Point(191, 157);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(276, 23);
             this.label2.TabIndex = 31;
@@ -244,6 +248,7 @@
             this.comboBox_problems.Name = "comboBox_problems";
             this.comboBox_problems.Size = new System.Drawing.Size(856, 27);
             this.comboBox_problems.TabIndex = 32;
+            this.comboBox_problems.TabStop = false;
             this.comboBox_problems.SelectedIndexChanged += new System.EventHandler(this.comboBox_problems_SelectedIndexChanged);
             // 
             // btn_add_problem
@@ -254,7 +259,7 @@
             this.btn_add_problem.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_add_problem.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btn_add_problem.ForeColor = System.Drawing.Color.Green;
-            this.btn_add_problem.Location = new System.Drawing.Point(953, 50);
+            this.btn_add_problem.Location = new System.Drawing.Point(989, 48);
             this.btn_add_problem.Name = "btn_add_problem";
             this.btn_add_problem.Size = new System.Drawing.Size(30, 42);
             this.btn_add_problem.TabIndex = 33;
@@ -270,7 +275,7 @@
             this.btn_problem_edit.FlatAppearance.BorderSize = 0;
             this.btn_problem_edit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_problem_edit.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btn_problem_edit.Location = new System.Drawing.Point(998, 56);
+            this.btn_problem_edit.Location = new System.Drawing.Point(1025, 53);
             this.btn_problem_edit.Name = "btn_problem_edit";
             this.btn_problem_edit.Size = new System.Drawing.Size(39, 42);
             this.btn_problem_edit.TabIndex = 34;
@@ -287,7 +292,7 @@
             this.btn_problem_delete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_problem_delete.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btn_problem_delete.ForeColor = System.Drawing.Color.Red;
-            this.btn_problem_delete.Location = new System.Drawing.Point(1059, 58);
+            this.btn_problem_delete.Location = new System.Drawing.Point(1070, 51);
             this.btn_problem_delete.Name = "btn_problem_delete";
             this.btn_problem_delete.Size = new System.Drawing.Size(30, 42);
             this.btn_problem_delete.TabIndex = 35;
@@ -301,7 +306,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label4.ForeColor = System.Drawing.Color.DimGray;
-            this.label4.Location = new System.Drawing.Point(29, 549);
+            this.label4.Location = new System.Drawing.Point(35, 549);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(563, 18);
             this.label4.TabIndex = 36;
@@ -312,7 +317,7 @@
             this.label_save_status.AutoSize = true;
             this.label_save_status.Font = new System.Drawing.Font("Tahoma", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label_save_status.ForeColor = System.Drawing.Color.Red;
-            this.label_save_status.Location = new System.Drawing.Point(28, 601);
+            this.label_save_status.Location = new System.Drawing.Point(270, 600);
             this.label_save_status.Name = "label_save_status";
             this.label_save_status.Size = new System.Drawing.Size(475, 21);
             this.label_save_status.TabIndex = 37;
@@ -350,50 +355,80 @@
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.choice});
-            this.dataGridView1.Location = new System.Drawing.Point(715, 295);
+            this.Выбор});
+            this.dataGridView1.Location = new System.Drawing.Point(684, 297);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.Size = new System.Drawing.Size(604, 239);
+            this.dataGridView1.Size = new System.Drawing.Size(659, 239);
             this.dataGridView1.TabIndex = 61;
-            // 
-            // choice
-            // 
-            this.choice.Frozen = true;
-            this.choice.HeaderText = "Выбор";
-            this.choice.Name = "choice";
+            this.dataGridView1.TabStop = false;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label7.ForeColor = System.Drawing.Color.Black;
-            this.label7.Location = new System.Drawing.Point(862, 236);
+            this.label7.Location = new System.Drawing.Point(755, 255);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(310, 23);
+            this.label7.Size = new System.Drawing.Size(533, 23);
             this.label7.TabIndex = 62;
-            this.label7.Text = "Список экспертов у проблемы";
+            this.label7.Text = "Список экспертов, которые оцнивают альтернативы";
+            // 
+            // Выбор
+            // 
+            this.Выбор.Frozen = true;
+            this.Выбор.HeaderText = "Выбор";
+            this.Выбор.Name = "Выбор";
+            this.Выбор.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            // 
+            // box_open_close
+            // 
+            this.box_open_close.AutoSize = true;
+            this.box_open_close.Checked = true;
+            this.box_open_close.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.box_open_close.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.box_open_close.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.box_open_close.Location = new System.Drawing.Point(786, 196);
+            this.box_open_close.Name = "box_open_close";
+            this.box_open_close.Size = new System.Drawing.Size(353, 27);
+            this.box_open_close.TabIndex = 63;
+            this.box_open_close.TabStop = false;
+            this.box_open_close.Text = "Проблема ОТКРЫТА для оценивания";
+            this.box_open_close.UseVisualStyleBackColor = true;
+            // 
+            // lbl_notprob
+            // 
+            this.lbl_notprob.AutoSize = true;
+            this.lbl_notprob.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lbl_notprob.ForeColor = System.Drawing.Color.Red;
+            this.lbl_notprob.Location = new System.Drawing.Point(560, 157);
+            this.lbl_notprob.Name = "lbl_notprob";
+            this.lbl_notprob.Size = new System.Drawing.Size(251, 23);
+            this.lbl_notprob.TabIndex = 69;
+            this.lbl_notprob.Text = "Проблемы отсутствуют!";
+            this.lbl_notprob.Visible = false;
             // 
             // form3_analyst_add
             // 
-            this.AcceptButton = this.btn_save;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.CancelButton = this.button_back;
             this.ClientSize = new System.Drawing.Size(1400, 663);
+            this.Controls.Add(this.lbl_notprob);
+            this.Controls.Add(this.box_open_close);
+            this.Controls.Add(this.comboBox_problems);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label_save_status);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.comboBox_problems);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txt_solution);
             this.Controls.Add(this.list_solution);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.btn_save);
+            this.Controls.Add(this.btn_alter_add);
             this.Controls.Add(this.button_back);
             this.Controls.Add(this.button_minimize);
             this.Controls.Add(this.button_cross);
@@ -423,7 +458,7 @@
         private System.Windows.Forms.Button button_cross;
         private System.Windows.Forms.Button button_back;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button btn_save;
+        private System.Windows.Forms.Button btn_alter_add;
         private System.Windows.Forms.TextBox txt_solution;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ContextMenuStrip list_menu;
@@ -440,7 +475,9 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn choice;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn Выбор;
+        private System.Windows.Forms.CheckBox box_open_close;
+        private System.Windows.Forms.Label lbl_notprob;
     }
 }

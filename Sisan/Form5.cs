@@ -529,7 +529,7 @@ namespace system_analysis
         // для ЗАГРУЗКИ МЕТОДА 1
         public void load_m1(int k)
         {
-            if (prob.m1.inf[k].status == 1)
+            if (prob.m1.inf[k].status == 1 || prob.m1.inf[k].status == -1)
             {
                 // если статус пройдeн у эксперта то читаем его оценочки
                 if (File.Exists(directory + "matrix" + prob.num_prob + "m1.txt") == true)
@@ -570,7 +570,7 @@ namespace system_analysis
         // для ЗАГРУЗКИ МЕТОДА 2
         public void load_m2(int k)
         {
-            if (prob.m2.inf[k].status == 1)
+            if (prob.m2.inf[k].status == 1 || prob.m2.inf[k].status == -1)
             {
                 // если статус пройдeн у эксперта то читаем его оценочки
                 if (File.Exists(directory + "matrix" + prob.num_prob + "m2.txt") == true)
@@ -609,7 +609,7 @@ namespace system_analysis
         // для ЗАГРУЗКИ МЕТОДА 3
         public void load_m3(int k)
         {
-            if (prob.m3.inf[k].status == 1)
+            if (prob.m3.inf[k].status == 1 || prob.m3.inf[k].status == -1)
             {
                 // если статус пройдeн у эксперта то читаем его оценочки
                 if (File.Exists(directory + "matrix" + prob.num_prob + "m3.txt") == true)

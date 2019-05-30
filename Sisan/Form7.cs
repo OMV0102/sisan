@@ -150,14 +150,18 @@ namespace system_analysis
                             tmp[j] = exp_res[E].marks[j].ToString();
                     }
                 }
-
+                uint sum = 0;
+                uint chislo;
                 for (int j = 0; j < list_sol.Count; j++)
                 {
+                    if (uint.TryParse(tmp[j], out chislo))
+                        sum += chislo;
                     DataRow dr = table.NewRow();
                     dr[0] = list_sol[j];
                     dr[1] = tmp[j] ;
                     table.Rows.Add(dr);
                 }
+                lbl_sum.Text = sum.ToString();
 
                 dataGridView1.DataSource = table;
                 dataGridView1.Columns[0].Width = 600; // ширина столбца альтерантив
@@ -465,6 +469,18 @@ namespace system_analysis
             {
                 check_cell_value(e.RowIndex, e.ColumnIndex);
                 is_edit = true;
+                //=====================================================
+                int sum = 0; // сумма оценок
+                int chislo;
+                for (int i = 0; i < sol_count; i++)
+                {
+                    if(int.TryParse(dataGridView1[1, i].Value.ToString(), out chislo))
+                    {
+                        sum += chislo;
+                    }
+                }
+                lbl_sum.Text = sum.ToString();
+                //=====================================================
             }
         }
 
