@@ -52,10 +52,17 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.Выбор = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.label7 = new System.Windows.Forms.Label();
             this.box_open_close = new System.Windows.Forms.CheckBox();
             this.lbl_notprob = new System.Windows.Forms.Label();
+            this.Выбор = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.comp = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.m1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.m2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.m3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.m4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.m5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.list_menu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -65,7 +72,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label1.ForeColor = System.Drawing.Color.Black;
-            this.label1.Location = new System.Drawing.Point(632, 60);
+            this.label1.Location = new System.Drawing.Point(646, 60);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(109, 23);
             this.label1.TabIndex = 13;
@@ -355,20 +362,20 @@
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Выбор});
+            this.Выбор,
+            this.comp,
+            this.fio,
+            this.m1,
+            this.m2,
+            this.m3,
+            this.m4,
+            this.m5});
             this.dataGridView1.Location = new System.Drawing.Point(684, 297);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.Size = new System.Drawing.Size(659, 239);
+            this.dataGridView1.Size = new System.Drawing.Size(670, 239);
             this.dataGridView1.TabIndex = 61;
             this.dataGridView1.TabStop = false;
-            // 
-            // Выбор
-            // 
-            this.Выбор.Frozen = true;
-            this.Выбор.HeaderText = "Выбор";
-            this.Выбор.Name = "Выбор";
-            this.Выбор.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
             // label7
             // 
@@ -407,6 +414,87 @@
             this.lbl_notprob.TabIndex = 69;
             this.lbl_notprob.Text = "Проблемы отсутствуют!";
             this.lbl_notprob.Visible = false;
+            // 
+            // Выбор
+            // 
+            this.Выбор.Frozen = true;
+            this.Выбор.HeaderText = "Выбор";
+            this.Выбор.Name = "Выбор";
+            this.Выбор.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Выбор.Width = 50;
+            // 
+            // comp
+            // 
+            this.comp.Frozen = true;
+            this.comp.HeaderText = "Компетентность";
+            this.comp.Name = "comp";
+            this.comp.ReadOnly = true;
+            this.comp.Width = 95;
+            // 
+            // fio
+            // 
+            this.fio.Frozen = true;
+            this.fio.HeaderText = "ФИО";
+            this.fio.Name = "fio";
+            this.fio.ReadOnly = true;
+            this.fio.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.fio.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.fio.Width = 270;
+            // 
+            // m1
+            // 
+            this.m1.Frozen = true;
+            this.m1.HeaderText = "М1";
+            this.m1.MaxInputLength = 1;
+            this.m1.Name = "m1";
+            this.m1.ReadOnly = true;
+            this.m1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.m1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.m1.Width = 50;
+            // 
+            // m2
+            // 
+            this.m2.Frozen = true;
+            this.m2.HeaderText = "М2";
+            this.m2.MaxInputLength = 1;
+            this.m2.Name = "m2";
+            this.m2.ReadOnly = true;
+            this.m2.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.m2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.m2.Width = 50;
+            // 
+            // m3
+            // 
+            this.m3.Frozen = true;
+            this.m3.HeaderText = "М3";
+            this.m3.MaxInputLength = 1;
+            this.m3.Name = "m3";
+            this.m3.ReadOnly = true;
+            this.m3.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.m3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.m3.Width = 50;
+            // 
+            // m4
+            // 
+            this.m4.Frozen = true;
+            this.m4.HeaderText = "М4";
+            this.m4.MaxInputLength = 1;
+            this.m4.Name = "m4";
+            this.m4.ReadOnly = true;
+            this.m4.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.m4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.m4.Width = 50;
+            // 
+            // m5
+            // 
+            this.m5.Frozen = true;
+            this.m5.HeaderText = "М5";
+            this.m5.MaxInputLength = 1;
+            this.m5.Name = "m5";
+            this.m5.ReadOnly = true;
+            this.m5.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.m5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.m5.Width = 50;
             // 
             // form3_analyst_add
             // 
@@ -476,8 +564,15 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn Выбор;
         private System.Windows.Forms.CheckBox box_open_close;
         private System.Windows.Forms.Label lbl_notprob;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn Выбор;
+        private System.Windows.Forms.DataGridViewTextBoxColumn comp;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fio;
+        private System.Windows.Forms.DataGridViewTextBoxColumn m1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn m2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn m3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn m4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn m5;
     }
 }

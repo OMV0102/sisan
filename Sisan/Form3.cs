@@ -210,7 +210,7 @@ namespace system_analysis
         }
         //==========================================================================================================
 
-        // кнопка СОХРАНИТЬ    // НЕ ГОТОВО
+        // кнопка СОХРАНИТЬ  НЕ ГОТОВО
         private void btn_save_all_Click(object sender, EventArgs e)
         {
             if (label_save_status.Visible == true)
@@ -237,10 +237,7 @@ namespace system_analysis
                         file.Delete();
                     }
                 }
-                else
-                // Обеспечивает сохранение проблемы и альтернатив в файл
-                // Возникает при нажатии на кнопку "Сохранить"
-                if (list_solution.Items.Count < 2)
+                else if (list_solution.Items.Count < 2)
                 {
                     this.Hide();
                     MessageBox.Show(
@@ -757,9 +754,9 @@ namespace system_analysis
                         a.id_exp = Convert.ToInt32(words[0]);
                         // записали ФИО эксперта сокращенное Фамилия И.О.
                         if (words[3] == "-")
-                            a.fio = words[1] + " " + words[2].First() + ".";
+                            a.fio = words[1] + " " + words[2];
                         else
-                            a.fio = words[1] + " " + words[2].First() + ". " + words[3].First() + ".";
+                            a.fio = words[1] + " " + words[2] + words[3];
                         // запомнили фамилию
                         a.surname = words[1];
                         // запомнили имя
@@ -917,8 +914,14 @@ namespace system_analysis
                             }
                             prob_list.Add(prob);
                             prob_count++;
+                            comboBox_problems.Items.Add(prob.txt_prob);
                         }
-
+                    }
+                    // файл problems закрылся
+                    // выбираем проблему 0
+                    if(comboBox_problems.Items.Count > 0)
+                    {
+                        comboBox_problems.SelectedIndex = 0;
                     }
                 }
                 else
@@ -1155,57 +1158,57 @@ namespace system_analysis
         // кнопка + (ДОБАВИТЬ ПРОБЛЕМУ)
         private void btn_add_problem_Click(object sender, EventArgs e)
         {
-            if (comboBox_problems.SelectedIndex != -1 && list_solution.Items.Count < 2)
+            if (comboBox_problems.SelectedIndex > 0 && comboBox_problems.SelectedIndex < prob_count)
             {
-                MessageBox.Show(
+                /*MessageBox.Show(
                 "У проблемы недостаточно альтернатив!\nУдалите проблему или добавьте как минимум 2 альтернативы!",
                 "Предупреждение",
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Warning,
                 MessageBoxDefaultButton.Button1,
                 MessageBoxOptions.DefaultDesktopOnly);
-                this.TopMost = true; this.TopMost = false;
-            }
-            else
-            {
-                Form_problem_add f_edit = new Form_problem_add();
-                edit_or_add = false;
-                f_edit.Owner = this;
-                f_edit.ShowDialog();
-                comboBox_problems.SelectedIndex = comboBox_problems.Items.Count - 1;
+                this.TopMost = true; this.TopMost = false;*/
 
-                // Надпись, что есть несохраненные данные
-                label_save_status.Visible = true;
-                add_new_prob = true; 
+                
+                    Form_problem_add f_edit = new Form_problem_add();
+                    edit_or_add = false;
+                    f_edit.Owner = this;
+                    f_edit.ShowDialog();
+                    //comboBox_problems.SelectedIndex = comboBox_problems.Items.Count - 1;
 
-                // ОНО НИЖЕ ЗАКОМЕНЧЕНО, ТАК И НАДО
-                // ПРИ ДОБАВЛЕНИИ ПРОБЛЕМЫ, НАДО САМИМ СОХРАНЯТЬ
-                // т.к. раньше после добавлении была возможна ситация: проблема есть, а альтернатив к ней нет
+                    // Надпись, что есть несохраненные данные
+                    label_save_status.Visible = true;
+                    add_new_prob = true;
 
-                //сохраняем проблемы в файл  //ПОСЛЕДНЯЯ ДОРАБОТКА БЫЛА, ЧТОБ НЕ НАЖИМАТЬ КНОПКУ СОХРАНИТЬ
-                //================================
-                /*string selectedState = comboBox_problems.SelectedItem.ToString();
-                string[] words = selectedState.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                string path = directory + "problems.txt";
+                    // ОНО НИЖЕ ЗАКОМЕНЧЕНО, ТАК И НАДО
+                    // ПРИ ДОБАВЛЕНИИ ПРОБЛЕМЫ, НАДО САМИМ СОХРАНЯТЬ
+                    // т.к. раньше после добавлении была возможна ситация: проблема есть, а альтернатив к ней нет
 
-                using (StreamWriter sr = new StreamWriter(path, false, System.Text.Encoding.UTF8))
-                {
-                    for (int i = 0; i < comboBox_problems.Items.Count; i++)
+                    //сохраняем проблемы в файл  //ПОСЛЕДНЯЯ ДОРАБОТКА БЫЛА, ЧТОБ НЕ НАЖИМАТЬ КНОПКУ СОХРАНИТЬ
+                    //================================
+                    /*string selectedState = comboBox_problems.SelectedItem.ToString();
+                    string[] words = selectedState.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                    string path = directory + "problems.txt";
+
+                    using (StreamWriter sr = new StreamWriter(path, false, System.Text.Encoding.UTF8))
                     {
-                        string line = comboBox_problems.Items[i].ToString();
-                        string[] line1 = line.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                        line1[0] = Convert.ToString(i);
-                        line = "";
-                        for (int j = 0; j < line1.Length; j++)
+                        for (int i = 0; i < comboBox_problems.Items.Count; i++)
                         {
-                            line += line1[j];
-                            line += " ";
-                        }
-                        sr.WriteLine(line);
+                            string line = comboBox_problems.Items[i].ToString();
+                            string[] line1 = line.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                            line1[0] = Convert.ToString(i);
+                            line = "";
+                            for (int j = 0; j < line1.Length; j++)
+                            {
+                                line += line1[j];
+                                line += " ";
+                            }
+                            sr.WriteLine(line);
 
-                    }
-                }*/
-                //===============================
+                        }
+                    }*/
+                    //===============================
+                
             }
         }
 
@@ -1317,26 +1320,17 @@ namespace system_analysis
         // кнопка ✎ (РЕДАКТИРОВАТЬ ПРОБЛЕМУ)
         private void btn_problem_edit_Click(object sender, EventArgs e)
         {
-            if (comboBox_problems.Items.Count == 0 || comboBox_problems.SelectedIndex == -1)
-            {
-                MessageBox.Show(
-                "Сначала выберите проблему для редактирования!",
-                "",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Warning,
-                MessageBoxDefaultButton.Button1,
-                MessageBoxOptions.DefaultDesktopOnly);
-                this.TopMost = true; this.TopMost = false;
-            }
-            else
-            {
-                int num = comboBox_problems.SelectedIndex;
+            if (comboBox_problems.SelectedIndex >= 0 && comboBox_problems.SelectedIndex < prob_count)
+            {          
+            
+            
+                index_prob = comboBox_problems.SelectedIndex;
                 Form_problem_add f_edit = new Form_problem_add();
                 edit_or_add = true;
                 f_edit.Owner = this;
                 f_edit.ShowDialog();
 
-                comboBox_problems.SelectedIndex = num;
+                //comboBox_problems.SelectedIndex = index_prob;
 
                 // Надпись, что есть несохраненные данные
                 label_save_status.Visible = true;
@@ -1376,49 +1370,35 @@ namespace system_analysis
         // ВЫБОР ПРОБЛЕМЫ В КОМБОБОКС
         private void comboBox_problems_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string selectedState;
-            String[] words;
-            string path;
-            if (mem == true && list_solution.Items.Count != 0)
+            index_prob = comboBox_problems.SelectedIndex;
+            if(index_prob >= 0 && index_prob < prob_count)
             {
-                selectedState = comboBox_problems.SelectedItem.ToString();
-                words = selectedState.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                path = directory + "solutions" + Convert.ToString(predN_prob) + ".txt";
+                //====== галочку открыта/закрыта =============
+                if (prob_list[index_prob].open_close == true)
+                    box_open_close.Checked = true;
+                else
+                    box_open_close.Checked = false;
+                //============================================
 
-                using (StreamWriter sr = new StreamWriter(path, false, System.Text.Encoding.UTF8))
+                //===== выводим альтернативы из alters =======
+                int alt_index = 0;
+                for(int i = 0; i < prob_count; i++)
                 {
-                    for (int i = 0; i < list_solution.Items.Count; i++)
+                    if(alter_list[i].id_prob == prob_list[index_prob].num_prob)
                     {
-                        string line = list_solution.Items[i].ToString();
-                        sr.WriteLine(line);
-
+                        alt_index = i;
                     }
                 }
-            }
 
-            predN_prob  = comboBox_problems.SelectedIndex;
-            selectedState = comboBox_problems.SelectedItem.ToString();
-            words = selectedState.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-
-            list_solution.Items.Clear();
-            path = directory + "solutions" + words[0] + ".txt";
-            FileInfo fileInf = new FileInfo(path);
-            if (fileInf.Exists)
-            {
-
-                using (StreamReader sr = new StreamReader(path, System.Text.Encoding.UTF8))
+                list_solution.Items.Clear();
+                for (int i = 0; i < alter_list[index_prob].alters.Count(); i++)
                 {
-                    string line;
-                    while ((line = sr.ReadLine()) != null)
-                    {
-                        list_solution.Items.Add(line);
-                    }
+                    list_solution.Items.Add(alter_list[alt_index].alters[i]);
                 }
-                mem = true;
-            }
+                //============================================
 
+
+            }
         }
-
-        //==========================================================================================================
     }
 }
