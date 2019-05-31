@@ -444,7 +444,7 @@ namespace system_analysis
                 }
                 else
                 {
-                    int n = list_solution.Items.Count;
+                    /*int n = list_solution.Items.Count;
                     string selectedState = comboBox_problems.SelectedItem.ToString();
                     string[] words = selectedState.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
                     string path = directory + "matrix" + words[0] + ".txt";
@@ -511,10 +511,10 @@ namespace system_analysis
                                 matrix = "";
                             }
                         }
-                    }
+                    }*/
 
                     list_solution.Items.Add(txt_solution.Text);
-                    txt_solution.Text = "";
+                    /*txt_solution.Text = "";
 
                     int num = comboBox_problems.SelectedIndex;
                     path = directory + "solutions" + Convert.ToString(num) + ".txt";
@@ -541,6 +541,7 @@ namespace system_analysis
                     this.ActiveControl = txt_solution;
                     this.TopMost = true; this.TopMost = false;
                     //label_save_status.Visible = true;
+                    */
                 }
                 
             }
@@ -587,7 +588,7 @@ namespace system_analysis
             {
 
 
-                int n = list_solution.Items.Count;
+                /*int n = list_solution.Items.Count;
                 string[,] arr1 = new string[n, n];
                 string[,] arr2 = new string[n - 1, n - 1];
                 string selectedState = comboBox_problems.SelectedItem.ToString();
@@ -690,11 +691,11 @@ namespace system_analysis
                             sw.WriteLine(matrix);
                             matrix = "";
                         }
-                    }
+                    }*/
 
                     list_solution.Items.RemoveAt(index);
 
-                    int num = comboBox_problems.SelectedIndex;
+                   /* int num = comboBox_problems.SelectedIndex;
                     path = directory + "solutions" + Convert.ToString(num) + ".txt";
 
                     using (StreamWriter sr = new StreamWriter(path, false, System.Text.Encoding.UTF8))
@@ -714,7 +715,7 @@ namespace system_analysis
 
                         }
                     }
-                }
+                }*/
             }
         }
 
@@ -1212,7 +1213,7 @@ namespace system_analysis
             if (index != -1)
             {
                 result = MessageBox.Show(
-                "Альтернативы удалятся вместе с проблемой!\nУдалить?",
+                "Данные оценивания удалятся вместе с проблемой!\nУдалить?",
                 "Предупреждение",
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Warning,
@@ -1417,7 +1418,10 @@ namespace system_analysis
                     }
                     DataRow dr = table.NewRow();
                     dr[0] = exp_list[j].fio;
-                    dr[1] = prob_list[index_prob].m1[index].comp;
+                    if (flag == true)
+                        dr[1] = prob_list[index_prob].m1[index].comp;
+                    else
+                        dr[1] = "";
                     dr[2] = exp_list[j].position;
                     dr[3] = prob_list[index_prob].m0[index].status;
                     dr[4] = prob_list[index_prob].m1[index].status;
@@ -1440,8 +1444,9 @@ namespace system_analysis
                 dataGridView1.Columns[8].Width = 30;
                 for (int i = 0; i < dataGridView1.Columns.Count;i++)
                 {
-                    if(i != 0)
-                        dataGridView1.Columns[i].ReadOnly = true;
+                    dataGridView1.Columns[i].ReadOnly = true;
+                    if (i == 0 || i == 2)
+                        dataGridView1.Columns[i].ReadOnly = false;
                     dataGridView1.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
                 }
                 dataGridView1.AllowUserToResizeColumns = false;
