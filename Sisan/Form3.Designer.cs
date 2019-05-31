@@ -52,12 +52,12 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.Выбор = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.label7 = new System.Windows.Forms.Label();
             this.box_open_close = new System.Windows.Forms.CheckBox();
             this.lbl_notprob = new System.Windows.Forms.Label();
             this.txt_scale = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.Выбор = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.list_menu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -82,7 +82,7 @@
             this.btn_save_all.FlatAppearance.MouseOverBackColor = System.Drawing.Color.SandyBrown;
             this.btn_save_all.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_save_all.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btn_save_all.Location = new System.Drawing.Point(818, 584);
+            this.btn_save_all.Location = new System.Drawing.Point(1180, 531);
             this.btn_save_all.Name = "btn_save_all";
             this.btn_save_all.Size = new System.Drawing.Size(165, 53);
             this.btn_save_all.TabIndex = 14;
@@ -319,7 +319,7 @@
             this.label_save_status.AutoSize = true;
             this.label_save_status.Font = new System.Drawing.Font("Tahoma", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label_save_status.ForeColor = System.Drawing.Color.Red;
-            this.label_save_status.Location = new System.Drawing.Point(270, 600);
+            this.label_save_status.Location = new System.Drawing.Point(625, 563);
             this.label_save_status.Name = "label_save_status";
             this.label_save_status.Size = new System.Drawing.Size(475, 21);
             this.label_save_status.TabIndex = 37;
@@ -359,19 +359,27 @@
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Выбор});
             this.dataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-            this.dataGridView1.Location = new System.Drawing.Point(684, 297);
+            this.dataGridView1.Location = new System.Drawing.Point(685, 255);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.Size = new System.Drawing.Size(670, 239);
             this.dataGridView1.TabIndex = 61;
             this.dataGridView1.TabStop = false;
             // 
+            // Выбор
+            // 
+            this.Выбор.Frozen = true;
+            this.Выбор.HeaderText = "Выбор";
+            this.Выбор.Name = "Выбор";
+            this.Выбор.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Выбор.Width = 50;
+            // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label7.ForeColor = System.Drawing.Color.Black;
-            this.label7.Location = new System.Drawing.Point(755, 255);
+            this.label7.Location = new System.Drawing.Point(756, 213);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(533, 23);
             this.label7.TabIndex = 62;
@@ -425,21 +433,13 @@
             this.label8.TabIndex = 71;
             this.label8.Text = "Шкала для оценивания методом\r\n полного попарного сопоставления:";
             // 
-            // Выбор
-            // 
-            this.Выбор.Frozen = true;
-            this.Выбор.HeaderText = "Выбор";
-            this.Выбор.Name = "Выбор";
-            this.Выбор.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Выбор.Width = 50;
-            // 
             // form3_analyst_add
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.CancelButton = this.button_back;
-            this.ClientSize = new System.Drawing.Size(1400, 663);
+            this.ClientSize = new System.Drawing.Size(1400, 612);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.txt_scale);
             this.Controls.Add(this.lbl_notprob);

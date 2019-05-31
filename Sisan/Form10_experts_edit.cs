@@ -52,6 +52,7 @@ namespace system_analysis
 
         private bool add_new;
         private int exp_count; // кол-во экспертов
+        private bool change;
 
         // кнопка СВЕРНУТЬ ОКНО
         private void button_minimize_Click(object sender, EventArgs e)
@@ -477,7 +478,7 @@ namespace system_analysis
         {
             Random rnd = new Random();
             string text = "";
-            for (int i = 0; i < 6; i++)
+            for (int i = 0; i < 4; i++)
             {
                 text += pass_char[rnd.Next(0, pass_char.Count() - 1)];
             }
@@ -507,13 +508,14 @@ namespace system_analysis
                     a.otch = exp_list[n].otch;
                     a.position = exp_list[n].position;
                     a.password_exp = text;
+                    txt_password.Text = text;
 
                     exp_list.Insert(n, a);
                     exp_list.RemoveAt(n + 1);
 
                     MessageBox.Show(
                     "Для эксперта " + comboBox_experts.SelectedItem.ToString() + " сброшен пароль.\n" +
-                    "Новый пароль: \"" + a.password_exp + "\"" +
+                    "Новый пароль: \"" + a.password_exp + "\"\n" +
                     "Пусть эксперт запомнит пароль, затем закройте это окно!",
                     "Сброс пароля",
                     MessageBoxButtons.OK,
@@ -521,9 +523,9 @@ namespace system_analysis
                     MessageBoxDefaultButton.Button1,
                     MessageBoxOptions.DefaultDesktopOnly);
 
+                    change = false;
+                    btn_save_Click(null, null);
 
-
-                    label_save_status.Visible = true;
                 }
                 else if (result == DialogResult.No)
                 {
@@ -621,7 +623,9 @@ namespace system_analysis
 
                 DialogResult result = MessageBox.Show(
                 "Удаление эксперта будет невозможно отменить.\n" +
-                "Удалить?",
+                "У эксперта \"Ковалев Никита Дмитриевич\" есть оценик по проблемам:\n" +
+                "Противодействие международному терроризму." +
+                "\nУдалить?",
                 "Удаление",
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Warning,
@@ -631,7 +635,7 @@ namespace system_analysis
                 {
                     this.TopMost = true; this.TopMost = false;
                     result = MessageBox.Show(
-                    "\"" + text + " будет удален." + "\"\n" +
+                    "\"" + text + "\" будет удален.\n" +
                     "Точно удалить?",
                     "Удаление",
                     MessageBoxButtons.YesNo,
@@ -922,17 +926,49 @@ namespace system_analysis
                     else if (btn_save.Text == "Изменить")
                     {
                         int n = comboBox_experts.SelectedIndex;
-                        DialogResult result = MessageBox.Show(
-                       "Все данные верны?\n",
-                       "Добавление",
-                       MessageBoxButtons.YesNo,
-                       MessageBoxIcon.Warning,
-                       MessageBoxDefaultButton.Button2,
-                       MessageBoxOptions.DefaultDesktopOnly);
-                        if (result == DialogResult.Yes)
+                        if (change == true)
+                        {
+                            DialogResult result = MessageBox.Show(
+                           "Все данные верны?\n",
+                           "Добавление",
+                           MessageBoxButtons.YesNo,
+                           MessageBoxIcon.Warning,
+                           MessageBoxDefaultButton.Button2,
+                           MessageBoxOptions.DefaultDesktopOnly);
+                            if (result == DialogResult.Yes)
+                            {
+                                this.TopMost = true; this.TopMost = false;
+
+                                exp_list.RemoveAt(n);
+                                comboBox_experts.Items.Clear();
+                                exp_list.Add(a);
+                                sort_fio();
+                                for (int i = 0; i < exp_count; i++)
+                                {
+                                    comboBox_experts.Items.Add(exp_list[i].fio);
+                                }
+                                add_new = true;
+
+                                label_view_Click(null, null);
+
+                                comboBox_experts.SelectedIndex = 0;
+                                comboBox_experts.Visible = true;
+                                label_save_status.Visible = true;
+                                btn_new.Text = "Добавить нового эксперта";
+                                btn_new.Visible = false;
+                                btn_save.Text = "Сохранить";
+                                btn_save.Visible = true;
+                                btn_delete.Visible = false;
+                            }
+                            else if (result == DialogResult.No)
+                            {
+                                this.TopMost = true; this.TopMost = false;
+                            }
+                            change = true;
+                        }
+                        else
                         {
                             this.TopMost = true; this.TopMost = false;
-
                             exp_list.RemoveAt(n);
                             comboBox_experts.Items.Clear();
                             exp_list.Add(a);
@@ -953,10 +989,6 @@ namespace system_analysis
                             btn_save.Text = "Сохранить";
                             btn_save.Visible = true;
                             btn_delete.Visible = false;
-                        }
-                        else if (result == DialogResult.No)
-                        {
-                            this.TopMost = true; this.TopMost = false;
                         }
                     }
                 }

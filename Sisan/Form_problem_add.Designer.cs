@@ -104,7 +104,7 @@
             this.KeyPreview = true;
             this.Name = "Form_problem_add";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Добавление/Редактирование проблемы";
+            this.Text = "Добавление/Редактирование формулировки проблемы";
             this.Load += new System.EventHandler(this.Form_problem_add_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -122,7 +122,7 @@
             this.btn_show_report.Size = new System.Drawing.Size(263, 68);
             this.btn_show_report.TabIndex = 9;
             this.btn_show_report.TabStop = false;
-            this.btn_show_report.Text = "Посмотреть результаты опроса";
+            this.btn_show_report.Text = "Посмотреть результаты оценивания";
             this.btn_show_report.UseVisualStyleBackColor = false;
             this.btn_show_report.Click += new System.EventHandler(this.btn_show_report_Click);
             // 

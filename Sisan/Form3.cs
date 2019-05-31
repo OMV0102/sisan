@@ -1408,7 +1408,7 @@ namespace system_analysis
                 {
                     index = 0;
                     bool flag = false;
-                    for(int i = 0; i < prob_count; i++)
+                    for(int i = 0; i < prob_list[index_prob].m0.Count(); i++)
                     {
                         if(prob_list[index_prob].m0[i].id_exp == exp_list[j].id_exp)
                         {
