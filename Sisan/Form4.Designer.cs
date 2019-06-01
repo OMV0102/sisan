@@ -34,7 +34,6 @@
             this.btn_add_problem = new System.Windows.Forms.Button();
             this.btn_show_report = new System.Windows.Forms.Button();
             this.button_back = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             this.btn_change_pass = new System.Windows.Forms.Button();
             this.btn_expert_edit = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
@@ -145,25 +144,6 @@
             this.button_back.UseVisualStyleBackColor = false;
             this.button_back.Click += new System.EventHandler(this.button_back_Click);
             // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(118)))), ((int)(((byte)(168)))));
-            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkOrange;
-            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.SandyBrown;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button1.Location = new System.Drawing.Point(34, 216);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(268, 65);
-            this.button1.TabIndex = 19;
-            this.button1.TabStop = false;
-            this.button1.Text = "Изменение списков экспертов к проблемам";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Visible = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // btn_change_pass
             // 
             this.btn_change_pass.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(118)))), ((int)(((byte)(168)))));
@@ -252,7 +232,6 @@
             this.Controls.Add(this.label5);
             this.Controls.Add(this.btn_expert_edit);
             this.Controls.Add(this.btn_change_pass);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.button_back);
             this.Controls.Add(this.btn_add_problem);
             this.Controls.Add(this.button_cross);
@@ -278,7 +257,6 @@
         private System.Windows.Forms.Button btn_add_problem;
         private System.Windows.Forms.Button btn_show_report;
         private System.Windows.Forms.Button button_back;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button btn_change_pass;
         private System.Windows.Forms.Button btn_expert_edit;
         private System.Windows.Forms.Label label5;
