@@ -73,16 +73,6 @@ namespace system_analysis
             this.Close();
         }
 
-        // кнопка ДОБАВЛЕНИЕ ЭКСПЕРТОВ К ПРОБЛЕМАМ
-        private void button1_Click(object sender, EventArgs e)
-        {
-            Form8.three_or_four = false;
-            Form8 form = new Form8();
-            form.Show();
-            this.Close();
-
-        }
-
         // кнопка СМЕНИТЬ ПАРОЛЬ аналитика
         private void btn_change_pass_Click(object sender, EventArgs e)
         {

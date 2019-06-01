@@ -332,11 +332,6 @@ namespace system_analysis
                         // Убираем надпись о несохраненных данных
                         label_save_status.Visible = false;
                         add_new_prob = false;
-
-                        Form8.three_or_four = true;
-                        Form8 form1 = new Form8();
-                        form1.Show();
-                        this.Close();
                     }
 
                     if (result == DialogResult.No)
