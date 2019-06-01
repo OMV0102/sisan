@@ -110,6 +110,7 @@
             // btn_save
             // 
             this.btn_save.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(118)))), ((int)(((byte)(168)))));
+            this.btn_save.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_save.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btn_save.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkOrange;
             this.btn_save.FlatAppearance.MouseOverBackColor = System.Drawing.Color.SandyBrown;

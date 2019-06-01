@@ -100,7 +100,7 @@
             this.button_cross.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button_cross.Font = new System.Drawing.Font("Times New Roman", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button_cross.ForeColor = System.Drawing.Color.Black;
-            this.button_cross.Location = new System.Drawing.Point(701, -1);
+            this.button_cross.Location = new System.Drawing.Point(700, 0);
             this.button_cross.Name = "button_cross";
             this.button_cross.Size = new System.Drawing.Size(40, 40);
             this.button_cross.TabIndex = 20;
@@ -305,6 +305,7 @@
             // comboBox_number
             // 
             this.comboBox_number.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.comboBox_number.Cursor = System.Windows.Forms.Cursors.Hand;
             this.comboBox_number.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_number.FormattingEnabled = true;
             this.comboBox_number.Location = new System.Drawing.Point(340, 397);

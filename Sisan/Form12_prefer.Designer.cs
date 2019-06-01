@@ -104,6 +104,7 @@
             // btn_save
             // 
             this.btn_save.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(118)))), ((int)(((byte)(168)))));
+            this.btn_save.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_save.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btn_save.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkOrange;
             this.btn_save.FlatAppearance.MouseOverBackColor = System.Drawing.Color.SandyBrown;
@@ -225,6 +226,7 @@
             // btn_sort
             // 
             this.btn_sort.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(118)))), ((int)(((byte)(168)))));
+            this.btn_sort.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_sort.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btn_sort.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkOrange;
             this.btn_sort.FlatAppearance.MouseOverBackColor = System.Drawing.Color.SandyBrown;
@@ -272,6 +274,7 @@
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label7);
+            this.Cursor = System.Windows.Forms.Cursors.Default;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Form12_prefer";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

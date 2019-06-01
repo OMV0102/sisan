@@ -284,7 +284,6 @@ namespace system_analysis
                     if (correct == true)
                     {
                         label2.BackColor = this.BackColor; // цвет label = цвет формы нейтральный
-                        label3.BackColor = this.BackColor; // цвет label = цвет формы нейтральный
 
                         // СОХРАНЯЕМ
                         // сохраняем в файл matrix...
@@ -725,7 +724,6 @@ namespace system_analysis
             if (correct == true)
             {
                 label2.BackColor = this.BackColor; // цвет label = цвет формы нейтральный
-                label3.BackColor = this.BackColor; // цвет label = цвет формы нейтральный
 
                 is_sort = true; // флаг сортировки включили 
                 table.Columns[0].ReadOnly = false; // в таблице, к которой привязан датагрид снимаем на альтернативах только чтение
@@ -781,7 +779,6 @@ namespace system_analysis
                 this.Show();
 
                 label2.BackColor = Color.FromArgb(254, 254, 34); // желтый фон
-                label3.BackColor = Color.FromArgb(254, 254, 34); // желтый фон
                 this.TopMost = true; this.TopMost = false;
             }
         }

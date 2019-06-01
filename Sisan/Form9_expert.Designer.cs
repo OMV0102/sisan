@@ -467,7 +467,7 @@
             this.label_no.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.label_no.Font = new System.Drawing.Font("Tahoma", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label_no.ForeColor = System.Drawing.Color.Red;
-            this.label_no.Location = new System.Drawing.Point(66, 132);
+            this.label_no.Location = new System.Drawing.Point(66, 137);
             this.label_no.Name = "label_no";
             this.label_no.Size = new System.Drawing.Size(713, 27);
             this.label_no.TabIndex = 57;

@@ -104,7 +104,7 @@ namespace system_analysis
                 Form_change_pass.is_ok = false;
                 MessageBox.Show(
                 "Пароль успешно изменен!",
-                "",
+                "Изменение пароля",
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Information,
                 MessageBoxDefaultButton.Button1,

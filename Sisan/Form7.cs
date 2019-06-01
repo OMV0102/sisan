@@ -235,6 +235,7 @@ namespace system_analysis
                         label2.BackColor = this.BackColor; // цвет label = цвет формы нейтральный
                         label8.BackColor = this.BackColor;
                         label9.BackColor = this.BackColor;
+                        lbl_sum.BackColor = this.BackColor;
 
                         // СОХРАНЯЕМ
                         // сохраняем в файл matrix...
@@ -290,6 +291,7 @@ namespace system_analysis
                         label2.BackColor = Color.FromArgb(254, 254, 34); // желтый фон
                         label8.BackColor = Color.FromArgb(254, 254, 34);
                         label9.BackColor = Color.FromArgb(254, 254, 34);
+                        lbl_sum.BackColor = Color.FromArgb(254, 254, 34);
                     }
                 }
                 else
